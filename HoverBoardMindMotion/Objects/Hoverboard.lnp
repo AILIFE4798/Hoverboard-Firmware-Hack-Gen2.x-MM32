@@ -1,0 +1,7 @@
+--cpu Cortex-M0
+".\objects\main.o"
+".\objects\startup_mm32spin06xx_s_keil.o"
+".\objects\system_mm32spin06xx_s.o"
+--ro-base 0x08000000 --entry 0x08000000 --rw-base 0x20000000 --entry Reset_Handler --first __Vectors --strict --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Listings\Hoverboard.map" -o .\Objects\Hoverboard.axf
