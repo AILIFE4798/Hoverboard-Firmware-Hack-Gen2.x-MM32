@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\HAL_Lib\Inc;.\HAL_Lib\Src</IncludePath>
+              <IncludePath>.\HAL_Lib\Inc;.\HAL_Lib\Src;.\RTE\_MM32SPIN05</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
