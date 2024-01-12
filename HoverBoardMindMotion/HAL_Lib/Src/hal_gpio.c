@@ -66,10 +66,12 @@ void GPIO_DeInit(GPIO_TypeDef* gpio)
             break;
     }
 }
+//this function is added from hal_rcc.h to fix error
 void RCC_AHBPeriphClockCmd(u32 ahb_periph, FunctionalState state)
 {
     (state) ? (RCC->AHBENR |= ahb_periph) : (RCC->AHBENR &= ~ahb_periph);
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /// @brief  Deinitializes the Alternate Functions (remap, event control
 ///         and EXTI configuration) registers to their default reset values.

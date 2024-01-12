@@ -22,6 +22,7 @@ Section Cross References
     main.o(.ARM.exidx.text.GPIO_PinLockConfig) refers to main.o(.text.GPIO_PinLockConfig) for [Anonymous Symbol]
     main.o(.ARM.exidx.text.GPIO_PinAFConfig) refers to main.o(.text.GPIO_PinAFConfig) for [Anonymous Symbol]
     main.o(.ARM.exidx.text.exGPIO_PinAFConfig) refers to main.o(.text.exGPIO_PinAFConfig) for [Anonymous Symbol]
+    main.o(.text.main) refers to main.o(.text.RCC_AHBPeriphClockCmd) for RCC_AHBPeriphClockCmd
     main.o(.text.main) refers to main.o(.text.GPIO_Init) for GPIO_Init
     main.o(.text.main) refers to delay.o(.text.DELAY_Init) for DELAY_Init
     main.o(.text.main) refers to main.o(.text.GPIO_WriteBit) for GPIO_WriteBit
@@ -183,7 +184,6 @@ Removing Unused input sections from the image.
     Removing main.o(.text), (0 bytes).
     Removing main.o(.text.GPIO_DeInit), (116 bytes).
     Removing main.o(.ARM.exidx.text.GPIO_DeInit), (8 bytes).
-    Removing main.o(.text.RCC_AHBPeriphClockCmd), (48 bytes).
     Removing main.o(.ARM.exidx.text.RCC_AHBPeriphClockCmd), (8 bytes).
     Removing main.o(.text.GPIO_AFIODeInit), (76 bytes).
     Removing main.o(.ARM.exidx.text.GPIO_AFIODeInit), (8 bytes).
@@ -229,7 +229,7 @@ Removing Unused input sections from the image.
     Removing system_mm32spin06xx_s.o(.ARM.exidx.text.SetSysClockToXX_HSI), (8 bytes).
     Removing system_mm32spin06xx_s.o(.rodata.AHBPrescTable), (16 bytes).
 
-48 unused section(s) (total 992 bytes) removed from the image.
+47 unused section(s) (total 944 bytes) removed from the image.
 
 ==============================================================================
 
@@ -364,38 +364,40 @@ Image Symbol Table
     [Anonymous Symbol]                       0x080004b0   Section        0  delay.o(.text.DELAY_Ms)
     [Anonymous Symbol]                       0x080004cc   Section        0  main.o(.text.GPIO_Init)
     [Anonymous Symbol]                       0x080005dc   Section        0  main.o(.text.GPIO_WriteBit)
-    SetSysClock                              0x08000609   Thumb Code     8  system_mm32spin06xx_s.o(.text.SetSysClock)
-    [Anonymous Symbol]                       0x08000608   Section        0  system_mm32spin06xx_s.o(.text.SetSysClock)
-    SetSysClockToXX_HSI                      0x08000611   Thumb Code   268  system_mm32spin06xx_s.o(.text.SetSysClockToXX_HSI)
-    [Anonymous Symbol]                       0x08000610   Section        0  system_mm32spin06xx_s.o(.text.SetSysClockToXX_HSI)
-    __arm_cp.3_1                             0x0800071c   Number         4  system_mm32spin06xx_s.o(.text.SetSysClockToXX_HSI)
-    __arm_cp.3_2                             0x08000720   Number         4  system_mm32spin06xx_s.o(.text.SetSysClockToXX_HSI)
-    __arm_cp.3_3                             0x08000724   Number         4  system_mm32spin06xx_s.o(.text.SetSysClockToXX_HSI)
-    __arm_cp.3_4                             0x08000728   Number         4  system_mm32spin06xx_s.o(.text.SetSysClockToXX_HSI)
-    __arm_cp.3_6                             0x0800072c   Number         4  system_mm32spin06xx_s.o(.text.SetSysClockToXX_HSI)
-    __arm_cp.3_7                             0x08000730   Number         4  system_mm32spin06xx_s.o(.text.SetSysClockToXX_HSI)
-    __arm_cp.3_8                             0x08000734   Number         4  system_mm32spin06xx_s.o(.text.SetSysClockToXX_HSI)
-    SysTick_Config                           0x08000739   Thumb Code    68  delay.o(.text.SysTick_Config)
-    [Anonymous Symbol]                       0x08000738   Section        0  delay.o(.text.SysTick_Config)
-    __arm_cp.1_0                             0x0800077c   Number         4  delay.o(.text.SysTick_Config)
-    __arm_cp.1_1                             0x08000780   Number         4  delay.o(.text.SysTick_Config)
-    __arm_cp.1_2                             0x08000784   Number         4  delay.o(.text.SysTick_Config)
-    [Anonymous Symbol]                       0x08000788   Section        0  delay.o(.text.SysTick_Handler)
-    [Anonymous Symbol]                       0x08000790   Section        0  system_mm32spin06xx_s.o(.text.SystemInit)
-    __arm_cp.0_0                             0x080007d8   Number         4  system_mm32spin06xx_s.o(.text.SystemInit)
-    __arm_cp.0_1                             0x080007dc   Number         4  system_mm32spin06xx_s.o(.text.SystemInit)
-    __arm_cp.0_2                             0x080007e0   Number         4  system_mm32spin06xx_s.o(.text.SystemInit)
-    __arm_cp.0_3                             0x080007e4   Number         4  system_mm32spin06xx_s.o(.text.SystemInit)
-    __arm_cp.0_4                             0x080007e8   Number         4  system_mm32spin06xx_s.o(.text.SystemInit)
-    __arm_cp.0_5                             0x080007ec   Number         4  system_mm32spin06xx_s.o(.text.SystemInit)
-    TimingDelayDecrement                     0x080007f1   Thumb Code    24  delay.o(.text.TimingDelayDecrement)
-    [Anonymous Symbol]                       0x080007f0   Section        0  delay.o(.text.TimingDelayDecrement)
-    __arm_cp.4_0                             0x08000808   Number         4  delay.o(.text.TimingDelayDecrement)
-    __NVIC_SetPriority                       0x0800080d   Thumb Code   124  delay.o(.text.__NVIC_SetPriority)
-    [Anonymous Symbol]                       0x0800080c   Section        0  delay.o(.text.__NVIC_SetPriority)
-    __arm_cp.2_0                             0x08000888   Number         4  delay.o(.text.__NVIC_SetPriority)
-    __arm_cp.2_1                             0x0800088c   Number         4  delay.o(.text.__NVIC_SetPriority)
-    [Anonymous Symbol]                       0x08000890   Section        0  main.o(.text.main)
+    [Anonymous Symbol]                       0x08000608   Section        0  main.o(.text.RCC_AHBPeriphClockCmd)
+    __arm_cp.1_0                             0x08000634   Number         4  main.o(.text.RCC_AHBPeriphClockCmd)
+    SetSysClock                              0x08000639   Thumb Code     8  system_mm32spin06xx_s.o(.text.SetSysClock)
+    [Anonymous Symbol]                       0x08000638   Section        0  system_mm32spin06xx_s.o(.text.SetSysClock)
+    SetSysClockToXX_HSI                      0x08000641   Thumb Code   268  system_mm32spin06xx_s.o(.text.SetSysClockToXX_HSI)
+    [Anonymous Symbol]                       0x08000640   Section        0  system_mm32spin06xx_s.o(.text.SetSysClockToXX_HSI)
+    __arm_cp.3_1                             0x0800074c   Number         4  system_mm32spin06xx_s.o(.text.SetSysClockToXX_HSI)
+    __arm_cp.3_2                             0x08000750   Number         4  system_mm32spin06xx_s.o(.text.SetSysClockToXX_HSI)
+    __arm_cp.3_3                             0x08000754   Number         4  system_mm32spin06xx_s.o(.text.SetSysClockToXX_HSI)
+    __arm_cp.3_4                             0x08000758   Number         4  system_mm32spin06xx_s.o(.text.SetSysClockToXX_HSI)
+    __arm_cp.3_6                             0x0800075c   Number         4  system_mm32spin06xx_s.o(.text.SetSysClockToXX_HSI)
+    __arm_cp.3_7                             0x08000760   Number         4  system_mm32spin06xx_s.o(.text.SetSysClockToXX_HSI)
+    __arm_cp.3_8                             0x08000764   Number         4  system_mm32spin06xx_s.o(.text.SetSysClockToXX_HSI)
+    SysTick_Config                           0x08000769   Thumb Code    68  delay.o(.text.SysTick_Config)
+    [Anonymous Symbol]                       0x08000768   Section        0  delay.o(.text.SysTick_Config)
+    __arm_cp.1_0                             0x080007ac   Number         4  delay.o(.text.SysTick_Config)
+    __arm_cp.1_1                             0x080007b0   Number         4  delay.o(.text.SysTick_Config)
+    __arm_cp.1_2                             0x080007b4   Number         4  delay.o(.text.SysTick_Config)
+    [Anonymous Symbol]                       0x080007b8   Section        0  delay.o(.text.SysTick_Handler)
+    [Anonymous Symbol]                       0x080007c0   Section        0  system_mm32spin06xx_s.o(.text.SystemInit)
+    __arm_cp.0_0                             0x08000808   Number         4  system_mm32spin06xx_s.o(.text.SystemInit)
+    __arm_cp.0_1                             0x0800080c   Number         4  system_mm32spin06xx_s.o(.text.SystemInit)
+    __arm_cp.0_2                             0x08000810   Number         4  system_mm32spin06xx_s.o(.text.SystemInit)
+    __arm_cp.0_3                             0x08000814   Number         4  system_mm32spin06xx_s.o(.text.SystemInit)
+    __arm_cp.0_4                             0x08000818   Number         4  system_mm32spin06xx_s.o(.text.SystemInit)
+    __arm_cp.0_5                             0x0800081c   Number         4  system_mm32spin06xx_s.o(.text.SystemInit)
+    TimingDelayDecrement                     0x08000821   Thumb Code    24  delay.o(.text.TimingDelayDecrement)
+    [Anonymous Symbol]                       0x08000820   Section        0  delay.o(.text.TimingDelayDecrement)
+    __arm_cp.4_0                             0x08000838   Number         4  delay.o(.text.TimingDelayDecrement)
+    __NVIC_SetPriority                       0x0800083d   Thumb Code   124  delay.o(.text.__NVIC_SetPriority)
+    [Anonymous Symbol]                       0x0800083c   Section        0  delay.o(.text.__NVIC_SetPriority)
+    __arm_cp.2_0                             0x080008b8   Number         4  delay.o(.text.__NVIC_SetPriority)
+    __arm_cp.2_1                             0x080008bc   Number         4  delay.o(.text.__NVIC_SetPriority)
+    [Anonymous Symbol]                       0x080008c0   Section        0  main.o(.text.main)
     .bss                                     0x20000008   Section       96  libspace.o(.bss)
     sTimingDelay                             0x20000068   Data           4  delay.o(.bss.sTimingDelay)
     [Anonymous Symbol]                       0x20000068   Section        0  delay.o(.bss.sTimingDelay)
@@ -545,11 +547,12 @@ Image Symbol Table
     DELAY_Ms                                 0x080004b1   Thumb Code    28  delay.o(.text.DELAY_Ms)
     GPIO_Init                                0x080004cd   Thumb Code   272  main.o(.text.GPIO_Init)
     GPIO_WriteBit                            0x080005dd   Thumb Code    44  main.o(.text.GPIO_WriteBit)
-    SysTick_Handler                          0x08000789   Thumb Code     8  delay.o(.text.SysTick_Handler)
-    SystemInit                               0x08000791   Thumb Code    72  system_mm32spin06xx_s.o(.text.SystemInit)
-    main                                     0x08000891   Thumb Code    74  main.o(.text.main)
-    Region$$Table$$Base                      0x080008dc   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x080008fc   Number         0  anon$$obj.o(Region$$Table)
+    RCC_AHBPeriphClockCmd                    0x08000609   Thumb Code    44  main.o(.text.RCC_AHBPeriphClockCmd)
+    SysTick_Handler                          0x080007b9   Thumb Code     8  delay.o(.text.SysTick_Handler)
+    SystemInit                               0x080007c1   Thumb Code    72  system_mm32spin06xx_s.o(.text.SystemInit)
+    main                                     0x080008c1   Thumb Code   112  main.o(.text.main)
+    Region$$Table$$Base                      0x08000930   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08000950   Number         0  anon$$obj.o(Region$$Table)
     SystemCoreClock                          0x20000000   Data           4  system_mm32spin06xx_s.o(.data.SystemCoreClock)
     __libspace_start                         0x20000008   Data          96  libspace.o(.bss)
     __temporary_stack_top$libspace           0x20000068   Data           0  libspace.o(.bss)
@@ -562,9 +565,9 @@ Memory Map of the image
 
   Image Entry point : 0x08000181
 
-  Load Region LR_1 (Base: 0x08000000, Size: 0x00000900, Max: 0xffffffff, ABSOLUTE)
+  Load Region LR_1 (Base: 0x08000000, Size: 0x00000954, Max: 0xffffffff, ABSOLUTE)
 
-    Execution Region ER_RO (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x000008fc, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00000950, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -633,32 +636,32 @@ Memory Map of the image
     0x080004b0   0x080004b0   0x0000001c   Code   RO           56    .text.DELAY_Ms      delay.o
     0x080004cc   0x080004cc   0x00000110   Code   RO            8    .text.GPIO_Init     main.o
     0x080005dc   0x080005dc   0x0000002c   Code   RO           24    .text.GPIO_WriteBit  main.o
-    0x08000608   0x08000608   0x00000008   Code   RO           77    .text.SetSysClock   system_mm32spin06xx_s.o
-    0x08000610   0x08000610   0x00000128   Code   RO           81    .text.SetSysClockToXX_HSI  system_mm32spin06xx_s.o
-    0x08000738   0x08000738   0x00000050   Code   RO           48    .text.SysTick_Config  delay.o
-    0x08000788   0x08000788   0x00000008   Code   RO           52    .text.SysTick_Handler  delay.o
-    0x08000790   0x08000790   0x00000060   Code   RO           75    .text.SystemInit    system_mm32spin06xx_s.o
-    0x080007f0   0x080007f0   0x0000001c   Code   RO           54    .text.TimingDelayDecrement  delay.o
-    0x0800080c   0x0800080c   0x00000084   Code   RO           50    .text.__NVIC_SetPriority  delay.o
-    0x08000890   0x08000890   0x0000004a   Code   RO           36    .text.main          main.o
-    0x080008da   0x080008da   0x00000002   PAD
-    0x080008dc   0x080008dc   0x00000020   Data   RO          275    Region$$Table       anon$$obj.o
+    0x08000608   0x08000608   0x00000030   Code   RO            4    .text.RCC_AHBPeriphClockCmd  main.o
+    0x08000638   0x08000638   0x00000008   Code   RO           77    .text.SetSysClock   system_mm32spin06xx_s.o
+    0x08000640   0x08000640   0x00000128   Code   RO           81    .text.SetSysClockToXX_HSI  system_mm32spin06xx_s.o
+    0x08000768   0x08000768   0x00000050   Code   RO           48    .text.SysTick_Config  delay.o
+    0x080007b8   0x080007b8   0x00000008   Code   RO           52    .text.SysTick_Handler  delay.o
+    0x080007c0   0x080007c0   0x00000060   Code   RO           75    .text.SystemInit    system_mm32spin06xx_s.o
+    0x08000820   0x08000820   0x0000001c   Code   RO           54    .text.TimingDelayDecrement  delay.o
+    0x0800083c   0x0800083c   0x00000084   Code   RO           50    .text.__NVIC_SetPriority  delay.o
+    0x080008c0   0x080008c0   0x00000070   Code   RO           36    .text.main          main.o
+    0x08000930   0x08000930   0x00000020   Data   RO          275    Region$$Table       anon$$obj.o
 
 
-    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x080008fc, Size: 0x00000004, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x08000950, Size: 0x00000004, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x080008fc   0x00000004   Data   RW           83    .data.SystemCoreClock  system_mm32spin06xx_s.o
+    0x20000000   0x08000950   0x00000004   Data   RW           83    .data.SystemCoreClock  system_mm32spin06xx_s.o
 
 
-    Execution Region ER_ZI (Exec base: 0x20000008, Load base: 0x08000900, Size: 0x00000668, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_ZI (Exec base: 0x20000008, Load base: 0x08000954, Size: 0x00000668, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x20000008        -       0x00000060   Zero   RW          139    .bss                c_p.l(libspace.o)
     0x20000068        -       0x00000004   Zero   RW           58    .bss.sTimingDelay   delay.o
-    0x2000006c   0x08000900   0x00000004   PAD
+    0x2000006c   0x08000954   0x00000004   PAD
     0x20000070        -       0x00000200   Zero   RW           66    HEAP                startup_mm32spin06xx_s_keil.o
     0x20000270        -       0x00000400   Zero   RW           65    STACK               startup_mm32spin06xx_s_keil.o
 
@@ -671,14 +674,14 @@ Image component sizes
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
        316         24          0          0          4       3259   delay.o
-       390          0          0          0          0       5300   main.o
+       476          4          0          0          0       5306   main.o
        124         58        192          0       1536        740   startup_mm32spin06xx_s_keil.o
        582         52          0          4          0       2558   system_mm32spin06xx_s.o
 
     ----------------------------------------------------------------------
-      1414        134        224          4       1544      11857   Object Totals
+      1498        138        224          4       1544      11863   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-         2          0          0          0          4          0   (incl. Padding)
+         0          0          0          0          4          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -726,15 +729,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      2076        156        224          4       1640      12381   Grand Totals
-      2076        156        224          4       1640      12381   ELF Image Totals
-      2076        156        224          4          0          0   ROM Totals
+      2160        160        224          4       1640      12387   Grand Totals
+      2160        160        224          4       1640      12387   ELF Image Totals
+      2160        160        224          4          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 2300 (   2.25kB)
+    Total RO  Size (Code + RO Data)                 2384 (   2.33kB)
     Total RW  Size (RW Data + ZI Data)              1644 (   1.61kB)
-    Total ROM Size (Code + RO Data + RW Data)       2304 (   2.25kB)
+    Total ROM Size (Code + RO Data + RW Data)       2388 (   2.33kB)
 
 ==============================================================================
 
