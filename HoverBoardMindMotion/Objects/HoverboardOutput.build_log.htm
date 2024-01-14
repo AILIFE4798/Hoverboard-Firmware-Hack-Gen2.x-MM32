@@ -145,13 +145,13 @@ Src/main.c(3): warning: In file included from...
 ./HAL_Lib/Src\hal_gpio.c(320): warning: unused parameter 'remap' [-Wunused-parameter]
   320 | void exGPIO_PinAFConfig(GPIO_TypeDef* gpio, u16 pin, s32 remap, s8 alternate_function)
       |                                                          ^
-Src/main.c(16): warning: mixing declarations and code is incompatible with standards before C99 [-Wdeclaration-after-statement]
-   16 |         GPIO_InitTypeDef GPIO_InitStruct;
+Src/main.c(20): warning: mixing declarations and code is incompatible with standards before C99 [-Wdeclaration-after-statement]
+   20 |         GPIO_InitTypeDef GPIO_InitStruct;
       |                          ^
 19 warnings generated.
 compiling main.c...
 linking...
-Program Size: Code=2160 RO-data=224 RW-data=4 ZI-data=1640  
+Program Size: Code=2252 RO-data=224 RW-data=4 ZI-data=1640  
 FromELF: creating hex file...
 ".\Objects\HoverboardOutput.axf" - 0 Error(s), 28 Warning(s).
 
@@ -182,7 +182,7 @@ Package Vendor: MindMotion
       Include file:  Device/MM32SPIN06xx_s/Include/mm32_device.h
       Source file:   Device/MM32SPIN06xx_s/Source/system_mm32spin06xx_s.c
       Source file:   Device/MM32SPIN06xx_s/Source/KEIL_StartAsm/startup_mm32spin06xx_s_keil.s
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:00
 </pre>
 </body>
 </html>

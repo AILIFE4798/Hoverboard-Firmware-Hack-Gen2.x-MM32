@@ -5,8 +5,12 @@
 #include "hal_rcc.h"
 #include "delay.h"
 
-#define LEDPIN GPIO_PinSource5
-#define LEDPORT GPIO_PortSourceGPIOA
+#define LEDRPIN GPIO_Pin_11
+#define LEDGPIN GPIO_Pin_2
+#define LEDBPIN GPIO_Pin_3
+#define LEDRPORT GPIOA
+#define LEDGPORT GPIOD
+#define LEDBPORT GPIOD
 
 s32 main(void){
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOA, ENABLE);
@@ -14,16 +18,25 @@ s32 main(void){
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOC, ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOD, ENABLE);
 	GPIO_InitTypeDef GPIO_InitStruct;
-  GPIO_InitStruct.GPIO_Pin = GPIO_Pin_5;
+  GPIO_InitStruct.GPIO_Pin = LEDRPIN;
   GPIO_InitStruct.GPIO_Mode = GPIO_Mode_Out_PP;
   GPIO_InitStruct.GPIO_Speed = GPIO_Speed_10MHz;
-	GPIO_Init(LEDPORT, &GPIO_InitStruct);
+	GPIO_Init(LEDRPORT, &GPIO_InitStruct);
+	GPIO_InitStruct.GPIO_Pin = LEDGPIN;
+	GPIO_Init(LEDGPORT, &GPIO_InitStruct);
+	GPIO_InitStruct.GPIO_Pin = LEDBPIN;
+	GPIO_Init(LEDBPORT, &GPIO_InitStruct);
 	DELAY_Init();
   while(1) {
-    GPIO_WriteBit(LEDPORT, LEDPIN, 1);
-		DELAY_Ms(1000);
-		GPIO_WriteBit(LEDPORT, LEDPIN, 0);
-		DELAY_Ms(1000);
+    GPIO_WriteBit(LEDRPORT, LEDRPIN, 1);
+		GPIO_WriteBit(LEDBPORT, LEDBPIN, 0);
+		DELAY_Ms(500);
+    GPIO_WriteBit(LEDGPORT, LEDGPIN, 1);
+		GPIO_WriteBit(LEDRPORT, LEDRPIN, 0);
+		DELAY_Ms(500);
+    GPIO_WriteBit(LEDBPORT, LEDBPIN, 1);
+		GPIO_WriteBit(LEDGPORT, LEDGPIN, 0);
+		DELAY_Ms(500);		
   }
 	
 }

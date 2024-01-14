@@ -398,6 +398,7 @@ Image Symbol Table
     __arm_cp.2_0                             0x080008b8   Number         4  delay.o(.text.__NVIC_SetPriority)
     __arm_cp.2_1                             0x080008bc   Number         4  delay.o(.text.__NVIC_SetPriority)
     [Anonymous Symbol]                       0x080008c0   Section        0  main.o(.text.main)
+    __arm_cp.17_0                            0x08000988   Number         4  main.o(.text.main)
     .bss                                     0x20000008   Section       96  libspace.o(.bss)
     sTimingDelay                             0x20000068   Data           4  delay.o(.bss.sTimingDelay)
     [Anonymous Symbol]                       0x20000068   Section        0  delay.o(.bss.sTimingDelay)
@@ -550,9 +551,9 @@ Image Symbol Table
     RCC_AHBPeriphClockCmd                    0x08000609   Thumb Code    44  main.o(.text.RCC_AHBPeriphClockCmd)
     SysTick_Handler                          0x080007b9   Thumb Code     8  delay.o(.text.SysTick_Handler)
     SystemInit                               0x080007c1   Thumb Code    72  system_mm32spin06xx_s.o(.text.SystemInit)
-    main                                     0x080008c1   Thumb Code   112  main.o(.text.main)
-    Region$$Table$$Base                      0x08000930   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08000950   Number         0  anon$$obj.o(Region$$Table)
+    main                                     0x080008c1   Thumb Code   200  main.o(.text.main)
+    Region$$Table$$Base                      0x0800098c   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x080009ac   Number         0  anon$$obj.o(Region$$Table)
     SystemCoreClock                          0x20000000   Data           4  system_mm32spin06xx_s.o(.data.SystemCoreClock)
     __libspace_start                         0x20000008   Data          96  libspace.o(.bss)
     __temporary_stack_top$libspace           0x20000068   Data           0  libspace.o(.bss)
@@ -565,9 +566,9 @@ Memory Map of the image
 
   Image Entry point : 0x08000181
 
-  Load Region LR_1 (Base: 0x08000000, Size: 0x00000954, Max: 0xffffffff, ABSOLUTE)
+  Load Region LR_1 (Base: 0x08000000, Size: 0x000009b0, Max: 0xffffffff, ABSOLUTE)
 
-    Execution Region ER_RO (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00000950, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x000009ac, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -644,24 +645,24 @@ Memory Map of the image
     0x080007c0   0x080007c0   0x00000060   Code   RO           75    .text.SystemInit    system_mm32spin06xx_s.o
     0x08000820   0x08000820   0x0000001c   Code   RO           54    .text.TimingDelayDecrement  delay.o
     0x0800083c   0x0800083c   0x00000084   Code   RO           50    .text.__NVIC_SetPriority  delay.o
-    0x080008c0   0x080008c0   0x00000070   Code   RO           36    .text.main          main.o
-    0x08000930   0x08000930   0x00000020   Data   RO          275    Region$$Table       anon$$obj.o
+    0x080008c0   0x080008c0   0x000000cc   Code   RO           36    .text.main          main.o
+    0x0800098c   0x0800098c   0x00000020   Data   RO          275    Region$$Table       anon$$obj.o
 
 
-    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x08000950, Size: 0x00000004, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x080009ac, Size: 0x00000004, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x08000950   0x00000004   Data   RW           83    .data.SystemCoreClock  system_mm32spin06xx_s.o
+    0x20000000   0x080009ac   0x00000004   Data   RW           83    .data.SystemCoreClock  system_mm32spin06xx_s.o
 
 
-    Execution Region ER_ZI (Exec base: 0x20000008, Load base: 0x08000954, Size: 0x00000668, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_ZI (Exec base: 0x20000008, Load base: 0x080009b0, Size: 0x00000668, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x20000008        -       0x00000060   Zero   RW          139    .bss                c_p.l(libspace.o)
     0x20000068        -       0x00000004   Zero   RW           58    .bss.sTimingDelay   delay.o
-    0x2000006c   0x08000954   0x00000004   PAD
+    0x2000006c   0x080009b0   0x00000004   PAD
     0x20000070        -       0x00000200   Zero   RW           66    HEAP                startup_mm32spin06xx_s_keil.o
     0x20000270        -       0x00000400   Zero   RW           65    STACK               startup_mm32spin06xx_s_keil.o
 
@@ -674,12 +675,12 @@ Image component sizes
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
        316         24          0          0          4       3259   delay.o
-       476          4          0          0          0       5306   main.o
+       568          8          0          0          0       5335   main.o
        124         58        192          0       1536        740   startup_mm32spin06xx_s_keil.o
        582         52          0          4          0       2558   system_mm32spin06xx_s.o
 
     ----------------------------------------------------------------------
-      1498        138        224          4       1544      11863   Object Totals
+      1590        142        224          4       1544      11892   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          0          0          0          0          4          0   (incl. Padding)
 
@@ -729,15 +730,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      2160        160        224          4       1640      12387   Grand Totals
-      2160        160        224          4       1640      12387   ELF Image Totals
-      2160        160        224          4          0          0   ROM Totals
+      2252        164        224          4       1640      12416   Grand Totals
+      2252        164        224          4       1640      12416   ELF Image Totals
+      2252        164        224          4          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 2384 (   2.33kB)
+    Total RO  Size (Code + RO Data)                 2476 (   2.42kB)
     Total RW  Size (RW Data + ZI Data)              1644 (   1.61kB)
-    Total ROM Size (Code + RO Data + RW Data)       2388 (   2.33kB)
+    Total ROM Size (Code + RO Data + RW Data)       2480 (   2.42kB)
 
 ==============================================================================
 
