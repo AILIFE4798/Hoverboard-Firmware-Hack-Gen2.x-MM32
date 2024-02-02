@@ -12,6 +12,15 @@
 #define LEDGPORT GPIOD
 #define LEDBPORT GPIOD
 
+#define HALLAPIN GPIO_Pin_13
+#define HALLBPIN GPIO_Pin_14
+#define HALLCPIN GPIO_Pin_15
+#define HALLAPORT GPIOC
+#define HALLBPORT GPIOC
+#define HALLCPORT GPIOC
+
+#define HALL2LED
+
 s32 main(void){
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOA, ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOB, ENABLE);
@@ -26,19 +35,34 @@ s32 main(void){
 	GPIO_Init(LEDGPORT, &GPIO_InitStruct);
 	GPIO_InitStruct.GPIO_Pin = LEDBPIN;
 	GPIO_Init(LEDBPORT, &GPIO_InitStruct);
+	
+	GPIO_InitStruct.GPIO_Pin = HALLAPIN;
+  GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IPU;
+	GPIO_Init(HALLAPORT, &GPIO_InitStruct);
+	GPIO_InitStruct.GPIO_Pin = HALLBPIN;
+	GPIO_Init(HALLBPORT, &GPIO_InitStruct);
+	GPIO_InitStruct.GPIO_Pin = HALLCPIN;
+	GPIO_Init(HALLCPORT, &GPIO_InitStruct);
+	
 	DELAY_Init();
   while(1) {
-    GPIO_WriteBit(LEDRPORT, LEDRPIN, 1);
+		#ifdef HALL2LED
+    GPIO_WriteBit(LEDRPORT, LEDRPIN, GPIO_ReadInputDataBit(HALLAPORT, HALLAPIN));
+		GPIO_WriteBit(LEDGPORT, LEDGPIN, GPIO_ReadInputDataBit(HALLBPORT, HALLBPIN));
+		GPIO_WriteBit(LEDBPORT, LEDBPIN, GPIO_ReadInputDataBit(HALLCPORT, HALLCPIN));
+		DELAY_Ms(2);		
+		#else
+		GPIO_WriteBit(LEDRPORT, LEDRPIN, 1);
 		GPIO_WriteBit(LEDBPORT, LEDBPIN, 0);
-		DELAY_Ms(500);
-    GPIO_WriteBit(LEDGPORT, LEDGPIN, 1);
+		DELAY_Ms(200);
+		GPIO_WriteBit(LEDGPORT, LEDGPIN, 1);
 		GPIO_WriteBit(LEDRPORT, LEDRPIN, 0);
-		DELAY_Ms(500);
-    GPIO_WriteBit(LEDBPORT, LEDBPIN, 1);
+		DELAY_Ms(200);
+		GPIO_WriteBit(LEDBPORT, LEDBPIN, 1);
 		GPIO_WriteBit(LEDGPORT, LEDGPIN, 0);
-		DELAY_Ms(500);		
+		DELAY_Ms(200);
+		#endif
   }
 	
 }
-
 

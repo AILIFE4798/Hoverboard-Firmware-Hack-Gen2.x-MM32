@@ -22,14 +22,11 @@ Dialog DLL:      TARMCM1.DLL V1.14.6.0
  
 <h2>Project:</h2>
 C:\Users\Admin\Documents\GitHub\Hoverboard-Firmware-Hack-Gen2.x-MM32\HoverBoardMindMotion\Hoverboard.uvprojx
-Project File Date:  02/02/2024
+Project File Date:  02/03/2024
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
-Rebuild target 'MM32SPIN05'
-assembling startup_mm32spin06xx_s_keil.s...
-compiling system_mm32spin06xx_s.c...
-compiling delay.c...
+Build target 'MM32SPIN05'
 compiling main.c...
 .\HAL_Lib\Src\hal_gpio.c(49): warning:  #1296-D: extended constant initialiser used
           case (u32)GPIOA:
@@ -39,23 +36,17 @@ compiling main.c...
           case (u32)GPIOC:
 .\HAL_Lib\Src\hal_gpio.c(61): warning:  #1296-D: extended constant initialiser used
           case (u32)GPIOD:
-Src\main.c(31): warning:  #188-D: enumerated type mixed with another type
-      GPIO_WriteBit(LEDRPORT, LEDRPIN, 1);
-Src\main.c(32): warning:  #188-D: enumerated type mixed with another type
-  		GPIO_WriteBit(LEDBPORT, LEDBPIN, 0);
-Src\main.c(34): warning:  #188-D: enumerated type mixed with another type
-      GPIO_WriteBit(LEDGPORT, LEDGPIN, 1);
-Src\main.c(35): warning:  #188-D: enumerated type mixed with another type
-  		GPIO_WriteBit(LEDRPORT, LEDRPIN, 0);
-Src\main.c(37): warning:  #188-D: enumerated type mixed with another type
-      GPIO_WriteBit(LEDBPORT, LEDBPIN, 1);
-Src\main.c(38): warning:  #188-D: enumerated type mixed with another type
-  		GPIO_WriteBit(LEDGPORT, LEDGPIN, 0);
-Src\main.c: 10 warnings, 0 errors
+Src\main.c(50): warning:  #188-D: enumerated type mixed with another type
+      GPIO_WriteBit(LEDRPORT, LEDRPIN, GPIO_ReadInputDataBit(HALLAPORT, HALLAPIN));
+Src\main.c(51): warning:  #188-D: enumerated type mixed with another type
+  		GPIO_WriteBit(LEDGPORT, LEDGPIN, GPIO_ReadInputDataBit(HALLBPORT, HALLBPIN));
+Src\main.c(52): warning:  #188-D: enumerated type mixed with another type
+  		GPIO_WriteBit(LEDBPORT, LEDBPIN, GPIO_ReadInputDataBit(HALLCPORT, HALLCPIN));
+Src\main.c: 7 warnings, 0 errors
 linking...
-Program Size: Code=1804 RO-data=224 RW-data=24 ZI-data=1632  
+Program Size: Code=1860 RO-data=224 RW-data=24 ZI-data=1632  
 FromELF: creating hex file...
-".\Objects\HoverboardOutput.axf" - 0 Error(s), 10 Warning(s).
+".\Objects\HoverboardOutput.axf" - 0 Error(s), 7 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -82,8 +73,8 @@ Package Vendor: MindMotion
 
    * Component: MindMotion::Device:Startup:1.0.0
       Source file:   Device/MM32SPIN06xx_s/Source/system_mm32spin06xx_s.c
-      Include file:  Device/MM32SPIN06xx_s/Include/mm32_device.h
       Source file:   Device/MM32SPIN06xx_s/Source/KEIL_StartAsm/startup_mm32spin06xx_s_keil.s
+      Include file:  Device/MM32SPIN06xx_s/Include/mm32_device.h
 Build Time Elapsed:  00:00:00
 </pre>
 </body>
