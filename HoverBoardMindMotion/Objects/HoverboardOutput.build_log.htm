@@ -3,169 +3,71 @@
 <pre>
 <h1>µVision Build Log</h1>
 <h2>Tool Versions:</h2>
-IDE-Version: µVision V5.39.0.0
-Copyright (C) 2023 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: ai life, AILLIFE, LIC=----
+IDE-Version: µVision V5.38.0.0
+Copyright (C) 2022 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: ai life, AILLIFE, LIC=14HV2-9MWQL-12QLE-5MWUR-A2NWJ-13L6U
  
 Tool Versions:
-Toolchain:       MDK-Lite  Version: 5.39.0.0
-Toolchain Path:  C:\Keil_v5\ARM\ARMCLANG\Bin
-C Compiler:      ArmClang.exe V6.21
-Assembler:       Armasm.exe V6.21
-Linker/Locator:  ArmLink.exe V6.21
-Library Manager: ArmAr.exe V6.21
-Hex Converter:   FromElf.exe V6.21
-CPU DLL:         SARMCM3.DLL V5.39.0.0
+Toolchain:       MDK-ARM Plus  Version: 5.38.0.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 7 (build 960)
+Assembler:       Armasm.exe V5.06 update 7 (build 960)
+Linker/Locator:  ArmLink.exe V5.06 update 7 (build 960)
+Library Manager: ArmAr.exe V5.06 update 7 (build 960)
+Hex Converter:   FromElf.exe V5.06 update 7 (build 960)
+CPU DLL:         SARMCM3.DLL V5.38.0.0
 Dialog DLL:      DARMCM1.DLL V1.19.6.0
-Target DLL:      UL2CM3.DLL V1.164.9.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.1.0.0
 Dialog DLL:      TARMCM1.DLL V1.14.6.0
  
 <h2>Project:</h2>
 C:\Users\Admin\Documents\GitHub\Hoverboard-Firmware-Hack-Gen2.x-MM32\HoverBoardMindMotion\Hoverboard.uvprojx
-Project File Date:  01/13/2024
+Project File Date:  02/02/2024
 
 <h2>Output:</h2>
-*** Using Compiler 'V6.21', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
+*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Rebuild target 'MM32SPIN05'
 assembling startup_mm32spin06xx_s_keil.s...
-Src/delay.c(80): warning: no previous prototype for function 'SysTick_Handler' [-Wmissing-prototypes]
-   80 | void SysTick_Handler(void)
-      |      ^
-Src/delay.c(80): note: declare 'static' if the function is not intended to be used outside of this translation unit
-   80 | void SysTick_Handler(void)
-      | ^
-      | static 
-1 warning generated.
-compiling delay.c...
-RTE/Device/MM32SPIN05PF/system_mm32spin06xx_s.c(103): warning: no previous extern declaration for non-static variable 'SystemCoreClock' [-Wmissing-variable-declarations]
-  103 | u32 SystemCoreClock         = SYSCLK_HSI_XXMHz;
-      |     ^
-RTE/Device/MM32SPIN05PF/system_mm32spin06xx_s.c(103): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-  103 | u32 SystemCoreClock         = SYSCLK_HSI_XXMHz;
-      | ^
-RTE/Device/MM32SPIN05PF/system_mm32spin06xx_s.c(108): warning: no previous extern declaration for non-static variable 'AHBPrescTable' [-Wmissing-variable-declarations]
-  108 | __I u8 AHBPrescTable[16] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 9};
-      |        ^
-RTE/Device/MM32SPIN05PF/system_mm32spin06xx_s.c(108): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-  108 | __I u8 AHBPrescTable[16] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 9};
-      |     ^
-RTE/Device/MM32SPIN05PF/system_mm32spin06xx_s.c(152): warning: no previous prototype for function 'SystemInit' [-Wmissing-prototypes]
-  152 | void SystemInit (void)
-      |      ^
-RTE/Device/MM32SPIN05PF/system_mm32spin06xx_s.c(152): note: declare 'static' if the function is not intended to be used outside of this translation unit
-  152 | void SystemInit (void)
-      | ^
-      | static 
-RTE/Device/MM32SPIN05PF/system_mm32spin06xx_s.c(199): warning: implicit conversion loses integer precision: 'u32' (aka 'unsigned int') to 'u8' (aka 'unsigned char') [-Wimplicit-int-conversion]
-  199 |                 *plln = n;
-      |                       ~ ^
-RTE/Device/MM32SPIN05PF/system_mm32spin06xx_s.c(200): warning: implicit conversion loses integer precision: 'u32' (aka 'unsigned int') to 'u8' (aka 'unsigned char') [-Wimplicit-int-conversion]
-  200 |                 *pllm = m;
-      |                       ~ ^
-RTE/Device/MM32SPIN05PF/system_mm32spin06xx_s.c(186): warning: no previous prototype for function 'AutoCalPllFactor' [-Wmissing-prototypes]
-  186 | u32 AutoCalPllFactor(u32 pllclkSourceFrq, u32 pllclkFrq, u8* plln, u8* pllm)
-      |     ^
-RTE/Device/MM32SPIN05PF/system_mm32spin06xx_s.c(186): note: declare 'static' if the function is not intended to be used outside of this translation unit
-  186 | u32 AutoCalPllFactor(u32 pllclkSourceFrq, u32 pllclkFrq, u8* plln, u8* pllm)
-      | ^
-      | static 
-RTE/Device/MM32SPIN05PF/system_mm32spin06xx_s.c(729): warning: implicit conversion changes signedness: 'int' to 'u32' (aka 'unsigned int') [-Wsign-conversion]
-  729 |     FLASH->ACR &= ~0x07;
-      |                ~~ ^~~~~
-RTE/Device/MM32SPIN05PF/system_mm32spin06xx_s.c(758): warning: implicit conversion changes signedness: 'int' to 'u32' (aka 'unsigned int') [-Wsign-conversion]
-  758 |     RCC->CR |= (plln << 26) | (pllm << 20);
-      |             ~~ ~~~~~~~~~~~~~^~~~~~~~~~~~~~
-8 warnings generated.
 compiling system_mm32spin06xx_s.c...
-Src/main.c(3): warning: In file included from...
-./HAL_Lib/Src\hal_gpio.c(49): warning: expression is not an integer constant expression; folding it to a constant is a GNU extension [-Wgnu-folding-constant]
-   49 |         case (u32)GPIOA:
-      |              ^~~~~~~~~~
-./HAL_Lib/Src\hal_gpio.c(49): note: this conversion is not allowed in a constant expression
-   49 |         case (u32)GPIOA:
-      |              ^~~~~~~~~~
-./HAL_Lib/Src\hal_gpio.c(53): warning: expression is not an integer constant expression; folding it to a constant is a GNU extension [-Wgnu-folding-constant]
-   53 |         case (u32)GPIOB:
-      |              ^~~~~~~~~~
-./HAL_Lib/Src\hal_gpio.c(53): note: this conversion is not allowed in a constant expression
-   53 |         case (u32)GPIOB:
-      |              ^~~~~~~~~~
-./HAL_Lib/Src\hal_gpio.c(57): warning: expression is not an integer constant expression; folding it to a constant is a GNU extension [-Wgnu-folding-constant]
-   57 |         case (u32)GPIOC:
-      |              ^~~~~~~~~~
-./HAL_Lib/Src\hal_gpio.c(57): note: this conversion is not allowed in a constant expression
-   57 |         case (u32)GPIOC:
-      |              ^~~~~~~~~~
-./HAL_Lib/Src\hal_gpio.c(61): warning: expression is not an integer constant expression; folding it to a constant is a GNU extension [-Wgnu-folding-constant]
-   61 |         case (u32)GPIOD:
-      |              ^~~~~~~~~~
-./HAL_Lib/Src\hal_gpio.c(61): note: this conversion is not allowed in a constant expression
-   61 |         case (u32)GPIOD:
-      |              ^~~~~~~~~~
-./HAL_Lib/Src\hal_gpio.c(81): warning: a function declaration without a prototype is deprecated in all versions of C [-Wstrict-prototypes]
-   81 | void GPIO_AFIODeInit()
-      |                     ^
-      |                      void
-./HAL_Lib/Src\hal_gpio.c(119): warning: implicit conversion changes signedness: 'int' to 'u32' (aka 'unsigned int') [-Wsign-conversion]
-  119 |             *reg  = (*reg  & ~(0xF << idx)) | (dat << idx);
-      |                            ~ ^~~~~~~~~~~~~
-./HAL_Lib/Src\hal_gpio.c(128): warning: implicit conversion changes signedness: 'int' to 'u32' (aka 'unsigned int') [-Wsign-conversion]
-  128 |             *reg  = (*reg  & ~(0xF << idx)) | (dat << idx);
-      |                            ~ ^~~~~~~~~~~~~
-./HAL_Lib/Src\hal_gpio.c(170): warning: implicit conversion loses integer precision: 'volatile u32' (aka 'volatile unsigned int') to 'u16' (aka 'unsigned short') [-Wimplicit-int-conversion]
-  170 |     return gpio->IDR;
-      |     ~~~~~~ ~~~~~~^~~
-./HAL_Lib/Src\hal_gpio.c(192): warning: implicit conversion loses integer precision: 'volatile u32' (aka 'volatile unsigned int') to 'u16' (aka 'unsigned short') [-Wimplicit-int-conversion]
-  192 |     return gpio->ODR;
-      |     ~~~~~~ ~~~~~~^~~
-./HAL_Lib/Src\hal_gpio.c(304): warning: cast from 'volatile unsigned int *' to 'unsigned int *' drops volatile qualifier [-Wcast-qual]
-  304 |     u32* ptr = (pin < 8) ? (u32*)&gpio->AFRL : (u32*)&gpio->AFRH;
-      |                                  ^
-./HAL_Lib/Src\hal_gpio.c(304): warning: cast from 'volatile unsigned int *' to 'unsigned int *' drops volatile qualifier [-Wcast-qual]
-  304 |     u32* ptr = (pin < 8) ? (u32*)&gpio->AFRL : (u32*)&gpio->AFRH;
-      |                                                      ^
-./HAL_Lib/Src\hal_gpio.c(305): warning: implicit conversion changes signedness: 'int' to 'u32' (aka 'unsigned int') [-Wsign-conversion]
-  305 |     *ptr = (*ptr & ~(0x0F << shift)) | (alternate_function << shift);
-      |                                      ~  ~~~~~~~~~~~~~~~~~~~^~~~~~~~
-./HAL_Lib/Src\hal_gpio.c(305): warning: implicit conversion changes signedness: 'int' to 'u32' (aka 'unsigned int') [-Wsign-conversion]
-  305 |     *ptr = (*ptr & ~(0x0F << shift)) | (alternate_function << shift);
-      |                  ~ ^~~~~~~~~~~~~~~~
-./HAL_Lib/Src\hal_gpio.c(336): warning: cast from 'volatile unsigned int *' to 'unsigned int *' drops volatile qualifier [-Wcast-qual]
-  336 |         ptr = (pin < 8) ? (u32*)&gpio->AFRL : (u32*)&gpio->AFRH;
-      |                                 ^
-./HAL_Lib/Src\hal_gpio.c(336): warning: cast from 'volatile unsigned int *' to 'unsigned int *' drops volatile qualifier [-Wcast-qual]
-  336 |         ptr = (pin < 8) ? (u32*)&gpio->AFRL : (u32*)&gpio->AFRH;
-      |                                                     ^
-./HAL_Lib/Src\hal_gpio.c(337): warning: implicit conversion changes signedness: 'int' to 'u32' (aka 'unsigned int') [-Wsign-conversion]
-  337 |         *ptr = (*ptr & ~(0x0F << shift)) | (alternate_function << shift);
-      |                                          ~  ~~~~~~~~~~~~~~~~~~~^~~~~~~~
-./HAL_Lib/Src\hal_gpio.c(337): warning: implicit conversion changes signedness: 'int' to 'u32' (aka 'unsigned int') [-Wsign-conversion]
-  337 |         *ptr = (*ptr & ~(0x0F << shift)) | (alternate_function << shift);
-      |                      ~ ^~~~~~~~~~~~~~~~
-./HAL_Lib/Src\hal_gpio.c(320): warning: unused parameter 'remap' [-Wunused-parameter]
-  320 | void exGPIO_PinAFConfig(GPIO_TypeDef* gpio, u16 pin, s32 remap, s8 alternate_function)
-      |                                                          ^
-Src/main.c(20): warning: mixing declarations and code is incompatible with standards before C99 [-Wdeclaration-after-statement]
-   20 |         GPIO_InitTypeDef GPIO_InitStruct;
-      |                          ^
-19 warnings generated.
+compiling delay.c...
 compiling main.c...
+.\HAL_Lib\Src\hal_gpio.c(49): warning:  #1296-D: extended constant initialiser used
+          case (u32)GPIOA:
+.\HAL_Lib\Src\hal_gpio.c(53): warning:  #1296-D: extended constant initialiser used
+          case (u32)GPIOB:
+.\HAL_Lib\Src\hal_gpio.c(57): warning:  #1296-D: extended constant initialiser used
+          case (u32)GPIOC:
+.\HAL_Lib\Src\hal_gpio.c(61): warning:  #1296-D: extended constant initialiser used
+          case (u32)GPIOD:
+Src\main.c(31): warning:  #188-D: enumerated type mixed with another type
+      GPIO_WriteBit(LEDRPORT, LEDRPIN, 1);
+Src\main.c(32): warning:  #188-D: enumerated type mixed with another type
+  		GPIO_WriteBit(LEDBPORT, LEDBPIN, 0);
+Src\main.c(34): warning:  #188-D: enumerated type mixed with another type
+      GPIO_WriteBit(LEDGPORT, LEDGPIN, 1);
+Src\main.c(35): warning:  #188-D: enumerated type mixed with another type
+  		GPIO_WriteBit(LEDRPORT, LEDRPIN, 0);
+Src\main.c(37): warning:  #188-D: enumerated type mixed with another type
+      GPIO_WriteBit(LEDBPORT, LEDBPIN, 1);
+Src\main.c(38): warning:  #188-D: enumerated type mixed with another type
+  		GPIO_WriteBit(LEDGPORT, LEDGPIN, 0);
+Src\main.c: 10 warnings, 0 errors
 linking...
-Program Size: Code=2252 RO-data=224 RW-data=4 ZI-data=1640  
+Program Size: Code=1804 RO-data=224 RW-data=24 ZI-data=1632  
 FromELF: creating hex file...
-".\Objects\HoverboardOutput.axf" - 0 Error(s), 28 Warning(s).
+".\Objects\HoverboardOutput.axf" - 0 Error(s), 10 Warning(s).
 
 <h2>Software Packages used:</h2>
 
 Package Vendor: ARM
                 http://www.keil.com/pack/ARM.CMSIS.5.9.0.pack
-                ARM::CMSIS@5.9.0
+                ARM.CMSIS.5.9.0
                 CMSIS (Common Microcontroller Software Interface Standard)
    * Component: CORE Version: 5.6.0
 
 Package Vendor: MindMotion
                 http://www.mindmotion.com.cn/Download/MDK_KEIL/MindMotion.MM32SPIN0x_DFP.1.0.8.pack
-                MindMotion::MM32SPIN0x_DFP@1.0.8
+                MindMotion.MM32SPIN0x_DFP.1.0.8
                 MindMotion MM32SPIN0x Series Device Support, Drivers and Examples
    * Component: Startup Version: 1.0.0
 
@@ -176,11 +78,11 @@ Package Vendor: MindMotion
 
 <h2>Collection of Component Files used:</h2>
 
-   * Component: ARM::CMSIS:CORE@5.6.0
+   * Component: ARM::CMSIS:CORE:5.6.0
 
-   * Component: MindMotion::Device:Startup@1.0.0
-      Include file:  Device/MM32SPIN06xx_s/Include/mm32_device.h
+   * Component: MindMotion::Device:Startup:1.0.0
       Source file:   Device/MM32SPIN06xx_s/Source/system_mm32spin06xx_s.c
+      Include file:  Device/MM32SPIN06xx_s/Include/mm32_device.h
       Source file:   Device/MM32SPIN06xx_s/Source/KEIL_StartAsm/startup_mm32spin06xx_s_keil.s
 Build Time Elapsed:  00:00:00
 </pre>

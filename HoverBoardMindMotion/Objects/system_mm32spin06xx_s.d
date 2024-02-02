@@ -1,33 +1,32 @@
-./objects/system_mm32spin06xx_s.o: \
-  RTE\Device\MM32SPIN05PF\system_mm32spin06xx_s.c \
-  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\mm32_device.h \
-  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\mm32_reg.h \
-  C:\Keil_v5\ARM\ARMCLANG\include\stdint.h \
-  C:\Keil_v5\ARM\ARMCLANG\include\stdbool.h \
-  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\types.h \
-  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_common.h \
-  C:\Users\Admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\core_cm0.h \
-  C:\Users\Admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_version.h \
-  C:\Users\Admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_compiler.h \
-  C:\Users\Admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_armclang.h \
-  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_adc.h \
-  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_bkp.h \
-  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_can.h \
-  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_comp.h \
-  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_crc.h \
-  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_dbg.h \
-  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_div.h \
-  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_dma.h \
-  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_exti.h \
-  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_flash.h \
-  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_gpio.h \
-  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_i2c.h \
-  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_iwdg.h \
-  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_pwr.h \
-  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_rcc.h \
-  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_spi.h \
-  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_syscfg.h \
-  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_tim.h \
-  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_uart.h \
-  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_wwdg.h \
-  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\mm32_reg_redefine_v1.h
+.\objects\system_mm32spin06xx_s.o: RTE/Device/MM32SPIN05PF/system_mm32spin06xx_s.c
+.\objects\system_mm32spin06xx_s.o: C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\mm32_device.h
+.\objects\system_mm32spin06xx_s.o: C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\mm32_reg.h
+.\objects\system_mm32spin06xx_s.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\system_mm32spin06xx_s.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\system_mm32spin06xx_s.o: C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\types.h
+.\objects\system_mm32spin06xx_s.o: C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_common.h
+.\objects\system_mm32spin06xx_s.o: C:\Users\Admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\core_cm0.h
+.\objects\system_mm32spin06xx_s.o: C:\Users\Admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_version.h
+.\objects\system_mm32spin06xx_s.o: C:\Users\Admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_compiler.h
+.\objects\system_mm32spin06xx_s.o: C:\Users\Admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_armcc.h
+.\objects\system_mm32spin06xx_s.o: C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_adc.h
+.\objects\system_mm32spin06xx_s.o: C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_bkp.h
+.\objects\system_mm32spin06xx_s.o: C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_can.h
+.\objects\system_mm32spin06xx_s.o: C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_comp.h
+.\objects\system_mm32spin06xx_s.o: C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_crc.h
+.\objects\system_mm32spin06xx_s.o: C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_dbg.h
+.\objects\system_mm32spin06xx_s.o: C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_div.h
+.\objects\system_mm32spin06xx_s.o: C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_dma.h
+.\objects\system_mm32spin06xx_s.o: C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_exti.h
+.\objects\system_mm32spin06xx_s.o: C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_flash.h
+.\objects\system_mm32spin06xx_s.o: C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_gpio.h
+.\objects\system_mm32spin06xx_s.o: C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_i2c.h
+.\objects\system_mm32spin06xx_s.o: C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_iwdg.h
+.\objects\system_mm32spin06xx_s.o: C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_pwr.h
+.\objects\system_mm32spin06xx_s.o: C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_rcc.h
+.\objects\system_mm32spin06xx_s.o: C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_spi.h
+.\objects\system_mm32spin06xx_s.o: C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_syscfg.h
+.\objects\system_mm32spin06xx_s.o: C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_tim.h
+.\objects\system_mm32spin06xx_s.o: C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_uart.h
+.\objects\system_mm32spin06xx_s.o: C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_wwdg.h
+.\objects\system_mm32spin06xx_s.o: C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\mm32_reg_redefine_v1.h

@@ -1,68 +1,35 @@
-Component: Arm Compiler for Embedded 6.21 Tool: armlink [5ec1fa00]
+Component: ARM Compiler 5.06 update 7 (build 960) Tool: armlink [4d3601]
 
 ==============================================================================
 
 Section Cross References
 
-    main.o(.text.GPIO_DeInit) refers to main.o(.text.RCC_AHBPeriphClockCmd) for RCC_AHBPeriphClockCmd
-    main.o(.ARM.exidx.text.GPIO_DeInit) refers to main.o(.text.GPIO_DeInit) for [Anonymous Symbol]
-    main.o(.ARM.exidx.text.RCC_AHBPeriphClockCmd) refers to main.o(.text.RCC_AHBPeriphClockCmd) for [Anonymous Symbol]
-    main.o(.ARM.exidx.text.GPIO_AFIODeInit) refers to main.o(.text.GPIO_AFIODeInit) for [Anonymous Symbol]
-    main.o(.ARM.exidx.text.GPIO_Init) refers to main.o(.text.GPIO_Init) for [Anonymous Symbol]
-    main.o(.ARM.exidx.text.GPIO_StructInit) refers to main.o(.text.GPIO_StructInit) for [Anonymous Symbol]
-    main.o(.ARM.exidx.text.GPIO_ReadInputDataBit) refers to main.o(.text.GPIO_ReadInputDataBit) for [Anonymous Symbol]
-    main.o(.ARM.exidx.text.GPIO_ReadInputData) refers to main.o(.text.GPIO_ReadInputData) for [Anonymous Symbol]
-    main.o(.ARM.exidx.text.GPIO_ReadOutputDataBit) refers to main.o(.text.GPIO_ReadOutputDataBit) for [Anonymous Symbol]
-    main.o(.ARM.exidx.text.GPIO_ReadOutputData) refers to main.o(.text.GPIO_ReadOutputData) for [Anonymous Symbol]
-    main.o(.ARM.exidx.text.GPIO_SetBits) refers to main.o(.text.GPIO_SetBits) for [Anonymous Symbol]
-    main.o(.ARM.exidx.text.GPIO_ResetBits) refers to main.o(.text.GPIO_ResetBits) for [Anonymous Symbol]
-    main.o(.ARM.exidx.text.GPIO_WriteBit) refers to main.o(.text.GPIO_WriteBit) for [Anonymous Symbol]
-    main.o(.ARM.exidx.text.GPIO_Write) refers to main.o(.text.GPIO_Write) for [Anonymous Symbol]
-    main.o(.ARM.exidx.text.GPIO_PinLock) refers to main.o(.text.GPIO_PinLock) for [Anonymous Symbol]
-    main.o(.ARM.exidx.text.GPIO_PinLockConfig) refers to main.o(.text.GPIO_PinLockConfig) for [Anonymous Symbol]
-    main.o(.ARM.exidx.text.GPIO_PinAFConfig) refers to main.o(.text.GPIO_PinAFConfig) for [Anonymous Symbol]
-    main.o(.ARM.exidx.text.exGPIO_PinAFConfig) refers to main.o(.text.exGPIO_PinAFConfig) for [Anonymous Symbol]
-    main.o(.text.main) refers to main.o(.text.RCC_AHBPeriphClockCmd) for RCC_AHBPeriphClockCmd
-    main.o(.text.main) refers to main.o(.text.GPIO_Init) for GPIO_Init
-    main.o(.text.main) refers to delay.o(.text.DELAY_Init) for DELAY_Init
-    main.o(.text.main) refers to main.o(.text.GPIO_WriteBit) for GPIO_WriteBit
-    main.o(.text.main) refers to delay.o(.text.DELAY_Ms) for DELAY_Ms
-    main.o(.ARM.exidx.text.main) refers to main.o(.text.main) for [Anonymous Symbol]
-    delay.o(.text.DELAY_Init) refers to aeabi_sdiv.o(.text) for __aeabi_uidiv
-    delay.o(.text.DELAY_Init) refers to delay.o(.text.SysTick_Config) for SysTick_Config
-    delay.o(.text.DELAY_Init) refers to delay.o(.text.__NVIC_SetPriority) for __NVIC_SetPriority
-    delay.o(.text.DELAY_Init) refers to system_mm32spin06xx_s.o(.data.SystemCoreClock) for SystemCoreClock
-    delay.o(.ARM.exidx.text.DELAY_Init) refers to delay.o(.text.DELAY_Init) for [Anonymous Symbol]
-    delay.o(.text.SysTick_Config) refers to delay.o(.text.__NVIC_SetPriority) for __NVIC_SetPriority
-    delay.o(.ARM.exidx.text.SysTick_Config) refers to delay.o(.text.SysTick_Config) for [Anonymous Symbol]
-    delay.o(.ARM.exidx.text.__NVIC_SetPriority) refers to delay.o(.text.__NVIC_SetPriority) for [Anonymous Symbol]
-    delay.o(.text.SysTick_Handler) refers to delay.o(.text.TimingDelayDecrement) for TimingDelayDecrement
-    delay.o(.ARM.exidx.text.SysTick_Handler) refers to delay.o(.text.SysTick_Handler) for [Anonymous Symbol]
-    delay.o(.text.TimingDelayDecrement) refers to delay.o(.bss.sTimingDelay) for [Anonymous Symbol]
-    delay.o(.ARM.exidx.text.TimingDelayDecrement) refers to delay.o(.text.TimingDelayDecrement) for [Anonymous Symbol]
-    delay.o(.text.DELAY_Ms) refers to delay.o(.bss.sTimingDelay) for [Anonymous Symbol]
-    delay.o(.ARM.exidx.text.DELAY_Ms) refers to delay.o(.text.DELAY_Ms) for [Anonymous Symbol]
+    main.o(i.GPIO_DeInit) refers to main.o(i.RCC_AHBPeriphClockCmd) for RCC_AHBPeriphClockCmd
+    main.o(i.main) refers to main.o(i.RCC_AHBPeriphClockCmd) for RCC_AHBPeriphClockCmd
+    main.o(i.main) refers to main.o(i.GPIO_Init) for GPIO_Init
+    main.o(i.main) refers to delay.o(i.DELAY_Init) for DELAY_Init
+    main.o(i.main) refers to main.o(i.GPIO_WriteBit) for GPIO_WriteBit
+    main.o(i.main) refers to delay.o(i.DELAY_Ms) for DELAY_Ms
+    delay.o(i.DELAY_Init) refers to aeabi_sdiv.o(.text) for __aeabi_uidivmod
+    delay.o(i.DELAY_Init) refers to delay.o(i.__NVIC_SetPriority) for __NVIC_SetPriority
+    delay.o(i.DELAY_Init) refers to system_mm32spin06xx_s.o(.data) for SystemCoreClock
+    delay.o(i.DELAY_Ms) refers to delay.o(.data) for sTimingDelay
+    delay.o(i.SysTick_Handler) refers to delay.o(i.TimingDelayDecrement) for TimingDelayDecrement
+    delay.o(i.TimingDelayDecrement) refers to delay.o(.data) for sTimingDelay
     startup_mm32spin06xx_s_keil.o(STACK) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
     startup_mm32spin06xx_s_keil.o(HEAP) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
     startup_mm32spin06xx_s_keil.o(RESET) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
     startup_mm32spin06xx_s_keil.o(RESET) refers to startup_mm32spin06xx_s_keil.o(STACK) for __initial_sp
     startup_mm32spin06xx_s_keil.o(RESET) refers to startup_mm32spin06xx_s_keil.o(.text) for Reset_Handler
-    startup_mm32spin06xx_s_keil.o(RESET) refers to delay.o(.text.SysTick_Handler) for SysTick_Handler
+    startup_mm32spin06xx_s_keil.o(RESET) refers to delay.o(i.SysTick_Handler) for SysTick_Handler
     startup_mm32spin06xx_s_keil.o(.text) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
     startup_mm32spin06xx_s_keil.o(.text) refers to startup_mm32spin06xx_s_keil.o(STACK) for __initial_sp
-    startup_mm32spin06xx_s_keil.o(.text) refers to system_mm32spin06xx_s.o(.text.SystemInit) for SystemInit
+    startup_mm32spin06xx_s_keil.o(.text) refers to system_mm32spin06xx_s.o(i.SystemInit) for SystemInit
     startup_mm32spin06xx_s_keil.o(.text) refers to __main.o(!!!main) for __main
     startup_mm32spin06xx_s_keil.o(.text) refers to startup_mm32spin06xx_s_keil.o(HEAP) for Heap_Mem
-    system_mm32spin06xx_s.o(.text.SystemInit) refers to system_mm32spin06xx_s.o(.text.SetSysClock) for SetSysClock
-    system_mm32spin06xx_s.o(.ARM.exidx.text.SystemInit) refers to system_mm32spin06xx_s.o(.text.SystemInit) for [Anonymous Symbol]
-    system_mm32spin06xx_s.o(.text.SetSysClock) refers to system_mm32spin06xx_s.o(.text.SetSysClockToXX_HSI) for SetSysClockToXX_HSI
-    system_mm32spin06xx_s.o(.ARM.exidx.text.SetSysClock) refers to system_mm32spin06xx_s.o(.text.SetSysClock) for [Anonymous Symbol]
-    system_mm32spin06xx_s.o(.text.AutoCalPllFactor) refers to aeabi_sdiv.o(.text) for __aeabi_uidiv
-    system_mm32spin06xx_s.o(.ARM.exidx.text.AutoCalPllFactor) refers to system_mm32spin06xx_s.o(.text.AutoCalPllFactor) for [Anonymous Symbol]
-    system_mm32spin06xx_s.o(.text.SetSysClockToXX_HSI) refers to aeabi_sdiv.o(.text) for __aeabi_uidiv
-    system_mm32spin06xx_s.o(.text.SetSysClockToXX_HSI) refers to system_mm32spin06xx_s.o(.text.AutoCalPllFactor) for AutoCalPllFactor
-    system_mm32spin06xx_s.o(.text.SetSysClockToXX_HSI) refers to system_mm32spin06xx_s.o(.data.SystemCoreClock) for SystemCoreClock
-    system_mm32spin06xx_s.o(.ARM.exidx.text.SetSysClockToXX_HSI) refers to system_mm32spin06xx_s.o(.text.SetSysClockToXX_HSI) for [Anonymous Symbol]
+    system_mm32spin06xx_s.o(i.AutoCalPllFactor) refers to aeabi_sdiv.o(.text) for __aeabi_uidivmod
+    system_mm32spin06xx_s.o(i.SetSysClock) refers to system_mm32spin06xx_s.o(i.SetSysClockTo48) for SetSysClockTo48
+    system_mm32spin06xx_s.o(i.SystemInit) refers to system_mm32spin06xx_s.o(i.SetSysClock) for SetSysClock
     __main.o(!!!main) refers to __rtentry.o(.ARM.Collect$$rtentry$$00000000) for __rt_entry
     __rtentry.o(.ARM.Collect$$rtentry$$00000000) refers (Special) to __rtentry2.o(.ARM.Collect$$rtentry$$0000000A) for __rt_entry_li
     __rtentry.o(.ARM.Collect$$rtentry$$00000000) refers (Special) to __rtentry2.o(.ARM.Collect$$rtentry$$0000000D) for __rt_entry_main
@@ -74,7 +41,7 @@ Section Cross References
     __rtentry2.o(.ARM.Collect$$rtentry$$00000008) refers to boardinit2.o(.text) for _platform_post_stackheap_init
     __rtentry2.o(.ARM.Collect$$rtentry$$0000000A) refers to libinit.o(.ARM.Collect$$libinit$$00000000) for __rt_lib_init
     __rtentry2.o(.ARM.Collect$$rtentry$$0000000B) refers to boardinit3.o(.text) for _platform_post_lib_init
-    __rtentry2.o(.ARM.Collect$$rtentry$$0000000D) refers to main.o(.text.main) for main
+    __rtentry2.o(.ARM.Collect$$rtentry$$0000000D) refers to main.o(i.main) for main
     __rtentry2.o(.ARM.Collect$$rtentry$$0000000D) refers to exit.o(.text) for exit
     __rtentry2.o(.ARM.exidx) refers to __rtentry2.o(.ARM.Collect$$rtentry$$00000001) for .ARM.Collect$$rtentry$$00000001
     __rtentry2.o(.ARM.exidx) refers to __rtentry2.o(.ARM.Collect$$rtentry$$00000008) for .ARM.Collect$$rtentry$$00000008
@@ -92,28 +59,27 @@ Section Cross References
     defsig_fpe_outer.o(.text) refers to defsig_fpe_inner.o(.text) for __rt_SIGFPE_inner
     defsig_fpe_outer.o(.text) refers to defsig_exit.o(.text) for __sig_exit
     defsig_fpe_formal.o(.text) refers to rt_raise.o(.text) for __rt_raise
-    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000030) for __rt_lib_init_alloca_1
-    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000002E) for __rt_lib_init_argv_1
-    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000001D) for __rt_lib_init_atexit_1
-    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000023) for __rt_lib_init_clock_1
-    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000034) for __rt_lib_init_cpp_1
-    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000032) for __rt_lib_init_exceptions_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000002E) for __rt_lib_init_alloca_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000002C) for __rt_lib_init_argv_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000001B) for __rt_lib_init_atexit_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000021) for __rt_lib_init_clock_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000032) for __rt_lib_init_cpp_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000030) for __rt_lib_init_exceptions_1
     libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000002) for __rt_lib_init_fp_1
-    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000021) for __rt_lib_init_fp_trap_1
-    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000025) for __rt_lib_init_getenv_1
-    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000000C) for __rt_lib_init_heap_1
-    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000013) for __rt_lib_init_lc_collate_1
-    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000015) for __rt_lib_init_lc_ctype_1
-    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000017) for __rt_lib_init_lc_monetary_1
-    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000019) for __rt_lib_init_lc_numeric_1
-    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000001B) for __rt_lib_init_lc_time_1
-    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000006) for __rt_lib_init_preinit_1
-    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000010) for __rt_lib_init_rand_1
-    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000004) for __rt_lib_init_relocate_pie_1
-    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000035) for __rt_lib_init_return
-    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000001F) for __rt_lib_init_signal_1
-    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000027) for __rt_lib_init_stdio_1
-    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000000E) for __rt_lib_init_user_alloc_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000001F) for __rt_lib_init_fp_trap_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000023) for __rt_lib_init_getenv_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000000A) for __rt_lib_init_heap_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000011) for __rt_lib_init_lc_collate_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000013) for __rt_lib_init_lc_ctype_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000015) for __rt_lib_init_lc_monetary_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000017) for __rt_lib_init_lc_numeric_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000019) for __rt_lib_init_lc_time_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000004) for __rt_lib_init_preinit_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000000E) for __rt_lib_init_rand_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000033) for __rt_lib_init_return
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000001D) for __rt_lib_init_signal_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000025) for __rt_lib_init_stdio_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000000C) for __rt_lib_init_user_alloc_1
     libspace.o(.text) refers to libspace.o(.bss) for __libspace_start
     rtexit.o(.ARM.Collect$$rtexit$$00000000) refers (Special) to rtexit2.o(.ARM.Collect$$rtexit$$00000004) for __rt_exit_exit
     rtexit.o(.ARM.Collect$$rtexit$$00000000) refers (Special) to rtexit2.o(.ARM.Collect$$rtexit$$00000003) for __rt_exit_ls
@@ -126,17 +92,15 @@ Section Cross References
     rt_raise.o(.text) refers to sys_exit.o(.text) for _sys_exit
     defsig_exit.o(.text) refers to sys_exit.o(.text) for _sys_exit
     defsig_fpe_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
-    libinit2.o(.ARM.Collect$$libinit$$00000012) refers to libinit2.o(.ARM.Collect$$libinit$$00000011) for .ARM.Collect$$libinit$$00000011
-    libinit2.o(.ARM.Collect$$libinit$$00000014) refers to libinit2.o(.ARM.Collect$$libinit$$00000011) for .ARM.Collect$$libinit$$00000011
-    libinit2.o(.ARM.Collect$$libinit$$00000016) refers to libinit2.o(.ARM.Collect$$libinit$$00000011) for .ARM.Collect$$libinit$$00000011
-    libinit2.o(.ARM.Collect$$libinit$$00000018) refers to libinit2.o(.ARM.Collect$$libinit$$00000011) for .ARM.Collect$$libinit$$00000011
-    libinit2.o(.ARM.Collect$$libinit$$0000001A) refers to libinit2.o(.ARM.Collect$$libinit$$00000011) for .ARM.Collect$$libinit$$00000011
-    libinit2.o(.ARM.Collect$$libinit$$00000028) refers to argv_veneer.o(.text) for __ARM_argv_veneer
-    libinit2.o(.ARM.Collect$$libinit$$00000029) refers to argv_veneer.o(.text) for __ARM_argv_veneer
+    libinit2.o(.ARM.Collect$$libinit$$00000010) refers to libinit2.o(.ARM.Collect$$libinit$$0000000F) for .ARM.Collect$$libinit$$0000000F
+    libinit2.o(.ARM.Collect$$libinit$$00000012) refers to libinit2.o(.ARM.Collect$$libinit$$0000000F) for .ARM.Collect$$libinit$$0000000F
+    libinit2.o(.ARM.Collect$$libinit$$00000014) refers to libinit2.o(.ARM.Collect$$libinit$$0000000F) for .ARM.Collect$$libinit$$0000000F
+    libinit2.o(.ARM.Collect$$libinit$$00000016) refers to libinit2.o(.ARM.Collect$$libinit$$0000000F) for .ARM.Collect$$libinit$$0000000F
+    libinit2.o(.ARM.Collect$$libinit$$00000018) refers to libinit2.o(.ARM.Collect$$libinit$$0000000F) for .ARM.Collect$$libinit$$0000000F
+    libinit2.o(.ARM.Collect$$libinit$$00000026) refers to argv_veneer.o(.text) for __ARM_argv_veneer
+    libinit2.o(.ARM.Collect$$libinit$$00000027) refers to argv_veneer.o(.text) for __ARM_argv_veneer
     sys_exit.o(.text) refers (Special) to use_no_semi.o(.text) for __I$use$semihosting
     sys_exit.o(.text) refers (Special) to indicate_semi.o(.text) for __semihosting_library_function
-    sys_exit_hlt.o(.text) refers (Special) to use_no_semi.o(.text) for __I$use$semihosting
-    sys_exit_hlt.o(.text) refers (Special) to indicate_semi.o(.text) for __semihosting_library_function
     rtexit2.o(.ARM.Collect$$rtexit$$00000003) refers to libshutdown.o(.ARM.Collect$$libshutdown$$00000000) for __rt_lib_shutdown
     rtexit2.o(.ARM.Collect$$rtexit$$00000004) refers to sys_exit.o(.text) for _sys_exit
     rtexit2.o(.ARM.exidx) refers to rtexit2.o(.ARM.Collect$$rtexit$$00000001) for .ARM.Collect$$rtexit$$00000001
@@ -146,24 +110,21 @@ Section Cross References
     defsig_general.o(.text) refers to sys_wrch.o(.text) for _ttywrch
     sys_wrch.o(.text) refers (Special) to use_no_semi.o(.text) for __I$use$semihosting
     sys_wrch.o(.text) refers (Special) to indicate_semi.o(.text) for __semihosting_library_function
-    sys_wrch_hlt.o(.text) refers (Special) to use_no_semi.o(.text) for __I$use$semihosting
-    sys_wrch_hlt.o(.text) refers (Special) to indicate_semi.o(.text) for __semihosting_library_function
     defsig.o(CL$$defsig) refers to defsig_fpe_inner.o(.text) for __rt_SIGFPE_inner
     defsig.o(CL$$defsig) refers to defsig_rtmem_inner.o(.text) for __rt_SIGRTMEM_inner
     _get_argv_nomalloc.o(.text) refers (Special) to hrguard.o(.text) for __heap_region$guard
     _get_argv_nomalloc.o(.text) refers to defsig_rtmem_outer.o(.text) for __rt_SIGRTMEM
     _get_argv_nomalloc.o(.text) refers to sys_command.o(.text) for _sys_command_string
-    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$00000002) for __rt_lib_shutdown_cpp_1
-    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$00000007) for __rt_lib_shutdown_fp_trap_1
-    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$0000000F) for __rt_lib_shutdown_heap_1
-    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$00000010) for __rt_lib_shutdown_return
-    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$0000000A) for __rt_lib_shutdown_signal_1
-    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$00000004) for __rt_lib_shutdown_stdio_1
-    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$0000000C) for __rt_lib_shutdown_user_alloc_1
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$00000004) for __rt_lib_shutdown_cpp_1
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$00000002) for __rt_lib_shutdown_fini_1
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$00000009) for __rt_lib_shutdown_fp_trap_1
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$00000011) for __rt_lib_shutdown_heap_1
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$00000012) for __rt_lib_shutdown_return
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$0000000C) for __rt_lib_shutdown_signal_1
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$00000006) for __rt_lib_shutdown_stdio_1
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$0000000E) for __rt_lib_shutdown_user_alloc_1
     sys_command.o(.text) refers (Special) to use_no_semi.o(.text) for __I$use$semihosting
     sys_command.o(.text) refers (Special) to indicate_semi.o(.text) for __semihosting_library_function
-    sys_command_hlt.o(.text) refers (Special) to use_no_semi.o(.text) for __I$use$semihosting
-    sys_command_hlt.o(.text) refers (Special) to indicate_semi.o(.text) for __semihosting_library_function
     defsig_abrt_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
     defsig_rtred_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
     defsig_rtmem_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
@@ -181,55 +142,29 @@ Section Cross References
 
 Removing Unused input sections from the image.
 
-    Removing main.o(.text), (0 bytes).
-    Removing main.o(.text.GPIO_DeInit), (116 bytes).
-    Removing main.o(.ARM.exidx.text.GPIO_DeInit), (8 bytes).
-    Removing main.o(.ARM.exidx.text.RCC_AHBPeriphClockCmd), (8 bytes).
-    Removing main.o(.text.GPIO_AFIODeInit), (76 bytes).
-    Removing main.o(.ARM.exidx.text.GPIO_AFIODeInit), (8 bytes).
-    Removing main.o(.ARM.exidx.text.GPIO_Init), (8 bytes).
-    Removing main.o(.text.GPIO_StructInit), (32 bytes).
-    Removing main.o(.ARM.exidx.text.GPIO_StructInit), (8 bytes).
-    Removing main.o(.text.GPIO_ReadInputDataBit), (30 bytes).
-    Removing main.o(.ARM.exidx.text.GPIO_ReadInputDataBit), (8 bytes).
-    Removing main.o(.text.GPIO_ReadInputData), (14 bytes).
-    Removing main.o(.ARM.exidx.text.GPIO_ReadInputData), (8 bytes).
-    Removing main.o(.text.GPIO_ReadOutputDataBit), (30 bytes).
-    Removing main.o(.ARM.exidx.text.GPIO_ReadOutputDataBit), (8 bytes).
-    Removing main.o(.text.GPIO_ReadOutputData), (14 bytes).
-    Removing main.o(.ARM.exidx.text.GPIO_ReadOutputData), (8 bytes).
-    Removing main.o(.text.GPIO_SetBits), (18 bytes).
-    Removing main.o(.ARM.exidx.text.GPIO_SetBits), (8 bytes).
-    Removing main.o(.text.GPIO_ResetBits), (18 bytes).
-    Removing main.o(.ARM.exidx.text.GPIO_ResetBits), (8 bytes).
-    Removing main.o(.ARM.exidx.text.GPIO_WriteBit), (8 bytes).
-    Removing main.o(.text.GPIO_Write), (18 bytes).
-    Removing main.o(.ARM.exidx.text.GPIO_Write), (8 bytes).
-    Removing main.o(.text.GPIO_PinLock), (52 bytes).
-    Removing main.o(.ARM.exidx.text.GPIO_PinLock), (8 bytes).
-    Removing main.o(.text.GPIO_PinLockConfig), (46 bytes).
-    Removing main.o(.ARM.exidx.text.GPIO_PinLockConfig), (8 bytes).
-    Removing main.o(.text.GPIO_PinAFConfig), (78 bytes).
-    Removing main.o(.ARM.exidx.text.GPIO_PinAFConfig), (8 bytes).
-    Removing main.o(.text.exGPIO_PinAFConfig), (158 bytes).
-    Removing main.o(.ARM.exidx.text.exGPIO_PinAFConfig), (8 bytes).
-    Removing main.o(.ARM.exidx.text.main), (8 bytes).
-    Removing main.o(.ARM.use_no_argv), (4 bytes).
-    Removing delay.o(.text), (0 bytes).
-    Removing delay.o(.ARM.exidx.text.DELAY_Init), (8 bytes).
-    Removing delay.o(.ARM.exidx.text.SysTick_Config), (8 bytes).
-    Removing delay.o(.ARM.exidx.text.__NVIC_SetPriority), (8 bytes).
-    Removing delay.o(.ARM.exidx.text.SysTick_Handler), (8 bytes).
-    Removing delay.o(.ARM.exidx.text.TimingDelayDecrement), (8 bytes).
-    Removing delay.o(.ARM.exidx.text.DELAY_Ms), (8 bytes).
-    Removing system_mm32spin06xx_s.o(.text), (0 bytes).
-    Removing system_mm32spin06xx_s.o(.ARM.exidx.text.SystemInit), (8 bytes).
-    Removing system_mm32spin06xx_s.o(.ARM.exidx.text.SetSysClock), (8 bytes).
-    Removing system_mm32spin06xx_s.o(.ARM.exidx.text.AutoCalPllFactor), (8 bytes).
-    Removing system_mm32spin06xx_s.o(.ARM.exidx.text.SetSysClockToXX_HSI), (8 bytes).
-    Removing system_mm32spin06xx_s.o(.rodata.AHBPrescTable), (16 bytes).
+    Removing main.o(.rev16_text), (4 bytes).
+    Removing main.o(.revsh_text), (4 bytes).
+    Removing main.o(i.GPIO_AFIODeInit), (52 bytes).
+    Removing main.o(i.GPIO_DeInit), (86 bytes).
+    Removing main.o(i.GPIO_PinAFConfig), (40 bytes).
+    Removing main.o(i.GPIO_PinLock), (20 bytes).
+    Removing main.o(i.GPIO_PinLockConfig), (24 bytes).
+    Removing main.o(i.GPIO_ReadInputData), (8 bytes).
+    Removing main.o(i.GPIO_ReadInputDataBit), (18 bytes).
+    Removing main.o(i.GPIO_ReadOutputData), (8 bytes).
+    Removing main.o(i.GPIO_ReadOutputDataBit), (18 bytes).
+    Removing main.o(i.GPIO_ResetBits), (4 bytes).
+    Removing main.o(i.GPIO_SetBits), (4 bytes).
+    Removing main.o(i.GPIO_StructInit), (16 bytes).
+    Removing main.o(i.GPIO_Write), (4 bytes).
+    Removing main.o(i.exGPIO_PinAFConfig), (74 bytes).
+    Removing delay.o(.rev16_text), (4 bytes).
+    Removing delay.o(.revsh_text), (4 bytes).
+    Removing system_mm32spin06xx_s.o(.rev16_text), (4 bytes).
+    Removing system_mm32spin06xx_s.o(.revsh_text), (4 bytes).
+    Removing system_mm32spin06xx_s.o(i.AutoCalPllFactor), (106 bytes).
 
-47 unused section(s) (total 944 bytes) removed from the image.
+21 unused section(s) (total 506 bytes) removed from the image.
 
 ==============================================================================
 
@@ -239,48 +174,48 @@ Image Symbol Table
 
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
-    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit1.o ABSOLUTE
-    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit2.o ABSOLUTE
-    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit3.o ABSOLUTE
     ../clib/angel/boardlib.s                 0x00000000   Number         0  boardshut.o ABSOLUTE
-    ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_copy.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit3.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit2.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit1.o ABSOLUTE
     ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_zi.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry2.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry4.o ABSOLUTE
+    ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_copy.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit2.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry4.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry2.o ABSOLUTE
     ../clib/angel/rt.s                       0x00000000   Number         0  aeabi_idiv0.o ABSOLUTE
     ../clib/angel/rt.s                       0x00000000   Number         0  aeabi_idiv0_sigfpe.o ABSOLUTE
-    ../clib/angel/rt.s                       0x00000000   Number         0  rt_div0.o ABSOLUTE
     ../clib/angel/rt.s                       0x00000000   Number         0  rt_raise.o ABSOLUTE
+    ../clib/angel/rt.s                       0x00000000   Number         0  rt_div0.o ABSOLUTE
     ../clib/angel/scatterp.s                 0x00000000   Number         0  __scatter.o ABSOLUTE
     ../clib/angel/startup.s                  0x00000000   Number         0  __main.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  indicate_semi.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  use_no_semi.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  sys_stackheap_outer.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  libspace.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  tempstk.o ABSOLUTE
-    ../clib/angel/sys.s                      0x00000000   Number         0  use_no_semi.o ABSOLUTE
-    ../clib/angel/sys.s                      0x00000000   Number         0  indicate_semi.o ABSOLUTE
-    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_exit.o ABSOLUTE
-    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_exit_hlt.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_wrch.o ABSOLUTE
-    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_wrch_hlt.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_command.o ABSOLUTE
-    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_command_hlt.o ABSOLUTE
-    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_exit.o ABSOLUTE
     ../clib/armsys.c                         0x00000000   Number         0  _get_argv_nomalloc.o ABSOLUTE
     ../clib/armsys.c                         0x00000000   Number         0  no_argv.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
     ../clib/division.s                       0x00000000   Number         0  aeabi_sdiv.o ABSOLUTE
     ../clib/division.s                       0x00000000   Number         0  aeabi_sdiv_div0.o ABSOLUTE
     ../clib/heapalloc.c                      0x00000000   Number         0  hrguard.o ABSOLUTE
     ../clib/heapaux.c                        0x00000000   Number         0  heapauxi.o ABSOLUTE
-    ../clib/libinit.s                        0x00000000   Number         0  libinit.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libinit2.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libshutdown.o ABSOLUTE
-    ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libinit.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_segv_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_exit.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_other.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_outer.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_formal.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_exit.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_pvfn_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  __raise.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_general.o ABSOLUTE
@@ -290,133 +225,110 @@ Image Symbol Table
     ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_outer.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_formal.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_stak_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_pvfn_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_cppl_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_segv_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_other.o ABSOLUTE
     ../clib/signal.s                         0x00000000   Number         0  defsig.o ABSOLUTE
     ../clib/stdlib.c                         0x00000000   Number         0  exit.o ABSOLUTE
     ../fplib/cfplib/fpinit.c                 0x00000000   Number         0  fpinit.o ABSOLUTE
     RTE/Device/MM32SPIN05PF/startup_mm32spin06xx_s_keil.s 0x00000000   Number         0  startup_mm32spin06xx_s_keil.o ABSOLUTE
+    RTE/Device/MM32SPIN05PF/system_mm32spin06xx_s.c 0x00000000   Number         0  system_mm32spin06xx_s.o ABSOLUTE
+    RTE\Device\MM32SPIN05PF\system_mm32spin06xx_s.c 0x00000000   Number         0  system_mm32spin06xx_s.o ABSOLUTE
+    Src\\delay.c                             0x00000000   Number         0  delay.o ABSOLUTE
+    Src\\main.c                              0x00000000   Number         0  main.o ABSOLUTE
+    Src\delay.c                              0x00000000   Number         0  delay.o ABSOLUTE
+    Src\main.c                               0x00000000   Number         0  main.o ABSOLUTE
     dc.s                                     0x00000000   Number         0  dc.o ABSOLUTE
-    delay.c                                  0x00000000   Number         0  delay.o ABSOLUTE
-    main.c                                   0x00000000   Number         0  main.o ABSOLUTE
-    system_mm32spin06xx_s.c                  0x00000000   Number         0  system_mm32spin06xx_s.o ABSOLUTE
     RESET                                    0x08000000   Section      192  startup_mm32spin06xx_s_keil.o(RESET)
     !!!main                                  0x080000c0   Section        8  __main.o(!!!main)
-    !!!scatter                               0x080000c8   Section       84  __scatter.o(!!!scatter)
-    !!handler_copy                           0x0800011c   Section       26  __scatter_copy.o(!!handler_copy)
-    !!handler_null                           0x08000138   Section        2  __scatter.o(!!handler_null)
-    !!handler_zi                             0x0800013c   Section       28  __scatter_zi.o(!!handler_zi)
-    .ARM.Collect$$libinit$$00000000          0x08000158   Section        2  libinit.o(.ARM.Collect$$libinit$$00000000)
-    .ARM.Collect$$libinit$$00000002          0x0800015a   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000002)
-    .ARM.Collect$$libinit$$00000004          0x0800015a   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000004)
-    .ARM.Collect$$libinit$$00000006          0x0800015a   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000006)
-    .ARM.Collect$$libinit$$0000000C          0x0800015a   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000000C)
-    .ARM.Collect$$libinit$$0000000E          0x0800015a   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000000E)
-    .ARM.Collect$$libinit$$00000010          0x0800015a   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000010)
-    .ARM.Collect$$libinit$$00000013          0x0800015a   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000013)
-    .ARM.Collect$$libinit$$00000015          0x0800015a   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000015)
-    .ARM.Collect$$libinit$$00000017          0x0800015a   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000017)
-    .ARM.Collect$$libinit$$00000019          0x0800015a   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000019)
-    .ARM.Collect$$libinit$$0000001B          0x0800015a   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000001B)
-    .ARM.Collect$$libinit$$0000001D          0x0800015a   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000001D)
-    .ARM.Collect$$libinit$$0000001F          0x0800015a   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000001F)
-    .ARM.Collect$$libinit$$00000021          0x0800015a   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000021)
-    .ARM.Collect$$libinit$$00000023          0x0800015a   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000023)
-    .ARM.Collect$$libinit$$00000025          0x0800015a   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000025)
-    .ARM.Collect$$libinit$$00000027          0x0800015a   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000027)
-    .ARM.Collect$$libinit$$0000002E          0x0800015a   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000002E)
-    .ARM.Collect$$libinit$$00000030          0x0800015a   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000030)
-    .ARM.Collect$$libinit$$00000032          0x0800015a   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000032)
-    .ARM.Collect$$libinit$$00000034          0x0800015a   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000034)
-    .ARM.Collect$$libinit$$00000035          0x0800015a   Section        2  libinit2.o(.ARM.Collect$$libinit$$00000035)
-    .ARM.Collect$$libshutdown$$00000000      0x0800015c   Section        2  libshutdown.o(.ARM.Collect$$libshutdown$$00000000)
-    .ARM.Collect$$libshutdown$$00000002      0x0800015e   Section        0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000002)
-    .ARM.Collect$$libshutdown$$00000004      0x0800015e   Section        0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000004)
-    .ARM.Collect$$libshutdown$$00000007      0x0800015e   Section        0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000007)
-    .ARM.Collect$$libshutdown$$0000000A      0x0800015e   Section        0  libshutdown2.o(.ARM.Collect$$libshutdown$$0000000A)
-    .ARM.Collect$$libshutdown$$0000000C      0x0800015e   Section        0  libshutdown2.o(.ARM.Collect$$libshutdown$$0000000C)
-    .ARM.Collect$$libshutdown$$0000000F      0x0800015e   Section        0  libshutdown2.o(.ARM.Collect$$libshutdown$$0000000F)
-    .ARM.Collect$$libshutdown$$00000010      0x0800015e   Section        2  libshutdown2.o(.ARM.Collect$$libshutdown$$00000010)
-    .ARM.Collect$$rtentry$$00000000          0x08000160   Section        0  __rtentry.o(.ARM.Collect$$rtentry$$00000000)
-    .ARM.Collect$$rtentry$$00000002          0x08000160   Section        0  __rtentry2.o(.ARM.Collect$$rtentry$$00000002)
-    .ARM.Collect$$rtentry$$00000004          0x08000160   Section        6  __rtentry4.o(.ARM.Collect$$rtentry$$00000004)
-    .ARM.Collect$$rtentry$$00000009          0x08000166   Section        0  __rtentry2.o(.ARM.Collect$$rtentry$$00000009)
-    .ARM.Collect$$rtentry$$0000000A          0x08000166   Section        4  __rtentry2.o(.ARM.Collect$$rtentry$$0000000A)
-    .ARM.Collect$$rtentry$$0000000C          0x0800016a   Section        0  __rtentry2.o(.ARM.Collect$$rtentry$$0000000C)
-    .ARM.Collect$$rtentry$$0000000D          0x0800016a   Section        8  __rtentry2.o(.ARM.Collect$$rtentry$$0000000D)
-    .ARM.Collect$$rtexit$$00000000           0x08000172   Section        2  rtexit.o(.ARM.Collect$$rtexit$$00000000)
-    .ARM.Collect$$rtexit$$00000002           0x08000174   Section        0  rtexit2.o(.ARM.Collect$$rtexit$$00000002)
-    .ARM.Collect$$rtexit$$00000003           0x08000174   Section        4  rtexit2.o(.ARM.Collect$$rtexit$$00000003)
-    .ARM.Collect$$rtexit$$00000004           0x08000178   Section        6  rtexit2.o(.ARM.Collect$$rtexit$$00000004)
-    .text                                    0x08000180   Section      124  startup_mm32spin06xx_s_keil.o(.text)
-    .text                                    0x080001fc   Section      364  aeabi_sdiv.o(.text)
-    .text                                    0x08000368   Section        0  heapauxi.o(.text)
-    .text                                    0x0800036e   Section       62  sys_stackheap_outer.o(.text)
-    .text                                    0x080003ac   Section        0  exit.o(.text)
-    .text                                    0x080003bc   Section        8  libspace.o(.text)
-    .text                                    0x080003c4   Section        0  sys_exit.o(.text)
-    .text                                    0x080003d0   Section        2  use_no_semi.o(.text)
-    [Anonymous Symbol]                       0x080003d2   Section        0  system_mm32spin06xx_s.o(.text.AutoCalPllFactor)
-    .text                                    0x080003d2   Section        0  indicate_semi.o(.text)
-    [Anonymous Symbol]                       0x08000488   Section        0  delay.o(.text.DELAY_Init)
-    [Anonymous Symbol]                       0x080004b0   Section        0  delay.o(.text.DELAY_Ms)
-    [Anonymous Symbol]                       0x080004cc   Section        0  main.o(.text.GPIO_Init)
-    [Anonymous Symbol]                       0x080005dc   Section        0  main.o(.text.GPIO_WriteBit)
-    [Anonymous Symbol]                       0x08000608   Section        0  main.o(.text.RCC_AHBPeriphClockCmd)
-    __arm_cp.1_0                             0x08000634   Number         4  main.o(.text.RCC_AHBPeriphClockCmd)
-    SetSysClock                              0x08000639   Thumb Code     8  system_mm32spin06xx_s.o(.text.SetSysClock)
-    [Anonymous Symbol]                       0x08000638   Section        0  system_mm32spin06xx_s.o(.text.SetSysClock)
-    SetSysClockToXX_HSI                      0x08000641   Thumb Code   268  system_mm32spin06xx_s.o(.text.SetSysClockToXX_HSI)
-    [Anonymous Symbol]                       0x08000640   Section        0  system_mm32spin06xx_s.o(.text.SetSysClockToXX_HSI)
-    __arm_cp.3_1                             0x0800074c   Number         4  system_mm32spin06xx_s.o(.text.SetSysClockToXX_HSI)
-    __arm_cp.3_2                             0x08000750   Number         4  system_mm32spin06xx_s.o(.text.SetSysClockToXX_HSI)
-    __arm_cp.3_3                             0x08000754   Number         4  system_mm32spin06xx_s.o(.text.SetSysClockToXX_HSI)
-    __arm_cp.3_4                             0x08000758   Number         4  system_mm32spin06xx_s.o(.text.SetSysClockToXX_HSI)
-    __arm_cp.3_6                             0x0800075c   Number         4  system_mm32spin06xx_s.o(.text.SetSysClockToXX_HSI)
-    __arm_cp.3_7                             0x08000760   Number         4  system_mm32spin06xx_s.o(.text.SetSysClockToXX_HSI)
-    __arm_cp.3_8                             0x08000764   Number         4  system_mm32spin06xx_s.o(.text.SetSysClockToXX_HSI)
-    SysTick_Config                           0x08000769   Thumb Code    68  delay.o(.text.SysTick_Config)
-    [Anonymous Symbol]                       0x08000768   Section        0  delay.o(.text.SysTick_Config)
-    __arm_cp.1_0                             0x080007ac   Number         4  delay.o(.text.SysTick_Config)
-    __arm_cp.1_1                             0x080007b0   Number         4  delay.o(.text.SysTick_Config)
-    __arm_cp.1_2                             0x080007b4   Number         4  delay.o(.text.SysTick_Config)
-    [Anonymous Symbol]                       0x080007b8   Section        0  delay.o(.text.SysTick_Handler)
-    [Anonymous Symbol]                       0x080007c0   Section        0  system_mm32spin06xx_s.o(.text.SystemInit)
-    __arm_cp.0_0                             0x08000808   Number         4  system_mm32spin06xx_s.o(.text.SystemInit)
-    __arm_cp.0_1                             0x0800080c   Number         4  system_mm32spin06xx_s.o(.text.SystemInit)
-    __arm_cp.0_2                             0x08000810   Number         4  system_mm32spin06xx_s.o(.text.SystemInit)
-    __arm_cp.0_3                             0x08000814   Number         4  system_mm32spin06xx_s.o(.text.SystemInit)
-    __arm_cp.0_4                             0x08000818   Number         4  system_mm32spin06xx_s.o(.text.SystemInit)
-    __arm_cp.0_5                             0x0800081c   Number         4  system_mm32spin06xx_s.o(.text.SystemInit)
-    TimingDelayDecrement                     0x08000821   Thumb Code    24  delay.o(.text.TimingDelayDecrement)
-    [Anonymous Symbol]                       0x08000820   Section        0  delay.o(.text.TimingDelayDecrement)
-    __arm_cp.4_0                             0x08000838   Number         4  delay.o(.text.TimingDelayDecrement)
-    __NVIC_SetPriority                       0x0800083d   Thumb Code   124  delay.o(.text.__NVIC_SetPriority)
-    [Anonymous Symbol]                       0x0800083c   Section        0  delay.o(.text.__NVIC_SetPriority)
-    __arm_cp.2_0                             0x080008b8   Number         4  delay.o(.text.__NVIC_SetPriority)
-    __arm_cp.2_1                             0x080008bc   Number         4  delay.o(.text.__NVIC_SetPriority)
-    [Anonymous Symbol]                       0x080008c0   Section        0  main.o(.text.main)
-    __arm_cp.17_0                            0x08000988   Number         4  main.o(.text.main)
-    .bss                                     0x20000008   Section       96  libspace.o(.bss)
-    sTimingDelay                             0x20000068   Data           4  delay.o(.bss.sTimingDelay)
-    [Anonymous Symbol]                       0x20000068   Section        0  delay.o(.bss.sTimingDelay)
-    Heap_Mem                                 0x20000070   Data         512  startup_mm32spin06xx_s_keil.o(HEAP)
-    HEAP                                     0x20000070   Section      512  startup_mm32spin06xx_s_keil.o(HEAP)
-    Stack_Mem                                0x20000270   Data        1024  startup_mm32spin06xx_s_keil.o(STACK)
-    STACK                                    0x20000270   Section     1024  startup_mm32spin06xx_s_keil.o(STACK)
-    __initial_sp                             0x20000670   Data           0  startup_mm32spin06xx_s_keil.o(STACK)
+    !!!scatter                               0x080000c8   Section       60  __scatter.o(!!!scatter)
+    !!handler_copy                           0x08000104   Section       26  __scatter_copy.o(!!handler_copy)
+    !!handler_zi                             0x08000120   Section       28  __scatter_zi.o(!!handler_zi)
+    .ARM.Collect$$libinit$$00000000          0x0800013c   Section        2  libinit.o(.ARM.Collect$$libinit$$00000000)
+    .ARM.Collect$$libinit$$00000002          0x0800013e   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000002)
+    .ARM.Collect$$libinit$$00000004          0x0800013e   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000004)
+    .ARM.Collect$$libinit$$0000000A          0x0800013e   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000000A)
+    .ARM.Collect$$libinit$$0000000C          0x0800013e   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000000C)
+    .ARM.Collect$$libinit$$0000000E          0x0800013e   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000000E)
+    .ARM.Collect$$libinit$$00000011          0x0800013e   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000011)
+    .ARM.Collect$$libinit$$00000013          0x0800013e   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000013)
+    .ARM.Collect$$libinit$$00000015          0x0800013e   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000015)
+    .ARM.Collect$$libinit$$00000017          0x0800013e   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000017)
+    .ARM.Collect$$libinit$$00000019          0x0800013e   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000019)
+    .ARM.Collect$$libinit$$0000001B          0x0800013e   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000001B)
+    .ARM.Collect$$libinit$$0000001D          0x0800013e   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000001D)
+    .ARM.Collect$$libinit$$0000001F          0x0800013e   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000001F)
+    .ARM.Collect$$libinit$$00000021          0x0800013e   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000021)
+    .ARM.Collect$$libinit$$00000023          0x0800013e   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000023)
+    .ARM.Collect$$libinit$$00000025          0x0800013e   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000025)
+    .ARM.Collect$$libinit$$0000002C          0x0800013e   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000002C)
+    .ARM.Collect$$libinit$$0000002E          0x0800013e   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000002E)
+    .ARM.Collect$$libinit$$00000030          0x0800013e   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000030)
+    .ARM.Collect$$libinit$$00000032          0x0800013e   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000032)
+    .ARM.Collect$$libinit$$00000033          0x0800013e   Section        2  libinit2.o(.ARM.Collect$$libinit$$00000033)
+    .ARM.Collect$$libshutdown$$00000000      0x08000140   Section        2  libshutdown.o(.ARM.Collect$$libshutdown$$00000000)
+    .ARM.Collect$$libshutdown$$00000002      0x08000142   Section        0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000002)
+    .ARM.Collect$$libshutdown$$00000004      0x08000142   Section        0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000004)
+    .ARM.Collect$$libshutdown$$00000006      0x08000142   Section        0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000006)
+    .ARM.Collect$$libshutdown$$00000009      0x08000142   Section        0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000009)
+    .ARM.Collect$$libshutdown$$0000000C      0x08000142   Section        0  libshutdown2.o(.ARM.Collect$$libshutdown$$0000000C)
+    .ARM.Collect$$libshutdown$$0000000E      0x08000142   Section        0  libshutdown2.o(.ARM.Collect$$libshutdown$$0000000E)
+    .ARM.Collect$$libshutdown$$00000011      0x08000142   Section        0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000011)
+    .ARM.Collect$$libshutdown$$00000012      0x08000142   Section        2  libshutdown2.o(.ARM.Collect$$libshutdown$$00000012)
+    .ARM.Collect$$rtentry$$00000000          0x08000144   Section        0  __rtentry.o(.ARM.Collect$$rtentry$$00000000)
+    .ARM.Collect$$rtentry$$00000002          0x08000144   Section        0  __rtentry2.o(.ARM.Collect$$rtentry$$00000002)
+    .ARM.Collect$$rtentry$$00000004          0x08000144   Section        6  __rtentry4.o(.ARM.Collect$$rtentry$$00000004)
+    .ARM.Collect$$rtentry$$00000009          0x0800014a   Section        0  __rtentry2.o(.ARM.Collect$$rtentry$$00000009)
+    .ARM.Collect$$rtentry$$0000000A          0x0800014a   Section        4  __rtentry2.o(.ARM.Collect$$rtentry$$0000000A)
+    .ARM.Collect$$rtentry$$0000000C          0x0800014e   Section        0  __rtentry2.o(.ARM.Collect$$rtentry$$0000000C)
+    .ARM.Collect$$rtentry$$0000000D          0x0800014e   Section        8  __rtentry2.o(.ARM.Collect$$rtentry$$0000000D)
+    .ARM.Collect$$rtexit$$00000000           0x08000156   Section        2  rtexit.o(.ARM.Collect$$rtexit$$00000000)
+    .ARM.Collect$$rtexit$$00000002           0x08000158   Section        0  rtexit2.o(.ARM.Collect$$rtexit$$00000002)
+    .ARM.Collect$$rtexit$$00000003           0x08000158   Section        4  rtexit2.o(.ARM.Collect$$rtexit$$00000003)
+    .ARM.Collect$$rtexit$$00000004           0x0800015c   Section        6  rtexit2.o(.ARM.Collect$$rtexit$$00000004)
+    .text                                    0x08000164   Section      124  startup_mm32spin06xx_s_keil.o(.text)
+    .text                                    0x080001e0   Section      346  aeabi_sdiv.o(.text)
+    .text                                    0x0800033a   Section        0  heapauxi.o(.text)
+    .text                                    0x08000340   Section       62  sys_stackheap_outer.o(.text)
+    .text                                    0x0800037e   Section        0  exit.o(.text)
+    .text                                    0x08000390   Section        8  libspace.o(.text)
+    .text                                    0x08000398   Section        0  sys_exit.o(.text)
+    .text                                    0x080003a4   Section        2  use_no_semi.o(.text)
+    .text                                    0x080003a6   Section        0  indicate_semi.o(.text)
+    i.DELAY_Init                             0x080003a8   Section        0  delay.o(i.DELAY_Init)
+    i.DELAY_Ms                               0x080003fc   Section        0  delay.o(i.DELAY_Ms)
+    i.GPIO_Init                              0x08000414   Section        0  main.o(i.GPIO_Init)
+    i.GPIO_WriteBit                          0x080004ae   Section        0  main.o(i.GPIO_WriteBit)
+    i.RCC_AHBPeriphClockCmd                  0x080004bc   Section        0  main.o(i.RCC_AHBPeriphClockCmd)
+    i.SetSysClock                            0x080004dc   Section        0  system_mm32spin06xx_s.o(i.SetSysClock)
+    SetSysClock                              0x080004dd   Thumb Code     8  system_mm32spin06xx_s.o(i.SetSysClock)
+    i.SetSysClockTo48                        0x080004e4   Section        0  system_mm32spin06xx_s.o(i.SetSysClockTo48)
+    SetSysClockTo48                          0x080004e5   Thumb Code   284  system_mm32spin06xx_s.o(i.SetSysClockTo48)
+    i.SysTick_Handler                        0x08000608   Section        0  delay.o(i.SysTick_Handler)
+    i.SystemInit                             0x08000610   Section        0  system_mm32spin06xx_s.o(i.SystemInit)
+    i.TimingDelayDecrement                   0x0800067c   Section        0  delay.o(i.TimingDelayDecrement)
+    TimingDelayDecrement                     0x0800067d   Thumb Code    20  delay.o(i.TimingDelayDecrement)
+    i.__NVIC_SetPriority                     0x08000694   Section        0  delay.o(i.__NVIC_SetPriority)
+    __NVIC_SetPriority                       0x08000695   Thumb Code   110  delay.o(i.__NVIC_SetPriority)
+    i.main                                   0x0800070c   Section        0  main.o(i.main)
+    .data                                    0x20000000   Section        4  delay.o(.data)
+    sTimingDelay                             0x20000000   Data           4  delay.o(.data)
+    .data                                    0x20000004   Section       20  system_mm32spin06xx_s.o(.data)
+    .bss                                     0x20000018   Section       96  libspace.o(.bss)
+    HEAP                                     0x20000078   Section      512  startup_mm32spin06xx_s_keil.o(HEAP)
+    Heap_Mem                                 0x20000078   Data         512  startup_mm32spin06xx_s_keil.o(HEAP)
+    STACK                                    0x20000278   Section     1024  startup_mm32spin06xx_s_keil.o(STACK)
+    Stack_Mem                                0x20000278   Data        1024  startup_mm32spin06xx_s_keil.o(STACK)
+    __initial_sp                             0x20000678   Data           0  startup_mm32spin06xx_s_keil.o(STACK)
 
     Global Symbols
 
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
-    BuildAttributes$$THM_ISAv3M$S$PE$A:L22$X:L11$S22$IEEE1$IW$~IW$USESV6$~STKCKD$USESV7$~SHL$OSPACE$ROPI$EBA8$UX$STANDARDLIB$REQ8$PRES8$EABIv2 0x00000000   Number         0  anon$$obj.o ABSOLUTE
+    BuildAttributes$$THM_ISAv3M$S$PE$A:L22$X:L11$S22$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OSPACE$ROPI$EBA8$UX$STANDARDLIB$REQ8$PRES8$EABIv2 0x00000000   Number         0  anon$$obj.o ABSOLUTE
+    __ARM_use_no_argv                        0x00000000   Number         0  main.o ABSOLUTE
     __ARM_exceptions_init                     - Undefined Weak Reference
     __alloca_initialize                       - Undefined Weak Reference
+    __arm_fini_                               - Undefined Weak Reference
     __arm_preinit_                            - Undefined Weak Reference
-    __arm_relocate_pie_                       - Undefined Weak Reference
     __cpp_initialize__aeabi_                  - Undefined Weak Reference
     __cxa_finalize                            - Undefined Weak Reference
     __rt_locale                               - Undefined Weak Reference
@@ -447,116 +359,115 @@ Image Symbol Table
     __Vectors_End                            0x080000c0   Data           0  startup_mm32spin06xx_s_keil.o(RESET)
     __main                                   0x080000c1   Thumb Code     8  __main.o(!!!main)
     __scatterload                            0x080000c9   Thumb Code     0  __scatter.o(!!!scatter)
-    __scatterload_rt2                        0x080000c9   Thumb Code    74  __scatter.o(!!!scatter)
+    __scatterload_rt2                        0x080000c9   Thumb Code    52  __scatter.o(!!!scatter)
     __scatterload_rt2_thumb_only             0x080000c9   Thumb Code     0  __scatter.o(!!!scatter)
-    __scatterload_loop                       0x080000d3   Thumb Code     0  __scatter.o(!!!scatter)
-    __scatterload_copy                       0x0800011d   Thumb Code    26  __scatter_copy.o(!!handler_copy)
-    __scatterload_null                       0x08000139   Thumb Code     2  __scatter.o(!!handler_null)
-    __scatterload_zeroinit                   0x0800013d   Thumb Code    28  __scatter_zi.o(!!handler_zi)
-    __rt_lib_init                            0x08000159   Thumb Code     0  libinit.o(.ARM.Collect$$libinit$$00000000)
-    __rt_lib_init_alloca_1                   0x0800015b   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000030)
-    __rt_lib_init_argv_1                     0x0800015b   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000002E)
-    __rt_lib_init_atexit_1                   0x0800015b   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000001D)
-    __rt_lib_init_clock_1                    0x0800015b   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000023)
-    __rt_lib_init_cpp_1                      0x0800015b   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000034)
-    __rt_lib_init_exceptions_1               0x0800015b   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000032)
-    __rt_lib_init_fp_1                       0x0800015b   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000002)
-    __rt_lib_init_fp_trap_1                  0x0800015b   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000021)
-    __rt_lib_init_getenv_1                   0x0800015b   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000025)
-    __rt_lib_init_heap_1                     0x0800015b   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000000C)
-    __rt_lib_init_lc_collate_1               0x0800015b   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000013)
-    __rt_lib_init_lc_ctype_1                 0x0800015b   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000015)
-    __rt_lib_init_lc_monetary_1              0x0800015b   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000017)
-    __rt_lib_init_lc_numeric_1               0x0800015b   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000019)
-    __rt_lib_init_lc_time_1                  0x0800015b   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000001B)
-    __rt_lib_init_preinit_1                  0x0800015b   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000006)
-    __rt_lib_init_rand_1                     0x0800015b   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000010)
-    __rt_lib_init_relocate_pie_1             0x0800015b   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000004)
-    __rt_lib_init_return                     0x0800015b   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000035)
-    __rt_lib_init_signal_1                   0x0800015b   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000001F)
-    __rt_lib_init_stdio_1                    0x0800015b   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000027)
-    __rt_lib_init_user_alloc_1               0x0800015b   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000000E)
-    __rt_lib_shutdown                        0x0800015d   Thumb Code     0  libshutdown.o(.ARM.Collect$$libshutdown$$00000000)
-    __rt_lib_shutdown_cpp_1                  0x0800015f   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000002)
-    __rt_lib_shutdown_fp_trap_1              0x0800015f   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000007)
-    __rt_lib_shutdown_heap_1                 0x0800015f   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$0000000F)
-    __rt_lib_shutdown_return                 0x0800015f   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000010)
-    __rt_lib_shutdown_signal_1               0x0800015f   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$0000000A)
-    __rt_lib_shutdown_stdio_1                0x0800015f   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000004)
-    __rt_lib_shutdown_user_alloc_1           0x0800015f   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$0000000C)
-    __rt_entry                               0x08000161   Thumb Code     0  __rtentry.o(.ARM.Collect$$rtentry$$00000000)
-    __rt_entry_presh_1                       0x08000161   Thumb Code     0  __rtentry2.o(.ARM.Collect$$rtentry$$00000002)
-    __rt_entry_sh                            0x08000161   Thumb Code     0  __rtentry4.o(.ARM.Collect$$rtentry$$00000004)
-    __rt_entry_li                            0x08000167   Thumb Code     0  __rtentry2.o(.ARM.Collect$$rtentry$$0000000A)
-    __rt_entry_postsh_1                      0x08000167   Thumb Code     0  __rtentry2.o(.ARM.Collect$$rtentry$$00000009)
-    __rt_entry_main                          0x0800016b   Thumb Code     0  __rtentry2.o(.ARM.Collect$$rtentry$$0000000D)
-    __rt_entry_postli_1                      0x0800016b   Thumb Code     0  __rtentry2.o(.ARM.Collect$$rtentry$$0000000C)
-    __rt_exit                                0x08000173   Thumb Code     0  rtexit.o(.ARM.Collect$$rtexit$$00000000)
-    __rt_exit_ls                             0x08000175   Thumb Code     0  rtexit2.o(.ARM.Collect$$rtexit$$00000003)
-    __rt_exit_prels_1                        0x08000175   Thumb Code     0  rtexit2.o(.ARM.Collect$$rtexit$$00000002)
-    __rt_exit_exit                           0x08000179   Thumb Code     0  rtexit2.o(.ARM.Collect$$rtexit$$00000004)
-    Reset_Handler                            0x08000181   Thumb Code    44  startup_mm32spin06xx_s_keil.o(.text)
-    NMI_Handler                              0x080001ad   Thumb Code     2  startup_mm32spin06xx_s_keil.o(.text)
-    HardFault_Handler                        0x080001af   Thumb Code     2  startup_mm32spin06xx_s_keil.o(.text)
-    SVC_Handler                              0x080001b1   Thumb Code     2  startup_mm32spin06xx_s_keil.o(.text)
-    PendSV_Handler                           0x080001b3   Thumb Code     2  startup_mm32spin06xx_s_keil.o(.text)
-    ADC1_COMP_IRQHandler                     0x080001b7   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
-    CAN_IRQHandler                           0x080001b7   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
-    DMA1_Channel1_IRQHandler                 0x080001b7   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
-    DMA1_Channel2_3_IRQHandler               0x080001b7   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
-    DMA1_Channel4_5_IRQHandler               0x080001b7   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
-    EXTI0_1_IRQHandler                       0x080001b7   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
-    EXTI2_3_IRQHandler                       0x080001b7   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
-    EXTI4_15_IRQHandler                      0x080001b7   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
-    FLASH_IRQHandler                         0x080001b7   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
-    HWDIV_IRQHandler                         0x080001b7   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
-    I2C1_IRQHandler                          0x080001b7   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
-    PVD_IRQHandler                           0x080001b7   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
-    RCC_CRS_IRQHandler                       0x080001b7   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
-    RTC_BKP_IRQHandler                       0x080001b7   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
-    SPI1_IRQHandler                          0x080001b7   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
-    SPI2_IRQHandler                          0x080001b7   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
-    TIM14_IRQHandler                         0x080001b7   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
-    TIM16_IRQHandler                         0x080001b7   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
-    TIM17_IRQHandler                         0x080001b7   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
-    TIM1_BRK_UP_TRG_COM_IRQHandler           0x080001b7   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
-    TIM1_CC_IRQHandler                       0x080001b7   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
-    TIM2_IRQHandler                          0x080001b7   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
-    TIM3_IRQHandler                          0x080001b7   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
-    UART1_IRQHandler                         0x080001b7   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
-    UART2_IRQHandler                         0x080001b7   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
-    WWDG_IRQHandler                          0x080001b7   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
-    __user_initial_stackheap                 0x080001b9   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
-    __aeabi_uidiv                            0x080001fd   Thumb Code     0  aeabi_sdiv.o(.text)
-    __aeabi_uidivmod                         0x080001fd   Thumb Code    20  aeabi_sdiv.o(.text)
-    __aeabi_idiv                             0x08000211   Thumb Code     0  aeabi_sdiv.o(.text)
-    __aeabi_idivmod                          0x08000211   Thumb Code   338  aeabi_sdiv.o(.text)
-    __use_two_region_memory                  0x08000369   Thumb Code     2  heapauxi.o(.text)
-    __rt_heap_escrow$2region                 0x0800036b   Thumb Code     2  heapauxi.o(.text)
-    __rt_heap_expand$2region                 0x0800036d   Thumb Code     2  heapauxi.o(.text)
-    __user_setup_stackheap                   0x0800036f   Thumb Code    62  sys_stackheap_outer.o(.text)
-    exit                                     0x080003ad   Thumb Code    16  exit.o(.text)
-    __user_libspace                          0x080003bd   Thumb Code     8  libspace.o(.text)
-    __user_perproc_libspace                  0x080003bd   Thumb Code     0  libspace.o(.text)
-    __user_perthread_libspace                0x080003bd   Thumb Code     0  libspace.o(.text)
-    _sys_exit                                0x080003c5   Thumb Code     8  sys_exit.o(.text)
-    __I$use$semihosting                      0x080003d1   Thumb Code     0  use_no_semi.o(.text)
-    __use_no_semihosting_swi                 0x080003d1   Thumb Code     2  use_no_semi.o(.text)
-    AutoCalPllFactor                         0x080003d3   Thumb Code   182  system_mm32spin06xx_s.o(.text.AutoCalPllFactor)
-    __semihosting_library_function           0x080003d3   Thumb Code     0  indicate_semi.o(.text)
-    DELAY_Init                               0x08000489   Thumb Code    40  delay.o(.text.DELAY_Init)
-    DELAY_Ms                                 0x080004b1   Thumb Code    28  delay.o(.text.DELAY_Ms)
-    GPIO_Init                                0x080004cd   Thumb Code   272  main.o(.text.GPIO_Init)
-    GPIO_WriteBit                            0x080005dd   Thumb Code    44  main.o(.text.GPIO_WriteBit)
-    RCC_AHBPeriphClockCmd                    0x08000609   Thumb Code    44  main.o(.text.RCC_AHBPeriphClockCmd)
-    SysTick_Handler                          0x080007b9   Thumb Code     8  delay.o(.text.SysTick_Handler)
-    SystemInit                               0x080007c1   Thumb Code    72  system_mm32spin06xx_s.o(.text.SystemInit)
-    main                                     0x080008c1   Thumb Code   200  main.o(.text.main)
-    Region$$Table$$Base                      0x0800098c   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x080009ac   Number         0  anon$$obj.o(Region$$Table)
-    SystemCoreClock                          0x20000000   Data           4  system_mm32spin06xx_s.o(.data.SystemCoreClock)
-    __libspace_start                         0x20000008   Data          96  libspace.o(.bss)
-    __temporary_stack_top$libspace           0x20000068   Data           0  libspace.o(.bss)
+    __scatterload_null                       0x080000d9   Thumb Code     0  __scatter.o(!!!scatter)
+    __scatterload_copy                       0x08000105   Thumb Code    26  __scatter_copy.o(!!handler_copy)
+    __scatterload_zeroinit                   0x08000121   Thumb Code    28  __scatter_zi.o(!!handler_zi)
+    __rt_lib_init                            0x0800013d   Thumb Code     0  libinit.o(.ARM.Collect$$libinit$$00000000)
+    __rt_lib_init_alloca_1                   0x0800013f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000002E)
+    __rt_lib_init_argv_1                     0x0800013f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000002C)
+    __rt_lib_init_atexit_1                   0x0800013f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000001B)
+    __rt_lib_init_clock_1                    0x0800013f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000021)
+    __rt_lib_init_cpp_1                      0x0800013f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000032)
+    __rt_lib_init_exceptions_1               0x0800013f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000030)
+    __rt_lib_init_fp_1                       0x0800013f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000002)
+    __rt_lib_init_fp_trap_1                  0x0800013f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000001F)
+    __rt_lib_init_getenv_1                   0x0800013f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000023)
+    __rt_lib_init_heap_1                     0x0800013f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000000A)
+    __rt_lib_init_lc_collate_1               0x0800013f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000011)
+    __rt_lib_init_lc_ctype_1                 0x0800013f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000013)
+    __rt_lib_init_lc_monetary_1              0x0800013f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000015)
+    __rt_lib_init_lc_numeric_1               0x0800013f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000017)
+    __rt_lib_init_lc_time_1                  0x0800013f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000019)
+    __rt_lib_init_preinit_1                  0x0800013f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000004)
+    __rt_lib_init_rand_1                     0x0800013f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000000E)
+    __rt_lib_init_return                     0x0800013f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000033)
+    __rt_lib_init_signal_1                   0x0800013f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000001D)
+    __rt_lib_init_stdio_1                    0x0800013f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000025)
+    __rt_lib_init_user_alloc_1               0x0800013f   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000000C)
+    __rt_lib_shutdown                        0x08000141   Thumb Code     0  libshutdown.o(.ARM.Collect$$libshutdown$$00000000)
+    __rt_lib_shutdown_cpp_1                  0x08000143   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000004)
+    __rt_lib_shutdown_fini_1                 0x08000143   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000002)
+    __rt_lib_shutdown_fp_trap_1              0x08000143   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000009)
+    __rt_lib_shutdown_heap_1                 0x08000143   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000011)
+    __rt_lib_shutdown_return                 0x08000143   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000012)
+    __rt_lib_shutdown_signal_1               0x08000143   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$0000000C)
+    __rt_lib_shutdown_stdio_1                0x08000143   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000006)
+    __rt_lib_shutdown_user_alloc_1           0x08000143   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$0000000E)
+    __rt_entry                               0x08000145   Thumb Code     0  __rtentry.o(.ARM.Collect$$rtentry$$00000000)
+    __rt_entry_presh_1                       0x08000145   Thumb Code     0  __rtentry2.o(.ARM.Collect$$rtentry$$00000002)
+    __rt_entry_sh                            0x08000145   Thumb Code     0  __rtentry4.o(.ARM.Collect$$rtentry$$00000004)
+    __rt_entry_li                            0x0800014b   Thumb Code     0  __rtentry2.o(.ARM.Collect$$rtentry$$0000000A)
+    __rt_entry_postsh_1                      0x0800014b   Thumb Code     0  __rtentry2.o(.ARM.Collect$$rtentry$$00000009)
+    __rt_entry_main                          0x0800014f   Thumb Code     0  __rtentry2.o(.ARM.Collect$$rtentry$$0000000D)
+    __rt_entry_postli_1                      0x0800014f   Thumb Code     0  __rtentry2.o(.ARM.Collect$$rtentry$$0000000C)
+    __rt_exit                                0x08000157   Thumb Code     0  rtexit.o(.ARM.Collect$$rtexit$$00000000)
+    __rt_exit_ls                             0x08000159   Thumb Code     0  rtexit2.o(.ARM.Collect$$rtexit$$00000003)
+    __rt_exit_prels_1                        0x08000159   Thumb Code     0  rtexit2.o(.ARM.Collect$$rtexit$$00000002)
+    __rt_exit_exit                           0x0800015d   Thumb Code     0  rtexit2.o(.ARM.Collect$$rtexit$$00000004)
+    Reset_Handler                            0x08000165   Thumb Code    44  startup_mm32spin06xx_s_keil.o(.text)
+    NMI_Handler                              0x08000191   Thumb Code     2  startup_mm32spin06xx_s_keil.o(.text)
+    HardFault_Handler                        0x08000193   Thumb Code     2  startup_mm32spin06xx_s_keil.o(.text)
+    SVC_Handler                              0x08000195   Thumb Code     2  startup_mm32spin06xx_s_keil.o(.text)
+    PendSV_Handler                           0x08000197   Thumb Code     2  startup_mm32spin06xx_s_keil.o(.text)
+    ADC1_COMP_IRQHandler                     0x0800019b   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
+    CAN_IRQHandler                           0x0800019b   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
+    DMA1_Channel1_IRQHandler                 0x0800019b   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
+    DMA1_Channel2_3_IRQHandler               0x0800019b   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
+    DMA1_Channel4_5_IRQHandler               0x0800019b   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
+    EXTI0_1_IRQHandler                       0x0800019b   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
+    EXTI2_3_IRQHandler                       0x0800019b   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
+    EXTI4_15_IRQHandler                      0x0800019b   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
+    FLASH_IRQHandler                         0x0800019b   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
+    HWDIV_IRQHandler                         0x0800019b   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
+    I2C1_IRQHandler                          0x0800019b   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
+    PVD_IRQHandler                           0x0800019b   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
+    RCC_CRS_IRQHandler                       0x0800019b   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
+    RTC_BKP_IRQHandler                       0x0800019b   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
+    SPI1_IRQHandler                          0x0800019b   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
+    SPI2_IRQHandler                          0x0800019b   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
+    TIM14_IRQHandler                         0x0800019b   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
+    TIM16_IRQHandler                         0x0800019b   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
+    TIM17_IRQHandler                         0x0800019b   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
+    TIM1_BRK_UP_TRG_COM_IRQHandler           0x0800019b   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
+    TIM1_CC_IRQHandler                       0x0800019b   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
+    TIM2_IRQHandler                          0x0800019b   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
+    TIM3_IRQHandler                          0x0800019b   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
+    UART1_IRQHandler                         0x0800019b   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
+    UART2_IRQHandler                         0x0800019b   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
+    WWDG_IRQHandler                          0x0800019b   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
+    __user_initial_stackheap                 0x0800019d   Thumb Code     0  startup_mm32spin06xx_s_keil.o(.text)
+    __aeabi_uidiv                            0x080001e1   Thumb Code     0  aeabi_sdiv.o(.text)
+    __aeabi_uidivmod                         0x080001e1   Thumb Code    20  aeabi_sdiv.o(.text)
+    __aeabi_idiv                             0x080001f5   Thumb Code     0  aeabi_sdiv.o(.text)
+    __aeabi_idivmod                          0x080001f5   Thumb Code   326  aeabi_sdiv.o(.text)
+    __use_two_region_memory                  0x0800033b   Thumb Code     2  heapauxi.o(.text)
+    __rt_heap_escrow$2region                 0x0800033d   Thumb Code     2  heapauxi.o(.text)
+    __rt_heap_expand$2region                 0x0800033f   Thumb Code     2  heapauxi.o(.text)
+    __user_setup_stackheap                   0x08000341   Thumb Code    62  sys_stackheap_outer.o(.text)
+    exit                                     0x0800037f   Thumb Code    16  exit.o(.text)
+    __user_libspace                          0x08000391   Thumb Code     8  libspace.o(.text)
+    __user_perproc_libspace                  0x08000391   Thumb Code     0  libspace.o(.text)
+    __user_perthread_libspace                0x08000391   Thumb Code     0  libspace.o(.text)
+    _sys_exit                                0x08000399   Thumb Code     8  sys_exit.o(.text)
+    __I$use$semihosting                      0x080003a5   Thumb Code     0  use_no_semi.o(.text)
+    __use_no_semihosting_swi                 0x080003a5   Thumb Code     2  use_no_semi.o(.text)
+    __semihosting_library_function           0x080003a7   Thumb Code     0  indicate_semi.o(.text)
+    DELAY_Init                               0x080003a9   Thumb Code    72  delay.o(i.DELAY_Init)
+    DELAY_Ms                                 0x080003fd   Thumb Code    20  delay.o(i.DELAY_Ms)
+    GPIO_Init                                0x08000415   Thumb Code   154  main.o(i.GPIO_Init)
+    GPIO_WriteBit                            0x080004af   Thumb Code    12  main.o(i.GPIO_WriteBit)
+    RCC_AHBPeriphClockCmd                    0x080004bd   Thumb Code    28  main.o(i.RCC_AHBPeriphClockCmd)
+    SysTick_Handler                          0x08000609   Thumb Code     8  delay.o(i.SysTick_Handler)
+    SystemInit                               0x08000611   Thumb Code    90  system_mm32spin06xx_s.o(i.SystemInit)
+    main                                     0x0800070d   Thumb Code   186  main.o(i.main)
+    Region$$Table$$Base                      0x080007cc   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x080007ec   Number         0  anon$$obj.o(Region$$Table)
+    SystemCoreClock                          0x20000004   Data           4  system_mm32spin06xx_s.o(.data)
+    AHBPrescTable                            0x20000008   Data          16  system_mm32spin06xx_s.o(.data)
+    __libspace_start                         0x20000018   Data          96  libspace.o(.bss)
+    __temporary_stack_top$libspace           0x20000078   Data           0  libspace.o(.bss)
 
 
 
@@ -564,107 +475,99 @@ Image Symbol Table
 
 Memory Map of the image
 
-  Image Entry point : 0x08000181
+  Image Entry point : 0x080000c1
 
-  Load Region LR_1 (Base: 0x08000000, Size: 0x000009b0, Max: 0xffffffff, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00000804, Max: 0x00008000, ABSOLUTE)
 
-    Execution Region ER_RO (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x000009ac, Max: 0xffffffff, ABSOLUTE)
-
-    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
-
-    0x08000000   0x08000000   0x000000c0   Data   RO           67    RESET               startup_mm32spin06xx_s_keil.o
-    0x080000c0   0x080000c0   0x00000008   Code   RO           99  * !!!main             c_p.l(__main.o)
-    0x080000c8   0x080000c8   0x00000054   Code   RO          276    !!!scatter          c_p.l(__scatter.o)
-    0x0800011c   0x0800011c   0x0000001a   Code   RO          280    !!handler_copy      c_p.l(__scatter_copy.o)
-    0x08000136   0x08000136   0x00000002   PAD
-    0x08000138   0x08000138   0x00000002   Code   RO          277    !!handler_null      c_p.l(__scatter.o)
-    0x0800013a   0x0800013a   0x00000002   PAD
-    0x0800013c   0x0800013c   0x0000001c   Code   RO          282    !!handler_zi        c_p.l(__scatter_zi.o)
-    0x08000158   0x08000158   0x00000002   Code   RO          137    .ARM.Collect$$libinit$$00000000  c_p.l(libinit.o)
-    0x0800015a   0x0800015a   0x00000000   Code   RO          151    .ARM.Collect$$libinit$$00000002  c_p.l(libinit2.o)
-    0x0800015a   0x0800015a   0x00000000   Code   RO          153    .ARM.Collect$$libinit$$00000004  c_p.l(libinit2.o)
-    0x0800015a   0x0800015a   0x00000000   Code   RO          155    .ARM.Collect$$libinit$$00000006  c_p.l(libinit2.o)
-    0x0800015a   0x0800015a   0x00000000   Code   RO          158    .ARM.Collect$$libinit$$0000000C  c_p.l(libinit2.o)
-    0x0800015a   0x0800015a   0x00000000   Code   RO          160    .ARM.Collect$$libinit$$0000000E  c_p.l(libinit2.o)
-    0x0800015a   0x0800015a   0x00000000   Code   RO          162    .ARM.Collect$$libinit$$00000010  c_p.l(libinit2.o)
-    0x0800015a   0x0800015a   0x00000000   Code   RO          165    .ARM.Collect$$libinit$$00000013  c_p.l(libinit2.o)
-    0x0800015a   0x0800015a   0x00000000   Code   RO          167    .ARM.Collect$$libinit$$00000015  c_p.l(libinit2.o)
-    0x0800015a   0x0800015a   0x00000000   Code   RO          169    .ARM.Collect$$libinit$$00000017  c_p.l(libinit2.o)
-    0x0800015a   0x0800015a   0x00000000   Code   RO          171    .ARM.Collect$$libinit$$00000019  c_p.l(libinit2.o)
-    0x0800015a   0x0800015a   0x00000000   Code   RO          173    .ARM.Collect$$libinit$$0000001B  c_p.l(libinit2.o)
-    0x0800015a   0x0800015a   0x00000000   Code   RO          175    .ARM.Collect$$libinit$$0000001D  c_p.l(libinit2.o)
-    0x0800015a   0x0800015a   0x00000000   Code   RO          177    .ARM.Collect$$libinit$$0000001F  c_p.l(libinit2.o)
-    0x0800015a   0x0800015a   0x00000000   Code   RO          179    .ARM.Collect$$libinit$$00000021  c_p.l(libinit2.o)
-    0x0800015a   0x0800015a   0x00000000   Code   RO          181    .ARM.Collect$$libinit$$00000023  c_p.l(libinit2.o)
-    0x0800015a   0x0800015a   0x00000000   Code   RO          183    .ARM.Collect$$libinit$$00000025  c_p.l(libinit2.o)
-    0x0800015a   0x0800015a   0x00000000   Code   RO          185    .ARM.Collect$$libinit$$00000027  c_p.l(libinit2.o)
-    0x0800015a   0x0800015a   0x00000000   Code   RO          189    .ARM.Collect$$libinit$$0000002E  c_p.l(libinit2.o)
-    0x0800015a   0x0800015a   0x00000000   Code   RO          191    .ARM.Collect$$libinit$$00000030  c_p.l(libinit2.o)
-    0x0800015a   0x0800015a   0x00000000   Code   RO          193    .ARM.Collect$$libinit$$00000032  c_p.l(libinit2.o)
-    0x0800015a   0x0800015a   0x00000000   Code   RO          195    .ARM.Collect$$libinit$$00000034  c_p.l(libinit2.o)
-    0x0800015a   0x0800015a   0x00000002   Code   RO          196    .ARM.Collect$$libinit$$00000035  c_p.l(libinit2.o)
-    0x0800015c   0x0800015c   0x00000002   Code   RO          231    .ARM.Collect$$libshutdown$$00000000  c_p.l(libshutdown.o)
-    0x0800015e   0x0800015e   0x00000000   Code   RO          259    .ARM.Collect$$libshutdown$$00000002  c_p.l(libshutdown2.o)
-    0x0800015e   0x0800015e   0x00000000   Code   RO          261    .ARM.Collect$$libshutdown$$00000004  c_p.l(libshutdown2.o)
-    0x0800015e   0x0800015e   0x00000000   Code   RO          264    .ARM.Collect$$libshutdown$$00000007  c_p.l(libshutdown2.o)
-    0x0800015e   0x0800015e   0x00000000   Code   RO          267    .ARM.Collect$$libshutdown$$0000000A  c_p.l(libshutdown2.o)
-    0x0800015e   0x0800015e   0x00000000   Code   RO          269    .ARM.Collect$$libshutdown$$0000000C  c_p.l(libshutdown2.o)
-    0x0800015e   0x0800015e   0x00000000   Code   RO          272    .ARM.Collect$$libshutdown$$0000000F  c_p.l(libshutdown2.o)
-    0x0800015e   0x0800015e   0x00000002   Code   RO          273    .ARM.Collect$$libshutdown$$00000010  c_p.l(libshutdown2.o)
-    0x08000160   0x08000160   0x00000000   Code   RO          101    .ARM.Collect$$rtentry$$00000000  c_p.l(__rtentry.o)
-    0x08000160   0x08000160   0x00000000   Code   RO          107    .ARM.Collect$$rtentry$$00000002  c_p.l(__rtentry2.o)
-    0x08000160   0x08000160   0x00000006   Code   RO          119    .ARM.Collect$$rtentry$$00000004  c_p.l(__rtentry4.o)
-    0x08000166   0x08000166   0x00000000   Code   RO          109    .ARM.Collect$$rtentry$$00000009  c_p.l(__rtentry2.o)
-    0x08000166   0x08000166   0x00000004   Code   RO          110    .ARM.Collect$$rtentry$$0000000A  c_p.l(__rtentry2.o)
-    0x0800016a   0x0800016a   0x00000000   Code   RO          112    .ARM.Collect$$rtentry$$0000000C  c_p.l(__rtentry2.o)
-    0x0800016a   0x0800016a   0x00000008   Code   RO          113    .ARM.Collect$$rtentry$$0000000D  c_p.l(__rtentry2.o)
-    0x08000172   0x08000172   0x00000002   Code   RO          142    .ARM.Collect$$rtexit$$00000000  c_p.l(rtexit.o)
-    0x08000174   0x08000174   0x00000000   Code   RO          202    .ARM.Collect$$rtexit$$00000002  c_p.l(rtexit2.o)
-    0x08000174   0x08000174   0x00000004   Code   RO          203    .ARM.Collect$$rtexit$$00000003  c_p.l(rtexit2.o)
-    0x08000178   0x08000178   0x00000006   Code   RO          204    .ARM.Collect$$rtexit$$00000004  c_p.l(rtexit2.o)
-    0x0800017e   0x0800017e   0x00000002   PAD
-    0x08000180   0x08000180   0x0000007c   Code   RO           68  * .text               startup_mm32spin06xx_s_keil.o
-    0x080001fc   0x080001fc   0x0000016c   Code   RO           93    .text               c_p.l(aeabi_sdiv.o)
-    0x08000368   0x08000368   0x00000006   Code   RO           97    .text               c_p.l(heapauxi.o)
-    0x0800036e   0x0800036e   0x0000003e   Code   RO          123    .text               c_p.l(sys_stackheap_outer.o)
-    0x080003ac   0x080003ac   0x00000010   Code   RO          126    .text               c_p.l(exit.o)
-    0x080003bc   0x080003bc   0x00000008   Code   RO          138    .text               c_p.l(libspace.o)
-    0x080003c4   0x080003c4   0x0000000c   Code   RO          197    .text               c_p.l(sys_exit.o)
-    0x080003d0   0x080003d0   0x00000002   Code   RO          220    .text               c_p.l(use_no_semi.o)
-    0x080003d2   0x080003d2   0x00000000   Code   RO          222    .text               c_p.l(indicate_semi.o)
-    0x080003d2   0x080003d2   0x000000b6   Code   RO           79    .text.AutoCalPllFactor  system_mm32spin06xx_s.o
-    0x08000488   0x08000488   0x00000028   Code   RO           46    .text.DELAY_Init    delay.o
-    0x080004b0   0x080004b0   0x0000001c   Code   RO           56    .text.DELAY_Ms      delay.o
-    0x080004cc   0x080004cc   0x00000110   Code   RO            8    .text.GPIO_Init     main.o
-    0x080005dc   0x080005dc   0x0000002c   Code   RO           24    .text.GPIO_WriteBit  main.o
-    0x08000608   0x08000608   0x00000030   Code   RO            4    .text.RCC_AHBPeriphClockCmd  main.o
-    0x08000638   0x08000638   0x00000008   Code   RO           77    .text.SetSysClock   system_mm32spin06xx_s.o
-    0x08000640   0x08000640   0x00000128   Code   RO           81    .text.SetSysClockToXX_HSI  system_mm32spin06xx_s.o
-    0x08000768   0x08000768   0x00000050   Code   RO           48    .text.SysTick_Config  delay.o
-    0x080007b8   0x080007b8   0x00000008   Code   RO           52    .text.SysTick_Handler  delay.o
-    0x080007c0   0x080007c0   0x00000060   Code   RO           75    .text.SystemInit    system_mm32spin06xx_s.o
-    0x08000820   0x08000820   0x0000001c   Code   RO           54    .text.TimingDelayDecrement  delay.o
-    0x0800083c   0x0800083c   0x00000084   Code   RO           50    .text.__NVIC_SetPriority  delay.o
-    0x080008c0   0x080008c0   0x000000cc   Code   RO           36    .text.main          main.o
-    0x0800098c   0x0800098c   0x00000020   Data   RO          275    Region$$Table       anon$$obj.o
-
-
-    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x080009ac, Size: 0x00000004, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x000007ec, Max: 0x00008000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x080009ac   0x00000004   Data   RW           83    .data.SystemCoreClock  system_mm32spin06xx_s.o
+    0x08000000   0x08000000   0x000000c0   Data   RO          356    RESET               startup_mm32spin06xx_s_keil.o
+    0x080000c0   0x080000c0   0x00000008   Code   RO          408  * !!!main             c_p.l(__main.o)
+    0x080000c8   0x080000c8   0x0000003c   Code   RO          579    !!!scatter          c_p.l(__scatter.o)
+    0x08000104   0x08000104   0x0000001a   Code   RO          581    !!handler_copy      c_p.l(__scatter_copy.o)
+    0x0800011e   0x0800011e   0x00000002   PAD
+    0x08000120   0x08000120   0x0000001c   Code   RO          583    !!handler_zi        c_p.l(__scatter_zi.o)
+    0x0800013c   0x0800013c   0x00000002   Code   RO          446    .ARM.Collect$$libinit$$00000000  c_p.l(libinit.o)
+    0x0800013e   0x0800013e   0x00000000   Code   RO          460    .ARM.Collect$$libinit$$00000002  c_p.l(libinit2.o)
+    0x0800013e   0x0800013e   0x00000000   Code   RO          462    .ARM.Collect$$libinit$$00000004  c_p.l(libinit2.o)
+    0x0800013e   0x0800013e   0x00000000   Code   RO          465    .ARM.Collect$$libinit$$0000000A  c_p.l(libinit2.o)
+    0x0800013e   0x0800013e   0x00000000   Code   RO          467    .ARM.Collect$$libinit$$0000000C  c_p.l(libinit2.o)
+    0x0800013e   0x0800013e   0x00000000   Code   RO          469    .ARM.Collect$$libinit$$0000000E  c_p.l(libinit2.o)
+    0x0800013e   0x0800013e   0x00000000   Code   RO          472    .ARM.Collect$$libinit$$00000011  c_p.l(libinit2.o)
+    0x0800013e   0x0800013e   0x00000000   Code   RO          474    .ARM.Collect$$libinit$$00000013  c_p.l(libinit2.o)
+    0x0800013e   0x0800013e   0x00000000   Code   RO          476    .ARM.Collect$$libinit$$00000015  c_p.l(libinit2.o)
+    0x0800013e   0x0800013e   0x00000000   Code   RO          478    .ARM.Collect$$libinit$$00000017  c_p.l(libinit2.o)
+    0x0800013e   0x0800013e   0x00000000   Code   RO          480    .ARM.Collect$$libinit$$00000019  c_p.l(libinit2.o)
+    0x0800013e   0x0800013e   0x00000000   Code   RO          482    .ARM.Collect$$libinit$$0000001B  c_p.l(libinit2.o)
+    0x0800013e   0x0800013e   0x00000000   Code   RO          484    .ARM.Collect$$libinit$$0000001D  c_p.l(libinit2.o)
+    0x0800013e   0x0800013e   0x00000000   Code   RO          486    .ARM.Collect$$libinit$$0000001F  c_p.l(libinit2.o)
+    0x0800013e   0x0800013e   0x00000000   Code   RO          488    .ARM.Collect$$libinit$$00000021  c_p.l(libinit2.o)
+    0x0800013e   0x0800013e   0x00000000   Code   RO          490    .ARM.Collect$$libinit$$00000023  c_p.l(libinit2.o)
+    0x0800013e   0x0800013e   0x00000000   Code   RO          492    .ARM.Collect$$libinit$$00000025  c_p.l(libinit2.o)
+    0x0800013e   0x0800013e   0x00000000   Code   RO          496    .ARM.Collect$$libinit$$0000002C  c_p.l(libinit2.o)
+    0x0800013e   0x0800013e   0x00000000   Code   RO          498    .ARM.Collect$$libinit$$0000002E  c_p.l(libinit2.o)
+    0x0800013e   0x0800013e   0x00000000   Code   RO          500    .ARM.Collect$$libinit$$00000030  c_p.l(libinit2.o)
+    0x0800013e   0x0800013e   0x00000000   Code   RO          502    .ARM.Collect$$libinit$$00000032  c_p.l(libinit2.o)
+    0x0800013e   0x0800013e   0x00000002   Code   RO          503    .ARM.Collect$$libinit$$00000033  c_p.l(libinit2.o)
+    0x08000140   0x08000140   0x00000002   Code   RO          534    .ARM.Collect$$libshutdown$$00000000  c_p.l(libshutdown.o)
+    0x08000142   0x08000142   0x00000000   Code   RO          560    .ARM.Collect$$libshutdown$$00000002  c_p.l(libshutdown2.o)
+    0x08000142   0x08000142   0x00000000   Code   RO          562    .ARM.Collect$$libshutdown$$00000004  c_p.l(libshutdown2.o)
+    0x08000142   0x08000142   0x00000000   Code   RO          564    .ARM.Collect$$libshutdown$$00000006  c_p.l(libshutdown2.o)
+    0x08000142   0x08000142   0x00000000   Code   RO          567    .ARM.Collect$$libshutdown$$00000009  c_p.l(libshutdown2.o)
+    0x08000142   0x08000142   0x00000000   Code   RO          570    .ARM.Collect$$libshutdown$$0000000C  c_p.l(libshutdown2.o)
+    0x08000142   0x08000142   0x00000000   Code   RO          572    .ARM.Collect$$libshutdown$$0000000E  c_p.l(libshutdown2.o)
+    0x08000142   0x08000142   0x00000000   Code   RO          575    .ARM.Collect$$libshutdown$$00000011  c_p.l(libshutdown2.o)
+    0x08000142   0x08000142   0x00000002   Code   RO          576    .ARM.Collect$$libshutdown$$00000012  c_p.l(libshutdown2.o)
+    0x08000144   0x08000144   0x00000000   Code   RO          410    .ARM.Collect$$rtentry$$00000000  c_p.l(__rtentry.o)
+    0x08000144   0x08000144   0x00000000   Code   RO          416    .ARM.Collect$$rtentry$$00000002  c_p.l(__rtentry2.o)
+    0x08000144   0x08000144   0x00000006   Code   RO          428    .ARM.Collect$$rtentry$$00000004  c_p.l(__rtentry4.o)
+    0x0800014a   0x0800014a   0x00000000   Code   RO          418    .ARM.Collect$$rtentry$$00000009  c_p.l(__rtentry2.o)
+    0x0800014a   0x0800014a   0x00000004   Code   RO          419    .ARM.Collect$$rtentry$$0000000A  c_p.l(__rtentry2.o)
+    0x0800014e   0x0800014e   0x00000000   Code   RO          421    .ARM.Collect$$rtentry$$0000000C  c_p.l(__rtentry2.o)
+    0x0800014e   0x0800014e   0x00000008   Code   RO          422    .ARM.Collect$$rtentry$$0000000D  c_p.l(__rtentry2.o)
+    0x08000156   0x08000156   0x00000002   Code   RO          451    .ARM.Collect$$rtexit$$00000000  c_p.l(rtexit.o)
+    0x08000158   0x08000158   0x00000000   Code   RO          507    .ARM.Collect$$rtexit$$00000002  c_p.l(rtexit2.o)
+    0x08000158   0x08000158   0x00000004   Code   RO          508    .ARM.Collect$$rtexit$$00000003  c_p.l(rtexit2.o)
+    0x0800015c   0x0800015c   0x00000006   Code   RO          509    .ARM.Collect$$rtexit$$00000004  c_p.l(rtexit2.o)
+    0x08000162   0x08000162   0x00000002   PAD
+    0x08000164   0x08000164   0x0000007c   Code   RO          357    .text               startup_mm32spin06xx_s_keil.o
+    0x080001e0   0x080001e0   0x0000015a   Code   RO          402    .text               c_p.l(aeabi_sdiv.o)
+    0x0800033a   0x0800033a   0x00000006   Code   RO          406    .text               c_p.l(heapauxi.o)
+    0x08000340   0x08000340   0x0000003e   Code   RO          432    .text               c_p.l(sys_stackheap_outer.o)
+    0x0800037e   0x0800037e   0x00000010   Code   RO          435    .text               c_p.l(exit.o)
+    0x0800038e   0x0800038e   0x00000002   PAD
+    0x08000390   0x08000390   0x00000008   Code   RO          447    .text               c_p.l(libspace.o)
+    0x08000398   0x08000398   0x0000000c   Code   RO          504    .text               c_p.l(sys_exit.o)
+    0x080003a4   0x080003a4   0x00000002   Code   RO          523    .text               c_p.l(use_no_semi.o)
+    0x080003a6   0x080003a6   0x00000000   Code   RO          525    .text               c_p.l(indicate_semi.o)
+    0x080003a6   0x080003a6   0x00000002   PAD
+    0x080003a8   0x080003a8   0x00000054   Code   RO          239    i.DELAY_Init        delay.o
+    0x080003fc   0x080003fc   0x00000018   Code   RO          240    i.DELAY_Ms          delay.o
+    0x08000414   0x08000414   0x0000009a   Code   RO            5    i.GPIO_Init         main.o
+    0x080004ae   0x080004ae   0x0000000c   Code   RO           17    i.GPIO_WriteBit     main.o
+    0x080004ba   0x080004ba   0x00000002   PAD
+    0x080004bc   0x080004bc   0x00000020   Code   RO           18    i.RCC_AHBPeriphClockCmd  main.o
+    0x080004dc   0x080004dc   0x00000008   Code   RO          364    i.SetSysClock       system_mm32spin06xx_s.o
+    0x080004e4   0x080004e4   0x00000124   Code   RO          365    i.SetSysClockTo48   system_mm32spin06xx_s.o
+    0x08000608   0x08000608   0x00000008   Code   RO          241    i.SysTick_Handler   delay.o
+    0x08000610   0x08000610   0x0000006c   Code   RO          366    i.SystemInit        system_mm32spin06xx_s.o
+    0x0800067c   0x0800067c   0x00000018   Code   RO          242    i.TimingDelayDecrement  delay.o
+    0x08000694   0x08000694   0x00000078   Code   RO          243    i.__NVIC_SetPriority  delay.o
+    0x0800070c   0x0800070c   0x000000c0   Code   RO           20    i.main              main.o
+    0x080007cc   0x080007cc   0x00000020   Data   RO          577    Region$$Table       anon$$obj.o
 
 
-    Execution Region ER_ZI (Exec base: 0x20000008, Load base: 0x080009b0, Size: 0x00000668, Max: 0xffffffff, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x080007ec, Size: 0x00000678, Max: 0x00001000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000008        -       0x00000060   Zero   RW          139    .bss                c_p.l(libspace.o)
-    0x20000068        -       0x00000004   Zero   RW           58    .bss.sTimingDelay   delay.o
-    0x2000006c   0x080009b0   0x00000004   PAD
-    0x20000070        -       0x00000200   Zero   RW           66    HEAP                startup_mm32spin06xx_s_keil.o
-    0x20000270        -       0x00000400   Zero   RW           65    STACK               startup_mm32spin06xx_s_keil.o
+    0x20000000   0x080007ec   0x00000004   Data   RW          244    .data               delay.o
+    0x20000004   0x080007f0   0x00000014   Data   RW          367    .data               system_mm32spin06xx_s.o
+    0x20000018        -       0x00000060   Zero   RW          448    .bss                c_p.l(libspace.o)
+    0x20000078        -       0x00000200   Zero   RW          355    HEAP                startup_mm32spin06xx_s_keil.o
+    0x20000278        -       0x00000400   Zero   RW          354    STACK               startup_mm32spin06xx_s_keil.o
 
 
 ==============================================================================
@@ -674,15 +577,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       316         24          0          0          4       3259   delay.o
-       568          8          0          0          0       5335   main.o
-       124         58        192          0       1536        740   startup_mm32spin06xx_s_keil.o
-       582         52          0          4          0       2558   system_mm32spin06xx_s.o
+       260         30          0          4          0      12892   delay.o
+       390         10          0          0          0      44547   main.o
+       124         58        192          0       1536        712   startup_mm32spin06xx_s_keil.o
+       408         26          0         20          0       2737   system_mm32spin06xx_s.o
 
     ----------------------------------------------------------------------
-      1590        142        224          4       1544      11892   Object Totals
+      1184        124        224         24       1536      60888   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-         0          0          0          0          4          0   (incl. Padding)
+         2          0          0          0          0          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -692,10 +595,10 @@ Image component sizes
          0          0          0          0          0          0   __rtentry.o
         12          0          0          0          0          0   __rtentry2.o
          6          0          0          0          0          0   __rtentry4.o
-        86         10          0          0          0          0   __scatter.o
+        60          8          0          0          0          0   __scatter.o
         26          0          0          0          0          0   __scatter_copy.o
         28          0          0          0          0          0   __scatter_zi.o
-       364          4          0          0          0         92   aeabi_sdiv.o
+       346          0          0          0          0         92   aeabi_sdiv.o
         16          0          0          0          0         68   exit.o
          6          0          0          0          0        136   heapauxi.o
          0          0          0          0          0          0   indicate_semi.o
@@ -711,17 +614,17 @@ Image component sizes
          2          0          0          0          0         68   use_no_semi.o
 
     ----------------------------------------------------------------------
-       662         22          0          0         96        640   Library Totals
-         6          0          0          0          0          0   (incl. Padding)
+       620         16          0          0         96        640   Library Totals
+         8          0          0          0          0          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Library Name
 
-       656         22          0          0         96        640   c_p.l
+       612         16          0          0         96        640   c_p.l
 
     ----------------------------------------------------------------------
-       662         22          0          0         96        640   Library Totals
+       620         16          0          0         96        640   Library Totals
 
     ----------------------------------------------------------------------
 
@@ -730,15 +633,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      2252        164        224          4       1640      12416   Grand Totals
-      2252        164        224          4       1640      12416   ELF Image Totals
-      2252        164        224          4          0          0   ROM Totals
+      1804        140        224         24       1632      60944   Grand Totals
+      1804        140        224         24       1632      60944   ELF Image Totals
+      1804        140        224         24          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 2476 (   2.42kB)
-    Total RW  Size (RW Data + ZI Data)              1644 (   1.61kB)
-    Total ROM Size (Code + RO Data + RW Data)       2480 (   2.42kB)
+    Total RO  Size (Code + RO Data)                 2028 (   1.98kB)
+    Total RW  Size (RW Data + ZI Data)              1656 (   1.62kB)
+    Total ROM Size (Code + RO Data + RW Data)       2052 (   2.00kB)
 
 ==============================================================================
 
