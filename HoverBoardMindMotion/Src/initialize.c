@@ -5,6 +5,8 @@
 #include "hal_tim.h"
 #include "initialize.h"
 #include "hal_conf.h"
+#include "mm32_reg_redefine_v1.h"
+
 
 void UART1_GPIO_Init(void);
 
@@ -224,6 +226,44 @@ void DMA_NVIC_Config(DMA_Channel_TypeDef* dam_chx, u32 cpar, u32 cmar, u16 cndtr
 
 }
 
+void adc_Init(void){
+		ADC_InitTypeDef  ADC_InitStructure;    
+    GPIO_InitTypeDef GPIO_InitStructure;
+    GPIO_StructInit(&GPIO_InitStructure);	
+	
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE); 
+
+		GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
+
+    GPIO_InitStructure.GPIO_Pin = VBATPIN;
+    GPIO_Init(VBATPORT, &GPIO_InitStructure);
+
+    GPIO_InitStructure.GPIO_Pin = ITOTALPIN;
+    GPIO_Init(ITOTALPORT, &GPIO_InitStructure);    
+
+    /* Initialize the ADC_PRESCALE values */
+		ADC_InitStructure.ADC_PRESCALE = ADC_PCLK2_PRESCALE_6;							//for 72MHz
+	
+    /* Initialize the ADC_Mode member */
+    ADC_InitStructure.ADC_Mode = ADC_Mode_Single_Period;
+
+    /* Initialize the ADC_DataAlign member */
+    ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
+		
+    /* Initialize the ADC_ExternalTrigConv member */
+    ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_T1_CC4;
+    //TIM1->CCR4 = 0;//triger ADC by saw bottom
+    ADC_InitStructure.ADC_Resolution = ADC_Resolution_12b;
+    ADC_Init(ADC1, &ADC_InitStructure);
+
+		ADC_ExternalTrigConvCmd(ADC1,ENABLE);
+		ADC_Cmd(ADC1, ENABLE);
+		
+		ADC_RegularChannelConfig(ADC1, VBATADC, 0, ADC_SampleTime_7_5Cycles);
+		ADC_RegularChannelConfig(ADC1, ITOTALADC, 1, ADC_SampleTime_7_5Cycles);
+
+}
 
 
 

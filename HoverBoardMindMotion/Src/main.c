@@ -2,21 +2,25 @@
 #include "RTE_Components.h"             // Component selection
 #include "hal_gpio.h"
 #include "hal_rcc.h"
+#include "hal_adc.h"
 #include "delay.h"
 #include "pinout.h"             
 #include "hal_tim.h"
 #include "../Src/initialize.h"
 #include "../Src/uart.h"
 
-#define HALL2LED
-#define UART1EN
+#define HALL2LED  //sequence through led or rotate acording to motor
+#define UART1EN  //enable uart1
 
 uint8_t step=1;//very importatnt to set to 1 or it will not work
 uint32_t millis;
 uint32_t lastCommutation;
 bool uart;
+bool adc;
 uint8_t uartBuffer=0;
 u8 sRxBuffer[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+int vbat;
+int itotal;
 
 
 s32 main(void){
@@ -30,7 +34,11 @@ s32 main(void){
 	DELAY_Init();
 	//interrupt config
 	NVIC_Configure(TIM1_BRK_UP_TRG_COM_IRQn, 1);
-	
+	//vbat
+	adc_Init();
+	//adc interrupt
+	exNVIC_Configure(ADC_COMP_IRQn, 0, 1);
+
 	#ifdef UART1EN
 	//serial1.begin(19200);
 	UART1_Init(19200);
@@ -51,9 +59,15 @@ s32 main(void){
 	}
 	//prevent turning back off imidiately
 	DELAY_Ms(5);	
+	
+	//25% PWM for test
 	TIM1->CCR1=1000;
 	TIM1->CCR2=1000;
 	TIM1->CCR3=1000;
+	
+	ADC_SoftwareStartConvCmd(ADC1, ENABLE);                                     //Software start conversion
+  ADC_ITConfig(ADC1, ADC_IT_EOC, ENABLE);
+	
   while(1) {
 		#ifdef HALL2LED
 		//rotating led

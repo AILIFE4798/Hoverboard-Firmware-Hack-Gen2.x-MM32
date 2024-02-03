@@ -7,6 +7,6 @@ void NVIC_Configure(u8 ch, u8 pri);
 void exNVIC_Configure(u8 ch, u8 pri, u8 sub);
 void UART1_Init(u32 baudrate);
 void DMA_NVIC_Config(DMA_Channel_TypeDef* dam_chx, u32 cpar, u32 cmar, u16 cndtr);
-
+void adc_Init(void);
 
 

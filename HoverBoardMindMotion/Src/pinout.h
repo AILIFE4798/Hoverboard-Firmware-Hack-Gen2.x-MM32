@@ -33,3 +33,17 @@
 #define SERIAL1RXPINSRC GPIO_PinSource4
 #define SERIAL1RXPORT GPIOB
 #define SERIAL1RXAF GPIO_AF_3
+//ADC
+#define VBATPIN GPIO_Pin_1
+#define VBATPORT GPIOB
+#define VBATADC ADC_Channel_2
+#define VBATADC2 ADDR2
+#define ITOTALPIN GPIO_Pin_7
+#define ITOTALPORT GPIOA
+#define ITOTALADC ADC_Channel_6
+#define ITOTALADC2 ADDR6
+
+//extra parameter
+#define MCUVCC 5000    //mcu voltage,used for adc,mm32spin support2.5-5.5v
+#define VBAT_DEVIDER 0.026    //for calculating vbat voltage
+

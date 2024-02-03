@@ -1,8 +1,14 @@
 #include "hal_tim.h"
 #include "hal_conf.h"
 #include  "stdio.h"
+#include "pinout.h"
+
 extern uint8_t step;
 extern bool uart;
+extern bool adc;
+extern int vbat;
+extern int itotal;
+
 //commutation interrupt
 void TIM1_BRK_UP_TRG_COM_IRQHandler(void)
 {
@@ -120,5 +126,14 @@ void DMA1_Channel2_3_IRQHandler(void)
     }
 }	
 	
-	
+void ADC1_COMP_IRQHandler(void)
+{
+    if(RESET != ADC_GetITStatus(ADC1, ADC_IT_EOC)) {
+        ADC_ClearITPendingBit(ADC1, ADC_IT_EOC);
+        //ADC_SoftwareStartConvCmd(ADC1, DISABLE);
+        vbat = ADC1->VBATADC2;
+			  itotal = ADC1->ITOTALADC2;
+        adc = 1;
+    }
+}	
 	

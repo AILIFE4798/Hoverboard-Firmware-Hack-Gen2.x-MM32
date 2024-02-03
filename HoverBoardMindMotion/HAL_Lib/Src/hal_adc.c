@@ -65,7 +65,7 @@ void ADC_DeInit(ADC_TypeDef* adc)
 void ADC_Init(ADC_TypeDef* adc, ADC_InitTypeDef* init_struct)
 {
     adc->ADCFG &= ~(ADC_CFGR_PRE | ADC_CFGR_RSLTCTL);
-    adc->ADCFG |= (u32)(init_struct->ADC_PRESCARE) | init_struct->ADC_Resolution;
+    adc->ADCFG |= (u32)(init_struct->ADC_PRESCALE) | init_struct->ADC_Resolution;
 
     adc->ADCR &= ~(ADC_CR_ALIGN | ADC_CR_MODE | ADC_CR_TRGSEL);
     adc->ADCR |= ((u32)init_struct->ADC_DataAlign) | init_struct->ADC_ExternalTrigConv | ((u32)init_struct->ADC_Mode);
@@ -80,7 +80,7 @@ void ADC_Init(ADC_TypeDef* adc, ADC_InitTypeDef* init_struct)
 void ADC_StructInit(ADC_InitTypeDef* init_struct)
 {
     init_struct->ADC_Resolution         = ADC_Resolution_12b;
-    init_struct->ADC_PRESCARE           = ADC_PCLK2_PRESCARE_2;
+    init_struct->ADC_PRESCALE           = ADC_PCLK2_PRESCALE_2;
     init_struct->ADC_Mode               = ADC_CR_IMM;                           //ADC_Mode_Single;
     init_struct->ADC_ContinuousConvMode = DISABLE;                              // useless
     init_struct->ADC_ExternalTrigConv   = ADC1_ExternalTrigConv_T1_CC1;

@@ -94,26 +94,26 @@ typedef enum {
 } ADCRSL_TypeDef;
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief ADC_Prescare
+/// @brief ADC_PRESCALE
 ////////////////////////////////////////////////////////////////////////////////
 typedef enum {
-    ADC_PCLK2_PRESCARE_3  = ADC_CFGR_PRE_3,   ///< ADC preclk 3
-    ADC_PCLK2_PRESCARE_5  = ADC_CFGR_PRE_5,   ///< ADC preclk 5
-    ADC_PCLK2_PRESCARE_7  = ADC_CFGR_PRE_7,   ///< ADC preclk 7
-    ADC_PCLK2_PRESCARE_9  = ADC_CFGR_PRE_9,   ///< ADC preclk 9
-    ADC_PCLK2_PRESCARE_11 = ADC_CFGR_PRE_11,  ///< ADC preclk 11
-    ADC_PCLK2_PRESCARE_13 = ADC_CFGR_PRE_13,  ///< ADC preclk 13
-    ADC_PCLK2_PRESCARE_15 = ADC_CFGR_PRE_15,  ///< ADC preclk 15
-    ADC_PCLK2_PRESCARE_17 = ADC_CFGR_PRE_17,  ///< ADC preclk 17
+    ADC_PCLK2_PRESCALE_3  = ADC_CFGR_PRE_3,   ///< ADC preclk 3
+    ADC_PCLK2_PRESCALE_5  = ADC_CFGR_PRE_5,   ///< ADC preclk 5
+    ADC_PCLK2_PRESCALE_7  = ADC_CFGR_PRE_7,   ///< ADC preclk 7
+    ADC_PCLK2_PRESCALE_9  = ADC_CFGR_PRE_9,   ///< ADC preclk 9
+    ADC_PCLK2_PRESCALE_11 = ADC_CFGR_PRE_11,  ///< ADC preclk 11
+    ADC_PCLK2_PRESCALE_13 = ADC_CFGR_PRE_13,  ///< ADC preclk 13
+    ADC_PCLK2_PRESCALE_15 = ADC_CFGR_PRE_15,  ///< ADC preclk 15
+    ADC_PCLK2_PRESCALE_17 = ADC_CFGR_PRE_17,  ///< ADC preclk 17
 
-    ADC_PCLK2_PRESCARE_2  = ADC_CFGR_PRE_2,   ///< ADC preclk 2
-    ADC_PCLK2_PRESCARE_4  = ADC_CFGR_PRE_4,   ///< ADC preclk 4
-    ADC_PCLK2_PRESCARE_6  = ADC_CFGR_PRE_6,   ///< ADC preclk 6
-    ADC_PCLK2_PRESCARE_8  = ADC_CFGR_PRE_8,   ///< ADC preclk 8
-    ADC_PCLK2_PRESCARE_10 = ADC_CFGR_PRE_10,  ///< ADC preclk 10
-    ADC_PCLK2_PRESCARE_12 = ADC_CFGR_PRE_12,  ///< ADC preclk 12
-    ADC_PCLK2_PRESCARE_14 = ADC_CFGR_PRE_14,  ///< ADC preclk 14
-    ADC_PCLK2_PRESCARE_16 = ADC_CFGR_PRE_16   ///< ADC preclk 16
+    ADC_PCLK2_PRESCALE_2  = ADC_CFGR_PRE_2,   ///< ADC preclk 2
+    ADC_PCLK2_PRESCALE_4  = ADC_CFGR_PRE_4,   ///< ADC preclk 4
+    ADC_PCLK2_PRESCALE_6  = ADC_CFGR_PRE_6,   ///< ADC preclk 6
+    ADC_PCLK2_PRESCALE_8  = ADC_CFGR_PRE_8,   ///< ADC preclk 8
+    ADC_PCLK2_PRESCALE_10 = ADC_CFGR_PRE_10,  ///< ADC preclk 10
+    ADC_PCLK2_PRESCALE_12 = ADC_CFGR_PRE_12,  ///< ADC preclk 12
+    ADC_PCLK2_PRESCALE_14 = ADC_CFGR_PRE_14,  ///< ADC preclk 14
+    ADC_PCLK2_PRESCALE_16 = ADC_CFGR_PRE_16   ///< ADC preclk 16
 } ADCPRE_TypeDef;
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -191,7 +191,7 @@ typedef enum {
 ////////////////////////////////////////////////////////////////////////////////
 typedef struct {
     u32                     ADC_Resolution;             ///< Convert data resolution
-    u32                     ADC_PRESCARE;               ///< Clock prescaler
+    u32                     ADC_PRESCALE;               ///< Clock prescaler
     u32                     ADC_Mode;                   ///< ADC conversion mode
     FunctionalState         ADC_ContinuousConvMode;     ///< Useless just for compatibility
     u32                     ADC_ExternalTrigConv;       ///< External trigger source selection
@@ -203,7 +203,7 @@ typedef struct {
 ////////////////////////////////////////////////////////////////////////////////
 typedef struct {
     ADCRSL_TypeDef          ADC_Resolution;             ///< Convert data resolution
-    ADCPRE_TypeDef          ADC_PRESCARE;               ///< Clock prescaler
+    ADCPRE_TypeDef          ADC_PRESCALE;               ///< Clock prescaler
     ADCMODE_TypeDef         ADC_Mode;                   ///< ADC conversion mode
     EXTERTRIG_TypeDef       ADC_ExternalTrigConv;       ///< External trigger source selection
     ADCDATAALI_TypeDef      ADC_DataAlign;              ///< Data alignmentn
