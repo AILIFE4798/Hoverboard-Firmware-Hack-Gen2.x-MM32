@@ -43,11 +43,11 @@ void io_init(){
 }
 void BLDC_init(){
 	GPIO_InitTypeDef GPIO_InitStructure;
-	
+	//high side
 	GPIO_PinAFConfig(GPIOA, GPIO_PinSource8, GPIO_AF_2);
 	GPIO_PinAFConfig(GPIOA, GPIO_PinSource9, GPIO_AF_2);
 	GPIO_PinAFConfig(GPIOA, GPIO_PinSource10, GPIO_AF_2);
-
+	//low side
 	GPIO_PinAFConfig(GPIOB, GPIO_PinSource13, GPIO_AF_2);
 	GPIO_PinAFConfig(GPIOB, GPIO_PinSource14, GPIO_AF_2);
 	GPIO_PinAFConfig(GPIOB, GPIO_PinSource15, GPIO_AF_2);
@@ -58,19 +58,14 @@ void BLDC_init(){
 	
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8;
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
-
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
-
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
-
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;
 	GPIO_Init(GPIOB, &GPIO_InitStructure);
-
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_14;
 	GPIO_Init(GPIOB, &GPIO_InitStructure);
-
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_15;
 	GPIO_Init(GPIOB, &GPIO_InitStructure);
 

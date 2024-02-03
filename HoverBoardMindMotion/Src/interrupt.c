@@ -1,6 +1,7 @@
 #include "hal_tim.h"
 extern uint8_t step;
 
+//commutation interrupt
 void TIM1_BRK_UP_TRG_COM_IRQHandler(void)
 {
     TIM_ClearITPendingBit(TIM1, TIM_IT_COM);

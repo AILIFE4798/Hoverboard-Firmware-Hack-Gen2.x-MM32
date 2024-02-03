@@ -8,7 +8,7 @@
 #include "../Src/initialize.h"
 
 #define HALL2LED
-uint8_t step=1;
+uint8_t step=1;//very importatnt to set to 1 or it will not work
 uint32_t millis;
 uint32_t lastCommutation;
 s32 main(void){
@@ -55,6 +55,7 @@ s32 main(void){
 		GPIO_WriteBit(LEDGPORT, LEDGPIN, 0);
 		DELAY_Ms(500);
 		#endif
+		//simulated hall sensor for commutation
 		if(millis-lastCommutation>100){
 			TIM_GenerateEvent(TIM1, TIM_EventSource_COM);
 			lastCommutation=millis;
