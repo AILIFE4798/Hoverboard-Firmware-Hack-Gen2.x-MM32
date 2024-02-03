@@ -55,6 +55,10 @@ s32 main(void){
 		GPIO_WriteBit(LEDGPORT, LEDGPIN, 0);
 		DELAY_Ms(500);
 		#endif
+		if(millis-lastCommutation>100){
+			TIM_GenerateEvent(TIM1, TIM_EventSource_COM);
+			lastCommutation=millis;
+		}
 		//button press for shutdown
 		if(GPIO_ReadInputDataBit(BTNPORT, BTNPIN)){
 			//power off melody
