@@ -33,6 +33,9 @@ s32 main(void){
 	}
 	//prevent turning back off imidiately
 	DELAY_Ms(5);	
+	TIM1->CCR1=200;
+	TIM1->CCR2=200;
+	TIM1->CCR3=200;
   while(1) {
 		#ifdef HALL2LED
 		//rotating led
@@ -54,13 +57,14 @@ s32 main(void){
 		#endif
 		//button press for shutdown
 		if(GPIO_ReadInputDataBit(BTNPORT, BTNPIN)){
-			//wait for release
+			//power off melody
 			for(int i=0;i<3;i++){
 			GPIO_WriteBit(BZPORT, BZPIN, 1);
 		  DELAY_Ms(10);
 		  GPIO_WriteBit(BZPORT, BZPIN, 0);
 		  DELAY_Ms(10);
 			}
+			//wait for release
 			while(GPIO_ReadInputDataBit(BTNPORT, BTNPIN)) {
 		    __NOP();
 	    }

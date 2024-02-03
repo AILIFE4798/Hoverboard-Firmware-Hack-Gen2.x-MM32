@@ -1575,11 +1575,12 @@ Image Symbol Table
     [Anonymous Symbol]                       0x08000c48   Section        0  initialize.o(.text.io_init)
     __arm_cp.0_0                             0x08000cec   Number         4  initialize.o(.text.io_init)
     [Anonymous Symbol]                       0x08000cf0   Section        0  main.o(.text.main)
-    __arm_cp.0_0                             0x08000df8   Number         4  main.o(.text.main)
-    __arm_cp.0_1                             0x08000dfc   Number         4  main.o(.text.main)
-    __arm_cp.0_2                             0x08000e00   Number         4  main.o(.text.main)
-    __arm_cp.0_3                             0x08000e04   Number         4  main.o(.text.main)
-    .text_divfast                            0x08000e08   Section      502  aeabi_sdivfast.o(.text_divfast)
+    __arm_cp.0_0                             0x08000e00   Number         4  main.o(.text.main)
+    __arm_cp.0_1                             0x08000e04   Number         4  main.o(.text.main)
+    __arm_cp.0_2                             0x08000e08   Number         4  main.o(.text.main)
+    __arm_cp.0_3                             0x08000e0c   Number         4  main.o(.text.main)
+    __arm_cp.0_4                             0x08000e10   Number         4  main.o(.text.main)
+    .text_divfast                            0x08000e14   Section      502  aeabi_sdivfast.o(.text_divfast)
     .bss                                     0x20000008   Section       96  libspace.o(.bss)
     sTimingDelay                             0x2000006c   Data           4  delay.o(.bss.sTimingDelay)
     [Anonymous Symbol]                       0x2000006c   Section        0  delay.o(.bss.sTimingDelay)
@@ -1751,11 +1752,11 @@ Image Symbol Table
     TIM_TimeBaseInit                         0x08000bb5   Thumb Code   112  hal_tim.o(.text.TIM_TimeBaseInit)
     TIM_TimeBaseStructInit                   0x08000c39   Thumb Code    16  hal_tim.o(.text.TIM_TimeBaseStructInit)
     io_init                                  0x08000c49   Thumb Code   164  initialize.o(.text.io_init)
-    main                                     0x08000cf1   Thumb Code   264  main.o(.text.main)
-    __aeabi_uidiv                            0x08000e09   Thumb Code    68  aeabi_sdivfast.o(.text_divfast)
-    __aeabi_idiv                             0x08000e4d   Thumb Code   434  aeabi_sdivfast.o(.text_divfast)
-    Region$$Table$$Base                      0x08001000   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08001020   Number         0  anon$$obj.o(Region$$Table)
+    main                                     0x08000cf1   Thumb Code   272  main.o(.text.main)
+    __aeabi_uidiv                            0x08000e15   Thumb Code    68  aeabi_sdivfast.o(.text_divfast)
+    __aeabi_idiv                             0x08000e59   Thumb Code   434  aeabi_sdivfast.o(.text_divfast)
+    Region$$Table$$Base                      0x0800100c   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x0800102c   Number         0  anon$$obj.o(Region$$Table)
     SystemCoreClock                          0x20000000   Data           4  system_mm32spin06xx_s.o(.data.SystemCoreClock)
     __libspace_start                         0x20000008   Data          96  libspace.o(.bss)
     __temporary_stack_top$libspace           0x20000068   Data           0  libspace.o(.bss)
@@ -1770,9 +1771,9 @@ Memory Map of the image
 
   Image Entry point : 0x080000c1
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00001028, Max: 0x00008000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00001038, Max: 0x00008000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00001020, Max: 0x00008000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x0000102c, Max: 0x00008000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -1869,23 +1870,23 @@ Memory Map of the image
     0x08000bb4   0x08000bb4   0x00000084   Code   RO          641    .text.TIM_TimeBaseInit  hal_tim.o
     0x08000c38   0x08000c38   0x00000010   Code   RO          665    .text.TIM_TimeBaseStructInit  hal_tim.o
     0x08000c48   0x08000c48   0x000000a8   Code   RO           15    .text.io_init       initialize.o
-    0x08000cf0   0x08000cf0   0x00000118   Code   RO            2    .text.main          main.o
-    0x08000e08   0x08000e08   0x000001f6   Code   RO          983    .text_divfast       c_p.l(aeabi_sdivfast.o)
-    0x08000ffe   0x08000ffe   0x00000002   PAD
-    0x08001000   0x08001000   0x00000020   Data   RO         1168    Region$$Table       anon$$obj.o
+    0x08000cf0   0x08000cf0   0x00000124   Code   RO            2    .text.main          main.o
+    0x08000e14   0x08000e14   0x000001f6   Code   RO          983    .text_divfast       c_p.l(aeabi_sdivfast.o)
+    0x0800100a   0x0800100a   0x00000002   PAD
+    0x0800100c   0x0800100c   0x00000020   Data   RO         1168    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08001020, Size: 0x00000678, Max: 0x00001000, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08001030, Size: 0x00000678, Max: 0x00001000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x08001020   0x00000004   Data   RW          971    .data.SystemCoreClock  system_mm32spin06xx_s.o
-    0x20000004   0x08001024   0x00000004   PAD
+    0x20000000   0x08001030   0x00000004   Data   RW          971    .data.SystemCoreClock  system_mm32spin06xx_s.o
+    0x20000004   0x08001034   0x00000004   PAD
     0x20000008        -       0x00000060   Zero   RW         1032    .bss                c_p.l(libspace.o)
     0x20000068        -       0x00000004   Zero   RW            5    .bss.millis         main.o
     0x2000006c        -       0x00000004   Zero   RW           37    .bss.sTimingDelay   delay.o
     0x20000070        -       0x00000001   Zero   RW            4    .bss.step           main.o
-    0x20000071   0x08001024   0x00000007   PAD
+    0x20000071   0x08001034   0x00000007   PAD
     0x20000078        -       0x00000200   Zero   RW          958    HEAP                startup_mm32spin06xx_s_keil.o
     0x20000278        -       0x00000400   Zero   RW          957    STACK               startup_mm32spin06xx_s_keil.o
 
@@ -1904,12 +1905,12 @@ Image component sizes
        690         32          0          0          0      27751   hal_tim.o
        548         24          0          0          0       5955   initialize.o
        552         10          0          0          0       2102   interrupt.o
-       280         16          0          0          5       2268   main.o
+       292         20          0          0          5       2828   main.o
        124         58        192          0       1536        740   startup_mm32spin06xx_s_keil.o
        448         40          0          4          0       3694   system_mm32spin06xx_s.o
 
     ----------------------------------------------------------------------
-      3128        228        224          4       1556      65375   Object Totals
+      3140        232        224          4       1556      65935   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          4          0          0          0         11          0   (incl. Padding)
 
@@ -1959,15 +1960,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      3904        244        224          4       1652      65711   Grand Totals
-      3904        244        224          4       1652      65711   ELF Image Totals
-      3904        244        224          4          0          0   ROM Totals
+      3916        248        224          4       1652      66271   Grand Totals
+      3916        248        224          4       1652      66271   ELF Image Totals
+      3916        248        224          4          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 4128 (   4.03kB)
+    Total RO  Size (Code + RO Data)                 4140 (   4.04kB)
     Total RW  Size (RW Data + ZI Data)              1656 (   1.62kB)
-    Total ROM Size (Code + RO Data + RW Data)       4132 (   4.04kB)
+    Total ROM Size (Code + RO Data + RW Data)       4144 (   4.05kB)
 
 ==============================================================================
 
