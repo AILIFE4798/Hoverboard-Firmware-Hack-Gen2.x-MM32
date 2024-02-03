@@ -15,6 +15,7 @@ uint8_t step=1;//very importatnt to set to 1 or it will not work
 uint32_t millis;
 uint32_t lastCommutation;
 bool uart;
+uint8_t uartBuffer=0;
 u8 sRxBuffer[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 
@@ -68,9 +69,12 @@ s32 main(void){
 		GPIO_WriteBit(LEDGPORT, LEDGPIN, 0);
 		DELAY_Ms(500);
 		#endif
-		UART1_Send_Byte(sRxBuffer[0]);
-		sRxBuffer[0]='\0';
-		
+		//serial loopback
+		if(uart){
+		  UART1_Send_Byte(sRxBuffer[0]);
+			uart=0;
+		}
+			
 		//simulated hall sensor for commutation
 		if(millis-lastCommutation>100){
 			TIM_GenerateEvent(TIM1, TIM_EventSource_COM);
