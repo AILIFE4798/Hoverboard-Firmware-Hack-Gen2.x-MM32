@@ -24,8 +24,13 @@
 //buzzer
 #define BZPIN GPIO_Pin_9
 #define BZPORT GPIOB
-
-
-
-
+//serial1
+#define SERIAL1TXPIN GPIO_Pin_6
+#define SERIAL1TXPINSRC GPIO_PinSource6
+#define SERIAL1TXPORT GPIOB
+#define SERIAL1TXAF GPIO_AF_0
+#define SERIAL1RXPIN GPIO_Pin_4
+#define SERIAL1RXPINSRC GPIO_PinSource4
+#define SERIAL1RXPORT GPIOB
+#define SERIAL1RXAF GPIO_AF_3
 

@@ -170,19 +170,18 @@ void UART1_Init(u32 baudrate)
 void UART1_GPIO_Init(){
 	GPIO_InitTypeDef GPIO_InitStructure;
 
-	GPIO_PinAFConfig(GPIOB, GPIO_PinSource4, GPIO_AF_3);
-	GPIO_PinAFConfig(GPIOB, GPIO_PinSource6, GPIO_AF_0);
-
+	GPIO_PinAFConfig(SERIAL1TXPORT, SERIAL1TXPINSRC, SERIAL1TXAF);
+	GPIO_PinAFConfig(SERIAL1RXPORT, SERIAL1RXPINSRC, SERIAL1RXAF);
 
 	GPIO_StructInit(&GPIO_InitStructure);
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;
+	GPIO_InitStructure.GPIO_Pin = SERIAL1TXPIN;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
-	GPIO_Init(GPIOB, &GPIO_InitStructure);
+	GPIO_Init(SERIAL1TXPORT, &GPIO_InitStructure);
 
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4;
+	GPIO_InitStructure.GPIO_Pin = SERIAL1RXPIN;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_FLOATING;
-	GPIO_Init(GPIOB, &GPIO_InitStructure);
+	GPIO_Init(SERIAL1RXPORT, &GPIO_InitStructure);
 }
 
 void DMA_NVIC_Config(DMA_Channel_TypeDef* dam_chx, u32 cpar, u32 cmar, u16 cndtr)
