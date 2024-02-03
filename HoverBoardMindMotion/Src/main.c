@@ -45,6 +45,8 @@ s32 main(void){
 	GPIO_Init(BTNPORT, &GPIO_InitStruct);
 	//systick config
 	DELAY_Init();
+	//latch on power
+	GPIO_WriteBit(LATCHPORT, LATCHPIN, 1);
 	//wait while release button
 	while(GPIO_ReadInputDataBit(BTNPORT, BTNPIN)) {
 		GPIO_WriteBit(BZPORT, BZPIN, 1);
@@ -52,7 +54,8 @@ s32 main(void){
 		GPIO_WriteBit(BZPORT, BZPIN, 0);
 		DELAY_Ms(1);
 	}
-		
+	//prevent turning back off imidiately
+	DELAY_Ms(50);	
   while(1) {
 		#ifdef HALL2LED
 		//rotating led
@@ -72,6 +75,18 @@ s32 main(void){
 		GPIO_WriteBit(LEDGPORT, LEDGPIN, 0);
 		DELAY_Ms(500);
 		#endif
+		//button press for shutdown
+		if(GPIO_ReadInputDataBit(BTNPORT, BTNPIN)){
+			//wait for release
+			while(GPIO_ReadInputDataBit(BTNPORT, BTNPIN)) {
+		  GPIO_WriteBit(BZPORT, BZPIN, 1);
+		  DELAY_Ms(2);
+		  GPIO_WriteBit(BZPORT, BZPIN, 0);
+		  DELAY_Ms(2);
+	    }
+			//last line to ever be executed
+			GPIO_WriteBit(LATCHPORT, LATCHPIN, 0);
+		}
   }
 	
 }
