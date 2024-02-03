@@ -98,7 +98,7 @@ s32 main(void){
 		sprintf(buffer, "VBAT: %d V\n\r", vbat);
 		if(adc){
 		  UART1_SendString(buffer);
-			uart=0;
+			adc=0;
 		}
 		#endif	
 		
