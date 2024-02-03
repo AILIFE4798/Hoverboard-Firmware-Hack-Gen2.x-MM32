@@ -45,29 +45,23 @@ Src\main.c(52): warning:  #188-D: enumerated type mixed with another type
   		GPIO_WriteBit(BZPORT, BZPIN, 1);
 Src\main.c(54): warning:  #188-D: enumerated type mixed with another type
   		GPIO_WriteBit(BZPORT, BZPIN, 0);
-Src\main.c(68): warning:  #188-D: enumerated type mixed with another type
-  		GPIO_WriteBit(LEDRPORT, LEDRPIN, 1);
-Src\main.c(69): warning:  #188-D: enumerated type mixed with another type
-  		GPIO_WriteBit(LEDBPORT, LEDBPIN, 0);
-Src\main.c(71): warning:  #188-D: enumerated type mixed with another type
-  		GPIO_WriteBit(LEDGPORT, LEDGPIN, 1);
-Src\main.c(72): warning:  #188-D: enumerated type mixed with another type
-  		GPIO_WriteBit(LEDRPORT, LEDRPIN, 0);
-Src\main.c(74): warning:  #188-D: enumerated type mixed with another type
-  		GPIO_WriteBit(LEDBPORT, LEDBPIN, 1);
-Src\main.c(75): warning:  #188-D: enumerated type mixed with another type
-  		GPIO_WriteBit(LEDGPORT, LEDGPIN, 0);
+Src\main.c(62): warning:  #188-D: enumerated type mixed with another type
+      GPIO_WriteBit(LEDRPORT, LEDRPIN, GPIO_ReadInputDataBit(HALLAPORT, HALLAPIN));
+Src\main.c(63): warning:  #188-D: enumerated type mixed with another type
+  		GPIO_WriteBit(LEDGPORT, LEDGPIN, GPIO_ReadInputDataBit(HALLBPORT, HALLBPIN));
+Src\main.c(64): warning:  #188-D: enumerated type mixed with another type
+  		GPIO_WriteBit(LEDBPORT, LEDBPIN, GPIO_ReadInputDataBit(HALLCPORT, HALLCPIN));
 Src\main.c(82): warning:  #188-D: enumerated type mixed with another type
   			GPIO_WriteBit(BZPORT, BZPIN, 1);
 Src\main.c(84): warning:  #188-D: enumerated type mixed with another type
   		  GPIO_WriteBit(BZPORT, BZPIN, 0);
 Src\main.c(91): warning:  #188-D: enumerated type mixed with another type
   			GPIO_WriteBit(LATCHPORT, LATCHPIN, 0);
-Src\main.c: 16 warnings, 0 errors
+Src\main.c: 13 warnings, 0 errors
 linking...
-Program Size: Code=2280 RO-data=224 RW-data=24 ZI-data=1632  
+Program Size: Code=2268 RO-data=224 RW-data=24 ZI-data=1632  
 FromELF: creating hex file...
-".\Objects\HoverboardOutput.axf" - 0 Error(s), 16 Warning(s).
+".\Objects\HoverboardOutput.axf" - 0 Error(s), 13 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -96,7 +90,7 @@ Package Vendor: MindMotion
       Source file:   Device/MM32SPIN06xx_s/Source/system_mm32spin06xx_s.c
       Include file:  Device/MM32SPIN06xx_s/Include/mm32_device.h
       Source file:   Device/MM32SPIN06xx_s/Source/KEIL_StartAsm/startup_mm32spin06xx_s_keil.s
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

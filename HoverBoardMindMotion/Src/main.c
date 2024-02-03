@@ -7,7 +7,7 @@
 #include "pinout.h"
 
 
-//#define HALL2LED
+#define HALL2LED
 
 s32 main(void){
 	//enable gpio clock
@@ -80,9 +80,9 @@ s32 main(void){
 			//wait for release
 			for(int i=0;i<3;i++){
 			GPIO_WriteBit(BZPORT, BZPIN, 1);
-		  DELAY_Ms(50);
+		  DELAY_Ms(10);
 		  GPIO_WriteBit(BZPORT, BZPIN, 0);
-		  DELAY_Ms(50);
+		  DELAY_Ms(10);
 			}
 			while(GPIO_ReadInputDataBit(BTNPORT, BTNPIN)) {
 		    __nop();
