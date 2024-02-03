@@ -33,4 +33,5 @@
   RTE\_MM32SPIN05\RTE_Components.h HAL_Lib\Inc\hal_gpio.h \
   HAL_Lib\Inc\hal_rcc.h Src\delay.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h Src\pinout.h \
-  HAL_Lib\Inc\hal_tim.h Src\..\Src\initialize.h
+  HAL_Lib\Inc\hal_tim.h Src\..\Src\initialize.h Src\..\Src\uart.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h
