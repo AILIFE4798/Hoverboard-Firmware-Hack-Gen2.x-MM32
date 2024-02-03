@@ -1,4 +1,15 @@
-# this is a temporary Keil project compiling the firmware for the Gen2.x hoverboard for the MM32 mcu.
+# This repo is for split board with MM32SPIN0X MCU
 
-## https://github.com/RoboDurden/Hoverboard-Firmware-Hack-Gen2.x with all its different layout images and pdf manuals has become to large.
-### documentation wills still be updated there but firmware is now here :-)
+ check https://github.com/RoboDurden/Hoverboard-Firmware-Hack-Gen2.x for guide and support
+
+## current support status
+
+* working method to unlock and flash the mcu
+* hall2led
+* self hold
+
+## todo
+
+* uart
+* adc
+* timer1 automatic output
