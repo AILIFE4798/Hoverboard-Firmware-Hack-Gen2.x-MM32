@@ -8,7 +8,7 @@
 #include "../Src/initialize.h"
 
 #define HALL2LED
-uint8_t step;
+uint8_t step=1;
 uint32_t millis;
 uint32_t lastCommutation;
 s32 main(void){
