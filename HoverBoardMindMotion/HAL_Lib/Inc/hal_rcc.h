@@ -25,7 +25,7 @@
 #include "reg_common.h"
 #include "reg_adc.h"
 #include "reg_rcc.h"
-#include "hal_rcc.h"
+
 
 ////////////////////////////////////////////////////////////////////////////////
 /// @addtogroup MM32_Hardware_Abstract_Layer

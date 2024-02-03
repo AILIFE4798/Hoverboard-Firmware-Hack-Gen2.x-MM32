@@ -1,50 +1,27 @@
 #include "mm32_device.h"                // Device header
 #include "RTE_Components.h"             // Component selection
-#include "hal_gpio.c"
 #include "hal_gpio.h"
 #include "hal_rcc.h"
 #include "delay.h"
-#include "pinout.h"
-
+#include "pinout.h"             
+#include "hal_tim.h"
+#include "../initialize.h"
 
 #define HALL2LED
-
+uint8_t step;
+uint32_t millis;
+uint32_t lastCommutation;
 s32 main(void){
-	//enable gpio clock
-	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOA, ENABLE);
-	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOB, ENABLE);
-	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOC, ENABLE);
-	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOD, ENABLE);
-	//LED output
-	GPIO_InitTypeDef GPIO_InitStruct;
-  GPIO_InitStruct.GPIO_Pin = LEDRPIN;
-  GPIO_InitStruct.GPIO_Mode = GPIO_Mode_Out_PP;
-  GPIO_InitStruct.GPIO_Speed = GPIO_Speed_10MHz;
-	GPIO_Init(LEDRPORT, &GPIO_InitStruct);
-	GPIO_InitStruct.GPIO_Pin = LEDGPIN;
-	GPIO_Init(LEDGPORT, &GPIO_InitStruct);
-	GPIO_InitStruct.GPIO_Pin = LEDBPIN;
-	GPIO_Init(LEDBPORT, &GPIO_InitStruct);
-	//latch output
-	GPIO_InitStruct.GPIO_Pin = LATCHPIN;
-	GPIO_Init(LATCHPORT, &GPIO_InitStruct);
-	//bz output
-	GPIO_InitStruct.GPIO_Pin = BZPIN;
-	GPIO_Init(BZPORT, &GPIO_InitStruct);
-	//hall input
-	GPIO_InitStruct.GPIO_Pin = HALLAPIN;
-  GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IPU;
-	GPIO_Init(HALLAPORT, &GPIO_InitStruct);
-	GPIO_InitStruct.GPIO_Pin = HALLBPIN;
-	GPIO_Init(HALLBPORT, &GPIO_InitStruct);
-	GPIO_InitStruct.GPIO_Pin = HALLCPIN;
-	GPIO_Init(HALLCPORT, &GPIO_InitStruct);
-	//button input
-	GPIO_InitStruct.GPIO_Pin = BTNPIN;
-	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_FLOATING;
-	GPIO_Init(BTNPORT, &GPIO_InitStruct);
+	//initialize normal gpio
+	io_init();
+	//initialize 6 bldc pins
+	BLDC_init();
+	//initialize timer
+	TIM1_init(4095, 0);
 	//systick config
 	DELAY_Init();
+	//interrupt config
+	NVIC_Configure(TIM1_BRK_UP_TRG_COM_IRQn, 1);
 	//latch on power
 	GPIO_WriteBit(LATCHPORT, LATCHPIN, 1);
 	//wait while release button
@@ -85,7 +62,7 @@ s32 main(void){
 		  DELAY_Ms(10);
 			}
 			while(GPIO_ReadInputDataBit(BTNPORT, BTNPIN)) {
-		    __nop();
+		    __NOP();
 	    }
 			//last line to ever be executed
 			GPIO_WriteBit(LATCHPORT, LATCHPIN, 0);

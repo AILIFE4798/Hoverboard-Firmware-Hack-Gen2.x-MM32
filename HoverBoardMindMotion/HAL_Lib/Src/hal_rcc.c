@@ -277,6 +277,7 @@ void RCC_LSICmd(FunctionalState state)
 /// @param  None.
 /// @retval sys_clk : System clock frequency
 ////////////////////////////////////////////////////////////////////////////////
+
 u32 RCC_GetSysClockFreq(void)
 {
     u32 result;
@@ -288,13 +289,14 @@ u32 RCC_GetSysClockFreq(void)
         case RCC_CFGR_SWS_HSE:
             result = HSE_VALUE;
             break;
-
+/*
         case RCC_CFGR_SWS_HSI:
             return (RCC->CR & RCC_CR_HSI_72M) ? HSI_72MHz : HSI_48MHz;
 
         default:
             result = (RCC->CR & RCC_CR_HSI_72M) ? HSI_72MHz_DIV6 : HSI_48MHz_DIV6;
             break;
+				*/
     }
     return result;
 }

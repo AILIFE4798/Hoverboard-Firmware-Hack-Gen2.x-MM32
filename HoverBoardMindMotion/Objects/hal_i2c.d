@@ -1,7 +1,7 @@
 ./objects/hal_i2c.o: HAL_Lib\Src\hal_i2c.c HAL_Lib\Inc\hal_i2c.h \
   C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\types.h \
-  C:\Keil_v5\ARM\ARMCLANG\include\stdint.h \
-  C:\Keil_v5\ARM\ARMCLANG\include\stdbool.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdint.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdbool.h \
   C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_i2c.h \
   HAL_Lib\Inc\hal_rcc.h \
   C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_common.h \

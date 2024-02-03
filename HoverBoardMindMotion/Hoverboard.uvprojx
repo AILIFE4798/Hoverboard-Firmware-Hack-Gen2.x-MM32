@@ -10,8 +10,8 @@
       <TargetName>MM32SPIN05</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060960::V5.06 update 7 (build 960)::.\ARMCC</pCCUsed>
-      <uAC6>0</uAC6>
+      <pCCUsed>6190000::V6.19::ARMCLANG</pCCUsed>
+      <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>MM32SPIN05PF</Device>
@@ -138,7 +138,7 @@
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3></Flash3>
+          <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
@@ -314,7 +314,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>1</Optim>
+            <Optim>2</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -323,13 +323,13 @@
             <PlainCh>0</PlainCh>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
-            <wLevel>2</wLevel>
+            <wLevel>3</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
             <uGnu>1</uGnu>
             <useXO>0</useXO>
-            <v6Lang>3</v6Lang>
+            <v6Lang>5</v6Lang>
             <v6LangP>3</v6LangP>
             <vShortEn>1</vShortEn>
             <vShortWch>1</vShortWch>
@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\HAL_Lib\Inc;.\HAL_Lib\Src;.\RTE\_MM32SPIN05</IncludePath>
+              <IncludePath>.\HAL_Lib\Inc;.\RTE\_MM32SPIN05</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -390,6 +390,16 @@
               <FilePath>.\Src\main.c</FilePath>
             </File>
             <File>
+              <FileName>initialize.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\initialize.c</FilePath>
+            </File>
+            <File>
+              <FileName>initialize.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\initialize.h</FilePath>
+            </File>
+            <File>
               <FileName>delay.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Src\delay.c</FilePath>
@@ -400,9 +410,134 @@
               <FilePath>.\Src\delay.h</FilePath>
             </File>
             <File>
+              <FileName>interrupt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\interrupt.c</FilePath>
+            </File>
+            <File>
+              <FileName>interrupt.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\interrupt.h</FilePath>
+            </File>
+            <File>
+              <FileName>bldc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\bldc.c</FilePath>
+            </File>
+            <File>
+              <FileName>bldc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\bldc.h</FilePath>
+            </File>
+            <File>
               <FileName>pinout.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Src\pinout.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>HAL</GroupName>
+          <Files>
+            <File>
+              <FileName>hal_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL_Lib\Src\hal_adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>hal_comp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL_Lib\Src\hal_comp.c</FilePath>
+            </File>
+            <File>
+              <FileName>hal_crc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL_Lib\Src\hal_crc.c</FilePath>
+            </File>
+            <File>
+              <FileName>hal_dbg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL_Lib\Src\hal_dbg.c</FilePath>
+            </File>
+            <File>
+              <FileName>hal_div.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL_Lib\Src\hal_div.c</FilePath>
+            </File>
+            <File>
+              <FileName>hal_dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL_Lib\Src\hal_dma.c</FilePath>
+            </File>
+            <File>
+              <FileName>hal_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL_Lib\Src\hal_exti.c</FilePath>
+            </File>
+            <File>
+              <FileName>hal_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL_Lib\Src\hal_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>hal_gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL_Lib\Src\hal_gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>hal_i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL_Lib\Src\hal_i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>hal_iwdg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL_Lib\Src\hal_iwdg.c</FilePath>
+            </File>
+            <File>
+              <FileName>hal_misc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL_Lib\Src\hal_misc.c</FilePath>
+            </File>
+            <File>
+              <FileName>hal_pwr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL_Lib\Src\hal_pwr.c</FilePath>
+            </File>
+            <File>
+              <FileName>hal_rcc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL_Lib\Src\hal_rcc.c</FilePath>
+            </File>
+            <File>
+              <FileName>hal_spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL_Lib\Src\hal_spi.c</FilePath>
+            </File>
+            <File>
+              <FileName>hal_tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL_Lib\Src\hal_tim.c</FilePath>
+            </File>
+            <File>
+              <FileName>hal_uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL_Lib\Src\hal_uart.c</FilePath>
+            </File>
+            <File>
+              <FileName>hal_uid.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL_Lib\Src\hal_uid.c</FilePath>
+            </File>
+            <File>
+              <FileName>hal_ver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL_Lib\Src\hal_ver.c</FilePath>
+            </File>
+            <File>
+              <FileName>hal_wwdg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL_Lib\Src\hal_wwdg.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -42,7 +42,6 @@
 /// @param  gpio: select the GPIO peripheral.
 /// @retval None.
 ////////////////////////////////////////////////////////////////////////////////
-
 void GPIO_DeInit(GPIO_TypeDef* gpio)
 {
     switch (*(u32*)&gpio) {
@@ -65,11 +64,6 @@ void GPIO_DeInit(GPIO_TypeDef* gpio)
         default:
             break;
     }
-}
-//this function is added from hal_rcc.h to fix error
-void RCC_AHBPeriphClockCmd(u32 ahb_periph, FunctionalState state)
-{
-    (state) ? (RCC->AHBENR |= ahb_periph) : (RCC->AHBENR &= ~ahb_periph);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

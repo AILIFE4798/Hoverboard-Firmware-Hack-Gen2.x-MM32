@@ -44,6 +44,7 @@
 #if USE_SYSTICK_DELAY
 extern u32 SystemCoreClock;
 static __IO u32 sTimingDelay;
+extern uint32_t millis;
 
 ////////////////////////////////////////////////////////////////////////////////
 /// @brief  Initialize systick for delay function
@@ -80,6 +81,7 @@ static void TimingDelayDecrement(void)
 void SysTick_Handler(void)
 {
     TimingDelayDecrement();
+	millis++;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
