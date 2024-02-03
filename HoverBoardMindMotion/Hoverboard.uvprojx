@@ -434,6 +434,16 @@
               <FileType>5</FileType>
               <FilePath>.\Src\interrupt.h</FilePath>
             </File>
+            <File>
+              <FileName>uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\uart.c</FilePath>
+            </File>
+            <File>
+              <FileName>uart.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Src\uart.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

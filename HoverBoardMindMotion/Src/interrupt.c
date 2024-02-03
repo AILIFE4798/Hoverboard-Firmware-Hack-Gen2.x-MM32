@@ -1,6 +1,8 @@
 #include "hal_tim.h"
+#include "hal_conf.h"
+#include  "stdio.h"
 extern uint8_t step;
-
+extern bool uart;
 //commutation interrupt
 void TIM1_BRK_UP_TRG_COM_IRQHandler(void)
 {
@@ -107,4 +109,16 @@ void TIM1_BRK_UP_TRG_COM_IRQHandler(void)
         TIM_CCxNCmd(TIM1, TIM_Channel_3, TIM_CCxN_Enable);
         step = 1;
     }
-}
+	}
+
+void DMA1_Channel2_3_IRQHandler(void)
+{
+    if(DMA_GetITStatus(DMA1_IT_TC3)) {
+        DMA_ClearITPendingBit(DMA1_IT_GL3);
+        // Check the received buffer
+        uart = 1;
+    }
+}	
+	
+	
+	

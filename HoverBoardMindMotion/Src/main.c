@@ -8,9 +8,14 @@
 #include "../Src/initialize.h"
 
 #define HALL2LED
+
+
 uint8_t step=1;//very importatnt to set to 1 or it will not work
 uint32_t millis;
 uint32_t lastCommutation;
+bool uart;
+
+
 s32 main(void){
 	//initialize normal gpio
 	io_init();
@@ -33,9 +38,9 @@ s32 main(void){
 	}
 	//prevent turning back off imidiately
 	DELAY_Ms(5);	
-	TIM1->CCR1=200;
-	TIM1->CCR2=200;
-	TIM1->CCR3=200;
+	TIM1->CCR1=1000;
+	TIM1->CCR2=1000;
+	TIM1->CCR3=1000;
   while(1) {
 		#ifdef HALL2LED
 		//rotating led
