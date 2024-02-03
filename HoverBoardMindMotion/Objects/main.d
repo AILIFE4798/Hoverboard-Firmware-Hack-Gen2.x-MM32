@@ -37,3 +37,4 @@
 .\objects\main.o: .\HAL_Lib\Inc\hal_rcc.h
 .\objects\main.o: Src\delay.h
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\main.o: Src\pinout.h

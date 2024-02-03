@@ -26,7 +26,10 @@ Project File Date:  02/03/2024
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
-Build target 'MM32SPIN05'
+Rebuild target 'MM32SPIN05'
+assembling startup_mm32spin06xx_s_keil.s...
+compiling delay.c...
+compiling system_mm32spin06xx_s.c...
 compiling main.c...
 .\HAL_Lib\Src\hal_gpio.c(49): warning:  #1296-D: extended constant initialiser used
           case (u32)GPIOA:
@@ -36,17 +39,19 @@ compiling main.c...
           case (u32)GPIOC:
 .\HAL_Lib\Src\hal_gpio.c(61): warning:  #1296-D: extended constant initialiser used
           case (u32)GPIOD:
-Src\main.c(50): warning:  #188-D: enumerated type mixed with another type
+Src\pinout.h(13): warning:  #1-D: last line of file ends without a newline
+  #define HALLCPORT GPIOC
+Src\main.c(38): warning:  #188-D: enumerated type mixed with another type
       GPIO_WriteBit(LEDRPORT, LEDRPIN, GPIO_ReadInputDataBit(HALLAPORT, HALLAPIN));
-Src\main.c(51): warning:  #188-D: enumerated type mixed with another type
+Src\main.c(39): warning:  #188-D: enumerated type mixed with another type
   		GPIO_WriteBit(LEDGPORT, LEDGPIN, GPIO_ReadInputDataBit(HALLBPORT, HALLBPIN));
-Src\main.c(52): warning:  #188-D: enumerated type mixed with another type
+Src\main.c(40): warning:  #188-D: enumerated type mixed with another type
   		GPIO_WriteBit(LEDBPORT, LEDBPIN, GPIO_ReadInputDataBit(HALLCPORT, HALLCPIN));
-Src\main.c: 7 warnings, 0 errors
+Src\main.c: 8 warnings, 0 errors
 linking...
-Program Size: Code=1860 RO-data=224 RW-data=24 ZI-data=1632  
+Program Size: Code=2068 RO-data=224 RW-data=24 ZI-data=1632  
 FromELF: creating hex file...
-".\Objects\HoverboardOutput.axf" - 0 Error(s), 7 Warning(s).
+".\Objects\HoverboardOutput.axf" - 0 Error(s), 8 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -73,9 +78,9 @@ Package Vendor: MindMotion
 
    * Component: MindMotion::Device:Startup:1.0.0
       Source file:   Device/MM32SPIN06xx_s/Source/system_mm32spin06xx_s.c
-      Source file:   Device/MM32SPIN06xx_s/Source/KEIL_StartAsm/startup_mm32spin06xx_s_keil.s
       Include file:  Device/MM32SPIN06xx_s/Include/mm32_device.h
-Build Time Elapsed:  00:00:00
+      Source file:   Device/MM32SPIN06xx_s/Source/KEIL_StartAsm/startup_mm32spin06xx_s_keil.s
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

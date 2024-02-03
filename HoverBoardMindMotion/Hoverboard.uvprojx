@@ -399,6 +399,11 @@
               <FileType>5</FileType>
               <FilePath>.\Src\delay.h</FilePath>
             </File>
+            <File>
+              <FileName>pinout.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Src\pinout.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

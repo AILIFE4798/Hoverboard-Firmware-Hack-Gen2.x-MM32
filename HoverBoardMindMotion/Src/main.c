@@ -4,20 +4,8 @@
 #include "hal_gpio.h"
 #include "hal_rcc.h"
 #include "delay.h"
+#include "pinout.h"
 
-#define LEDRPIN GPIO_Pin_12
-#define LEDGPIN GPIO_Pin_2
-#define LEDBPIN GPIO_Pin_3
-#define LEDRPORT GPIOA
-#define LEDGPORT GPIOD
-#define LEDBPORT GPIOD
-
-#define HALLAPIN GPIO_Pin_13
-#define HALLBPIN GPIO_Pin_14
-#define HALLCPIN GPIO_Pin_15
-#define HALLAPORT GPIOC
-#define HALLBPORT GPIOC
-#define HALLCPORT GPIOC
 
 #define HALL2LED
 
