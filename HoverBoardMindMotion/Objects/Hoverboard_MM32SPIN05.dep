@@ -1,6 +1,6 @@
 Dependencies for Project 'Hoverboard', Target 'MM32SPIN05': (DO NOT MODIFY !)
 CompilerVersion: 5060960::V5.06 update 7 (build 960)::.\ARMCC
-F (.\Src\main.c)(0x65BDED44)(--c99 --gnu -c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections -I .\HAL_Lib\Inc -I .\HAL_Lib\Src -I .\RTE\_MM32SPIN05-I.\RTE\_MM32SPIN05-IC:\Users\Admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include-D__UVISION_VERSION="538" -D_RTE_ -DMM32SPIN05PF -D_RTE_-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (.\Src\main.c)(0x65BDF0F2)(--c99 --gnu -c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections -I .\HAL_Lib\Inc -I .\HAL_Lib\Src -I .\RTE\_MM32SPIN05-I.\RTE\_MM32SPIN05-IC:\Users\Admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include-D__UVISION_VERSION="538" -D_RTE_ -DMM32SPIN05PF -D_RTE_-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\mm32_device.h)(0x65998461)
 I (C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\mm32_reg.h)(0x65998461)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
@@ -38,7 +38,7 @@ I (.\HAL_Lib\Inc\hal_gpio.h)(0x65BD2FE2)
 I (.\HAL_Lib\Inc\hal_rcc.h)(0x65BD2FE2)
 I (Src\delay.h)(0x65BD2FE2)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5E8E3CC2)
-I (Src\pinout.h)(0x65BDED44)
+I (Src\pinout.h)(0x65BDEFA4)
 F (.\Src\delay.c)(0x65BD2FE2)(--c99 --gnu -c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections -I .\HAL_Lib\Inc -I .\HAL_Lib\Src -I .\RTE\_MM32SPIN05-I.\RTE\_MM32SPIN05-IC:\Users\Admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include-D__UVISION_VERSION="538" -D_RTE_ -DMM32SPIN05PF -D_RTE_-o .\objects\delay.o --omf_browse .\objects\delay.crf --depend .\objects\delay.d)
 I (Src\delay.h)(0x65BD2FE2)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5E8E3CC2)
@@ -75,7 +75,7 @@ I (C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device
 I (C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\mm32_reg_redefine_v1.h)(0x65998461)
 I (.\HAL_Lib\Inc\hal_rcc.h)(0x65BD2FE2)
 F (.\Src\delay.h)(0x65BD2FE2)()
-F (.\Src\pinout.h)(0x65BDED44)()
+F (.\Src\pinout.h)(0x65BDEFA4)()
 F (RTE/Device/MM32SPIN05PF/startup_mm32spin06xx_s_keil.s)(0x65BD2FE2)(--cpu Cortex-M0 -g --apcs=interwork -I.\RTE\_MM32SPIN05-IC:\Users\Admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include--pd "__UVISION_VERSION SETA 538" --pd "_RTE_ SETA 1" --pd "MM32SPIN05PF SETA 1" --pd "_RTE_ SETA 1"--list .\listings\startup_mm32spin06xx_s_keil.lst --xref -o .\objects\startup_mm32spin06xx_s_keil.o --depend .\objects\startup_mm32spin06xx_s_keil.d)
 F (RTE/Device/MM32SPIN05PF/system_mm32spin06xx_s.c)(0x65BDED44)(--c99 --gnu -c --cpu Cortex-M0 -g -O0 --apcs=interwork --split_sections -I .\HAL_Lib\Inc -I .\HAL_Lib\Src -I .\RTE\_MM32SPIN05-I.\RTE\_MM32SPIN05-IC:\Users\Admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-IC:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include-D__UVISION_VERSION="538" -D_RTE_ -DMM32SPIN05PF -D_RTE_-o .\objects\system_mm32spin06xx_s.o --omf_browse .\objects\system_mm32spin06xx_s.crf --depend .\objects\system_mm32spin06xx_s.d)
 I (C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\mm32_device.h)(0x65998461)
