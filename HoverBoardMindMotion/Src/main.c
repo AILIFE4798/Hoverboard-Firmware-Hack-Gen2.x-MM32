@@ -7,7 +7,7 @@
 #include "pinout.h"
 
 
-#define HALL2LED
+//#define HALL2LED
 
 s32 main(void){
 	//enable gpio clock
@@ -55,7 +55,7 @@ s32 main(void){
 		DELAY_Ms(1);
 	}
 	//prevent turning back off imidiately
-	DELAY_Ms(50);	
+	DELAY_Ms(5);	
   while(1) {
 		#ifdef HALL2LED
 		//rotating led
@@ -78,11 +78,14 @@ s32 main(void){
 		//button press for shutdown
 		if(GPIO_ReadInputDataBit(BTNPORT, BTNPIN)){
 			//wait for release
-			while(GPIO_ReadInputDataBit(BTNPORT, BTNPIN)) {
-		  GPIO_WriteBit(BZPORT, BZPIN, 1);
-		  DELAY_Ms(2);
+			for(int i=0;i<3;i++){
+			GPIO_WriteBit(BZPORT, BZPIN, 1);
+		  DELAY_Ms(50);
 		  GPIO_WriteBit(BZPORT, BZPIN, 0);
-		  DELAY_Ms(2);
+		  DELAY_Ms(50);
+			}
+			while(GPIO_ReadInputDataBit(BTNPORT, BTNPIN)) {
+		    __nop();
 	    }
 			//last line to ever be executed
 			GPIO_WriteBit(LATCHPORT, LATCHPIN, 0);
