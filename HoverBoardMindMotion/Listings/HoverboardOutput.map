@@ -8,8 +8,8 @@ Section Cross References
     main.o(.text.main) refers to initialize.o(.text.BLDC_init) for BLDC_init
     main.o(.text.main) refers to initialize.o(.text.TIM1_init) for TIM1_init
     main.o(.text.main) refers to delay.o(.text.DELAY_Init) for DELAY_Init
-    main.o(.text.main) refers to initialize.o(.text.UART1_Init) for UART1_Init
     main.o(.text.main) refers to initialize.o(.text.NVIC_Configure) for NVIC_Configure
+    main.o(.text.main) refers to initialize.o(.text.UART1_Init) for UART1_Init
     main.o(.text.main) refers to initialize.o(.text.exNVIC_Configure) for exNVIC_Configure
     main.o(.text.main) refers to initialize.o(.text.DMA_NVIC_Config) for DMA_NVIC_Config
     main.o(.text.main) refers to hal_gpio.o(.text.GPIO_WriteBit) for GPIO_WriteBit

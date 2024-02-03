@@ -9,7 +9,7 @@
 #include "../Src/uart.h"
 
 #define HALL2LED
-
+#define UART1EN
 
 uint8_t step=1;//very importatnt to set to 1 or it will not work
 uint32_t millis;
@@ -28,14 +28,18 @@ s32 main(void){
 	TIM1_init(4095, 0);
 	//systick config
 	DELAY_Init();
-	//serial1.begin(19200);
-	UART1_Init(19200);
 	//interrupt config
 	NVIC_Configure(TIM1_BRK_UP_TRG_COM_IRQn, 1);
+	
+	#ifdef UART1EN
+	//serial1.begin(19200);
+	UART1_Init(19200);
 	//uart interrupt
 	exNVIC_Configure(DMA1_Channel2_3_IRQn, 0, 0);
 	//uart dma
 	DMA_NVIC_Config(DMA1_Channel3, (u32)&UART1->RDR, (u32)sRxBuffer, 1);
+	#endif
+	
 	//latch on power
 	GPIO_WriteBit(LATCHPORT, LATCHPIN, 1);
 	//wait while release button
@@ -69,18 +73,23 @@ s32 main(void){
 		GPIO_WriteBit(LEDGPORT, LEDGPIN, 0);
 		DELAY_Ms(500);
 		#endif
+		
+		#ifdef UART1EN
 		//serial loopback
 		if(uart){
 		  UART1_Send_Byte(sRxBuffer[0]);
 			uart=0;
 		}
-			
+		#endif	
+		
 		//simulated hall sensor for commutation
 		if(millis-lastCommutation>100){
 			TIM_GenerateEvent(TIM1, TIM_EventSource_COM);
 			lastCommutation=millis;
 			//testing serial
+			#ifdef UART1EN
 			UART1_SendString("helloWorld\r\n");
+			#endif
 		}
 		//button press for shutdown
 		if(GPIO_ReadInputDataBit(BTNPORT, BTNPIN)){

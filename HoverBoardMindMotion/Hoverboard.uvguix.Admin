@@ -3606,9 +3606,9 @@
       <ActiveTab>0</ActiveTab>
       <Doc>
         <Name>.\Src\main.c</Name>
-        <ColumnNumber>6</ColumnNumber>
-        <TopLine>32</TopLine>
-        <CurrentLine>77</CurrentLine>
+        <ColumnNumber>5</ColumnNumber>
+        <TopLine>58</TopLine>
+        <CurrentLine>93</CurrentLine>
         <Folding>1</Folding>
         <ContractedFolders></ContractedFolders>
         <PaneID>0</PaneID>
@@ -3678,9 +3678,9 @@
       </Doc>
       <Doc>
         <Name>.\Src\pinout.h</Name>
-        <ColumnNumber>21</ColumnNumber>
-        <TopLine>9</TopLine>
-        <CurrentLine>30</CurrentLine>
+        <ColumnNumber>0</ColumnNumber>
+        <TopLine>8</TopLine>
+        <CurrentLine>36</CurrentLine>
         <Folding>1</Folding>
         <ContractedFolders></ContractedFolders>
         <PaneID>0</PaneID>
