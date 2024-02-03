@@ -1,1 +1,1 @@
-./objects/bldc.o: bldc.c
+./objects/bldc.o: Src\bldc.c

@@ -1,5 +1,5 @@
 //initialize all pheberals
-#include "Src\pinout.h"
+#include "../Src/pinout.h"
 #include "hal_gpio.h"
 #include "hal_rcc.h"
 #include "hal_tim.h"

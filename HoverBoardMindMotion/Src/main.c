@@ -5,7 +5,7 @@
 #include "delay.h"
 #include "pinout.h"             
 #include "hal_tim.h"
-#include "../initialize.h"
+#include "../Src/initialize.h"
 
 #define HALL2LED
 uint8_t step;

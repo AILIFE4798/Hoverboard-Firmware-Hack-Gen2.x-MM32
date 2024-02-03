@@ -16,6 +16,14 @@ Section Cross References
     main.o(.text.main) refers to main.o(.bss.lastCommutation) for lastCommutation
     main.o(.text.main) refers to main.o(.bss.millis) for millis
     main.o(.ARM.exidx.text.main) refers to main.o(.text.main) for [Anonymous Symbol]
+    delay.o(.text.DELAY_Init) refers to aeabi_sdivfast.o(.text_divfast) for __aeabi_uidiv
+    delay.o(.text.DELAY_Init) refers to system_mm32spin06xx_s.o(.data.SystemCoreClock) for SystemCoreClock
+    delay.o(.ARM.exidx.text.DELAY_Init) refers to delay.o(.text.DELAY_Init) for [Anonymous Symbol]
+    delay.o(.text.SysTick_Handler) refers to delay.o(.bss.sTimingDelay) for [Anonymous Symbol]
+    delay.o(.text.SysTick_Handler) refers to main.o(.bss.millis) for millis
+    delay.o(.ARM.exidx.text.SysTick_Handler) refers to delay.o(.text.SysTick_Handler) for [Anonymous Symbol]
+    delay.o(.text.DELAY_Ms) refers to delay.o(.bss.sTimingDelay) for [Anonymous Symbol]
+    delay.o(.ARM.exidx.text.DELAY_Ms) refers to delay.o(.text.DELAY_Ms) for [Anonymous Symbol]
     initialize.o(.text.io_init) refers to hal_rcc.o(.text.RCC_AHBPeriphClockCmd) for RCC_AHBPeriphClockCmd
     initialize.o(.text.io_init) refers to hal_gpio.o(.text.GPIO_Init) for GPIO_Init
     initialize.o(.ARM.exidx.text.io_init) refers to initialize.o(.text.io_init) for [Anonymous Symbol]
@@ -39,14 +47,6 @@ Section Cross References
     initialize.o(.ARM.exidx.text.TIM1_init) refers to initialize.o(.text.TIM1_init) for [Anonymous Symbol]
     initialize.o(.text.NVIC_Configure) refers to hal_misc.o(.text.NVIC_Init) for NVIC_Init
     initialize.o(.ARM.exidx.text.NVIC_Configure) refers to initialize.o(.text.NVIC_Configure) for [Anonymous Symbol]
-    delay.o(.text.DELAY_Init) refers to aeabi_sdivfast.o(.text_divfast) for __aeabi_uidiv
-    delay.o(.text.DELAY_Init) refers to system_mm32spin06xx_s.o(.data.SystemCoreClock) for SystemCoreClock
-    delay.o(.ARM.exidx.text.DELAY_Init) refers to delay.o(.text.DELAY_Init) for [Anonymous Symbol]
-    delay.o(.text.SysTick_Handler) refers to delay.o(.bss.sTimingDelay) for [Anonymous Symbol]
-    delay.o(.text.SysTick_Handler) refers to main.o(.bss.millis) for millis
-    delay.o(.ARM.exidx.text.SysTick_Handler) refers to delay.o(.text.SysTick_Handler) for [Anonymous Symbol]
-    delay.o(.text.DELAY_Ms) refers to delay.o(.bss.sTimingDelay) for [Anonymous Symbol]
-    delay.o(.ARM.exidx.text.DELAY_Ms) refers to delay.o(.text.DELAY_Ms) for [Anonymous Symbol]
     interrupt.o(.text.TIM1_BRK_UP_TRG_COM_IRQHandler) refers to hal_tim.o(.text.TIM_ClearITPendingBit) for TIM_ClearITPendingBit
     interrupt.o(.text.TIM1_BRK_UP_TRG_COM_IRQHandler) refers to hal_tim.o(.text.TIM_CCxCmd) for TIM_CCxCmd
     interrupt.o(.text.TIM1_BRK_UP_TRG_COM_IRQHandler) refers to hal_tim.o(.text.TIM_CCxNCmd) for TIM_CCxNCmd
@@ -596,18 +596,18 @@ Removing Unused input sections from the image.
     Removing main.o(.text), (0 bytes).
     Removing main.o(.ARM.exidx.text.main), (8 bytes).
     Removing main.o(.ARM.use_no_argv), (4 bytes).
+    Removing delay.o(.text), (0 bytes).
+    Removing delay.o(.ARM.exidx.text.DELAY_Init), (8 bytes).
+    Removing delay.o(.ARM.exidx.text.SysTick_Handler), (8 bytes).
+    Removing delay.o(.ARM.exidx.text.DELAY_Ms), (8 bytes).
+    Removing bldc.o(.text), (0 bytes).
     Removing initialize.o(.text), (0 bytes).
     Removing initialize.o(.ARM.exidx.text.io_init), (8 bytes).
     Removing initialize.o(.ARM.exidx.text.BLDC_init), (8 bytes).
     Removing initialize.o(.ARM.exidx.text.TIM1_init), (8 bytes).
     Removing initialize.o(.ARM.exidx.text.NVIC_Configure), (8 bytes).
-    Removing delay.o(.text), (0 bytes).
-    Removing delay.o(.ARM.exidx.text.DELAY_Init), (8 bytes).
-    Removing delay.o(.ARM.exidx.text.SysTick_Handler), (8 bytes).
-    Removing delay.o(.ARM.exidx.text.DELAY_Ms), (8 bytes).
     Removing interrupt.o(.text), (0 bytes).
     Removing interrupt.o(.ARM.exidx.text.TIM1_BRK_UP_TRG_COM_IRQHandler), (8 bytes).
-    Removing bldc.o(.text), (0 bytes).
     Removing hal_adc.o(.text), (0 bytes).
     Removing hal_adc.o(.text.ADC_DeInit), (24 bytes).
     Removing hal_adc.o(.ARM.exidx.text.ADC_DeInit), (8 bytes).
@@ -1841,23 +1841,23 @@ Memory Map of the image
     0x08000248   0x08000248   0x00000002   Code   RO         1113    .text               c_p.l(use_no_semi.o)
     0x0800024a   0x0800024a   0x00000000   Code   RO         1115    .text               c_p.l(indicate_semi.o)
     0x0800024a   0x0800024a   0x00000002   PAD
-    0x0800024c   0x0800024c   0x000000a8   Code   RO           17    .text.BLDC_init     initialize.o
-    0x080002f4   0x080002f4   0x00000048   Code   RO           31    .text.DELAY_Init    delay.o
-    0x0800033c   0x0800033c   0x00000014   Code   RO           35    .text.DELAY_Ms      delay.o
+    0x0800024c   0x0800024c   0x000000a8   Code   RO           33    .text.BLDC_init     initialize.o
+    0x080002f4   0x080002f4   0x00000048   Code   RO           15    .text.DELAY_Init    delay.o
+    0x0800033c   0x0800033c   0x00000014   Code   RO           19    .text.DELAY_Ms      delay.o
     0x08000350   0x08000350   0x00000090   Code   RO          330    .text.GPIO_Init     hal_gpio.o
     0x080003e0   0x080003e0   0x00000020   Code   RO          354    .text.GPIO_PinAFConfig  hal_gpio.o
     0x08000400   0x08000400   0x0000000a   Code   RO          334    .text.GPIO_ReadInputDataBit  hal_gpio.o
     0x0800040a   0x0800040a   0x00000002   PAD
     0x0800040c   0x0800040c   0x00000014   Code   RO          332    .text.GPIO_StructInit  hal_gpio.o
     0x08000420   0x08000420   0x00000010   Code   RO          346    .text.GPIO_WriteBit  hal_gpio.o
-    0x08000430   0x08000430   0x00000018   Code   RO           21    .text.NVIC_Configure  initialize.o
+    0x08000430   0x08000430   0x00000018   Code   RO           37    .text.NVIC_Configure  initialize.o
     0x08000448   0x08000448   0x00000050   Code   RO          462    .text.NVIC_Init     hal_misc.o
     0x08000498   0x08000498   0x0000001c   Code   RO          540    .text.RCC_AHBPeriphClockCmd  hal_rcc.o
     0x080004b4   0x080004b4   0x0000001c   Code   RO          542    .text.RCC_APB2PeriphClockCmd  hal_rcc.o
-    0x080004d0   0x080004d0   0x00000020   Code   RO           33    .text.SysTick_Handler  delay.o
+    0x080004d0   0x080004d0   0x00000020   Code   RO           17    .text.SysTick_Handler  delay.o
     0x080004f0   0x080004f0   0x000001c0   Code   RO          967    .text.SystemInit    system_mm32spin06xx_s.o
-    0x080006b0   0x080006b0   0x00000228   Code   RO           46    .text.TIM1_BRK_UP_TRG_COM_IRQHandler  interrupt.o
-    0x080008d8   0x080008d8   0x000000bc   Code   RO           19    .text.TIM1_init     initialize.o
+    0x080006b0   0x080006b0   0x00000228   Code   RO           47    .text.TIM1_BRK_UP_TRG_COM_IRQHandler  interrupt.o
+    0x080008d8   0x080008d8   0x000000bc   Code   RO           35    .text.TIM1_init     initialize.o
     0x08000994   0x08000994   0x0000001e   Code   RO          663    .text.TIM_BDTRConfig  hal_tim.o
     0x080009b2   0x080009b2   0x00000012   Code   RO          671    .text.TIM_BDTRStructInit  hal_tim.o
     0x080009c4   0x080009c4   0x00000010   Code   RO          719    .text.TIM_CCPreloadControl  hal_tim.o
@@ -1876,7 +1876,7 @@ Memory Map of the image
     0x08000b60   0x08000b60   0x00000058   Code   RO          763    .text.TIM_SelectOCxM  hal_tim.o
     0x08000bb8   0x08000bb8   0x00000084   Code   RO          641    .text.TIM_TimeBaseInit  hal_tim.o
     0x08000c3c   0x08000c3c   0x00000010   Code   RO          665    .text.TIM_TimeBaseStructInit  hal_tim.o
-    0x08000c4c   0x08000c4c   0x000000a8   Code   RO           15    .text.io_init       initialize.o
+    0x08000c4c   0x08000c4c   0x000000a8   Code   RO           31    .text.io_init       initialize.o
     0x08000cf4   0x08000cf4   0x0000014c   Code   RO            2    .text.main          main.o
     0x08000e40   0x08000e40   0x000001f6   Code   RO          983    .text_divfast       c_p.l(aeabi_sdivfast.o)
     0x08001036   0x08001036   0x00000002   PAD
@@ -1892,7 +1892,7 @@ Memory Map of the image
     0x20000008        -       0x00000060   Zero   RW         1032    .bss                c_p.l(libspace.o)
     0x20000068        -       0x00000004   Zero   RW            5    .bss.lastCommutation  main.o
     0x2000006c        -       0x00000004   Zero   RW            4    .bss.millis         main.o
-    0x20000070        -       0x00000004   Zero   RW           37    .bss.sTimingDelay   delay.o
+    0x20000070        -       0x00000004   Zero   RW           21    .bss.sTimingDelay   delay.o
     0x20000074        -       0x00000001   Zero   RW            6    .bss.step           main.o
     0x20000075   0x0800105c   0x00000003   PAD
     0x20000078        -       0x00000200   Zero   RW          958    HEAP                startup_mm32spin06xx_s_keil.o
@@ -1911,14 +1911,14 @@ Image component sizes
         80         12          0          0          0       2876   hal_misc.o
         56          8          0          0          0      11473   hal_rcc.o
        694         32          0          0          0      27751   hal_tim.o
-       548         24          0          0          0       5955   initialize.o
-       552         10          0          0          0       2102   interrupt.o
+       548         24          0          0          0       5963   initialize.o
+       552         10          0          0          0       2110   interrupt.o
        332         28          0          0          9       3130   main.o
        124         58        192          0       1536        740   startup_mm32spin06xx_s_keil.o
        448         40          0          4          0       3694   system_mm32spin06xx_s.o
 
     ----------------------------------------------------------------------
-      3184        240        224          4       1556      66237   Object Totals
+      3184        240        224          4       1556      66253   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          4          0          0          0          7          0   (incl. Padding)
 
@@ -1968,8 +1968,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      3960        256        224          4       1652      66573   Grand Totals
-      3960        256        224          4       1652      66573   ELF Image Totals
+      3960        256        224          4       1652      66589   Grand Totals
+      3960        256        224          4       1652      66589   ELF Image Totals
       3960        256        224          4          0          0   ROM Totals
 
 ==============================================================================

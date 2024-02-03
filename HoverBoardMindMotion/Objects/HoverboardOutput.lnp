@@ -1,9 +1,9 @@
 --cpu Cortex-M0
 ".\objects\main.o"
-".\objects\initialize.o"
 ".\objects\delay.o"
-".\objects\interrupt.o"
 ".\objects\bldc.o"
+".\objects\initialize.o"
+".\objects\interrupt.o"
 ".\objects\hal_adc.o"
 ".\objects\hal_comp.o"
 ".\objects\hal_crc.o"
