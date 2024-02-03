@@ -94,16 +94,18 @@ s32 main(void){
 		  UART1_Send_Byte(sRxBuffer[0]);
 			uart=0;
 		}
+		char buffer[16];
+		sprintf(buffer, "VBAT: %d V\n\r", vbat);
+		if(adc){
+		  UART1_SendString(buffer);
+			uart=0;
+		}
 		#endif	
 		
 		//simulated hall sensor for commutation
 		if(millis-lastCommutation>100){
 			TIM_GenerateEvent(TIM1, TIM_EventSource_COM);
 			lastCommutation=millis;
-			//testing serial
-			#ifdef UART1EN
-			UART1_SendString("helloWorld\r\n");
-			#endif
 		}
 		//button press for shutdown
 		if(GPIO_ReadInputDataBit(BTNPORT, BTNPIN)){
