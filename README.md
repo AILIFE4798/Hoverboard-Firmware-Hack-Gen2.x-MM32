@@ -8,10 +8,10 @@
 * hall2led
 * self hold
 * timer1 automatic output
-
+* uart
+  
 ## todo
 
-* uart
 * adc
 * iwdg
 * eeprom
