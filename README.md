@@ -15,3 +15,4 @@
 * adc
 * iwdg
 * eeprom
+* ws2812
