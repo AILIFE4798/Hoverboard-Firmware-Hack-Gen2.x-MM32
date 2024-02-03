@@ -7,9 +7,12 @@
 * working method to unlock and flash the mcu
 * hall2led
 * self hold
+* timer1 automatic output
 
 ## todo
 
 * uart
 * adc
-* timer1 automatic output
+* iwdg
+* eeprom
+* ws2812
