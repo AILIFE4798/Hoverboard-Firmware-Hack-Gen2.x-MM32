@@ -18,6 +18,7 @@ uint32_t millis;
 uint32_t lastCommutation;
 bool uart;
 bool adc;
+bool comm;
 uint8_t uartBuffer=0;
 u8 sRxBuffer[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 int vbat;
@@ -84,8 +85,7 @@ s32 main(void){
 		//rotating led
     GPIO_WriteBit(LEDRPORT, LEDRPIN, GPIO_ReadInputDataBit(HALLAPORT, HALLAPIN));
 		GPIO_WriteBit(LEDGPORT, LEDGPIN, GPIO_ReadInputDataBit(HALLBPORT, HALLBPIN));
-		GPIO_WriteBit(LEDBPORT, LEDBPIN, GPIO_ReadInputDataBit(HALLCPORT, HALLCPIN));
-		DELAY_Ms(5);		
+		GPIO_WriteBit(LEDBPORT, LEDBPIN, GPIO_ReadInputDataBit(HALLCPORT, HALLCPIN));		
 		#else
 		//blink in sequence
 		GPIO_WriteBit(LEDRPORT, LEDRPIN, 1);
@@ -115,17 +115,22 @@ s32 main(void){
 		}
 		#endif	
 		
-		/*
-		//simulated hall sensor for commutation
+		if(comm){
+			TIM_GenerateEvent(TIM1, TIM_EventSource_COM);
+			comm=0;
+		}
+/*		//simulated hall sensor for commutation
 		if(millis-lastCommutation>1){
+			
 			step++;
 			if(step>6){
 				step=1;
 			}
+			
 			TIM_GenerateEvent(TIM1, TIM_EventSource_COM);
 			lastCommutation=millis;
 		}
-		*/
+*/		
 		
 		//button press for shutdown
 		if(GPIO_ReadInputDataBit(BTNPORT, BTNPIN)){
