@@ -115,7 +115,7 @@ s32 main(void){
 		}
 		#endif	
 		
-//		/*
+		/*
 		//simulated hall sensor for commutation
 		if(millis-lastCommutation>1){
 			step++;
@@ -125,7 +125,7 @@ s32 main(void){
 			TIM_GenerateEvent(TIM1, TIM_EventSource_COM);
 			lastCommutation=millis;
 		}
-//		*/
+		*/
 		
 		//button press for shutdown
 		if(GPIO_ReadInputDataBit(BTNPORT, BTNPIN)){

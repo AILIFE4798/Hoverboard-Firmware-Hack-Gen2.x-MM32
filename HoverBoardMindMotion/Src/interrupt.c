@@ -36,13 +36,13 @@ void ADC1_COMP_IRQHandler(void)
 			vbat = ADC1->VBATADC2;
 			itotal = ADC1->ITOTALADC2;
 			adc = 1;
-		/*
+		
 			if(hallpos(1)!=hallposprev){
 				hallposprev=hallpos(1);
 				step=hallposprev;
 				commutate();
 			}
-		*/
+		
     }
 }	
 
