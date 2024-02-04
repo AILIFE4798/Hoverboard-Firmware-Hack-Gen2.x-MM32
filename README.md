@@ -14,9 +14,11 @@
 * timer1 automatic output
 * uart
 * adc
+* iwdg
 
 ## todo
 
-* iwdg
+* test on real motor
 * eeprom
 * ws2812
+* comparator
