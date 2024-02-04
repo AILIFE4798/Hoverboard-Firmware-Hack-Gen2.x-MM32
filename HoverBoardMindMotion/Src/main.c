@@ -94,9 +94,9 @@ s32 main(void){
 		  UART1_Send_Byte(sRxBuffer[0]);
 			uart=0;
 		}
-		char buffer[16];
-		sprintf(buffer, "VBAT: %d V\n\r", vbat);
 		if(adc){
+			char buffer[16];
+		  sprintf(buffer, "VBAT: %d V\n\r", vbat);
 		  UART1_SendString(buffer);
 			adc=0;
 		}
