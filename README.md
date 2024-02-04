@@ -15,10 +15,11 @@
 * uart
 * adc
 * iwdg
+* TESTROTATE(spin back and forth, works on real motor)
 
 ## todo
 
-* test on real motor
+* uartbus protocol
 * eeprom
 * ws2812
 * comparator
