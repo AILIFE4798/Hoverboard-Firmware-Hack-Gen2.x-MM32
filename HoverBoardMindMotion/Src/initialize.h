@@ -10,3 +10,4 @@ void DMA_NVIC_Config(DMA_Channel_TypeDef* dam_chx, u32 cpar, u32 cmar, u16 cndtr
 void adc_Init(void);
 void TIM2_Init(u32 arr, u16 psc);
 void HALL_Init(void);
+void Iwdg_Init(u16 IWDG_Prescaler, u16 Reload);

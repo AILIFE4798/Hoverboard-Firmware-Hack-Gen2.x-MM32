@@ -2,10 +2,11 @@
 #include "RTE_Components.h"             // Component selection
 #include "hal_gpio.h"
 #include "hal_rcc.h"
-#include "hal_adc.h"
-#include "delay.h"
-#include "pinout.h"             
+#include "hal_adc.h"           
 #include "hal_tim.h"
+#include "hal_iwdg.h"
+#include "../Src/delay.h"
+#include "../Src/pinout.h"  
 #include "../Src/initialize.h"
 #include "../Src/uart.h"
 
@@ -44,7 +45,9 @@ s32 main(void){
 	adc_Init();
 	//adc interrupt
 	exNVIC_Configure(ADC_COMP_IRQn, 0, 1);
-
+	//watchdog
+	Iwdg_Init(IWDG_Prescaler_32, 0xff);
+	
 	#ifdef UART1EN
 	//serial1.begin(19200);
 	UART1_Init(19200);
@@ -62,6 +65,7 @@ s32 main(void){
 		DELAY_Ms(1);
 		GPIO_WriteBit(BZPORT, BZPIN, 0);
 		DELAY_Ms(1);
+		IWDG_ReloadCounter();
 	}
 	//prevent turning back off imidiately
 	DELAY_Ms(5);	
@@ -86,9 +90,11 @@ s32 main(void){
 		GPIO_WriteBit(LEDRPORT, LEDRPIN, 1);
 		GPIO_WriteBit(LEDBPORT, LEDBPIN, 0);
 		DELAY_Ms(500);
+		IWDG_ReloadCounter();
 		GPIO_WriteBit(LEDGPORT, LEDGPIN, 1);
 		GPIO_WriteBit(LEDRPORT, LEDRPIN, 0);
 		DELAY_Ms(500);
+		IWDG_ReloadCounter();
 		GPIO_WriteBit(LEDBPORT, LEDBPIN, 1);
 		GPIO_WriteBit(LEDGPORT, LEDGPIN, 0);
 		DELAY_Ms(500);
@@ -125,11 +131,13 @@ s32 main(void){
 			//wait for release
 			while(GPIO_ReadInputDataBit(BTNPORT, BTNPIN)) {
 		    __NOP();
+				IWDG_ReloadCounter();
 	    }
 			//last line to ever be executed
 			GPIO_WriteBit(LATCHPORT, LATCHPIN, 0);
 		}
-  }
+		IWDG_ReloadCounter();
+  }//main loop
 	
 }
 
