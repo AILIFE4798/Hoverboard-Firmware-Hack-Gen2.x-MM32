@@ -35,4 +35,4 @@
   HAL_Lib\Inc\hal_iwdg.h Src\..\Src\delay.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h Src\..\Src\pinout.h \
   Src\..\Src\initialize.h Src\..\Src\uart.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h Src\..\Src\bldc.h

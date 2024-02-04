@@ -3,9 +3,12 @@
 #include "../Src/pinout.h"
 #include "hal_tim.h"
 #include "hal_conf.h"
+#include "math.h"
 
 extern uint8_t step;
-
+extern int speed;
+extern bool dir;
+int testrotatedir=1;
 uint8_t hallpos(uint8_t dir);
 
 const uint8_t hall_to_pos[8] =
@@ -48,6 +51,7 @@ uint8_t hallpos(uint8_t dir){
 
 
 void commutate(){
+
 
 	if(step == 1) {
 		TIM_CCxCmd(TIM1, TIM_Channel_2, TIM_CCx_Disable);
@@ -126,7 +130,28 @@ void commutate(){
 	TIM_GenerateEvent(TIM1, TIM_EventSource_COM);
 }
 
-
+void speedupdate(){
+ // #ifdef TESTROTATE	
+	speed+=50*testrotatedir;
+	if(speed>1500){
+	testrotatedir=-1;
+  }
+	if(speed<-1500){
+	testrotatedir=1;
+  }
+	if(speed>0){
+	dir=1;
+  }else{
+	dir=0;
+	}
+	unsigned int abspeed=fabs((double)speed);
+	TIM1->CCR1=abspeed;
+	TIM1->CCR2=abspeed;
+	TIM1->CCR3=abspeed;
+	
+	
+//	#endif
+}
 
 
 

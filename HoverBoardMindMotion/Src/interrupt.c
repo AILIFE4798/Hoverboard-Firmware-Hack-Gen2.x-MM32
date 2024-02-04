@@ -8,6 +8,7 @@ extern uint8_t step;
 extern bool uart;
 extern bool adc;
 extern bool comm;
+extern bool dir;
 extern int vbat;
 extern int itotal;
 extern uint8_t hallposprev;
@@ -38,8 +39,8 @@ void ADC1_COMP_IRQHandler(void)
 			itotal = ADC1->ITOTALADC2;
 			adc = 1;
 		
-			if(hallpos(1)!=hallposprev){
-				hallposprev=hallpos(1);
+			if(hallpos(dir)!=hallposprev){
+				hallposprev=hallpos(dir);
 				step=hallposprev;
 				commutate();
 			}

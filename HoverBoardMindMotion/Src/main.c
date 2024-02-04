@@ -9,22 +9,26 @@
 #include "../Src/pinout.h"  
 #include "../Src/initialize.h"
 #include "../Src/uart.h"
+#include "../Src/bldc.h"
 
 #define HALL2LED  //sequence through led or rotate acording to motor
 #define UART1EN  //enable uart1
+#define TESTROTATE  //enable uart1
 
 uint8_t step=1;//very importatnt to set to 1 or it will not work
 uint32_t millis;
 uint32_t lastCommutation;
+uint32_t lastupdate;
 bool uart;
 bool adc;
 bool comm=1;
+bool dir=1;
 uint8_t uartBuffer=0;
 u8 sRxBuffer[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 int vbat;
 int itotal;
 uint8_t hallposprev=1;
-
+int speed=0;
 s32 main(void){
 	//initialize normal gpio
 	io_init();
@@ -73,9 +77,9 @@ s32 main(void){
 	DELAY_Ms(5);	
 	
 	//25% PWM for test
-	TIM1->CCR1=1500;
-	TIM1->CCR2=1500;
-	TIM1->CCR3=1500;
+	TIM1->CCR1=1000;
+	TIM1->CCR2=1000;
+	TIM1->CCR3=1000;
 	
 	ADC_SoftwareStartConvCmd(ADC1, ENABLE);                                     //Software start conversion
   ADC_ITConfig(ADC1, ADC_IT_EOC, ENABLE);
@@ -115,8 +119,11 @@ s32 main(void){
 			adc=0;
 		}
 		#endif	
-
-/*		
+		if(millis-lastupdate>3){
+			speedupdate();
+			lastupdate=millis;
+		}	
+/*	
 		//simulated hall sensor for commutation
 		if(millis-lastCommutation>3){
 			
