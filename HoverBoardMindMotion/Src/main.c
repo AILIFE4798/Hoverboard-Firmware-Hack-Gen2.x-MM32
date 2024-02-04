@@ -26,14 +26,20 @@ int itotal;
 s32 main(void){
 	//initialize normal gpio
 	io_init();
+	//hall gpio init
+	HALL_Init();
+	//hall timer init
+	TIM2_Init(65535, 0);
 	//initialize 6 bldc pins
 	BLDC_init();
 	//initialize timer
 	TIM1_init(4095, 0);
 	//systick config
 	DELAY_Init();
-	//interrupt config
+	//timer1 commutation interrupt config
 	NVIC_Configure(TIM1_BRK_UP_TRG_COM_IRQn, 1);
+	//timer2 hall change interrupt config
+	NVIC_Configure(TIM2_IRQn, 1);
 	//vbat
 	adc_Init();
 	//adc interrupt

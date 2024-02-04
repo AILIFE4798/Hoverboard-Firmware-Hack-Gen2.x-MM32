@@ -15,6 +15,12 @@
 #define HALLAPORT GPIOC
 #define HALLBPORT GPIOC
 #define HALLCPORT GPIOC
+#define HALLAAF GPIO_AF_6
+#define HALLBAF GPIO_AF_6
+#define HALLCAF GPIO_AF_6
+#define HALLAPINSRC GPIO_PinSource13
+#define HALLBPINSRC GPIO_PinSource14
+#define HALLCPINSRC GPIO_PinSource15
 //self hold
 #define LATCHPIN GPIO_Pin_2
 #define LATCHPORT GPIOB
@@ -44,6 +50,6 @@
 #define ITOTALADC2 ADDR6
 
 //extra parameter
-#define MCUVCC 5000    //mcu voltage,used for adc,mm32spin support2.5-5.5v
+#define MCUVCC 5000    //mcu voltage in mv,used for adc,mm32spin support2.5-5.5v
 #define VBAT_DEVIDER 0.026    //for calculating vbat voltage
 

@@ -136,4 +136,13 @@ void ADC1_COMP_IRQHandler(void)
         adc = 1;
     }
 }	
+
+void TIM2_IRQHandler(void) {
+
+__NOP();
+}
+
+
+
+
 	

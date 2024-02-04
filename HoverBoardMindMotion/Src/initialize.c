@@ -33,18 +33,61 @@ void io_init(){
 	//bz output
 	GPIO_InitStruct.GPIO_Pin = BZPIN;
 	GPIO_Init(BZPORT, &GPIO_InitStruct);
-	//hall input
-	GPIO_InitStruct.GPIO_Pin = HALLAPIN;
-  GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IPU;
-	GPIO_Init(HALLAPORT, &GPIO_InitStruct);
-	GPIO_InitStruct.GPIO_Pin = HALLBPIN;
-	GPIO_Init(HALLBPORT, &GPIO_InitStruct);
-	GPIO_InitStruct.GPIO_Pin = HALLCPIN;
-	GPIO_Init(HALLCPORT, &GPIO_InitStruct);
 	//button input
 	GPIO_InitStruct.GPIO_Pin = BTNPIN;
 	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_FLOATING;
 	GPIO_Init(BTNPORT, &GPIO_InitStruct);
+}
+void HALL_Init(){
+	GPIO_InitTypeDef GPIO_InitStructure;
+	
+	GPIO_PinAFConfig(HALLAPORT, HALLAPINSRC, HALLAAF);
+	GPIO_PinAFConfig(HALLBPORT, HALLBPINSRC, HALLBAF);
+	GPIO_PinAFConfig(HALLCPORT, HALLCPINSRC, HALLCAF);
+
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_InitStructure.GPIO_Pin = HALLAPIN;
+	GPIO_Init(HALLAPORT, &GPIO_InitStructure);
+	GPIO_InitStructure.GPIO_Pin = HALLBPIN;
+	GPIO_Init(HALLBPORT, &GPIO_InitStructure);
+	GPIO_InitStructure.GPIO_Pin = HALLCPIN;
+	GPIO_Init(HALLCPORT, &GPIO_InitStructure);	
+}
+//hall sensor hardware speed sensing
+void TIM2_Init(u32 arr, u16 psc){
+	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStruct;
+	TIM_ICInitTypeDef  TIM_ICInitStruct;
+
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);      
+
+	TIM_TimeBaseStructInit(&TIM_TimeBaseStruct);
+	TIM_TimeBaseStruct.TIM_Period = arr;
+	TIM_TimeBaseStruct.TIM_Prescaler = psc;
+	//Setting Clock Segmentation
+	TIM_TimeBaseStruct.TIM_ClockDivision = TIM_CKD_DIV1;
+	TIM_TimeBaseStruct.TIM_RepetitionCounter = 0;
+	///TIM Upward Counting Mode
+	TIM_TimeBaseStruct.TIM_CounterMode = TIM_CounterMode_Up;
+	TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStruct);
+
+	TIM_ICStructInit(&TIM_ICInitStruct);
+	TIM_ICInitStruct.TIM_Channel = TIM_Channel_1;
+	TIM_ICInitStruct.TIM_ICPolarity = TIM_ICPolarity_BothEdge;
+	TIM_ICInitStruct.TIM_ICSelection = TIM_ICSelection_DirectTI;
+	TIM_ICInitStruct.TIM_ICPrescaler = TIM_ICPSC_DIV1;
+	TIM_ICInitStruct.TIM_ICFilter = 0x0;
+	TIM_ICInit(TIM2, &TIM_ICInitStruct); 
+
+	TIM_SelectHallSensor(TIM2,ENABLE);
+	
+	TIM_UpdateRequestConfig(TIM2,TIM_UpdateSource_Regular);
+
+	TIM_SelectInputTrigger(TIM2, TIM_TS_TI1F_ED);
+	TIM_SelectSlaveMode(TIM2, TIM_SlaveMode_Reset);
+	TIM_SelectMasterSlaveMode(TIM2, TIM_MasterSlaveMode_Enable);
+	
+	TIM_Cmd(TIM2, ENABLE);
 }
 
 //6 bldc pin
