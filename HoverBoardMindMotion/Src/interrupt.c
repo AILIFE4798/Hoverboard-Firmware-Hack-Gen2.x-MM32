@@ -9,6 +9,7 @@ extern bool uart;
 extern bool adc;
 extern bool comm;
 extern bool dir;
+extern double rpm;
 extern int vbat;
 extern int itotal;
 extern uint8_t hallposprev;
@@ -34,15 +35,16 @@ void ADC1_COMP_IRQHandler(void)
 {
     if(RESET != ADC_GetITStatus(ADC1, ADC_IT_EOC)) {
 			ADC_ClearITPendingBit(ADC1, ADC_IT_EOC);
-			//ADC_SoftwareStartConvCmd(ADC1, DISABLE);
-			vbat = ADC1->VBATADC2;
+			vbat = ADC1->VBATADC2;//read adc register
 			itotal = ADC1->ITOTALADC2;
-			adc = 1;
+			adc = 1;//handle in main loop
 		
-			if(hallpos(dir)!=hallposprev){
+			if(hallpos(dir)!=hallposprev){//commutation needed
 				hallposprev=hallpos(dir);
 				step=hallposprev;
 				commutate();
+				comm = 1;
+				double rpm=(double)(96000000/TIM2->CCR1)/60;
 			}
 		
     }

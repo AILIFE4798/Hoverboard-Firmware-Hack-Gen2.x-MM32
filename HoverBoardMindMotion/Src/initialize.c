@@ -65,7 +65,7 @@ void TIM2_Init(u32 arr, u16 psc){
 	TIM_TimeBaseStruct.TIM_Period = arr;
 	TIM_TimeBaseStruct.TIM_Prescaler = psc;
 	//Setting Clock Segmentation
-	TIM_TimeBaseStruct.TIM_ClockDivision = TIM_CKD_DIV1;
+	TIM_TimeBaseStruct.TIM_ClockDivision = TIM_CKD_DIV4;
 	TIM_TimeBaseStruct.TIM_RepetitionCounter = 0;
 	///TIM Upward Counting Mode
 	TIM_TimeBaseStruct.TIM_CounterMode = TIM_CounterMode_Up;

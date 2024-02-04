@@ -23,6 +23,7 @@ bool uart;
 bool adc;
 bool comm=1;
 bool dir=1;
+double rpm;
 uint8_t uartBuffer=0;
 u8 sRxBuffer[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 int vbat;
@@ -112,13 +113,16 @@ s32 main(void){
 			uart=0;
 		}
 		//print adc value in serial terminal
-		if(adc){
-			char buffer[16];
-		  sprintf(buffer, "VBAT: %i V\n\r", vbat);
+		if(comm){
+			char buffer[32];
+		  //sprintf(buffer, "VBAT: %i V\n\r", vbat);
+			
+			sprintf(buffer, "speed: %f V\n\r", rpm);
 		  UART1_SendString(buffer);
-			adc=0;
+			comm=0;
 		}
 		#endif	
+		//speed pid loop
 		if(millis-lastupdate>3){
 			speedupdate();
 			lastupdate=millis;
@@ -153,6 +157,7 @@ s32 main(void){
 			//last line to ever be executed
 			GPIO_WriteBit(LATCHPORT, LATCHPIN, 0);
 		}
+		//feed the watchdog
 		IWDG_ReloadCounter();
   }//main loop
 	
