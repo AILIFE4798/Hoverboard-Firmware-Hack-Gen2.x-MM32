@@ -15,9 +15,9 @@
 #define HALLAPORT GPIOC
 #define HALLBPORT GPIOC
 #define HALLCPORT GPIOC
-#define HALLAAF GPIO_AF_6
-#define HALLBAF GPIO_AF_6
-#define HALLCAF GPIO_AF_6
+#define HALLAAF GPIO_AF_6    //timer2 alternate function
+#define HALLBAF GPIO_AF_6    //timer2 alternate function
+#define HALLCAF GPIO_AF_6    //timer2 alternate function
 #define HALLAPINSRC GPIO_PinSource13
 #define HALLBPINSRC GPIO_PinSource14
 #define HALLCPINSRC GPIO_PinSource15
@@ -34,11 +34,11 @@
 #define SERIAL1TXPIN GPIO_Pin_6
 #define SERIAL1TXPINSRC GPIO_PinSource6
 #define SERIAL1TXPORT GPIOB
-#define SERIAL1TXAF GPIO_AF_0
+#define SERIAL1TXAF GPIO_AF_0    //serial1 alternate function
 #define SERIAL1RXPIN GPIO_Pin_4
 #define SERIAL1RXPINSRC GPIO_PinSource4
 #define SERIAL1RXPORT GPIOB
-#define SERIAL1RXAF GPIO_AF_3
+#define SERIAL1RXAF GPIO_AF_3    //serial1 alternate function
 //ADC
 #define VBATPIN GPIO_Pin_1
 #define VBATPORT GPIOB

@@ -45,6 +45,7 @@ s32 main(void){
 	adc_Init();
 	//adc interrupt
 	exNVIC_Configure(ADC_COMP_IRQn, 0, 1);
+	
 	//watchdog
 	//Iwdg_Init(IWDG_Prescaler_32, 0xff);
 	
@@ -71,9 +72,9 @@ s32 main(void){
 	DELAY_Ms(5);	
 	
 	//25% PWM for test
-	TIM1->CCR1=200;
-	TIM1->CCR2=200;
-	TIM1->CCR3=200;
+	TIM1->CCR1=1000;
+	TIM1->CCR2=1000;
+	TIM1->CCR3=1000;
 	
 	ADC_SoftwareStartConvCmd(ADC1, ENABLE);                                     //Software start conversion
   ADC_ITConfig(ADC1, ADC_IT_EOC, ENABLE);
@@ -108,19 +109,23 @@ s32 main(void){
 		}
 		if(adc){
 			char buffer[16];
-		  sprintf(buffer, "VBAT: %d V\n\r", vbat);
+		  sprintf(buffer, "VBAT: %i V\n\r", vbat);
 		  UART1_SendString(buffer);
 			adc=0;
 		}
 		#endif	
 		
-		/*
+//		/*
 		//simulated hall sensor for commutation
-		if(millis-lastCommutation>100){
+		if(millis-lastCommutation>1){
+			step++;
+			if(step>6){
+				step=1;
+			}
 			TIM_GenerateEvent(TIM1, TIM_EventSource_COM);
 			lastCommutation=millis;
 		}
-		*/
+//		*/
 		
 		//button press for shutdown
 		if(GPIO_ReadInputDataBit(BTNPORT, BTNPIN)){
