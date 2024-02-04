@@ -2375,7 +2375,7 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       880         48          8          4          0       3441   bldc.o
+       880         48          8          4          0       3446   bldc.o
        132         28          0          0          4       3160   delay.o
        234         12          0          0          0       9090   hal_adc.o
        202         12          0          0          0       4598   hal_dma.o
@@ -2393,7 +2393,7 @@ Image component sizes
         72          0          0          0          0       1785   uart.o
 
     ----------------------------------------------------------------------
-      5696        462        234         28       1588     107228   Object Totals
+      5696        462        234         28       1588     107233   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          8          0          2          1         16          0   (incl. Padding)
 
@@ -2457,8 +2457,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      7178        510        234         28       1684     107736   Grand Totals
-      7178        510        234         28       1684     107736   ELF Image Totals
+      7178        510        234         28       1684     107741   Grand Totals
+      7178        510        234         28       1684     107741   ELF Image Totals
       7178        510        234         28          0          0   ROM Totals
 
 ==============================================================================

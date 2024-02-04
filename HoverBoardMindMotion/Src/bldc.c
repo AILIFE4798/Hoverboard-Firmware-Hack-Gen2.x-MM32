@@ -5,6 +5,8 @@
 #include "hal_conf.h"
 #include "math.h"
 
+#define TESTROTATE 
+
 extern uint8_t step;
 extern int speed;
 extern bool dir;
@@ -131,15 +133,20 @@ void commutate(){
 }
 
 void speedupdate(){
- // #ifdef TESTROTATE	
-	speed+=50*testrotatedir;
-	if(speed>1500){
+  #ifdef TESTROTATE	
+	speed+=50*testrotatedir; //keep changing speed
+	if(speed>1500){    //reverse dir
 	testrotatedir=-1;
   }
 	if(speed<-1500){
 	testrotatedir=1;
   }
-	if(speed>0){
+	#endif	
+	
+	
+	
+	
+	if(speed>0){    //to support speed from 4095~-4095
 	dir=1;
   }else{
 	dir=0;
@@ -148,9 +155,6 @@ void speedupdate(){
 	TIM1->CCR1=abspeed;
 	TIM1->CCR2=abspeed;
 	TIM1->CCR3=abspeed;
-	
-	
-//	#endif
 }
 
 
