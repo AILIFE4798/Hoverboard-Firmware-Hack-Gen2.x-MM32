@@ -73,9 +73,9 @@ s32 main(void){
 	DELAY_Ms(5);	
 	
 	//25% PWM for test
-	TIM1->CCR1=1000;
-	TIM1->CCR2=1000;
-	TIM1->CCR3=1000;
+	TIM1->CCR1=1500;
+	TIM1->CCR2=1500;
+	TIM1->CCR3=1500;
 	
 	ADC_SoftwareStartConvCmd(ADC1, ENABLE);                                     //Software start conversion
   ADC_ITConfig(ADC1, ADC_IT_EOC, ENABLE);
@@ -107,6 +107,7 @@ s32 main(void){
 		  UART1_Send_Byte(sRxBuffer[0]);
 			uart=0;
 		}
+		//print adc value in serial terminal
 		if(adc){
 			char buffer[16];
 		  sprintf(buffer, "VBAT: %i V\n\r", vbat);
@@ -114,19 +115,19 @@ s32 main(void){
 			adc=0;
 		}
 		#endif	
-		
+		//commutation needed
 		if(comm){
 			TIM_GenerateEvent(TIM1, TIM_EventSource_COM);
 			comm=0;
 		}
-/*		//simulated hall sensor for commutation
-		if(millis-lastCommutation>1){
+/*		
+		//simulated hall sensor for commutation
+		if(millis-lastCommutation>3){
 			
 			step++;
 			if(step>6){
 				step=1;
 			}
-			
 			TIM_GenerateEvent(TIM1, TIM_EventSource_COM);
 			lastCommutation=millis;
 		}

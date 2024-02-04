@@ -12,12 +12,12 @@ const uint8_t hall_to_pos[8] =
 {
 	// annotation: for example SA=0 means hall sensor pulls SA down to Ground
   0, // hall position [-] - No function (access from 1-6) 
-  3, // hall position [1] (SA=1, SB=0, SC=0) -> PWM-position 3
-  5, // hall position [2] (SA=0, SB=1, SC=0) -> PWM-position 5
-  4, // hall position [3] (SA=1, SB=1, SC=0) -> PWM-position 4
-  1, // hall position [4] (SA=0, SB=0, SC=1) -> PWM-position 1
-  2, // hall position [5] (SA=1, SB=0, SC=1) -> PWM-position 2
-  6, // hall position [6] (SA=0, SB=1, SC=1) -> PWM-position 6
+  2, // hall position [1] (SA=1, SB=0, SC=0) -> PWM-position 3
+  4, // hall position [2] (SA=0, SB=1, SC=0) -> PWM-position 5
+  3, // hall position [3] (SA=1, SB=1, SC=0) -> PWM-position 4
+  6, // hall position [4] (SA=0, SB=0, SC=1) -> PWM-position 1
+  1, // hall position [5] (SA=1, SB=0, SC=1) -> PWM-position 2
+  5, // hall position [6] (SA=0, SB=1, SC=1) -> PWM-position 6
   0, // hall position [-] - No function (access from 1-6) 
 };
 
@@ -62,14 +62,16 @@ void commutate(){
 	
 	}
 	else if(step == 2) {
-		TIM_CCxCmd(TIM1, TIM_Channel_3, TIM_CCx_Disable);
-		TIM_CCxNCmd(TIM1, TIM_Channel_3, TIM_CCxN_Disable);
-		TIM_SelectOCxM(TIM1, TIM_Channel_1, TIM_OCMode_PWM1);
-		TIM_CCxCmd(TIM1, TIM_Channel_1, TIM_CCx_Enable);
+ 		TIM_CCxCmd(TIM1, TIM_Channel_1, TIM_CCx_Disable);
 		TIM_CCxNCmd(TIM1, TIM_Channel_1, TIM_CCxN_Disable);
 		TIM_SelectOCxM(TIM1, TIM_Channel_2, TIM_OCMode_PWM1);
-		TIM_CCxCmd(TIM1, TIM_Channel_2, TIM_CCx_Disable);
-		TIM_CCxNCmd(TIM1, TIM_Channel_2, TIM_CCxN_Enable);  		
+		TIM_CCxCmd(TIM1, TIM_Channel_2, TIM_CCx_Enable);
+		TIM_CCxNCmd(TIM1, TIM_Channel_2, TIM_CCxN_Disable);
+		TIM_SelectOCxM(TIM1, TIM_Channel_3, TIM_OCMode_PWM1);
+		TIM_CCxCmd(TIM1, TIM_Channel_3, TIM_CCx_Disable);
+		TIM_CCxNCmd(TIM1, TIM_Channel_3, TIM_CCxN_Enable);		
+		
+		
 		
 	
   }
@@ -85,14 +87,14 @@ void commutate(){
 		
 }
 	else if(step == 4) {
- 		TIM_CCxCmd(TIM1, TIM_Channel_1, TIM_CCx_Disable);
-		TIM_CCxNCmd(TIM1, TIM_Channel_1, TIM_CCxN_Disable);
-		TIM_SelectOCxM(TIM1, TIM_Channel_2, TIM_OCMode_PWM1);
-		TIM_CCxCmd(TIM1, TIM_Channel_2, TIM_CCx_Enable);
+		TIM_CCxCmd(TIM1, TIM_Channel_2, TIM_CCx_Disable);
 		TIM_CCxNCmd(TIM1, TIM_Channel_2, TIM_CCxN_Disable);
 		TIM_SelectOCxM(TIM1, TIM_Channel_3, TIM_OCMode_PWM1);
-		TIM_CCxCmd(TIM1, TIM_Channel_3, TIM_CCx_Disable);
-		TIM_CCxNCmd(TIM1, TIM_Channel_3, TIM_CCxN_Enable);
+		TIM_CCxCmd(TIM1, TIM_Channel_3, TIM_CCx_Enable);
+		TIM_CCxNCmd(TIM1, TIM_Channel_3, TIM_CCxN_Disable);
+		TIM_SelectOCxM(TIM1, TIM_Channel_1, TIM_OCMode_PWM1);
+		TIM_CCxCmd(TIM1, TIM_Channel_1, TIM_CCx_Disable);
+		TIM_CCxNCmd(TIM1, TIM_Channel_1, TIM_CCxN_Enable);	
   }
 	else if(step == 5) {
 		TIM_CCxCmd(TIM1, TIM_Channel_1, TIM_CCx_Disable);
@@ -105,14 +107,14 @@ void commutate(){
 		TIM_CCxNCmd(TIM1, TIM_Channel_2, TIM_CCxN_Enable);	
 	}
 	else if(step == 6) {
-		TIM_CCxCmd(TIM1, TIM_Channel_2, TIM_CCx_Disable);
-		TIM_CCxNCmd(TIM1, TIM_Channel_2, TIM_CCxN_Disable);
-		TIM_SelectOCxM(TIM1, TIM_Channel_3, TIM_OCMode_PWM1);
-		TIM_CCxCmd(TIM1, TIM_Channel_3, TIM_CCx_Enable);
+		TIM_CCxCmd(TIM1, TIM_Channel_3, TIM_CCx_Disable);
 		TIM_CCxNCmd(TIM1, TIM_Channel_3, TIM_CCxN_Disable);
 		TIM_SelectOCxM(TIM1, TIM_Channel_1, TIM_OCMode_PWM1);
-		TIM_CCxCmd(TIM1, TIM_Channel_1, TIM_CCx_Disable);
-		TIM_CCxNCmd(TIM1, TIM_Channel_1, TIM_CCxN_Enable);	
+		TIM_CCxCmd(TIM1, TIM_Channel_1, TIM_CCx_Enable);
+		TIM_CCxNCmd(TIM1, TIM_Channel_1, TIM_CCxN_Disable);
+		TIM_SelectOCxM(TIM1, TIM_Channel_2, TIM_OCMode_PWM1);
+		TIM_CCxCmd(TIM1, TIM_Channel_2, TIM_CCx_Disable);
+		TIM_CCxNCmd(TIM1, TIM_Channel_2, TIM_CCxN_Enable);  
   }else{
 		TIM_CCxCmd(TIM1, TIM_Channel_1, TIM_CCx_Disable);
 		TIM_CCxNCmd(TIM1, TIM_Channel_1, TIM_CCxN_Disable);

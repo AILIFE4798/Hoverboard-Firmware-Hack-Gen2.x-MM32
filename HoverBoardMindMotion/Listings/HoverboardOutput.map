@@ -1862,8 +1862,9 @@ Image Symbol Table
     __arm_cp.0_10                            0x08001954   Number         4  main.o(.text.main)
     __arm_cp.0_11                            0x08001958   Number         4  main.o(.text.main)
     __arm_cp.0_12                            0x0800195c   Number         4  main.o(.text.main)
-    __arm_cp.0_14                            0x08001970   Number         4  main.o(.text.main)
-    .text_divfast                            0x08001974   Section      502  aeabi_sdivfast.o(.text_divfast)
+    __arm_cp.0_13                            0x08001960   Number         4  main.o(.text.main)
+    __arm_cp.0_15                            0x08001974   Number         4  main.o(.text.main)
+    .text_divfast                            0x08001978   Section      502  aeabi_sdivfast.o(.text_divfast)
     .bss                                     0x20000018   Section       96  libspace.o(.bss)
     sTimingDelay                             0x20000090   Data           4  delay.o(.bss.sTimingDelay)
     [Anonymous Symbol]                       0x20000090   Section        0  delay.o(.bss.sTimingDelay)
@@ -2094,11 +2095,11 @@ Image Symbol Table
     hallpos                                  0x08001689   Thumb Code   100  bldc.o(.text.hallpos)
     io_init                                  0x080016f1   Thumb Code   124  initialize.o(.text.io_init)
     main                                     0x08001771   Thumb Code   444  main.o(.text.main)
-    __aeabi_uidiv                            0x08001975   Thumb Code    68  aeabi_sdivfast.o(.text_divfast)
-    __aeabi_idiv                             0x080019b9   Thumb Code   434  aeabi_sdivfast.o(.text_divfast)
-    hall_to_pos                              0x08001b6a   Data           8  bldc.o(.rodata.hall_to_pos)
-    Region$$Table$$Base                      0x08001b74   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08001b94   Number         0  anon$$obj.o(Region$$Table)
+    __aeabi_uidiv                            0x08001979   Thumb Code    68  aeabi_sdivfast.o(.text_divfast)
+    __aeabi_idiv                             0x080019bd   Thumb Code   434  aeabi_sdivfast.o(.text_divfast)
+    hall_to_pos                              0x08001b6e   Data           8  bldc.o(.rodata.hall_to_pos)
+    Region$$Table$$Base                      0x08001b78   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08001b98   Number         0  anon$$obj.o(Region$$Table)
     SystemCoreClock                          0x20000000   Data           4  system_mm32spin06xx_s.o(.data.SystemCoreClock)
     hallposprev                              0x20000004   Data           1  main.o(.data.hallposprev)
     step                                     0x20000005   Data           1  main.o(.data.step)
@@ -2123,7 +2124,7 @@ Memory Map of the image
 
   Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00001bb0, Max: 0x00008000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00001b94, Max: 0x00008000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00001b98, Max: 0x00008000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -2280,11 +2281,11 @@ Memory Map of the image
     0x08001638   0x08001638   0x00000050   Code   RO          521    .text.exNVIC_Init   hal_misc.o
     0x08001688   0x08001688   0x00000068   Code   RO           38    .text.hallpos       bldc.o
     0x080016f0   0x080016f0   0x00000080   Code   RO           51    .text.io_init       initialize.o
-    0x08001770   0x08001770   0x00000204   Code   RO            2    .text.main          main.o
-    0x08001974   0x08001974   0x000001f6   Code   RO         1070    .text_divfast       c_p.l(aeabi_sdivfast.o)
-    0x08001b6a   0x08001b6a   0x00000008   Data   RO           42    .rodata.hall_to_pos  bldc.o
-    0x08001b72   0x08001b72   0x00000002   PAD
-    0x08001b74   0x08001b74   0x00000020   Data   RO         1266    Region$$Table       anon$$obj.o
+    0x08001770   0x08001770   0x00000208   Code   RO            2    .text.main          main.o
+    0x08001978   0x08001978   0x000001f6   Code   RO         1070    .text_divfast       c_p.l(aeabi_sdivfast.o)
+    0x08001b6e   0x08001b6e   0x00000008   Data   RO           42    .rodata.hall_to_pos  bldc.o
+    0x08001b76   0x08001b76   0x00000002   PAD
+    0x08001b78   0x08001b78   0x00000020   Data   RO         1266    Region$$Table       anon$$obj.o
 
 
     Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08001b98, Size: 0x000006a0, Max: 0x00001000, ABSOLUTE)
@@ -2332,13 +2333,13 @@ Image component sizes
        186          4          0          0          0       6297   hal_uart.o
       1134         52          0          0          0      15884   initialize.o
        156         32          0          0          0       3058   interrupt.o
-       516         72          0          2         25       5309   main.o
+       520         76          0          2         25       5309   main.o
        124         58        192          0       1536        740   startup_mm32spin06xx_s_keil.o
        448         40          0          4          0       3694   system_mm32spin06xx_s.o
         72          0          0          0          0       1785   uart.o
 
     ----------------------------------------------------------------------
-      5504        428        234         24       1576     106849   Object Totals
+      5508        432        234         24       1576     106849   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          8          0          2          2         11          0   (incl. Padding)
 
@@ -2398,15 +2399,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      6826        472        234         24       1672     107285   Grand Totals
-      6826        472        234         24       1672     107285   ELF Image Totals
-      6826        472        234         24          0          0   ROM Totals
+      6830        476        234         24       1672     107285   Grand Totals
+      6830        476        234         24       1672     107285   ELF Image Totals
+      6830        476        234         24          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 7060 (   6.89kB)
+    Total RO  Size (Code + RO Data)                 7064 (   6.90kB)
     Total RW  Size (RW Data + ZI Data)              1696 (   1.66kB)
-    Total ROM Size (Code + RO Data + RW Data)       7084 (   6.92kB)
+    Total ROM Size (Code + RO Data + RW Data)       7088 (   6.92kB)
 
 ==============================================================================
 
