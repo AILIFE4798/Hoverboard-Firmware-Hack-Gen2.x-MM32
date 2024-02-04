@@ -12,12 +12,12 @@ const uint8_t hall_to_pos[8] =
 {
 	// annotation: for example SA=0 means hall sensor pulls SA down to Ground
   0, // hall position [-] - No function (access from 1-6) 
-  2, // hall position [1] (SA=1, SB=0, SC=0) -> PWM-position 3
-  4, // hall position [2] (SA=0, SB=1, SC=0) -> PWM-position 5
-  3, // hall position [3] (SA=1, SB=1, SC=0) -> PWM-position 4
-  6, // hall position [4] (SA=0, SB=0, SC=1) -> PWM-position 1
-  1, // hall position [5] (SA=1, SB=0, SC=1) -> PWM-position 2
-  5, // hall position [6] (SA=0, SB=1, SC=1) -> PWM-position 6
+  3, // hall position [1] (SA=1, SB=0, SC=0) -> PWM-position 3
+  5, // hall position [2] (SA=0, SB=1, SC=0) -> PWM-position 5
+  4, // hall position [3] (SA=1, SB=1, SC=0) -> PWM-position 4
+  1, // hall position [4] (SA=0, SB=0, SC=1) -> PWM-position 1
+  2, // hall position [5] (SA=1, SB=0, SC=1) -> PWM-position 2
+  6, // hall position [6] (SA=0, SB=1, SC=1) -> PWM-position 6
   0, // hall position [-] - No function (access from 1-6) 
 };
 
@@ -123,7 +123,7 @@ void commutate(){
 		TIM_CCxCmd(TIM1, TIM_Channel_3, TIM_CCx_Disable);
 		TIM_CCxNCmd(TIM1, TIM_Channel_3, TIM_CCxN_Disable);
 	}
-	
+	TIM_GenerateEvent(TIM1, TIM_EventSource_COM);
 }
 
 

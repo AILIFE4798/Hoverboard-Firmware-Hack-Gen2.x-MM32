@@ -18,7 +18,7 @@ uint32_t millis;
 uint32_t lastCommutation;
 bool uart;
 bool adc;
-bool comm;
+bool comm=1;
 uint8_t uartBuffer=0;
 u8 sRxBuffer[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 int vbat;
@@ -115,11 +115,7 @@ s32 main(void){
 			adc=0;
 		}
 		#endif	
-		//commutation needed
-		if(comm){
-			TIM_GenerateEvent(TIM1, TIM_EventSource_COM);
-			comm=0;
-		}
+
 /*		
 		//simulated hall sensor for commutation
 		if(millis-lastCommutation>3){

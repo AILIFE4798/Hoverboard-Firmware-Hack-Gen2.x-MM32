@@ -16,7 +16,7 @@ extern uint8_t hallposprev;
 void TIM1_BRK_UP_TRG_COM_IRQHandler(void)
 {
   TIM_ClearITPendingBit(TIM1, TIM_IT_COM);
-	commutate();
+	
     
 }
 
@@ -41,7 +41,7 @@ void ADC1_COMP_IRQHandler(void)
 			if(hallpos(1)!=hallposprev){
 				hallposprev=hallpos(1);
 				step=hallposprev;
-				comm=1;
+				commutate();
 			}
 		
     }
