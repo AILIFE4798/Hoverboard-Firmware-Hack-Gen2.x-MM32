@@ -22,7 +22,7 @@ uint8_t uartBuffer=0;
 u8 sRxBuffer[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 int vbat;
 int itotal;
-
+uint8_t hallposprev=1;
 
 s32 main(void){
 	//initialize normal gpio
@@ -46,7 +46,7 @@ s32 main(void){
 	//adc interrupt
 	exNVIC_Configure(ADC_COMP_IRQn, 0, 1);
 	//watchdog
-	Iwdg_Init(IWDG_Prescaler_32, 0xff);
+	//Iwdg_Init(IWDG_Prescaler_32, 0xff);
 	
 	#ifdef UART1EN
 	//serial1.begin(19200);
@@ -71,9 +71,9 @@ s32 main(void){
 	DELAY_Ms(5);	
 	
 	//25% PWM for test
-	TIM1->CCR1=1000;
-	TIM1->CCR2=1000;
-	TIM1->CCR3=1000;
+	TIM1->CCR1=200;
+	TIM1->CCR2=200;
+	TIM1->CCR3=200;
 	
 	ADC_SoftwareStartConvCmd(ADC1, ENABLE);                                     //Software start conversion
   ADC_ITConfig(ADC1, ADC_IT_EOC, ENABLE);
@@ -114,11 +114,14 @@ s32 main(void){
 		}
 		#endif	
 		
+		/*
 		//simulated hall sensor for commutation
 		if(millis-lastCommutation>100){
 			TIM_GenerateEvent(TIM1, TIM_EventSource_COM);
 			lastCommutation=millis;
 		}
+		*/
+		
 		//button press for shutdown
 		if(GPIO_ReadInputDataBit(BTNPORT, BTNPIN)){
 			//power off melody

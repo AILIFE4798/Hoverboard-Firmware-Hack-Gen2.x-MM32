@@ -38,4 +38,4 @@
   HAL_Lib\Inc\hal_pwr.h HAL_Lib\Inc\hal_rcc.h HAL_Lib\Inc\hal_spi.h \
   HAL_Lib\Inc\hal_syscfg.h HAL_Lib\Inc\hal_uart.h HAL_Lib\Inc\hal_uid.h \
   HAL_Lib\Inc\hal_wwdg.h HAL_Lib\Inc\hal_redefine.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h Src\pinout.h
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h Src\pinout.h Src\bldc.h
