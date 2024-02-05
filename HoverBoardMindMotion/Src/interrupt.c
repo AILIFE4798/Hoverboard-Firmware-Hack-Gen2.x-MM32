@@ -51,7 +51,7 @@ void ADC1_COMP_IRQHandler(void)
 }	
 
 void TIM2_IRQHandler(void) {
-	realspeed = (float)50000/(TIM2->CCR1);
+	realspeed = (float)20000/(TIM2->CCR1);
 	__NOP();
   lastcommutate = millis;
 

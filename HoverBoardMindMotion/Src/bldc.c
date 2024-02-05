@@ -149,13 +149,13 @@ void speedupdate(){
 	uint16_t pwm=PID(speed,realspeed);
 	
 	
-	if(pwm>0){    //to support speed from 4095~-4095
+	if(speed>0){    //to support speed from 4095~-4095
 	dir=1;
   }else{
 	dir=0;
 	}
 
-	unsigned int abspeed=fabs((double)pwm);
+	unsigned int abspeed=fabs((double)speed);
 	TIM1->CCR1=abspeed;
 	TIM1->CCR2=abspeed;
 	TIM1->CCR3=abspeed;

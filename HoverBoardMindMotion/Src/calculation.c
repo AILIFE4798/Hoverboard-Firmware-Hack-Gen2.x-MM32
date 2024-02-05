@@ -3,8 +3,8 @@
 
 uint16_t max = 4095;
 uint16_t min = -4095;
-uint16_t Kp = 8000;		
-uint16_t Ki = 50;
+uint16_t Kp = 10;		
+uint16_t Ki = 0;
 uint16_t qdSum = 0;
 uint16_t qInMeas = 0;
 uint16_t qOut = 0;
