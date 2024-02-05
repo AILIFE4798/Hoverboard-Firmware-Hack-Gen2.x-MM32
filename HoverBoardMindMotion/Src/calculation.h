@@ -1,4 +1,9 @@
 #include "mm32_device.h"                // Device header
 
+#define Kp 20
 
-uint16_t PID(uint16_t speed,uint16_t realspeed);
+#define Ki 0
+#define Kd 8
+
+int PID(int setpoint,int real);
+void avgspeed();

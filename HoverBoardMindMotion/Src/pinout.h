@@ -60,5 +60,5 @@
 #define UART1EN  //enable uart1
 //#define TESTROTATE  //enable uart1
 //#define WATCHDOG    //enable watchdog, to debug you must disable it
-
+#define CONSTSPEED    //PID loop to attempt keeping constant speed
 

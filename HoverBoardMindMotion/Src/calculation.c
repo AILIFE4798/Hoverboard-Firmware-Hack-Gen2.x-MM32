@@ -1,38 +1,40 @@
 #include "mm32_device.h"                // Device header
+#include "calculation.h"   
 
+int max = 4095;
+int min = -4095;
+int qdSum = 0;
+int lasterr=0;
 
-uint16_t max = 4095;
-uint16_t min = -4095;
-uint16_t Kp = 10;		
-uint16_t Ki = 0;
-uint16_t qdSum = 0;
-uint16_t qInMeas = 0;
-uint16_t qOut = 0;
-uint16_t qIn = 0;
+uint8_t index;
+int datasum;
+int avgarr[32];
+extern int realspeed;
+extern int frealspeed;
 
-
-
-
-uint16_t PID(uint16_t speed,uint16_t realspeed){
+int PID(int setpoint,int real){
 	
-	signed int   Error;
+	int qOut = 0;
+	int Error;
 	signed long  Up;
 	signed long  Ui;
+	signed long  Ud;
 	//Calc Error
-	Error = speed - realspeed;
+	Error = setpoint - real;
 	//Calc proportional
-	Up = (Kp * Error)>>15;
+	Up = (Kp * Error);
 	//Calc integral
 	qdSum = qdSum + Ki * Error;
 	//Limit integral 
-	if(qdSum >= (max<<15)){
-		qdSum = (max<<15);
-	}else if(qdSum <= min<<15){
-		qdSum = (min<<15);
+	if(qdSum >= (max)){
+		qdSum = (max);
+	}else if(qdSum <= min){
+		qdSum = (min);
 	}
-	Ui = qdSum>>15;
-	//Out = Up + Ui 
-	qOut = Up + Ui;		
+	Ui = qdSum;
+	Ud=(Error-lasterr)*Kd;
+	lasterr=Error;
+	qOut = Up + Ui + Ud;		
 	//Out Limit
 	if(qOut > max){
 		qOut =max ;
@@ -40,10 +42,17 @@ uint16_t PID(uint16_t speed,uint16_t realspeed){
 		qOut = min;
 	}
 	return qOut;
+	
 }
 
-
-
-
-
+void avgspeed(){
+	
+	if(index >= 32){
+    index = 0;
+  } 
+  datasum = datasum + realspeed - avgarr[index];
+  avgarr[index] = realspeed;
+  frealspeed = (int)(datasum>>5);
+  index++;
+}
 

@@ -26,7 +26,9 @@ int vbat;
 int itotal;
 uint8_t hallposprev=1;
 int speed=0;
-float realspeed=0;
+int pwm;
+int realspeed=0;
+int frealspeed=0;
 uint8_t  wState;
 
 
@@ -91,15 +93,14 @@ s32 main(void){
 		GPIO_WriteBit(LEDBPORT, LEDBPIN, GPIO_ReadInputDataBit(HALLCPORT, HALLCPIN));		
 		#endif
 		
-
-		//speed pid loop
-		if(millis-lastupdate>3){
+		
+		if(millis-lastupdate>10){//speed pid loop
 			speedupdate();
-			lastupdate=millis;
-		}	
+		  lastupdate=millis;
+		}
 /*	
 		//simulated hall sensor for commutation
-		if(millis-lastCommutation>3){
+		if(millis-lastCommutation>300){
 			step++;
 			if(step>6){
 				step=1;

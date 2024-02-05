@@ -11,13 +11,20 @@
 
 extern uint8_t step;
 extern int speed;
+extern int pwm;
 extern bool dir;
 extern int realspeed;
+extern int frealspeed;
 extern uint32_t millis;
 uint32_t lastcommutate;
+uint32_t lasttestrotate;
 int testrotatedir=1;
 uint8_t hallpos(uint8_t dir);
 bool lastdir=0;
+
+
+
+
 const uint8_t hall_to_pos[8] =
 {
 	// annotation: for example SA=0 means hall sensor pulls SA down to Ground
@@ -129,33 +136,48 @@ void commutate(){
 	TIM_GenerateEvent(TIM1, TIM_EventSource_COM);//apply changes
 }
 
+
+
+
+
 void speedupdate(){
   #ifdef TESTROTATE	
-	speed+=50*testrotatedir; //keep changing speed
-	if(speed>1500){    //reverse dir
-	testrotatedir=-1;
-  }
-	if(speed<-1500){
-	testrotatedir=1;
-  }
+	if(millis-lasttestrotate>100){
+		speed+=2*testrotatedir; //keep changing speed
+		if(speed>150){    //reverse dir
+			testrotatedir=-1;
+		}
+		if(speed<-150){
+			testrotatedir=1;
+		}	
+		lasttestrotate=millis;
+	}
 	#else	
 	RemoteUpdate();
-	//speed=1500;
 	#endif
 	
-	if(millis-lastcommutate>10){//zero out speed
-			realspeed=0;
+	avgspeed();//speed filter prevent oscilation
+	if(millis-lastcommutate>500){//zero out speed
+		realspeed=0;
+		frealspeed=0;
 	}	
-	uint16_t pwm=PID(speed,realspeed);
+	#ifdef CONSTSPEED	
+	pwm= PID(speed,frealspeed);
+	//pwm=(speed-frealspeed)*30;
+	if(speed==0){
+		pwm=0;
+	}
+	#else
+	pwm=speed*4;//1000~-1000
+	#endif
 	
-	
-	if(speed>0){    //to support speed from 4095~-4095
+	if(pwm>0){    // 4095~-4095
 	dir=1;
   }else{
 	dir=0;
 	}
 
-	unsigned int abspeed=fabs((double)speed);
+	unsigned int abspeed=fabs((double)pwm);
 	TIM1->CCR1=abspeed;
 	TIM1->CCR2=abspeed;
 	TIM1->CCR3=abspeed;

@@ -15,8 +15,10 @@ extern uint32_t lastcommutate;
 extern uint32_t millis;
 extern int vbat;
 extern int itotal;
-extern float realspeed;
+extern int realspeed;
+extern int frealspeed;
 extern uint8_t hallposprev;
+
 
 //commutation interrupt
 void TIM1_BRK_UP_TRG_COM_IRQHandler(void)
@@ -47,12 +49,16 @@ void ADC1_COMP_IRQHandler(void)
 				step=hallposprev;
 				commutate();
 			}
+			millis++;
     }
 }	
 
 void TIM2_IRQHandler(void) {
-	realspeed = (float)20000/(TIM2->CCR1);
-	__NOP();
+	realspeed = (long)80000/(long)(TIM2->CCR1);
+	if(dir==0){    //negative speed spinning backward
+		realspeed*=-1;
+	}
+
   lastcommutate = millis;
 
 
