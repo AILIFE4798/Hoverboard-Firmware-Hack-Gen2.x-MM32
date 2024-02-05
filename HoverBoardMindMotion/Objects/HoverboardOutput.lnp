@@ -5,6 +5,7 @@
 ".\objects\initialize.o"
 ".\objects\interrupt.o"
 ".\objects\uart.o"
+".\objects\remoteuartbus.o"
 ".\objects\hal_adc.o"
 ".\objects\hal_comp.o"
 ".\objects\hal_crc.o"

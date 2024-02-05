@@ -444,6 +444,16 @@
               <FileType>5</FileType>
               <FilePath>.\Src\uart.h</FilePath>
             </File>
+            <File>
+              <FileName>remoteUartBus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\remoteUartBus.c</FilePath>
+            </File>
+            <File>
+              <FileName>remoteUartBus.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Src\remoteUartBus.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

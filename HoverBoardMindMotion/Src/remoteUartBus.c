@@ -106,9 +106,9 @@ uint16_t CalcCRC(uint8_t *ptr, int count){    //file checksum calculation
 }
 
 
-// Send frame to steer device
-void RemoteUpdate(void)
-{
+
+void RemoteUpdate(void){
+	
 	if (millis - iTimeLastRx > SREIALTIMEOUT){
 		speed = 0;
 	}
@@ -118,8 +118,7 @@ extern 	uint32_t steerCounter;
 
 uint32_t iAnswerMaster = 0;
 
-void AnswerMaster(void)
-{
+void AnswerMaster(void){
 	
 	// Ask for steer input
 	SerialHover2Server oData;
@@ -149,8 +148,7 @@ uint8_t iRxDataSize;
 
 // Update USART steer input
 // static int16_t iReceivePos = -1;		// if >= 0 incoming bytes are recorded until message size reached
-void RemoteCallback(void)
-{
+void RemoteCallback(void){
 
 	#ifdef UART1EN
 		uint8_t cRead = sRxBuffer[0];

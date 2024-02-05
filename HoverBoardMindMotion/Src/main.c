@@ -59,7 +59,7 @@ s32 main(void){
 	
 	#ifdef UART1EN
 	//serial1.begin(19200);
-	UART1_Init(19200);
+	UART1_Init(BAUD);
 	//uart interrupt
 	exNVIC_Configure(DMA1_Channel2_3_IRQn, 0, 0);
 	//uart dma

@@ -1,6 +1,8 @@
 #include "mm32_device.h"                // Device header
 #include "hal_gpio.h"
 #include "../Src/pinout.h"
+#include "../Src/remoteUartBus.h"
+#include "../Src/bldc.h"
 #include "hal_tim.h"
 #include "hal_conf.h"
 #include "math.h"
@@ -133,7 +135,7 @@ void speedupdate(){
 	testrotatedir=1;
   }
 	#endif	
-	
+	RemoteUpdate();
 	
 	
 	
