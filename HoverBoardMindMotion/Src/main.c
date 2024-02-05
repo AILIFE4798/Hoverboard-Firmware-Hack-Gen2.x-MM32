@@ -16,6 +16,7 @@ uint8_t step=1;//very importatnt to set to 1 or it will not work
 uint32_t millis;
 uint32_t lastCommutation;
 uint32_t lastupdate;
+uint32_t iOdom;
 bool uart;
 bool adc;
 bool comm=1;

@@ -135,9 +135,9 @@ void AnswerMaster(void){
 	//oData.iVolt = (uint16_t)	(vbat * 100);
 	//oData.iAmp = (int16_t) 	(itotal * 100);
 	oData.iAmp = (int16_t) 	(speed * 100);
-	oData.iSpeed = (int16_t) (frealspeed	*100);
+	oData.iSpeed = (int16_t) (frealspeed	*10);
 	oData.iOdom = (int32_t) iOdom;
-	oData.iOdom = iAnswerMaster++;
+	//oData.iOdom = iAnswerMaster++;
 
 	oData.checksum = 	CalcCRC((uint8_t*) &oData, sizeof(oData) - 2);	// (first bytes except crc)
 

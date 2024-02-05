@@ -18,7 +18,7 @@ extern int itotal;
 extern int realspeed;
 extern int frealspeed;
 extern uint8_t hallposprev;
-
+extern int32_t iOdom;
 
 //commutation interrupt
 void TIM1_BRK_UP_TRG_COM_IRQHandler(void)
@@ -60,8 +60,11 @@ void TIM2_IRQHandler(void) {
 	}
 
   lastcommutate = millis;
-
-
+	if(dir==1){
+		iOdom++;
+	}else{
+		iOdom--;
+	}
 	
 
 }
