@@ -1,12 +1,12 @@
 # This repo is for split board with MM32SPIN0X MCU
 
- check https://github.com/RoboDurden/Hoverboard-Firmware-Hack-Gen2.x for guide and support
+ Check https://github.com/RoboDurden/Hoverboard-Firmware-Hack-Gen2.x for guide and support
 
- you can help us by testing this code on actual hardware
+ You can help us by testing this code on actual hardware
 
- pre-compiled binary is available
+ Pre-compiled binary is available
  
-## current support status
+## Working features
 
 The firmware is already 80% functional, basic motor control should all work, but more testing is needed
 
