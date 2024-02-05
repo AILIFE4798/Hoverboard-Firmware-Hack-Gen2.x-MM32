@@ -148,7 +148,7 @@ uint8_t iRxDataSize;
 
 // Update USART steer input
 // static int16_t iReceivePos = -1;		// if >= 0 incoming bytes are recorded until message size reached
-void RemoteCallback(void){
+void serialit(void){
 
 	#ifdef UART1EN
 		uint8_t cRead = sRxBuffer[0];

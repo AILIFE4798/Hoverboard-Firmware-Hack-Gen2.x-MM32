@@ -3,6 +3,7 @@
 #include "stdio.h"
 #include "pinout.h"
 #include "bldc.h"
+#include "../Src/remoteUartBus.h"
 
 extern uint8_t step;
 extern bool uart;
@@ -28,7 +29,7 @@ void DMA1_Channel2_3_IRQHandler(void)
     if(DMA_GetITStatus(DMA1_IT_TC3)) {
         DMA_ClearITPendingBit(DMA1_IT_GL3);
         // Check the received buffer
-        uart = 1;
+        serialit();
     }
 }	
 	
