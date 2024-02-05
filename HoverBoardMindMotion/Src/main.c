@@ -26,7 +26,7 @@ int vbat;
 int itotal;
 uint8_t hallposprev=1;
 int speed=0;
-int realspeed=0;
+float realspeed=0;
 uint8_t  wState;
 
 
@@ -38,7 +38,7 @@ s32 main(void){
 	//hall gpio init
 	HALL_Init();
 	//hall timer init
-	TIM2_Init(65535, 47);
+	TIM2_Init(65535, 100);
 	//initialize 6 bldc pins
 	BLDC_init();
 	//initialize timer
@@ -93,37 +93,9 @@ s32 main(void){
     GPIO_WriteBit(LEDRPORT, LEDRPIN, GPIO_ReadInputDataBit(HALLAPORT, HALLAPIN));
 		GPIO_WriteBit(LEDGPORT, LEDGPIN, GPIO_ReadInputDataBit(HALLBPORT, HALLBPIN));
 		GPIO_WriteBit(LEDBPORT, LEDBPIN, GPIO_ReadInputDataBit(HALLCPORT, HALLCPIN));		
-		#else
-		//blink in sequence
-		GPIO_WriteBit(LEDRPORT, LEDRPIN, 1);
-		GPIO_WriteBit(LEDBPORT, LEDBPIN, 0);
-		DELAY_Ms(500);
-		IWDG_ReloadCounter();
-		GPIO_WriteBit(LEDGPORT, LEDGPIN, 1);
-		GPIO_WriteBit(LEDRPORT, LEDRPIN, 0);
-		DELAY_Ms(500);
-		IWDG_ReloadCounter();
-		GPIO_WriteBit(LEDBPORT, LEDBPIN, 1);
-		GPIO_WriteBit(LEDGPORT, LEDGPIN, 0);
-		DELAY_Ms(500);
 		#endif
 		
-		#ifdef UART1EN
-		//serial loopback
-		if(uart){
-		  UART1_Send_Byte(sRxBuffer[0]);
-			uart=0;
-		}
-		//print adc value in serial terminal
-		if(comm){
-			char buffer[32];
-		  //sprintf(buffer, "VBAT: %i V\n\r", vbat);
-			
-			sprintf(buffer, "speed: %i V\n\r", realspeed);
-		  UART1_SendString(buffer);
-			comm=0;
-		}
-		#endif	
+
 		//speed pid loop
 		if(millis-lastupdate>3){
 			speedupdate();
@@ -132,12 +104,11 @@ s32 main(void){
 /*	
 		//simulated hall sensor for commutation
 		if(millis-lastCommutation>3){
-			
 			step++;
 			if(step>6){
 				step=1;
 			}
-			TIM_GenerateEvent(TIM1, TIM_EventSource_COM);
+			commutate();
 			lastCommutation=millis;
 		}
 */		

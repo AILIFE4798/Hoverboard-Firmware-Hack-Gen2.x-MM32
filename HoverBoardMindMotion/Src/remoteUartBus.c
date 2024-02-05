@@ -31,7 +31,7 @@ extern uint8_t  wState;
 extern int32_t iOdom;
 extern float vbat; 							// global variable for battery voltage
 extern float itotal; 									// global variable for current dc
-extern int realspeed; 									// global variable for real Speed
+extern float realspeed; 									// global variable for real Speed
 
 typedef struct {			// ´#pragma pack(1)´ needed to get correct sizeof()
    uint8_t cStart;			//  = '/';
@@ -127,7 +127,7 @@ void AnswerMaster(void){
 	oData.iSlave = SLAVEID;
 	oData.iVolt = (uint16_t)	(vbat * 100);
 	oData.iAmp = (int16_t) 	(itotal * 100);
-	oData.iSpeed = (int16_t) (realspeed *100);
+	oData.iSpeed = (int16_t) (realspeed	*100);
 	oData.iOdom = (int32_t) iOdom;
 	oData.iOdom = iAnswerMaster++;
 
