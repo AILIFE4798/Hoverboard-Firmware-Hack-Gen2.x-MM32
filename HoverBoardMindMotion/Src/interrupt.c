@@ -11,6 +11,8 @@ extern bool adc;
 extern bool comm;
 extern bool dir;
 extern double rpm;
+extern uint32_t lastcommutate;
+extern uint32_t millis;
 extern int vbat;
 extern int itotal;
 extern int realspeed;
@@ -40,21 +42,22 @@ void ADC1_COMP_IRQHandler(void)
 			vbat = ADC1->VBATADC2;//read adc register
 			itotal = ADC1->ITOTALADC2;
 			adc = 1;//handle in main loop
-		
-			if(hallpos(dir)!=hallposprev){//commutation needed
+			if(hallpos(dir)!=hallposprev){
 				hallposprev=hallpos(dir);
 				step=hallposprev;
 				commutate();
-				comm = 1;
-				realspeed=(double)(96000000/TIM2->CCR1)/60;
 			}
-		
     }
 }	
 
 void TIM2_IRQHandler(void) {
+	realspeed = (float)(200000/TIM2->CCR1)/9;
+	__NOP();
+  lastcommutate = millis;
 
-__NOP();
+
+	
+
 }
 
 

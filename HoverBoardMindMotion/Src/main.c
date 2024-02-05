@@ -38,7 +38,7 @@ s32 main(void){
 	//hall gpio init
 	HALL_Init();
 	//hall timer init
-	TIM2_Init(65535, 0);
+	TIM2_Init(65535, 47);
 	//initialize 6 bldc pins
 	BLDC_init();
 	//initialize timer

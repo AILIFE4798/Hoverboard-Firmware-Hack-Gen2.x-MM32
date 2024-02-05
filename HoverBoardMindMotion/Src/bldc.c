@@ -11,9 +11,12 @@
 extern uint8_t step;
 extern int speed;
 extern bool dir;
+extern int realspeed;
+extern uint32_t millis;
+uint32_t lastcommutate;
 int testrotatedir=1;
 uint8_t hallpos(uint8_t dir);
-
+bool lastdir=0;
 const uint8_t hall_to_pos[8] =
 {
 	// annotation: for example SA=0 means hall sensor pulls SA down to Ground
@@ -134,16 +137,22 @@ void speedupdate(){
 	if(speed<-1500){
 	testrotatedir=1;
   }
-	#endif	
+	#else	
 	RemoteUpdate();
+	//speed=1500;
+	#endif
 	
 	
+	if(millis-lastcommutate>10){
+			realspeed=0;
+	}	
 	
 	if(speed>0){    //to support speed from 4095~-4095
 	dir=1;
   }else{
 	dir=0;
 	}
+
 	unsigned int abspeed=fabs((double)speed);
 	TIM1->CCR1=abspeed;
 	TIM1->CCR2=abspeed;
