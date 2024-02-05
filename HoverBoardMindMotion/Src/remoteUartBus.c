@@ -22,7 +22,7 @@
 extern uint32_t millis;
 extern uint8_t sRxBuffer[10];
 
-
+uint8_t bAnswerMaster = 0;
 static int16_t iReceivePos = 0;	
 
 extern int32_t speed;
@@ -112,6 +112,11 @@ void RemoteUpdate(void){
 	
 	if (millis - iTimeLastRx > SREIALTIMEOUT){
 		speed = 0;
+	}
+	if (bAnswerMaster)
+	{
+		AnswerMaster();
+		bAnswerMaster = 0;
 	}
 }
 
@@ -214,7 +219,7 @@ void serialit(void){
 			}
 			
 			//if (speed > 300) speed = 300;	else if (speed < -300) speed = -300;		// for testing this function
-			AnswerMaster();
+			bAnswerMaster = 1;
 			iTimeLastRx = millis;  	// Reset the pwm timout to avoid stopping motors
 		}
 	}

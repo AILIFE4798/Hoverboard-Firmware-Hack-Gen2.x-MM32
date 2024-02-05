@@ -454,6 +454,16 @@
               <FileType>5</FileType>
               <FilePath>.\Src\remoteUartBus.h</FilePath>
             </File>
+            <File>
+              <FileName>calculation.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\calculation.c</FilePath>
+            </File>
+            <File>
+              <FileName>calculation.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Src\calculation.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

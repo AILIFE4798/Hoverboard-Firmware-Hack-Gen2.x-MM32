@@ -3,6 +3,7 @@
 #include "../Src/pinout.h"
 #include "../Src/remoteUartBus.h"
 #include "../Src/bldc.h"
+#include "../Src/calculation.h"
 #include "hal_tim.h"
 #include "hal_conf.h"
 #include "math.h"
@@ -142,18 +143,19 @@ void speedupdate(){
 	//speed=1500;
 	#endif
 	
-	
-	if(millis-lastcommutate>10){
+	if(millis-lastcommutate>10){//zero out speed
 			realspeed=0;
 	}	
+	uint16_t pwm=PID(speed,realspeed);
 	
-	if(speed>0){    //to support speed from 4095~-4095
+	
+	if(pwm>0){    //to support speed from 4095~-4095
 	dir=1;
   }else{
 	dir=0;
 	}
 
-	unsigned int abspeed=fabs((double)speed);
+	unsigned int abspeed=fabs((double)pwm);
 	TIM1->CCR1=abspeed;
 	TIM1->CCR2=abspeed;
 	TIM1->CCR3=abspeed;
