@@ -22,9 +22,13 @@ int PID(int setpoint,int real){
 	//Calc Error
 	Error = setpoint - real;
 	//Calc proportional
-	Up = (Kp * Error);
+	Up = ((Kp+(setpoint/DYNKp)) * Error);
 	//Calc integral
-	qdSum = qdSum + Ki * Error;
+	#ifdef DYNKi
+	qdSum = qdSum + (Ki+(setpoint/DYNKi)) * Error;
+	#else
+	qdSum=0;
+	#endif
 	//Limit integral 
 	if(qdSum >= (max)){
 		qdSum = (max);
@@ -32,7 +36,7 @@ int PID(int setpoint,int real){
 		qdSum = (min);
 	}
 	Ui = qdSum;
-	Ud=(Error-lasterr)*Kd;
+	Ud=(Error-lasterr)*(Kd-(setpoint/DYNKd));
 	lasterr=Error;
 	qOut = Up + Ui + Ud;		
 	//Out Limit
