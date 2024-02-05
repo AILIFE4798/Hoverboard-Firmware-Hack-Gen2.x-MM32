@@ -8,6 +8,10 @@
  
 ## current support status
 
+you can already use this firmware in production, it can be controled by the same uartbus protocol, but more testing is needed
+
+https://youtu.be/hCaIlEKzI3A
+
 * working method to unlock and flash the mcu
 * hall2led
 * self hold
@@ -19,7 +23,7 @@
 
 ## todo
 
-* uartbus protocol
-* eeprom
+* optimizations
+* eeprom (autodetect)
 * ws2812
-* comparator
+* comparator (foc)
