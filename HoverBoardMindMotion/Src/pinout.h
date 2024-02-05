@@ -52,4 +52,13 @@
 //extra parameter
 #define MCUVCC 5000    //mcu voltage in mv,used for adc,mm32spin support2.5-5.5v
 #define VBAT_DEVIDER 0.026    //for calculating vbat voltage
+#define SLAVEID 1    //for remoteuartbus protol, compatiable with gen2 gd32
+
+
+//test
+#define HALL2LED  //sequence through led or rotate acording to motor
+#define UART1EN  //enable uart1
+#define TESTROTATE  //enable uart1
+
+
 

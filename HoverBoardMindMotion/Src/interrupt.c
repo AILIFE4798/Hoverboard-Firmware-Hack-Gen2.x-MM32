@@ -12,6 +12,7 @@ extern bool dir;
 extern double rpm;
 extern int vbat;
 extern int itotal;
+extern int realspeed;
 extern uint8_t hallposprev;
 
 //commutation interrupt
@@ -44,7 +45,7 @@ void ADC1_COMP_IRQHandler(void)
 				step=hallposprev;
 				commutate();
 				comm = 1;
-				double rpm=(double)(96000000/TIM2->CCR1)/60;
+				realspeed=(double)(96000000/TIM2->CCR1)/60;
 			}
 		
     }

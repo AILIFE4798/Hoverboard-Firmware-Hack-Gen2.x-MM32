@@ -11,9 +11,6 @@
 #include "../Src/uart.h"
 #include "../Src/bldc.h"
 
-#define HALL2LED  //sequence through led or rotate acording to motor
-#define UART1EN  //enable uart1
-#define TESTROTATE  //enable uart1
 
 uint8_t step=1;//very importatnt to set to 1 or it will not work
 uint32_t millis;
@@ -23,13 +20,18 @@ bool uart;
 bool adc;
 bool comm=1;
 bool dir=1;
-double rpm;
 uint8_t uartBuffer=0;
 u8 sRxBuffer[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 int vbat;
 int itotal;
 uint8_t hallposprev=1;
 int speed=0;
+int realspeed=0;
+uint8_t  wState;
+
+
+
+
 s32 main(void){
 	//initialize normal gpio
 	io_init();
@@ -117,7 +119,7 @@ s32 main(void){
 			char buffer[32];
 		  //sprintf(buffer, "VBAT: %i V\n\r", vbat);
 			
-			sprintf(buffer, "speed: %f V\n\r", rpm);
+			sprintf(buffer, "speed: %i V\n\r", realspeed);
 		  UART1_SendString(buffer);
 			comm=0;
 		}

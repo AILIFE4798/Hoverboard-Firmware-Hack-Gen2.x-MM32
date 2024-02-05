@@ -5,7 +5,6 @@
 #include "hal_conf.h"
 #include "math.h"
 
-#define TESTROTATE 
 
 extern uint8_t step;
 extern int speed;
