@@ -54,8 +54,9 @@ s32 main(void){
 	//adc interrupt
 	exNVIC_Configure(ADC_COMP_IRQn, 0, 1);
 	
-	//watchdog
-	//Iwdg_Init(IWDG_Prescaler_32, 0xff);
+	#ifdef WATCHDOG//watchdog
+	Iwdg_Init(IWDG_Prescaler_32, 0xff);
+	#endif
 	
 	#ifdef UART1EN
 	//serial1.begin(19200);
@@ -79,13 +80,8 @@ s32 main(void){
 	//prevent turning back off imidiately
 	DELAY_Ms(5);	
 	
-	//25% PWM for test
-	TIM1->CCR1=1000;
-	TIM1->CCR2=1000;
-	TIM1->CCR3=1000;
-	
 	ADC_SoftwareStartConvCmd(ADC1, ENABLE);                                     //Software start conversion
-  ADC_ITConfig(ADC1, ADC_IT_EOC, ENABLE);
+
 	
   while(1) {
 		#ifdef HALL2LED

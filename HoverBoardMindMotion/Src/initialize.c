@@ -306,7 +306,7 @@ void adc_Init(void){
 		
 		ADC_RegularChannelConfig(ADC1, VBATADC, 0, ADC_SampleTime_7_5Cycles);
 		ADC_RegularChannelConfig(ADC1, ITOTALADC, 1, ADC_SampleTime_7_5Cycles);
-
+		ADC_ITConfig(ADC1, ADC_IT_EOC, ENABLE);
 }
 
 void Iwdg_Init(u16 IWDG_Prescaler, u16 Reload){
