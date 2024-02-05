@@ -31,6 +31,7 @@
   C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_wwdg.h \
   C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\mm32_reg_redefine_v1.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\math.h Src\..\Src\pinout.h \
-  Src\..\Src\bldc.h C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h \
+  Src\..\Src\bldc.h Src\..\Src\uart.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h \
   Src\..\Src\remoteUartBus.h HAL_Lib\Inc\hal_crc.h

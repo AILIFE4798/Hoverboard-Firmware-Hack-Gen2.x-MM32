@@ -11,6 +11,7 @@
 #include "math.h" 
 #include "../Src/pinout.h"
 #include "../Src/bldc.h"
+#include "../Src/uart.h"
 #include "stdio.h"
 #include "string.h"
 #include "../Src/remoteUartBus.h"
@@ -132,11 +133,8 @@ void AnswerMaster(void){
 
 	oData.checksum = 	CalcCRC((uint8_t*) &oData, sizeof(oData) - 2);	// (first bytes except crc)
 
-	#ifdef USART0_REMOTE
-		SendBuffer(USART0, (uint8_t*) &oData, sizeof(oData));
-	#endif
-	#ifdef USART1_REMOTE
-		SendBuffer(USART1, (uint8_t*) &oData, sizeof(oData));
+	#ifdef UART1EN
+		UART1_Send_Group((uint8_t*) &oData, sizeof(oData));
 	#endif
 
 }
