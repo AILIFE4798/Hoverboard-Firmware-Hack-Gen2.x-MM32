@@ -1,4 +1,4 @@
-# This repo is for split board with MM32SPIN0X MCU
+# This repo is for split hoverboard with MM32SPIN0X MCU
 
  Check https://github.com/RoboDurden/Hoverboard-Firmware-Hack-Gen2.x for guide and support
 
@@ -17,7 +17,6 @@ https://youtu.be/hCaIlEKzI3A
 * RemoteUartBus protocol(used by gen2.x gd32)
 * PID loop for constant speed
 * self hold
-* iwdg
 ## todo
 * adc (half working)
 * optimizations
