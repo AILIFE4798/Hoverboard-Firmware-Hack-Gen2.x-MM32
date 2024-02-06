@@ -19,14 +19,16 @@ void io_init(){
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOD, ENABLE);
 	//LED output
 	GPIO_InitTypeDef GPIO_InitStruct;
-  GPIO_InitStruct.GPIO_Pin = LEDRPIN;
   GPIO_InitStruct.GPIO_Mode = GPIO_Mode_Out_PP;
-  GPIO_InitStruct.GPIO_Speed = GPIO_Speed_10MHz;
+  GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
+	#ifdef LEDRPIN
+  GPIO_InitStruct.GPIO_Pin = LEDRPIN;
 	GPIO_Init(LEDRPORT, &GPIO_InitStruct);
 	GPIO_InitStruct.GPIO_Pin = LEDGPIN;
 	GPIO_Init(LEDGPORT, &GPIO_InitStruct);
 	GPIO_InitStruct.GPIO_Pin = LEDBPIN;
 	GPIO_Init(LEDBPORT, &GPIO_InitStruct);
+	#endif
 	#ifdef LATCHPIN
 	//latch output
 	GPIO_InitStruct.GPIO_Pin = LATCHPIN;
@@ -277,6 +279,7 @@ void DMA_NVIC_Config(DMA_Channel_TypeDef* dam_chx, u32 cpar, u32 cmar, u16 cndtr
 }
 
 void adc_Init(void){
+	#ifdef VBATPIN
 	ADC_InitTypeDef  ADC_InitStructure;    
 	GPIO_InitTypeDef GPIO_InitStructure;
 	GPIO_StructInit(&GPIO_InitStructure);	
@@ -313,6 +316,7 @@ void adc_Init(void){
 	ADC_RegularChannelConfig(ADC1, VBATADC, 0, ADC_SampleTime_7_5Cycles);
 	ADC_RegularChannelConfig(ADC1, ITOTALADC, 1, ADC_SampleTime_7_5Cycles);
 	ADC_ITConfig(ADC1, ADC_IT_EOC, ENABLE);
+	#endif
 }
 
 void Iwdg_Init(u16 IWDG_Prescaler, u16 Reload){

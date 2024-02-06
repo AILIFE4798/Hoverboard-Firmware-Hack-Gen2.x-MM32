@@ -61,5 +61,7 @@
 //#define WATCHDOG    //enable watchdog, to debug you must disable it
 #ifdef HALLAPIN    //no way to know real speed without hall!
   #define CONSTSPEED    //PID loop to attempt keeping constant speed
-	#define HALL2LED  //sequence through led or rotate acording to motor
+	#ifdef LEDRPIN
+		#define HALL2LED  //sequence through led or rotate acording to motor
+	#endif
 #endif
