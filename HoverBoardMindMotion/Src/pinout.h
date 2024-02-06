@@ -22,13 +22,13 @@
 #define HALLBPINSRC GPIO_PinSource14
 #define HALLCPINSRC GPIO_PinSource15
 //self hold
-#define LATCHPIN GPIO_Pin_2
+#define LATCHPIN GPIO_Pin_2		//comment out to disable button&latch!
 #define LATCHPORT GPIOB
 //power button
 #define BTNPIN GPIO_Pin_5
 #define BTNPORT GPIOB
 //buzzer
-#define BZPIN GPIO_Pin_9
+#define BZPIN GPIO_Pin_9    //comment out to disable buzzer!
 #define BZPORT GPIOB
 //serial1
 #define SERIAL1TXPIN GPIO_Pin_6
@@ -40,7 +40,7 @@
 #define SERIAL1RXPORT GPIOB
 #define SERIAL1RXAF GPIO_AF_3    //serial1 alternate function
 //ADC
-#define VBATPIN GPIO_Pin_1
+#define VBATPIN GPIO_Pin_1    //comment out to disable ADC!
 #define VBATPORT GPIOB
 #define VBATADC ADC_Channel_2
 #define VBATADC2 ADDR2

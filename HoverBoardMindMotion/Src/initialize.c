@@ -27,16 +27,20 @@ void io_init(){
 	GPIO_Init(LEDGPORT, &GPIO_InitStruct);
 	GPIO_InitStruct.GPIO_Pin = LEDBPIN;
 	GPIO_Init(LEDBPORT, &GPIO_InitStruct);
+	#ifdef LATCHPIN
 	//latch output
 	GPIO_InitStruct.GPIO_Pin = LATCHPIN;
 	GPIO_Init(LATCHPORT, &GPIO_InitStruct);
-	//bz output
-	GPIO_InitStruct.GPIO_Pin = BZPIN;
-	GPIO_Init(BZPORT, &GPIO_InitStruct);
 	//button input
 	GPIO_InitStruct.GPIO_Pin = BTNPIN;
 	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_FLOATING;
 	GPIO_Init(BTNPORT, &GPIO_InitStruct);
+	#endif
+	#ifdef BZPIN
+	//bz output
+	GPIO_InitStruct.GPIO_Pin = BZPIN;
+	GPIO_Init(BZPORT, &GPIO_InitStruct);
+	#endif
 }
 void HALL_Init(){
 	GPIO_InitTypeDef GPIO_InitStructure;
@@ -271,42 +275,42 @@ void DMA_NVIC_Config(DMA_Channel_TypeDef* dam_chx, u32 cpar, u32 cmar, u16 cndtr
 }
 
 void adc_Init(void){
-		ADC_InitTypeDef  ADC_InitStructure;    
-    GPIO_InitTypeDef GPIO_InitStructure;
-    GPIO_StructInit(&GPIO_InitStructure);	
+	ADC_InitTypeDef  ADC_InitStructure;    
+	GPIO_InitTypeDef GPIO_InitStructure;
+	GPIO_StructInit(&GPIO_InitStructure);	
+
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE); 
+
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
+
+	GPIO_InitStructure.GPIO_Pin = VBATPIN;
+	GPIO_Init(VBATPORT, &GPIO_InitStructure);
+
+	GPIO_InitStructure.GPIO_Pin = ITOTALPIN;
+	GPIO_Init(ITOTALPORT, &GPIO_InitStructure);    
+
+	/* Initialize the ADC_PRESCALE values */
+	ADC_InitStructure.ADC_PRESCALE = ADC_PCLK2_PRESCALE_6;							//for 72MHz
+
+	/* Initialize the ADC_Mode member */
+	ADC_InitStructure.ADC_Mode = ADC_Mode_Single_Period;
+
+	/* Initialize the ADC_DataAlign member */
+	ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
 	
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE); 
+	/* Initialize the ADC_ExternalTrigConv member */
+	ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_T1_CC4;
+	//TIM1->CCR4 = 0;//triger ADC by saw bottom
+	ADC_InitStructure.ADC_Resolution = ADC_Resolution_12b;
+	ADC_Init(ADC1, &ADC_InitStructure);
 
-		GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-		GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
-
-    GPIO_InitStructure.GPIO_Pin = VBATPIN;
-    GPIO_Init(VBATPORT, &GPIO_InitStructure);
-
-    GPIO_InitStructure.GPIO_Pin = ITOTALPIN;
-    GPIO_Init(ITOTALPORT, &GPIO_InitStructure);    
-
-    /* Initialize the ADC_PRESCALE values */
-		ADC_InitStructure.ADC_PRESCALE = ADC_PCLK2_PRESCALE_6;							//for 72MHz
+	ADC_ExternalTrigConvCmd(ADC1,ENABLE);
+	ADC_Cmd(ADC1, ENABLE);
 	
-    /* Initialize the ADC_Mode member */
-    ADC_InitStructure.ADC_Mode = ADC_Mode_Single_Period;
-
-    /* Initialize the ADC_DataAlign member */
-    ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
-		
-    /* Initialize the ADC_ExternalTrigConv member */
-    ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_T1_CC4;
-    //TIM1->CCR4 = 0;//triger ADC by saw bottom
-    ADC_InitStructure.ADC_Resolution = ADC_Resolution_12b;
-    ADC_Init(ADC1, &ADC_InitStructure);
-
-		ADC_ExternalTrigConvCmd(ADC1,ENABLE);
-		ADC_Cmd(ADC1, ENABLE);
-		
-		ADC_RegularChannelConfig(ADC1, VBATADC, 0, ADC_SampleTime_7_5Cycles);
-		ADC_RegularChannelConfig(ADC1, ITOTALADC, 1, ADC_SampleTime_7_5Cycles);
-		ADC_ITConfig(ADC1, ADC_IT_EOC, ENABLE);
+	ADC_RegularChannelConfig(ADC1, VBATADC, 0, ADC_SampleTime_7_5Cycles);
+	ADC_RegularChannelConfig(ADC1, ITOTALADC, 1, ADC_SampleTime_7_5Cycles);
+	ADC_ITConfig(ADC1, ADC_IT_EOC, ENABLE);
 }
 
 void Iwdg_Init(u16 IWDG_Prescaler, u16 Reload){

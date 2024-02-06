@@ -53,10 +53,11 @@ s32 main(void){
 	//timer2 hall change interrupt config
 	NVIC_Configure(TIM2_IRQn, 1);
 	//vbat
+	#ifdef VBATPIN
 	adc_Init();
 	//adc interrupt
 	exNVIC_Configure(ADC_COMP_IRQn, 0, 1);
-	
+	#endif
 	#ifdef WATCHDOG//watchdog
 	Iwdg_Init(IWDG_Prescaler_32, 0xff);
 	#endif
@@ -69,22 +70,25 @@ s32 main(void){
 	//uart dma
 	DMA_NVIC_Config(DMA1_Channel3, (u32)&UART1->RDR, (u32)sRxBuffer, 1);
 	#endif
-	
+	#ifdef LATCHPIN
 	//latch on power
 	GPIO_WriteBit(LATCHPORT, LATCHPIN, 1);
 	//wait while release button
 	while(GPIO_ReadInputDataBit(BTNPORT, BTNPIN)) {
+		#ifdef BZPIN
 		GPIO_WriteBit(BZPORT, BZPIN, 1);
 		DELAY_Ms(1);
 		GPIO_WriteBit(BZPORT, BZPIN, 0);
 		DELAY_Ms(1);
+		#endif
 		IWDG_ReloadCounter();
 	}
 	//prevent turning back off imidiately
 	DELAY_Ms(5);	
-	
-	ADC_SoftwareStartConvCmd(ADC1, ENABLE);                                     //Software start conversion
-
+	#endif
+	#ifdef VBATPIN
+	ADC_SoftwareStartConvCmd(ADC1, ENABLE);    //Software start conversion
+	#endif
 	
   while(1) {
 		#ifdef HALL2LED
@@ -110,15 +114,17 @@ s32 main(void){
 			lastCommutation=millis;
 		}
 */		
-		
+		#ifdef LATCHPIN
 		//button press for shutdown
 		if(GPIO_ReadInputDataBit(BTNPORT, BTNPIN)){
 			//power off melody
 			for(int i=0;i<3;i++){
+			#ifdef BZPIN
 			GPIO_WriteBit(BZPORT, BZPIN, 1);
 		  DELAY_Ms(10);
 		  GPIO_WriteBit(BZPORT, BZPIN, 0);
 		  DELAY_Ms(10);
+			#endif	
 			}
 			//wait for release
 			while(GPIO_ReadInputDataBit(BTNPORT, BTNPIN)) {
@@ -128,6 +134,7 @@ s32 main(void){
 			//last line to ever be executed
 			GPIO_WriteBit(LATCHPORT, LATCHPIN, 0);
 		}
+		#endif
 		//feed the watchdog
 		IWDG_ReloadCounter();
   }//main loop
