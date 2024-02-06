@@ -9,7 +9,7 @@
 #define LEDGPORT GPIOD
 #define LEDBPORT GPIOD
 //hall sensor
-#define HALLAPIN GPIO_Pin_13
+#define HALLAPIN GPIO_Pin_13    //comment out to use simulated hall sensor!
 #define HALLBPIN GPIO_Pin_14
 #define HALLCPIN GPIO_Pin_15
 #define HALLAPORT GPIOC
@@ -56,9 +56,10 @@
 #define BAUD 19200
 
 //test
-#define HALL2LED  //sequence through led or rotate acording to motor
 #define UART1EN  //enable uart1
-//#define TESTROTATE  //enable uart1
+#define TESTROTATE  //enable uart1
 //#define WATCHDOG    //enable watchdog, to debug you must disable it
-#define CONSTSPEED    //PID loop to attempt keeping constant speed
-
+#ifdef HALLAPIN    //no way to know real speed without hall!
+  #define CONSTSPEED    //PID loop to attempt keeping constant speed
+	#define HALL2LED  //sequence through led or rotate acording to motor
+#endif

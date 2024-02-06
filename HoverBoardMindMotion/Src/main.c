@@ -39,7 +39,9 @@ s32 main(void){
 	//initialize normal gpio
 	io_init();
 	//hall gpio init
+	#ifdef HALLAPIN
 	HALL_Init();
+	#endif
 	//hall timer init
 	TIM2_Init(65535, 100);
 	//initialize 6 bldc pins
@@ -103,17 +105,25 @@ s32 main(void){
 			speedupdate();
 		  lastupdate=millis;
 		}
-/*	
+		#ifndef HALLAPIN
 		//simulated hall sensor for commutation
-		if(millis-lastCommutation>300){
-			step++;
+		if(millis-lastCommutation>70){
+			if(dir){
+				step++;
+			}else{
+				step--;
+			}
+			step=step+dir;
 			if(step>6){
 				step=1;
+			}
+			if(step<1){
+				step=6;
 			}
 			commutate();
 			lastCommutation=millis;
 		}
-*/		
+		#endif
 		#ifdef LATCHPIN
 		//button press for shutdown
 		if(GPIO_ReadInputDataBit(BTNPORT, BTNPIN)){

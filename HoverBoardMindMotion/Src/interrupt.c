@@ -44,11 +44,13 @@ void ADC1_COMP_IRQHandler(void)
 			vbat = ADC1->VBATADC2;//read adc register
 			itotal = ADC1->ITOTALADC2;
 			adc = 1;//handle in main loop
+			#ifdef HALLAPIN
 			if(hallpos(dir)!=hallposprev){
 				hallposprev=hallpos(dir);
 				step=hallposprev;
 				commutate();
 			}
+			#endif
 			millis++;
     }
 }	

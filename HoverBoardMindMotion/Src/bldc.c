@@ -40,7 +40,7 @@ const uint8_t hall_to_pos[8] =
 
 
 uint8_t hallpos(uint8_t dir){
-	
+	#ifdef HALLAPIN
 	uint8_t HallA;
 	uint8_t HallB;
 	uint8_t HallC;
@@ -60,7 +60,9 @@ uint8_t hallpos(uint8_t dir){
 	}
 	
 	return hall_to_pos[HallValue];
-
+	#else
+	return 0;
+	#endif
 }
 
 
@@ -142,16 +144,19 @@ void commutate(){
 
 void speedupdate(){
   #ifdef TESTROTATE	
-	if(millis-lasttestrotate>100){
+	if(millis-lasttestrotate>150){
 		speed+=2*testrotatedir; //keep changing speed
-		if(speed>150){    //reverse dir
+		if(speed>300){    //reverse dir
 			testrotatedir=-1;
 		}
-		if(speed<-150){
+		if(speed<-300){
 			testrotatedir=1;
 		}	
 		lasttestrotate=millis;
 	}
+		#ifndef HALLAPIN
+			speed=300;
+		#endif
 	#else	
 	RemoteUpdate();
 	#endif

@@ -43,6 +43,7 @@ void io_init(){
 	#endif
 }
 void HALL_Init(){
+	#ifdef HALLAPIN
 	GPIO_InitTypeDef GPIO_InitStructure;
 	
 	GPIO_PinAFConfig(HALLAPORT, HALLAPINSRC, HALLAAF);
@@ -57,6 +58,7 @@ void HALL_Init(){
 	GPIO_Init(HALLBPORT, &GPIO_InitStructure);
 	GPIO_InitStructure.GPIO_Pin = HALLCPIN;
 	GPIO_Init(HALLCPORT, &GPIO_InitStructure);	
+	#endif
 }
 //hall sensor hardware speed sensing
 void TIM2_Init(u32 arr, u16 psc){
