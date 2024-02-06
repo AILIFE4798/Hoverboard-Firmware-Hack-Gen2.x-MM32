@@ -33,7 +33,9 @@ void DMA1_Channel2_3_IRQHandler(void)
     if(DMA_GetITStatus(DMA1_IT_TC3)) {
         DMA_ClearITPendingBit(DMA1_IT_GL3);
         // Check the received buffer
+			  #ifdef UART1EN
         serialit();
+				#endif
     }
 }	
 	

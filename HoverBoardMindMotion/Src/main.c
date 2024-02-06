@@ -100,7 +100,6 @@ s32 main(void){
 		GPIO_WriteBit(LEDBPORT, LEDBPIN, GPIO_ReadInputDataBit(HALLCPORT, HALLCPIN));		
 		#endif
 		
-		
 		if(millis-lastupdate>10){//speed pid loop
 			speedupdate();
 		  lastupdate=millis;
