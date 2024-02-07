@@ -27,7 +27,7 @@ int vbat;
 int itotal;
 uint8_t hallposprev=1;
 int speed=0;
-int pwm;
+int pwm=0;
 int realspeed=0;
 int frealspeed=0;
 uint8_t  wState;
@@ -72,6 +72,9 @@ s32 main(void){
 	//uart dma
 	DMA_NVIC_Config(DMA1_Channel3, (u32)&UART1->RDR, (u32)sRxBuffer, 1);
 	#endif
+	TIM1->CCR1=0;//prevent motor starting automaticly
+	TIM1->CCR2=0;
+	TIM1->CCR3=0;
 	#ifdef LATCHPIN
 	//latch on power
 	GPIO_WriteBit(LATCHPORT, LATCHPIN, 1);
@@ -126,6 +129,9 @@ s32 main(void){
 		#ifdef LATCHPIN
 		//button press for shutdown
 		if(GPIO_ReadInputDataBit(BTNPORT, BTNPIN)){
+			TIM1->CCR1=0;    //shut down motor
+			TIM1->CCR2=0;
+			TIM1->CCR3=0;
 			//power off melody
 			for(int i=0;i<3;i++){
 			#ifdef BZPIN
@@ -142,6 +148,7 @@ s32 main(void){
 	    }
 			//last line to ever be executed
 			GPIO_WriteBit(LATCHPORT, LATCHPIN, 0);
+			while(1);//incase the hardware failed...
 		}
 		#endif
 		//feed the watchdog
