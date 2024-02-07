@@ -54,6 +54,8 @@
 #define VBAT_DEVIDER 0.026    //for calculating vbat voltage
 #define SLAVEID 1    //for remoteuartbus protol, compatiable with gen2 gd32
 #define BAUD 19200
+//#define INVERT_LOWSIDE    //when the low side gate driver is active LOW
+
 
 //test
 #define UART1EN  //enable uart1
