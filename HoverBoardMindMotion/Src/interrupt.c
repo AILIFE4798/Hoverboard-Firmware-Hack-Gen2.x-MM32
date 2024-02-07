@@ -1,9 +1,9 @@
 #include "hal_tim.h"
 #include "hal_conf.h"
 #include "stdio.h"
-#include "pinout.h"
-#include "bldc.h"
-#include "../Src/remoteUartBus.h"
+#include "../Inc/pinout.h"
+#include "../Inc/bldc.h"
+#include "../Inc/remoteUartBus.h"
 
 extern uint8_t step;
 extern bool uart;

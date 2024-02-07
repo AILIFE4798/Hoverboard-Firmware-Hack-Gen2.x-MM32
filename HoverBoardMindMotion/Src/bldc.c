@@ -1,9 +1,9 @@
 #include "mm32_device.h"                // Device header
 #include "hal_gpio.h"
-#include "../Src/pinout.h"
-#include "../Src/remoteUartBus.h"
-#include "../Src/bldc.h"
-#include "../Src/calculation.h"
+#include "../Inc/pinout.h"
+#include "../Inc/remoteUartBus.h"
+#include "../Inc/bldc.h"
+#include "../Inc/calculation.h"
 #include "hal_tim.h"
 #include "hal_conf.h"
 #include "math.h"

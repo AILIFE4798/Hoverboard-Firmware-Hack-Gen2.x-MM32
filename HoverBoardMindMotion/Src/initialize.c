@@ -1,9 +1,9 @@
 //initialize all pheberals
-#include "../Src/pinout.h"
+#include "../Inc/pinout.h"
 #include "hal_gpio.h"
 #include "hal_rcc.h"
 #include "hal_tim.h"
-#include "initialize.h"
+#include "../Inc/initialize.h"
 #include "hal_conf.h"
 #include "mm32_reg_redefine_v1.h"
 

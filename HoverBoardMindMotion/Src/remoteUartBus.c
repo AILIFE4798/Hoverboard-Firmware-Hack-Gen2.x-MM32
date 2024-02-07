@@ -9,12 +9,12 @@
 /////////////////////////////////////////////////////////////////////////
 #include "mm32_device.h"                
 #include "math.h" 
-#include "../Src/pinout.h"
-#include "../Src/bldc.h"
-#include "../Src/uart.h"
+#include "../Inc/pinout.h"
+#include "../Inc/bldc.h"
+#include "../Inc/uart.h"
 #include "stdio.h"
 #include "string.h"
-#include "../Src/remoteUartBus.h"
+#include "../Inc/remoteUartBus.h"
 #include "hal_crc.h"
 
 #pragma pack(1)
