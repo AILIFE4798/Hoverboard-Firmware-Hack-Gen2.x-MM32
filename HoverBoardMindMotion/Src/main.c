@@ -5,11 +5,11 @@
 #include "hal_adc.h"           
 #include "hal_tim.h"
 #include "hal_iwdg.h"
-#include "../Src/delay.h"
-#include "../Src/pinout.h"  
-#include "../Src/initialize.h"
-#include "../Src/uart.h"
-#include "../Src/bldc.h"
+#include "../Inc/delay.h"
+#include "../Inc/pinout.h"  
+#include "../Inc/initialize.h"
+#include "../Inc/uart.h"
+#include "../Inc/bldc.h"
 
 
 uint8_t step=1;//very importatnt to set to 1 or it will not work

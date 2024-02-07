@@ -1,5 +1,5 @@
 #include "mm32_device.h"                // Device header
-#include "calculation.h"   
+#include "../Inc/calculation.h"   
 
 int max = 4095;
 int min = -4095;
