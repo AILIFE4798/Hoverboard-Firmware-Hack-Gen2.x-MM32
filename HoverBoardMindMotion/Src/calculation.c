@@ -6,11 +6,23 @@ int min = -4095;
 int qdSum = 0;
 int lasterr=0;
 int prevpwm=0;
+
 uint8_t index;
 int datasum;
 int avgarr[32];
 extern int realspeed;
 extern int frealspeed;
+uint8_t vindex;
+int vdatasum;
+int vavgarr[32];
+extern int vbat;
+extern int fvbat;
+uint8_t aindex;
+int adatasum;
+int aavgarr[64];
+extern int itotal;
+extern int fitotal;
+
 
 int PID(int setpoint,int real){
 	
@@ -59,7 +71,26 @@ void avgspeed(){
   frealspeed = (int)(datasum>>5);
   index++;
 }
-
+void avgvbat(){
+	
+	if(vindex >= 32){
+    vindex = 0;
+  } 
+  vdatasum = vdatasum + vbat - vavgarr[vindex];
+  vavgarr[vindex] = vbat;
+  fvbat = (int)(vdatasum>>5);
+  vindex++;
+}
+void avgItotal(){
+	
+	if(aindex >= 64){
+    aindex = 0;
+  } 
+  adatasum = adatasum + itotal - aavgarr[aindex];
+  aavgarr[aindex] = itotal;
+  fitotal = (int)(adatasum>>6);
+  aindex++;
+}
 int PID2PWM(int pid){
 	int pwm = prevpwm += pid;
 	if(pwm > max){

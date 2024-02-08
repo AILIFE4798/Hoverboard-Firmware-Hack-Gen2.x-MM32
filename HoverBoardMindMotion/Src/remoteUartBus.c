@@ -33,8 +33,8 @@ extern int32_t speed;
 extern uint8_t  wState;
 
 extern int32_t iOdom;
-extern int vbat; 							// global variable for battery voltage
-extern int itotal; 									// global variable for current dc
+extern int fvbat; 							// global variable for battery voltage
+extern int fitotal; 									// global variable for current dc
 extern int frealspeed; 									// global variable for real Speed
 
 typedef struct {			// ´#pragma pack(1)´ needed to get correct sizeof()
@@ -134,8 +134,8 @@ void AnswerMaster(void){
 	SerialHover2Server oData;
 	oData.cStart = START_FRAME;
 	oData.iSlave = SLAVEID;
-	oData.iVolt = (uint16_t)	(vbat);
-	oData.iAmp = (int16_t) 	(itotal);
+	oData.iVolt = (uint16_t)	(fvbat);
+	oData.iAmp = (int16_t) 	(fitotal);
 	oData.iSpeed = (int16_t) (frealspeed	*10);
 	oData.iOdom = (int32_t) iOdom;
 	//oData.iOdom = iAnswerMaster++;

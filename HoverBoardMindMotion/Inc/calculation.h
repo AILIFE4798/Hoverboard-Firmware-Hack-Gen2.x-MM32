@@ -9,5 +9,5 @@
 int PID(int setpoint,int real);
 void avgspeed();
 int PID2PWM(int pid);
-
-
+void avgItotal();
+void avgvbat();

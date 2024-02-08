@@ -25,6 +25,8 @@ uint8_t uartBuffer=0;
 u8 sRxBuffer[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 int vbat;
 int itotal;
+int fvbat;
+int fitotal;
 uint8_t hallposprev=1;
 int speed=0;
 int pwm=0;

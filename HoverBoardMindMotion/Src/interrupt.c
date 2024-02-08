@@ -4,6 +4,7 @@
 #include "../Inc/pinout.h"
 #include "../Inc/bldc.h"
 #include "../Inc/remoteUartBus.h"
+#include "../Inc/calculation.h"
 
 extern uint8_t step;
 extern bool uart;
@@ -45,7 +46,8 @@ void ADC1_COMP_IRQHandler(void)
 			ADC_ClearITPendingBit(ADC1, ADC_IT_EOC);
 			vbat = (double)VBAT_DIVIDER*(uint16_t)ADC1->VBATADC2*100;//read adc register
 			itotal = (double)ITOTAL_DIVIDER*(uint16_t)ADC1->ITOTALADC2*100;
-			adc = 1;//handle in main loop
+			avgvbat();
+			avgItotal();
 			#ifdef HALLAPIN
 			if(hallpos(dir)!=hallposprev){
 				hallposprev=hallpos(dir);
