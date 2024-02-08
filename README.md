@@ -8,7 +8,7 @@
  
 ## Working features
 
-The firmware is already 80% functional, basic motor control should all work, but more testing is needed
+The firmware is already 90% functional, basic motor control should all work, but more testing is needed
 
 https://youtu.be/hCaIlEKzI3A
 
@@ -17,8 +17,8 @@ https://youtu.be/hCaIlEKzI3A
 * RemoteUartBus protocol(used by gen2.x gd32)
 * PID loop for constant speed
 * self hold
+* voltage and total current
 ## todo
-* adc (half working)
 * optimizations
 * eeprom (autodetect)
 * ws2812
