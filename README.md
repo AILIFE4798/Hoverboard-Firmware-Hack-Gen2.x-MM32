@@ -20,5 +20,7 @@ https://youtu.be/hCaIlEKzI3A
 * voltage and total current
 ## todo
 * optimizations
-* eeprom (autodetect)
-* comparator (foc)
+* constant torque
+* autodetect pins
+* phase current
+* foc
