@@ -239,7 +239,7 @@ void speedupdate(){
 		frealspeed=0;
 	}	
 	#ifdef CONSTSPEED	
-	pwm= PID(speed,frealspeed);
+	pwm= PID2PWM((PID(speed,frealspeed)/50));
 	//pwm=(speed-frealspeed)*30;
 	if(speed==0){
 		pwm=0;
