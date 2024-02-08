@@ -427,6 +427,51 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Inc</GroupName>
+          <Files>
+            <File>
+              <FileName>bldc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\bldc.h</FilePath>
+            </File>
+            <File>
+              <FileName>calculation.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\calculation.h</FilePath>
+            </File>
+            <File>
+              <FileName>delay.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\delay.h</FilePath>
+            </File>
+            <File>
+              <FileName>initialize.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\initialize.h</FilePath>
+            </File>
+            <File>
+              <FileName>interrupt.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\interrupt.h</FilePath>
+            </File>
+            <File>
+              <FileName>pinout.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\pinout.h</FilePath>
+            </File>
+            <File>
+              <FileName>remoteUartBus.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\remoteUartBus.h</FilePath>
+            </File>
+            <File>
+              <FileName>uart.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\uart.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>HAL</GroupName>
           <Files>
             <File>
@@ -528,51 +573,6 @@
               <FileName>hal_wwdg.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\HAL_Lib\Src\hal_wwdg.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Inc</GroupName>
-          <Files>
-            <File>
-              <FileName>bldc.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Inc\bldc.h</FilePath>
-            </File>
-            <File>
-              <FileName>calculation.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Inc\calculation.h</FilePath>
-            </File>
-            <File>
-              <FileName>delay.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Inc\delay.h</FilePath>
-            </File>
-            <File>
-              <FileName>initialize.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Inc\initialize.h</FilePath>
-            </File>
-            <File>
-              <FileName>interrupt.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Inc\interrupt.h</FilePath>
-            </File>
-            <File>
-              <FileName>pinout.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Inc\pinout.h</FilePath>
-            </File>
-            <File>
-              <FileName>remoteUartBus.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Inc\remoteUartBus.h</FilePath>
-            </File>
-            <File>
-              <FileName>uart.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Inc\uart.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -59,7 +59,7 @@
 
 //test
 #define UART1EN  //enable uart1
-#define TESTROTATE  //enable uart1
+//#define TESTROTATE  //spin motor foward and backward automaticly
 //#define WATCHDOG    //enable watchdog, to debug you must disable it
 #ifdef HALLAPIN    //no way to know real speed without hall!
   #define CONSTSPEED    //PID loop to attempt keeping constant speed

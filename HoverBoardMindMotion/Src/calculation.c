@@ -67,6 +67,11 @@ int PID2PWM(int pid){
 	}else if(pwm < min){
 		pwm = min;
 	}
+	if(prevpwm > max){
+		prevpwm =max ;
+	}else if(prevpwm < min){
+		prevpwm = min;
+	}
 	return pwm;
 }
 
