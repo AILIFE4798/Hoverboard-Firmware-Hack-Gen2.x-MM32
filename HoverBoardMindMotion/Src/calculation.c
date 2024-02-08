@@ -5,7 +5,7 @@ int max = 4095;
 int min = -4095;
 int qdSum = 0;
 int lasterr=0;
-
+int prevpwm=0;
 uint8_t index;
 int datasum;
 int avgarr[32];
@@ -22,10 +22,10 @@ int PID(int setpoint,int real){
 	//Calc Error
 	Error = setpoint - real;
 	//Calc proportional
-	Up = ((Kp+(setpoint/DYNKp)) * Error);
+	Up = (Kp * Error);
 	//Calc integral
 	#ifdef DYNKi
-	qdSum = qdSum + (Ki+(setpoint/DYNKi)) * Error;
+	qdSum = qdSum + Ki * Error;
 	#else
 	qdSum=0;
 	#endif
@@ -36,7 +36,7 @@ int PID(int setpoint,int real){
 		qdSum = (min);
 	}
 	Ui = qdSum;
-	Ud=(Error-lasterr)*(Kd-(setpoint/DYNKd));
+	Ud=(Error-lasterr)*Kd;
 	lasterr=Error;
 	qOut = Up + Ui + Ud;		
 	//Out Limit
@@ -59,4 +59,18 @@ void avgspeed(){
   frealspeed = (int)(datasum>>5);
   index++;
 }
+
+int PID2PWM(int pid){
+	int pwm = prevpwm += pid;
+	if(pwm > max){
+		pwm =max ;
+	}else if(pwm < min){
+		pwm = min;
+	}
+	return pwm;
+}
+
+
+
+
 
