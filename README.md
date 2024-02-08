@@ -21,5 +21,4 @@ https://youtu.be/hCaIlEKzI3A
 ## todo
 * optimizations
 * eeprom (autodetect)
-* ws2812
 * comparator (foc)
