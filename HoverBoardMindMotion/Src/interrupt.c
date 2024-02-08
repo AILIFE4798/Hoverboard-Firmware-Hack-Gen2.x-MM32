@@ -43,8 +43,8 @@ void ADC1_COMP_IRQHandler(void)
 {
     if(RESET != ADC_GetITStatus(ADC1, ADC_IT_EOC)) {
 			ADC_ClearITPendingBit(ADC1, ADC_IT_EOC);
-			vbat = ADC1->VBATADC2;//read adc register
-			itotal = ADC1->ITOTALADC2;
+			vbat = (double)VBAT_DIVIDER*(uint16_t)ADC1->VBATADC2*100;//read adc register
+			itotal = (double)ITOTAL_DIVIDER*(uint16_t)ADC1->ITOTALADC2*100;
 			adc = 1;//handle in main loop
 			#ifdef HALLAPIN
 			if(hallpos(dir)!=hallposprev){

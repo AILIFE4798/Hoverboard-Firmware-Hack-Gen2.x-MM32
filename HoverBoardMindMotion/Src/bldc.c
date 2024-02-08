@@ -248,13 +248,13 @@ void speedupdate(){
 	pwm=speed*4;//1000~-1000
 	#endif
 	
-	if(pwm>0){    // 4095~-4095
+	if(pwm>0){
 	dir=1;
   }else{
 	dir=0;
 	}
 
-	unsigned int abspeed=fabs((double)pwm);
+	unsigned int abspeed=fabs((double)pwm);    // 4095~-4095
 	TIM1->CCR1=abspeed;
 	TIM1->CCR2=abspeed;
 	TIM1->CCR3=abspeed;

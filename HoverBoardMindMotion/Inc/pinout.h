@@ -42,16 +42,19 @@
 //ADC
 #define VBATPIN GPIO_Pin_1    //comment out to disable ADC!
 #define VBATPORT GPIOB
-#define VBATADC ADC_Channel_2
-#define VBATADC2 ADDR2
+#define VBATADC ADC_Channel_9
+#define VBATADC2 ADDR9
 #define ITOTALPIN GPIO_Pin_7
 #define ITOTALPORT GPIOA
-#define ITOTALADC ADC_Channel_6
-#define ITOTALADC2 ADDR6
+#define ITOTALADC ADC_Channel_7
+#define ITOTALADC2 ADDR7
 
 //extra parameter
 #define MCUVCC 5000    //mcu voltage in mv,used for adc,mm32spin support2.5-5.5v
-#define VBAT_DEVIDER 0.026    //for calculating vbat voltage
+#define VBAT_DIVIDER 0.038    //for calculating vbat voltage, my board have a 1:31 voltage divider and 5v vcc
+//#define VBAT_DIVIDER MCUVCC/4096/1000*31    //supply voltage/12bit adc/mv to v*divider percentage
+#define ITOTAL_DIVIDER 0.3    //for calculating Itotal,most board have R004=0.004ohm current shunt
+//#define ITOTAL MCUVCC/4096/1000*(1000/4)    //supply voltage/12bit adc/mv to v*shunt resistance invert(/0.004 == *250)
 #define SLAVEID 1    //for remoteuartbus protol, compatiable with gen2 gd32
 #define BAUD 19200
 //#define INVERT_LOWSIDE    //when the low side gate driver is active LOW
