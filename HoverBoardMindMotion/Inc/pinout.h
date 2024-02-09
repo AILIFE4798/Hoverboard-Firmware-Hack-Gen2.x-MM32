@@ -2,12 +2,12 @@
 //pinout is for Layout2.8.1
 
 //3LED
-#define LEDRPIN GPIO_Pin_12
+#define LEDRPIN GPIO_Pin_3
 #define LEDGPIN GPIO_Pin_2
-#define LEDBPIN GPIO_Pin_3
-#define LEDRPORT GPIOA
+#define LEDBPIN GPIO_Pin_12
+#define LEDRPORT GPIOD
 #define LEDGPORT GPIOD
-#define LEDBPORT GPIOD
+#define LEDBPORT GPIOA
 //hall sensor
 #define HALLAPIN GPIO_Pin_13    //comment out to use simulated hall sensor!
 #define HALLBPIN GPIO_Pin_14
@@ -30,17 +30,8 @@
 //buzzer
 #define BZPIN GPIO_Pin_9    //comment out to disable buzzer!
 #define BZPORT GPIOB
-//serial1
-#define SERIAL1TXPIN GPIO_Pin_6
-#define SERIAL1TXPINSRC GPIO_PinSource6
-#define SERIAL1TXPORT GPIOB
-#define SERIAL1TXAF GPIO_AF_0    //serial1 alternate function
-#define SERIAL1RXPIN GPIO_Pin_4
-#define SERIAL1RXPINSRC GPIO_PinSource4
-#define SERIAL1RXPORT GPIOB
-#define SERIAL1RXAF GPIO_AF_3    //serial1 alternate function
 //ADC
-#define VBATPIN GPIO_Pin_1    //comment out to disable ADC!
+#define VBATPIN GPIO_Pin_1    //comment out to disable ADC! the code will no longer run because the timer is driven by ADC interrupt
 #define VBATPORT GPIOB
 #define VBATADC ADC_Channel_9
 #define VBATADC2 ADDR9
@@ -57,16 +48,30 @@
 //#define ITOTAL MCUVCC/4096/1000*(1000/4)    //supply voltage/12bit adc/mv to v*shunt resistance invert(/0.004 == *250)
 #define SLAVEID 1    //for remoteuartbus protol, compatiable with gen2 gd32
 #define BAUD 19200
-//#define INVERT_LOWSIDE    //when the low side gate driver is active LOW
-
+#define INVERT_LOWSIDE TIM_OCNPolarity_High   //when the low side gate driver is active HIGH
+//#define INVERT_LOWSIDE TIM_OCNPolarity_Low   //when the low side gate driver is active LOW
 
 //test
-#define UART1EN  //enable uart1
+#define UARTEN UART1 //enable uart, PA2 PA3=UART2, PB4 PB6=UART1
 //#define TESTROTATE  //spin motor foward and backward automaticly
 //#define WATCHDOG    //enable watchdog, to debug you must disable it
 #ifdef HALLAPIN    //no way to know real speed without hall!
-  #define CONSTSPEED    //PID loop to attempt keeping constant speed
 	#ifdef LEDRPIN
 		#define HALL2LED  //sequence through led or rotate acording to motor
 	#endif
+	#define HALLTIM TIM2    //timer for counting speed of hall sensor
+  #define CONSTSPEED    //PID loop to attempt keeping constant speed
 #endif
+
+//serial1
+#ifdef UARTEN 
+#define SERIALTXPIN GPIO_Pin_6
+#define SERIALTXPINSRC GPIO_PinSource6
+#define SERIALTXPORT GPIOB
+#define SERIALTXAF GPIO_AF_0    //serial alternate function
+#define SERIALRXPIN GPIO_Pin_4
+#define SERIALRXPINSRC GPIO_PinSource4
+#define SERIALRXPORT GPIOB
+#define SERIALRXAF GPIO_AF_3    //serial alternate function 
+#endif
+

@@ -43,9 +43,17 @@ s32 main(void){
 	//hall gpio init
 	#ifdef HALLAPIN
 	HALL_Init();
-	#endif
 	//hall timer init
-	TIM2_Init(65535, 100);
+		#ifdef HALLTIM
+		HALLTIM_Init(65535, 100);
+		//timer2 hall change interrupt config
+		if(HALLTIM==TIM2){
+			NVIC_Configure(TIM2_IRQn, 1);
+		}else{
+			NVIC_Configure(TIM3_IRQn, 1);
+		}
+		#endif
+	#endif
 	//initialize 6 bldc pins
 	BLDC_init();
 	//initialize timer
@@ -54,8 +62,6 @@ s32 main(void){
 	DELAY_Init();
 	//timer1 commutation interrupt config
 	NVIC_Configure(TIM1_BRK_UP_TRG_COM_IRQn, 1);
-	//timer2 hall change interrupt config
-	NVIC_Configure(TIM2_IRQn, 1);
 	//vbat
 	#ifdef VBATPIN
 	adc_Init();
@@ -66,13 +72,17 @@ s32 main(void){
 	Iwdg_Init(IWDG_Prescaler_32, 0xff);
 	#endif
 	
-	#ifdef UART1EN
+	#ifdef UARTEN
 	//serial1.begin(19200);
-	UART1_Init(BAUD);
+	UARTX_Init(BAUD);
 	//uart interrupt
 	exNVIC_Configure(DMA1_Channel2_3_IRQn, 0, 0);
 	//uart dma
-	DMA_NVIC_Config(DMA1_Channel3, (u32)&UART1->RDR, (u32)sRxBuffer, 1);
+	if(UARTEN==UART1){
+		DMA_NVIC_Config(DMA1_Channel3, (u32)&UART1->RDR, (u32)sRxBuffer, 1);
+	}else{
+		DMA_NVIC_Config(DMA1_Channel3, (u32)&UART2->RDR, (u32)sRxBuffer, 1);
+	}
 	#endif
 	TIM1->CCR1=0;//prevent motor starting automaticly
 	TIM1->CCR2=0;
@@ -96,7 +106,7 @@ s32 main(void){
 	#ifdef VBATPIN
 	ADC_SoftwareStartConvCmd(ADC1, ENABLE);    //Software start conversion
 	#endif
-	
+	UART_SendString("hello World\n\r");
   while(1) {
 		#ifdef HALL2LED
 		//rotating led
