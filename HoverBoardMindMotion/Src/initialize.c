@@ -271,7 +271,7 @@ void DMA_NVIC_Config(DMA_Channel_TypeDef* dam_chx, u32 cpar, u32 cmar, u16 cndtr
 	// Enable UARTy_DMA1_Channel Transfer complete interrupt
 	DMA_ITConfig(dam_chx, DMA_IT_TC, ENABLE);
 
-	UART_DMACmd(UART1, UART_DMAReq_EN, ENABLE);
+	UART_DMACmd(UARTEN, UART_DMAReq_EN, ENABLE);
 
 	// UARTy_DMA1_Channel enable
 	DMA_Cmd(dam_chx, ENABLE);
