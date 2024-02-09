@@ -34,7 +34,7 @@ void DMA1_Channel2_3_IRQHandler(void)
     if(DMA_GetITStatus(DMA1_IT_TC3)) {
         DMA_ClearITPendingBit(DMA1_IT_GL3);
         // Check the received buffer
-			  #ifdef UART1EN
+			  #ifdef UARTEN
         serialit();
 				#endif
     }
@@ -74,7 +74,21 @@ void TIM2_IRQHandler(void) {
 	
 
 }
+void TIM3_IRQHandler(void) {
+	realspeed = (long)80000/(long)(TIM3->CCR1);
+	if(dir==0){    //negative speed spinning backward
+		realspeed*=-1;
+	}
 
+  lastcommutate = millis;
+	if(dir==1){
+		iOdom++;
+	}else{
+		iOdom--;
+	}
+	
+
+}
 
 
 

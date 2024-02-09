@@ -19,7 +19,7 @@
 #include "../Inc/remoteUartBus.h"
 #include "hal_crc.h"
 
-#ifdef UART1EN
+#ifdef UARTEN
 #pragma pack(1)
 
 extern uint32_t millis;
@@ -142,8 +142,8 @@ void AnswerMaster(void){
 
 	oData.checksum = 	CalcCRC((uint8_t*) &oData, sizeof(oData) - 2);	// (first bytes except crc)
 
-	#ifdef UART1EN
-		UART1_Send_Group((uint8_t*) &oData, sizeof(oData));
+	#ifdef UARTEN
+		UART_Send_Group((uint8_t*) &oData, sizeof(oData));
 	#endif
 
 }
@@ -157,7 +157,7 @@ uint8_t iRxDataSize;
 // static int16_t iReceivePos = -1;		// if >= 0 incoming bytes are recorded until message size reached
 void serialit(void){
 
-	#ifdef UART1EN
+	#ifdef UARTEN
 		uint8_t cRead = sRxBuffer[0];
 	#endif
 	//DEBUG_LedSet((steerCounter%20) < 10,0)	// 	
