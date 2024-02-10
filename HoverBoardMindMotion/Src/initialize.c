@@ -197,7 +197,7 @@ void exNVIC_Configure(u8 ch, u8 pri, u8 sub)
 
 	exNVIC_Init(&NVIC_InitStruct);
 }
-//uart1
+//uart
 #ifdef UARTEN
 void UARTX_Init(u32 baudrate)
 {
