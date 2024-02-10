@@ -9,7 +9,7 @@
 #define LEDGPORT GPIOD
 #define LEDBPORT GPIOA
 //hall sensor
-#define HALLAPIN GPIO_Pin_13    //comment out to use simulated hall sensor!
+//#define HALLAPIN GPIO_Pin_13    //comment out to use simulated hall sensor!
 #define HALLBPIN GPIO_Pin_14
 #define HALLCPIN GPIO_Pin_15
 #define HALLAPORT GPIOC
