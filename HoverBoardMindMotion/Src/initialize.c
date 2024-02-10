@@ -60,6 +60,7 @@ void HALL_Init(){
 	GPIO_Init(HALLCPORT, &GPIO_InitStructure);	
 	#endif
 }
+#ifdef HALLTIM
 //hall sensor hardware speed sensing
 void HALLTIM_Init(u32 arr, u16 psc){
 	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStruct;
@@ -96,7 +97,7 @@ void HALLTIM_Init(u32 arr, u16 psc){
 	
 	TIM_Cmd(HALLTIM, ENABLE);
 }
-
+#endif
 
 //6 bldc pin
 void BLDC_init(){
