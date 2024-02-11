@@ -22,6 +22,10 @@ extern uint8_t hallposprev;
 extern int32_t iOdom;
 uint32_t itotaloffset=0;
 uint8_t poweron=0;
+uint16_t iphasea;
+uint16_t iphaseb;
+uint32_t iphaseaoffset=0;
+uint32_t iphaseboffset=0;
 
 //commutation interrupt
 void TIM1_BRK_UP_TRG_COM_IRQHandler(void)
@@ -48,13 +52,25 @@ void ADC1_COMP_IRQHandler(void)
 			ADC_ClearITPendingBit(ADC1, ADC_IT_EOC);
 			if(poweron<127){//cancel out adc offset
 				itotaloffset+=(uint16_t)ADC1->ITOTALADC2;
+				#ifdef IPHASEAPIN
+				iphaseaoffset+=(uint16_t)ADC1->IPHASEAADC2;
+				iphaseboffset+=(uint16_t)ADC1->IPHASEBADC2;
+				#endif
 				poweron++;
 			}else if(poweron==127){//divide by 128
-				itotaloffset=itotaloffset>>7;
+				itotaloffset = itotaloffset>>7;
+				#ifdef IPHASEAPIN
+				iphaseaoffset = iphaseaoffset>>7;
+				iphaseboffset = iphaseboffset>>7;
+				#endif
 				poweron++;
 			}else{
 				vbat = (double)VBAT_DIVIDER*(uint16_t)ADC1->VBATADC2*100;//read adc register
 				itotal = (double)ITOTAL_DIVIDER*((uint16_t)ADC1->ITOTALADC2-itotaloffset)*100;
+				#ifdef IPHASEAPIN
+				iphasea = (double)IPHASE_DIVIDER*((uint16_t)ADC1->IPHASEAADC2-iphaseaoffset)*100;
+				iphaseb = (double)IPHASE_DIVIDER*((uint16_t)ADC1->IPHASEBADC2-iphaseboffset)*100;
+				#endif
 				avgvbat();
 				avgItotal();
 				#ifdef HALLAPIN

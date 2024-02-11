@@ -39,6 +39,14 @@
 #define ITOTALPORT GPIOA
 #define ITOTALADC ADC_Channel_7
 #define ITOTALADC2 ADDR7
+//#define IPHASEAPIN GPIO_Pin_7    //comment out to disable phase current and foc
+#define IPHASEAPORT GPIOA
+#define IPHASEAADC ADC_Channel_7
+#define IPHASEAADC2 ADDR7
+#define IPHASEBPIN GPIO_Pin_7
+#define IPHASEBPORT GPIOA
+#define IPHASEBADC ADC_Channel_7
+#define IPHASEBADC2 ADDR7
 
 //extra parameter
 #define MCUVCC 5000    //mcu voltage in mv,used for adc,mm32spin support2.5-5.5v
@@ -46,6 +54,7 @@
 //#define VBAT_DIVIDER MCUVCC/4096/1000*31    //supply voltage/12bit adc/mv to v*divider percentage
 #define ITOTAL_DIVIDER 0.3    //for calculating Itotal,most board have R004=0.004ohm current shunt
 //#define ITOTAL MCUVCC/4096/1000*(1000/4)    //supply voltage/12bit adc/mv to v*shunt resistance invert(/0.004 == *250)
+#define IPHASE_DIVIDER 0.3    //for calculating Itotal,most board have R004=0.004ohm current shunt
 #define SLAVEID 1    //for remoteuartbus protol, compatiable with gen2 gd32
 #define BAUD 19200
 #define INVERT_LOWSIDE TIM_OCNPolarity_High   //when the low side gate driver is active HIGH
