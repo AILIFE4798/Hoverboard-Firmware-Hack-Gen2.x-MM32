@@ -20,6 +20,8 @@ extern int realspeed;
 extern int frealspeed;
 extern uint8_t hallposprev;
 extern int32_t iOdom;
+uint32_t itotaloffset=0;
+uint8_t poweron=0;
 
 //commutation interrupt
 void TIM1_BRK_UP_TRG_COM_IRQHandler(void)
@@ -44,18 +46,26 @@ void ADC1_COMP_IRQHandler(void)
 {
     if(RESET != ADC_GetITStatus(ADC1, ADC_IT_EOC)) {
 			ADC_ClearITPendingBit(ADC1, ADC_IT_EOC);
-			vbat = (double)VBAT_DIVIDER*(uint16_t)ADC1->VBATADC2*100;//read adc register
-			itotal = (double)ITOTAL_DIVIDER*(uint16_t)ADC1->ITOTALADC2*100;
-			avgvbat();
-			avgItotal();
-			#ifdef HALLAPIN
-			if(hallpos(dir)!=hallposprev){
-				hallposprev=hallpos(dir);
-				step=hallposprev;
-				commutate();
-			}
-			#endif
-			millis++;
+			if(poweron<127){//cancel out adc offset
+				itotaloffset+=(uint16_t)ADC1->ITOTALADC2;
+				poweron++;
+			}else if(poweron==127){//divide by 128
+				itotaloffset=itotaloffset>>7;
+				poweron++;
+			}else{
+				vbat = (double)VBAT_DIVIDER*(uint16_t)ADC1->VBATADC2*100;//read adc register
+				itotal = (double)ITOTAL_DIVIDER*((uint16_t)ADC1->ITOTALADC2-itotaloffset)*100;
+				avgvbat();
+				avgItotal();
+				#ifdef HALLAPIN
+				if(hallpos(dir)!=hallposprev){
+					hallposprev=hallpos(dir);
+					step=hallposprev;
+					commutate();
+				}
+				#endif
+		  }
+			millis++;//temp fix,systick is not accurate
     }
 }	
 
@@ -74,6 +84,7 @@ void TIM2_IRQHandler(void) {
 	
 
 }
+
 void TIM3_IRQHandler(void) {
 	realspeed = (long)80000/(long)(TIM3->CCR1);
 	if(dir==0){    //negative speed spinning backward

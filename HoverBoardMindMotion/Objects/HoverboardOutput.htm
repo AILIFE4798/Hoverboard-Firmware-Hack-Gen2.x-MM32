@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\HoverboardOutput.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\HoverboardOutput.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Sun Feb 11 01:32:17 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Mon Feb 12 01:59:12 2024
 <BR><P>
 <H3>Maximum Stack Usage =         96 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -341,8 +341,10 @@ Global Symbols
 
 <P><STRONG><a name="[b8]"></a>_dflt</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, dflti.o(.text), UNUSED)
 
-<P><STRONG><a name="[33]"></a>__aeabi_ui2d</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, dflti.o(.text), UNUSED)
+<P><STRONG><a name="[33]"></a>__aeabi_ui2d</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, dflti.o(.text))
 <BR><BR>[Calls]<UL><LI><a href="#[32]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d_normalise
+</UL>
+<BR>[Called By]<UL><LI><a href="#[12]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC1_COMP_IRQHandler
 </UL>
 
 <P><STRONG><a name="[b9]"></a>_dfltu</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, dflti.o(.text), UNUSED)
@@ -393,7 +395,7 @@ Global Symbols
 
 <P><STRONG><a name="[bf]"></a>__semihosting_library_function</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, indicate_semi.o(.text), UNUSED)
 
-<P><STRONG><a name="[12]"></a>ADC1_COMP_IRQHandler</STRONG> (Thumb, 144 bytes, Stack size 16 bytes, interrupt.o(.text.ADC1_COMP_IRQHandler))
+<P><STRONG><a name="[12]"></a>ADC1_COMP_IRQHandler</STRONG> (Thumb, 192 bytes, Stack size 16 bytes, interrupt.o(.text.ADC1_COMP_IRQHandler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = ADC1_COMP_IRQHandler &rArr; __aeabi_dmul
 </UL>
 <BR>[Calls]<UL><LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;avgItotal
@@ -403,6 +405,7 @@ Global Symbols
 <LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;commutate
 <LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hallpos
 <LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
+<LI><a href="#[33]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
 <LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
 <LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2iz
 </UL>
@@ -976,7 +979,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[10]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Channel2_3_IRQHandler
 </UL>
 
-<P><STRONG><a name="[8a]"></a>speedupdate</STRONG> (Thumb, 112 bytes, Stack size 16 bytes, bldc.o(.text.speedupdate))
+<P><STRONG><a name="[8a]"></a>speedupdate</STRONG> (Thumb, 124 bytes, Stack size 16 bytes, bldc.o(.text.speedupdate))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = speedupdate &rArr; RemoteUpdate &rArr; UART_Send_Group
 </UL>
 <BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID2PWM

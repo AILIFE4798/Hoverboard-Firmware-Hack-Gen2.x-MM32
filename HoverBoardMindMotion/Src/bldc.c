@@ -21,7 +21,7 @@ uint32_t lasttestrotate;
 int testrotatedir=1;
 uint8_t hallpos(uint8_t dir);
 bool lastdir=0;
-
+extern uint8_t poweron;
 
 
 
@@ -141,49 +141,51 @@ void commutate(){
 
 
 void speedupdate(){
-  #ifdef TESTROTATE	
-	if(millis-lasttestrotate>150){
-		speed+=2*testrotatedir; //keep changing speed
-		if(speed>300){    //reverse dir
-			testrotatedir=-1;
+	if(poweron>127){
+		#ifdef TESTROTATE	
+		if(millis-lasttestrotate>150){
+			speed+=2*testrotatedir; //keep changing speed
+			if(speed>300){    //reverse dir
+				testrotatedir=-1;
+			}
+			if(speed<-300){
+				testrotatedir=1;
+			}	
+			lasttestrotate=millis;
 		}
-		if(speed<-300){
-			testrotatedir=1;
-		}	
-		lasttestrotate=millis;
-	}
-		#ifndef HALLAPIN
-			speed=300;
+			#ifndef HALLAPIN
+				speed=300;
+			#endif
+		#else	
+		RemoteUpdate();
 		#endif
-	#else	
-	RemoteUpdate();
-	#endif
-	
-	avgspeed();//speed filter prevent oscilation
-	if(millis-lastcommutate>500){//zero out speed
-		realspeed=0;
-		frealspeed=0;
-	}	
-	#ifdef CONSTSPEED	
-	pwm= PID2PWM((PID(speed,frealspeed)/50));
-	//pwm=(speed-frealspeed)*30;
-	if(speed==0){
-		pwm=0;
-	}
-	#else
-	pwm=speed*4;//1000~-1000
-	#endif
-	
-	if(pwm>0){
-	dir=1;
-  }else{
-	dir=0;
-	}
+		
+		avgspeed();//speed filter prevent oscilation
+		if(millis-lastcommutate>500){//zero out speed
+			realspeed=0;
+			frealspeed=0;
+		}	
+		#ifdef CONSTSPEED	
+		pwm= PID2PWM((PID(speed,frealspeed)/50));
+		//pwm=(speed-frealspeed)*30;
+		if(speed==0){
+			pwm=0;
+		}
+		#else
+		pwm=speed*4;//1000~-1000
+		#endif
+		
+		if(pwm>0){
+		dir=1;
+		}else{
+		dir=0;
+		}
 
-	unsigned int abspeed=fabs((double)pwm);    // 4095~-4095
-	TIM1->CCR1=abspeed;
-	TIM1->CCR2=abspeed;
-	TIM1->CCR3=abspeed;
+		unsigned int abspeed=fabs((double)pwm);    // 4095~-4095
+		TIM1->CCR1=abspeed;
+		TIM1->CCR2=abspeed;
+		TIM1->CCR3=abspeed;
+ }
 }
 
 

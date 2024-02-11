@@ -97,7 +97,6 @@ Reset_Handler   PROC
                 IMPORT  __main
                 IMPORT  SystemInit
         
-        
                 LDR     R0, =__initial_sp                                       ; set stack pointer 
                 MSR     MSP, R0  
 
