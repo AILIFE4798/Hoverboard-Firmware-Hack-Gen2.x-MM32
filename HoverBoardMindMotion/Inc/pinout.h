@@ -1,3 +1,9 @@
+//¦¦+  ¦¦+ ¦¦¦¦¦¦+ ¦¦+   ¦¦+¦¦¦¦¦¦¦+¦¦¦¦¦¦+     ¦¦+  ¦¦+ ¦¦¦¦¦+  ¦¦¦¦¦¦+¦¦+  ¦¦+    ¦¦+   ¦¦+¦¦¦¦¦¦+ 
+//¦¦¦  ¦¦¦¦¦+---¦¦+¦¦¦   ¦¦¦¦¦+----+¦¦+--¦¦+    ¦¦¦  ¦¦¦¦¦+--¦¦+¦¦+----+¦¦¦ ¦¦++    ¦¦¦   ¦¦¦+----¦¦+
+//¦¦¦¦¦¦¦¦¦¦¦   ¦¦¦¦¦¦   ¦¦¦¦¦¦¦¦+  ¦¦¦¦¦¦++    ¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦¦     ¦¦¦¦¦++     ¦¦¦   ¦¦¦ ¦¦¦¦¦++
+//¦¦+--¦¦¦¦¦¦   ¦¦¦+¦¦+ ¦¦++¦¦+--+  ¦¦+--¦¦+    ¦¦+--¦¦¦¦¦+--¦¦¦¦¦¦     ¦¦+-¦¦+     +¦¦+ ¦¦++¦¦+---+ 
+//¦¦¦  ¦¦¦+¦¦¦¦¦¦++ +¦¦¦¦++ ¦¦¦¦¦¦¦+¦¦¦  ¦¦¦    ¦¦¦  ¦¦¦¦¦¦  ¦¦¦+¦¦¦¦¦¦+¦¦¦  ¦¦+     +¦¦¦¦++ ¦¦¦¦¦¦¦+
+//+-+  +-+ +-----+   +---+  +------++-+  +-+    +-+  +-++-+  +-+ +-----++-+  +-+      +---+  +------+
 //file for setting custom pinout before autodetect
 //pinout is for Layout2.8.1
 
@@ -35,10 +41,10 @@
 #define VBATPORT GPIOB
 #define VBATADC ADC_Channel_9
 #define VBATADC2 ADDR9
-#define ITOTALPIN GPIO_Pin_7
-#define ITOTALPORT GPIOA
-#define ITOTALADC ADC_Channel_7
-#define ITOTALADC2 ADDR7
+#define ITOTALPIN GPIO_Pin_0
+#define ITOTALPORT GPIOB
+#define ITOTALADC ADC_Channel_8
+#define ITOTALADC2 ADDR8
 //#define IPHASEAPIN GPIO_Pin_7    //comment out to disable phase current and foc
 #define IPHASEAPORT GPIOA
 #define IPHASEAADC ADC_Channel_7
