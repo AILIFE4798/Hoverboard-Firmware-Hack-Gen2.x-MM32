@@ -73,11 +73,11 @@
 #ifndef HARD_ILIMIT_AWDG
 	#define HARD_ILIMIT_COMP_REF_PIN GPIO_Pin_3    //uses comparator for emergency stop, comment out to use external transistor
 	#define HARD_ILIMIT_COMP_REF_PORT GPIOA
-	#define HARD_ILIMIT_COMP_INVERTING COMP_NonInvertingInput_IO3
-	#define HARD_ILIMIT_COMP_NONINVERTING COMP_InvertingInput_IO3
-	#define HARD_ILIMIT_PIN GPIO_Pin_12    //this pin is used for both analog and comparator input
+	#define HARD_ILIMIT_COMP_INVERTING COMP_NonInvertingInput_IO2
+	#define HARD_ILIMIT_COMP_NONINVERTING COMP_InvertingInput_IO2
+	#define HARD_ILIMIT_PIN GPIO_Pin_7    //this pin is used for both analog and comparator input
 	#define HARD_ILIMIT_PINSRC GPIO_PinSource12    //not needed for comp
-	#define HARD_ILIMIT_PORT GPIOB
+	#define HARD_ILIMIT_PORT GPIOA
 	#define HARD_ILIMIT_AF GPIO_AF_6    //not needed for comp
 #endif
 #define UARTEN UART1 //enable uart, PA2 PA3=UART2, PB4 PB6=UART1
