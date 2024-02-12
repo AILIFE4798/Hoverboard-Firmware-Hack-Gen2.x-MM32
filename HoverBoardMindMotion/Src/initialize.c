@@ -2,6 +2,7 @@
 #include "../Inc/pinout.h"
 #include "hal_gpio.h"
 #include "hal_rcc.h"
+#include "hal_comp.h"
 #include "hal_tim.h"
 #include "../Inc/initialize.h"
 #include "hal_conf.h"
@@ -177,14 +178,36 @@ void TIM1_init(u16 arr, u16 psc){
 	TIM_BDTRConfig(TIM1, &TIM_BDTRInitStructure);
 	
 	#ifdef HARD_ILIMIT_COMP_REF_PIN
-	
-	
-	#elsedef HARD_ILIMIT_PIN
+		RCC_APB2PeriphClockCmd(RCC_APB2ENR_COMP, ENABLE);
 		GPIO_InitTypeDef GPIO_InitStruct;
-		GPIO_InitStruct.GPIO_Mode = GPIO_Mode_Floating;
+		GPIO_InitStruct.GPIO_Mode = GPIO_Mode_AIN;
 		GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
-		GPIO_InitStruct.GPIO_Pin = LEDRPIN;
-		GPIO_Init(LEDRPORT, &GPIO_InitStruct);
+		GPIO_InitStruct.GPIO_Pin = HARD_ILIMIT_PIN;
+		GPIO_Init(HARD_ILIMIT_PORT, &GPIO_InitStruct);
+		GPIO_InitStruct.GPIO_Pin = HARD_ILIMIT_COMP_REF_PIN;
+		GPIO_Init(HARD_ILIMIT_COMP_REF_PORT, &GPIO_InitStruct);
+		
+		COMP_InitTypeDef COMP_InitStructure;
+		COMP_DeInit(COMP1); 
+		COMP_InitStructure.COMP_InvertingInput 		= HARD_ILIMIT_COMP_INVERTING;
+		COMP_InitStructure.COMP_NonInvertingInput = HARD_ILIMIT_COMP_NONINVERTING;
+		COMP_InitStructure.COMP_Output    				= COMP_Output_TIM1BKIN;
+		COMP_InitStructure.COMP_OutputPol 				= COMP_OutputPol_NonInverted;
+		COMP_InitStructure.COMP_Hysteresis  			= COMP_Hysteresis_High; 
+		COMP_InitStructure.COMP_Mode        			= COMP_Mode_HighSpeed;
+		COMP_InitStructure.COMP_Filter      			= COMP_Filter_4_Period;
+		COMP_Init(COMP1, &COMP_InitStructure);
+		COMP_Cmd(COMP1, ENABLE);
+
+	#else
+	#ifdef HARD_ILIMIT_PIN
+		GPIO_InitTypeDef GPIO_InitStruct;
+		GPIO_InitStruct.GPIO_Mode = GPIO_Mode_FLOATING;
+		GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
+		GPIO_InitStruct.GPIO_Pin = HARD_ILIMIT_PIN;
+		GPIO_Init(HARD_ILIMIT_PORT, &GPIO_InitStruct);
+		GPIO_PinAFConfig(HARD_ILIMIT_PORT, HARD_ILIMIT_PINSRC, HARD_ILIMIT_AF);
+	#endif	
 	#endif
 	TIM_Cmd(TIM1, ENABLE);
 }
