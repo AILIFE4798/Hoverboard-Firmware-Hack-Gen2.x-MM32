@@ -1,8 +1,8 @@
 #include "mm32_device.h"                // Device header
 
-#define Kp 8
-#define Ki 10
-#define Kd 400
+#define Kp 12
+#define Ki 1000
+#define Kd 500
 
 
 
