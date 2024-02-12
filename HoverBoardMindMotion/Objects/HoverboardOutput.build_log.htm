@@ -27,6 +27,7 @@ Project File Date:  02/12/2024
 <h2>Output:</h2>
 *** Using Compiler 'V6.19', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'MM32SPIN05'
+compiling bldc.c...
 Src/main.c(109): warning: passing 'char[14]' to parameter of type 'u8 *' (aka 'unsigned char *') converts between pointers to integer types where one is of the unique plain 'char' type and the other is not [-Wpointer-sign]
         UART_SendString("hello World\n\r");
                         ^~~~~~~~~~~~~~~~~
@@ -36,12 +37,11 @@ void UART_SendString(u8* str);
 1 warning generated.
 compiling main.c...
 compiling initialize.c...
-compiling bldc.c...
 compiling uart.c...
 compiling interrupt.c...
 compiling remoteUartBus.c...
 linking...
-Program Size: Code=8666 RO-data=234 RW-data=36 ZI-data=2524  
+Program Size: Code=8574 RO-data=234 RW-data=36 ZI-data=2524  
 FromELF: creating hex file...
 ".\Objects\HoverboardOutput.axf" - 0 Error(s), 1 Warning(s).
 
@@ -72,7 +72,7 @@ Package Vendor: MindMotion
       Include file:  Device/MM32SPIN06xx_s/Include/mm32_device.h
       Source file:   Device/MM32SPIN06xx_s/Source/system_mm32spin06xx_s.c
       Source file:   Device/MM32SPIN06xx_s/Source/KEIL_StartAsm/startup_mm32spin06xx_s_keil.s
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

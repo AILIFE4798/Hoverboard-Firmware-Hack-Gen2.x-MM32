@@ -1,5 +1,6 @@
 #include "hal_tim.h"
 #include "hal_conf.h"
+#include "hal_adc.h"
 #include "stdio.h"
 #include "../Inc/pinout.h"
 #include "../Inc/bldc.h"
@@ -46,48 +47,59 @@ void DMA1_Channel2_3_IRQHandler(void)
     }
 }	
 	
-void ADC1_COMP_IRQHandler(void)
-{
-    if(RESET != ADC_GetITStatus(ADC1, ADC_IT_EOC)) {
-			ADC_ClearITPendingBit(ADC1, ADC_IT_EOC);
-			if(poweron<127){//cancel out adc offset
-				itotaloffset+=(uint16_t)ADC1->ITOTALADC2;
-				#ifdef IPHASEAPIN
-				iphaseaoffset+=(uint16_t)ADC1->IPHASEAADC2;
-				iphaseboffset+=(uint16_t)ADC1->IPHASEBADC2;
-				#endif
-				poweron++;
-			}else if(poweron==127){//divide by 128
-				itotaloffset = itotaloffset>>7;
-				#ifdef IPHASEAPIN
-				iphaseaoffset = iphaseaoffset>>7;
-				iphaseboffset = iphaseboffset>>7;
-				#endif
-				poweron++;
-			}else{
-				vbat = (double)VBAT_DIVIDER*(uint16_t)ADC1->VBATADC2*100;//read adc register
-				itotal = (double)ITOTAL_DIVIDER*((uint16_t)ADC1->ITOTALADC2-itotaloffset)*100;
-				#ifdef IPHASEAPIN
-				iphasea = (double)IPHASE_DIVIDER*((uint16_t)ADC1->IPHASEAADC2-iphaseaoffset)*100;
-				iphaseb = (double)IPHASE_DIVIDER*((uint16_t)ADC1->IPHASEBADC2-iphaseboffset)*100;
-				#endif
-				avgvbat();
-				avgItotal();
-				#ifdef HALLAPIN
-				if(hallpos(dir)!=hallposprev){
-					hallposprev=hallpos(dir);
-					step=hallposprev;
-					commutate();
+void ADC1_COMP_IRQHandler(void){
+	if(ADC_GetFlagStatus(ADC1, ADC_IT_AWD) != RESET) {
+    ADC_ClearFlag(ADC1, ADC_IT_AWD);
+		TIM_GenerateEvent(TIM1, TIM_EventSource_Break);
+  }
+	if(RESET != ADC_GetITStatus(ADC1, ADC_IT_EOC)) {
+		if(poweron<127){//cancel out adc offset
+			itotaloffset+=(uint16_t)ADC1->ITOTALADC2;
+			#ifdef IPHASEAPIN
+			iphaseaoffset+=(uint16_t)ADC1->IPHASEAADC2;
+			iphaseboffset+=(uint16_t)ADC1->IPHASEBADC2;
+			#endif
+			poweron++;
+		}else if(poweron==127){//divide by 128
+			itotaloffset = itotaloffset>>7;
+			#ifdef IPHASEAPIN
+			iphaseaoffset = iphaseaoffset>>7;
+			iphaseboffset = iphaseboffset>>7;
+			#endif
+			/*#ifdef HARD_ILIMIT_AWDG
+				ADC_AnalogWatchdogCmd(ADC1, ENABLE);
+				ADC_AnalogWatchdogThresholdsConfig(ADC1, (uint16_t)(HARD_ILIMIT_AWDG+itotaloffset), 0);
+				ADC_AnalogWatchdogSingleChannelConfig(ADC1, ITOTALADC);
+				ADC_ITConfig(ADC1, ADC_IT_AWD, ENABLE);
+			#endif*/
+			poweron++;
+		}else{
+			vbat = (double)VBAT_DIVIDER*(uint16_t)ADC1->VBATADC2*100;//read adc register
+			itotal = (double)ITOTAL_DIVIDER*((uint16_t)ADC1->ITOTALADC2-itotaloffset)*100;
+			#ifdef IPHASEAPIN
+			iphasea = (double)IPHASE_DIVIDER*((uint16_t)ADC1->IPHASEAADC2-iphaseaoffset)*100;
+			iphaseb = (double)IPHASE_DIVIDER*((uint16_t)ADC1->IPHASEBADC2-iphaseboffset)*100;
+			#endif
+			avgvbat();
+			avgItotal();
+			#ifdef HALLAPIN
+			if(hallpos(dir)!=hallposprev){
+				hallposprev=hallpos(dir);
+				step=hallposprev;
+				commutate();
+				#ifdef SOFT_ILIMIT
 					if(itotal>SOFT_ILIMIT){
-            TIM_CtrlPWMOutputs(TIM1, DISABLE);
-          }else{
-		        TIM_CtrlPWMOutputs(TIM1, ENABLE);
+						TIM_CtrlPWMOutputs(TIM1, DISABLE);
+					}else{
+						TIM_CtrlPWMOutputs(TIM1, ENABLE);
 					}
-				}
 				#endif
-		  }
-			millis++;//temp fix,systick is not accurate
-    }
+			}
+			#endif
+		}
+		millis++;//temp fix,systick is not accurate
+		ADC_ClearITPendingBit(ADC1, ADC_IT_EOC);
+	}
 }	
 
 void TIM2_IRQHandler(void) {
