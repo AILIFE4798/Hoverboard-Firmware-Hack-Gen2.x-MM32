@@ -170,12 +170,22 @@ void TIM1_init(u16 arr, u16 psc){
 	TIM_BDTRInitStructure.TIM_OSSIState = (TIMOSSI_Typedef) TIM_OSSRState_Enable;
 	TIM_BDTRInitStructure.TIM_OSSRState = TIM_OSSRState_Enable;
 	TIM_BDTRInitStructure.TIM_Break = TIM_Break_Enable;
-	TIM_BDTRInitStructure.TIM_BreakPolarity = TIM_BreakPolarity_High;
+	TIM_BDTRInitStructure.TIM_BreakPolarity = HARD_LIMIT_POLARITY;
 	TIM_BDTRInitStructure.TIM_DeadTime = 1;
 	TIM_BDTRInitStructure.TIM_LOCKLevel = TIM_LOCKLevel_OFF;
 	TIM_BDTRInitStructure.TIM_AutomaticOutput = TIM_AutomaticOutput_Enable;
 	TIM_BDTRConfig(TIM1, &TIM_BDTRInitStructure);
-
+	
+	#ifdef HARD_ILIMIT_COMP_REF_PIN
+	
+	
+	#elsedef HARD_ILIMIT_PIN
+		GPIO_InitTypeDef GPIO_InitStruct;
+		GPIO_InitStruct.GPIO_Mode = GPIO_Mode_Floating;
+		GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
+		GPIO_InitStruct.GPIO_Pin = LEDRPIN;
+		GPIO_Init(LEDRPORT, &GPIO_InitStruct);
+	#endif
 	TIM_Cmd(TIM1, ENABLE);
 }
 
