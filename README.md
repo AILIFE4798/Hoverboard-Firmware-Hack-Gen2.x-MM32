@@ -18,6 +18,7 @@ https://youtu.be/hCaIlEKzI3A
 * PID loop for constant speed
 * self hold
 * voltage and total current
+* software and hardware over current protection
 ## todo
 * optimizations
 * constant torque
