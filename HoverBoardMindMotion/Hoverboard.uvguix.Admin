@@ -3679,8 +3679,8 @@
       </Doc>
       <Doc>
         <Name>.\Inc\pinout.h</Name>
-        <ColumnNumber>0</ColumnNumber>
-        <TopLine>67</TopLine>
+        <ColumnNumber>30</ColumnNumber>
+        <TopLine>87</TopLine>
         <CurrentLine>71</CurrentLine>
         <Folding>1</Folding>
         <ContractedFolders></ContractedFolders>
