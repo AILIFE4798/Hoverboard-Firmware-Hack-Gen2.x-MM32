@@ -68,7 +68,7 @@
 
 //test
 #define SOFT_ILIMIT 1000    //software current limit, default to 10a, new plastic motor may need to be lowered
-//#define HARD_ILIMIT_AWDG 300    //using analog watchdog interrupt for timer emergency break, use comparator or external transistor if you can
+#define HARD_ILIMIT_AWDG 300    //using analog watchdog interrupt for timer emergency break, use comparator or external transistor if you can
 
 #ifndef HARD_ILIMIT_AWDG
   #define HARD_LIMIT_POLARITY TIM_BreakPolarity_Low

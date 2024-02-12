@@ -66,12 +66,12 @@ void ADC1_COMP_IRQHandler(void){
 			iphaseaoffset = iphaseaoffset>>7;
 			iphaseboffset = iphaseboffset>>7;
 			#endif
-			/*#ifdef HARD_ILIMIT_AWDG
+			#ifdef HARD_ILIMIT_AWDG
 				ADC_AnalogWatchdogCmd(ADC1, ENABLE);
 				ADC_AnalogWatchdogThresholdsConfig(ADC1, (uint16_t)(HARD_ILIMIT_AWDG+itotaloffset), 0);
 				ADC_AnalogWatchdogSingleChannelConfig(ADC1, ITOTALADC);
 				ADC_ITConfig(ADC1, ADC_IT_AWD, ENABLE);
-			#endif*/
+			#endif
 			poweron++;
 		}else{
 			vbat = (double)VBAT_DIVIDER*(uint16_t)ADC1->VBATADC2*100;//read adc register
