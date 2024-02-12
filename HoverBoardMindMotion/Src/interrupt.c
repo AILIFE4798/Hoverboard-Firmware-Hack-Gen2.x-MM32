@@ -78,6 +78,11 @@ void ADC1_COMP_IRQHandler(void)
 					hallposprev=hallpos(dir);
 					step=hallposprev;
 					commutate();
+					if(itotal>SOFT_ILIMIT){
+            TIM_CtrlPWMOutputs(TIM1, DISABLE);
+          }else{
+		        TIM_CtrlPWMOutputs(TIM1, ENABLE);
+					}
 				}
 				#endif
 		  }
