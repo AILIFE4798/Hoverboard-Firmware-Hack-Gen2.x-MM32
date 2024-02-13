@@ -159,7 +159,9 @@ void speedupdate(){
 				speed=300;
 			#endif
 		#else	
+		#ifdef UARTEN
 		RemoteUpdate();
+		#endif
 		#endif
 		
 		avgspeed();//speed filter prevent oscilation

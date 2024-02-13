@@ -270,7 +270,7 @@ void UART_GPIO_Init(){
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_FLOATING;
 	GPIO_Init(SERIALRXPORT, &GPIO_InitStructure);
 }
-#endif
+
 void DMA_NVIC_Config(DMA_Channel_TypeDef* dam_chx, u32 cpar, u32 cmar, u16 cndtr)
 {
 	DMA_InitTypeDef DMA_InitStructure;
@@ -311,7 +311,7 @@ void DMA_NVIC_Config(DMA_Channel_TypeDef* dam_chx, u32 cpar, u32 cmar, u16 cndtr
 	DMA_Cmd(dam_chx, ENABLE);
 
 }
-
+#endif
 void adc_Init(void){
 	#ifdef VBATPIN
 	ADC_InitTypeDef  ADC_InitStructure;    
