@@ -2,8 +2,8 @@
 #include "../Inc/calculation.h"   
 #include "../Inc/pinout.h"   
 
-int max = 4095;
-int min = -4095;
+int max = 4000;
+int min = -4000;
 int qdSum = 0;
 int lasterr=0;
 int prevpwm=0;
@@ -104,7 +104,7 @@ int PID2PWM(int pid){
 	}else if(prevpwm < min){
 		prevpwm = min;
 	}
-	return pwm;
+	return pwm*PWM_RES/4000;
 }
 
 uint32_t updateMotorRPM(uint32_t halltime){

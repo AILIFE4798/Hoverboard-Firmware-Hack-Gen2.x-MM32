@@ -97,11 +97,13 @@ s32 main(void){
 		DELAY_Ms(1);
 		GPIO_WriteBit(BZPORT, BZPIN, 0);
 		DELAY_Ms(1);
+		#else
+		__NOP();
 		#endif
 		IWDG_ReloadCounter();
 	}
 	//prevent turning back off imidiately
-	DELAY_Ms(5);	
+	DELAY_Ms(50);	
 	#endif
 	#ifdef VBATPIN
 	ADC_SoftwareStartConvCmd(ADC1, ENABLE);    //Software start conversion
@@ -115,13 +117,13 @@ s32 main(void){
 		GPIO_WriteBit(LEDBPORT, LEDBPIN, GPIO_ReadInputDataBit(HALLCPORT, HALLCPIN));		
 		#endif
 		
-		if(millis-lastupdate>10){//speed pid loop
+		if(millis-lastupdate>1){//speed pid loop
 			speedupdate();
 		  lastupdate=millis;
 		}
 		#ifndef HALLAPIN
 		//simulated hall sensor for commutation
-		if(millis-lastCommutation>70){
+		if(millis-lastCommutation>30){
 			if(dir){
 				step++;
 			}else{
@@ -148,9 +150,9 @@ s32 main(void){
 			for(int i=0;i<3;i++){
 			#ifdef BZPIN
 			GPIO_WriteBit(BZPORT, BZPIN, 1);
-		  DELAY_Ms(10);
+		  DELAY_Ms(150);
 		  GPIO_WriteBit(BZPORT, BZPIN, 0);
-		  DELAY_Ms(10);
+		  DELAY_Ms(150);
 			#endif	
 			}
 			//wait for release

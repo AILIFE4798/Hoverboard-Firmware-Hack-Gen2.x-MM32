@@ -90,14 +90,12 @@ void ADC1_COMP_IRQHandler(void){
 				}
 			#endif
 			#ifdef HALLAPIN
-			#ifndef HALLTIM
 			if(hallpos(dir)!=hallposprev){
 				hallposprev=hallpos(dir);
 				step=hallposprev;
 				commutate();
 			}
-			#endif
-			#endif
+    	#endif
 		}
 		ADC_ClearITPendingBit(ADC1, ADC_IT_EOC);
 	}
@@ -107,13 +105,6 @@ void TIM2_IRQHandler(void) {
 	if (TIM_GetITStatus(TIM2, TIM_IT_CC1) != RESET){
 		
     realspeed = updateMotorRPM(TIM2->CCR1); // rpm is correct		
-		#ifdef HALLTIM
-			uint8_t hp = hallpos(dir);
-			step = hp + 1; // note needed to run smoothly
-			if ( step > 6 ) { step = 1; }
-			if ( step < 1 ) { step = 6; }
-			commutate();
-    #endif
 		TIM_ClearITPendingBit(TIM2, TIM_IT_CC1);
   }
   //realspeed = (long)80000 / (long)(TIM2->CCR1); // not correct
@@ -132,13 +123,6 @@ void TIM3_IRQHandler(void) {
 	if (TIM_GetITStatus(TIM3, TIM_IT_CC1) != RESET){
 		
     realspeed = updateMotorRPM(TIM3->CCR1); // rpm is correct		
-		#ifdef HALLTIM
-			uint8_t hp = hallpos(dir);
-			step = hp + 1; // note needed to run smoothly
-			if ( step > 6 ) { step = 1; }
-			if ( step < 1 ) { step = 6; }
-			commutate();
-    #endif
 		TIM_ClearITPendingBit(TIM3, TIM_IT_CC1);
   }
   //realspeed = (long)80000 / (long)(TIM2->CCR1); // not correct

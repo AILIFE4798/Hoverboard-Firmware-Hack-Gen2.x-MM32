@@ -145,7 +145,7 @@ void commutate(){
 void speedupdate(){
 	if(poweron>127){
 		#ifdef TESTROTATE	
-		if(millis-lasttestrotate>150){
+		if(millis-lasttestrotate>50){
 			speed+=2*testrotatedir; //keep changing speed
 			if(speed>300){    //reverse dir
 				testrotatedir=-1;
@@ -170,13 +170,12 @@ void speedupdate(){
 			frealspeed=0;
 		}	
 		#ifdef CONSTSPEED	
-		pwm= PID2PWM((PID(speed,frealspeed)/50));
-		//pwm=(speed-frealspeed)*30;
+		pwm= PID2PWM((PID(speed,frealspeed)/50));// command the required RPM
 		if(speed==0){
 			pwm=0;
 		}
 		#else
-		pwm=speed*4;//1000~-1000
+		pwm=speed*PWM_RES/1000;//1000~-1000 for all pwm resolution
 		#endif
 		
 		if(pwm>0){

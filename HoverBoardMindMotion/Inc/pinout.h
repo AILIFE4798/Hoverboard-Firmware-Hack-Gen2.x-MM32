@@ -4,8 +4,8 @@
 //¦¦+--¦¦¦¦¦¦   ¦¦¦+¦¦+ ¦¦++¦¦+--+  ¦¦+--¦¦+    ¦¦+--¦¦¦¦¦+--¦¦¦¦¦¦     ¦¦+-¦¦+     +¦¦+ ¦¦++¦¦+---+ 
 //¦¦¦  ¦¦¦+¦¦¦¦¦¦++ +¦¦¦¦++ ¦¦¦¦¦¦¦+¦¦¦  ¦¦¦    ¦¦¦  ¦¦¦¦¦¦  ¦¦¦+¦¦¦¦¦¦+¦¦¦  ¦¦+     +¦¦¦¦++ ¦¦¦¦¦¦¦+
 //+-+  +-+ +-----+   +---+  +------++-+  +-+    +-+  +-++-+  +-+ +-----++-+  +-+      +---+  +------+
-//version 116 :  
-//file for setting custom pinout before autodetect
+//version 117 : revert commutation in adc interrupt+timing adjust+PID retune
+//file for setting custom pinout
 //pinout is for Layout2.8.1
 
 //3LED
@@ -66,7 +66,7 @@
 #define BAUD 19200
 #define INVERT_LOWSIDE TIM_OCNPolarity_High   //when the low side gate driver is active HIGH
 //#define INVERT_LOWSIDE TIM_OCNPolarity_Low   //when the low side gate driver is active LOW
-#define PWM_RES 1024    //the higher the resolution, the lower the frequency
+#define PWM_RES 8192   //the higher the resolution, the lower the frequency
 #define WINDINGS 30
 
 //test
