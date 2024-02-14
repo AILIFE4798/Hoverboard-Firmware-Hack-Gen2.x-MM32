@@ -153,7 +153,7 @@ void TIM1_init(u16 arr, u16 psc){
 	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_Timing;
 	TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
 	TIM_OCInitStructure.TIM_OutputNState = TIM_OutputNState_Enable;
-	TIM_OCInitStructure.TIM_Pulse = 2047;
+	TIM_OCInitStructure.TIM_Pulse = 0;
 	TIM_OCInitStructure.TIM_OCNPolarity = INVERT_LOWSIDE;
 	TIM_OCInitStructure.TIM_OCIdleState = TIM_OCIdleState_Reset;
 	TIM_OCInitStructure.TIM_OCNIdleState = TIM_OCNIdleState_Reset;

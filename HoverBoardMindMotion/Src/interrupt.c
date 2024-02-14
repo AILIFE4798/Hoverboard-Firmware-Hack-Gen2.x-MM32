@@ -97,7 +97,6 @@ void ADC1_COMP_IRQHandler(void){
 			}
 			#endif
 		}
-		millis++;//temp fix,systick is not accurate
 		ADC_ClearITPendingBit(ADC1, ADC_IT_EOC);
 	}
 }	

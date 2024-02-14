@@ -229,6 +229,10 @@
           <WinId>35904</WinId>
         </Entry>
         <Entry>
+          <Name>System Viewer\RCC</Name>
+          <WinId>35902</WinId>
+        </Entry>
+        <Entry>
           <Name>System Viewer\UART1</Name>
           <WinId>35903</WinId>
         </Entry>

@@ -65,6 +65,7 @@
 #define BAUD 19200
 #define INVERT_LOWSIDE TIM_OCNPolarity_High   //when the low side gate driver is active HIGH
 //#define INVERT_LOWSIDE TIM_OCNPolarity_Low   //when the low side gate driver is active LOW
+#define PWM_RES 1024    //the higher the resolution, the lower the frequency
 
 //test
 #define SOFT_ILIMIT 1000    //software current limit, default to 10a, new plastic motor may need to be lowered

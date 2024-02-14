@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\HoverboardOutput.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\HoverboardOutput.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Wed Feb 14 01:40:25 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Thu Feb 15 02:23:31 2024
 <BR><P>
 <H3>Maximum Stack Usage =         96 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -395,7 +395,7 @@ Global Symbols
 
 <P><STRONG><a name="[c4]"></a>__semihosting_library_function</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, indicate_semi.o(.text), UNUSED)
 
-<P><STRONG><a name="[12]"></a>ADC1_COMP_IRQHandler</STRONG> (Thumb, 292 bytes, Stack size 24 bytes, interrupt.o(.text.ADC1_COMP_IRQHandler))
+<P><STRONG><a name="[12]"></a>ADC1_COMP_IRQHandler</STRONG> (Thumb, 284 bytes, Stack size 24 bytes, interrupt.o(.text.ADC1_COMP_IRQHandler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = ADC1_COMP_IRQHandler &rArr; __aeabi_dmul
 </UL>
 <BR>[Calls]<UL><LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_ClearITPendingBit
@@ -679,11 +679,7 @@ Global Symbols
 <P><STRONG><a name="[5]"></a>SysTick_Handler</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, delay.o(.text.SysTick_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_mm32spin06xx_s_keil.o(RESET)
 </UL>
-<P><STRONG><a name="[20]"></a>SystemInit</STRONG> (Thumb, 408 bytes, Stack size 64 bytes, system_mm32spin06xx_s.o(.text.SystemInit))
-<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = SystemInit
-</UL>
-<BR>[Calls]<UL><LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidiv
-</UL>
+<P><STRONG><a name="[20]"></a>SystemInit</STRONG> (Thumb, 60 bytes, Stack size 0 bytes, system_mm32spin06xx_s.o(.text.SystemInit))
 <BR>[Address Reference Count : 1]<UL><LI> startup_mm32spin06xx_s_keil.o(.text)
 </UL>
 <P><STRONG><a name="[13]"></a>TIM1_BRK_UP_TRG_COM_IRQHandler</STRONG> (Thumb, 12 bytes, Stack size 8 bytes, interrupt.o(.text.TIM1_BRK_UP_TRG_COM_IRQHandler))
@@ -693,7 +689,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_mm32spin06xx_s_keil.o(RESET)
 </UL>
-<P><STRONG><a name="[6c]"></a>TIM1_init</STRONG> (Thumb, 176 bytes, Stack size 72 bytes, initialize.o(.text.TIM1_init))
+<P><STRONG><a name="[6c]"></a>TIM1_init</STRONG> (Thumb, 172 bytes, Stack size 72 bytes, initialize.o(.text.TIM1_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = TIM1_init &rArr; TIM_OC3Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_BDTRConfig
@@ -1028,7 +1024,6 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_DeInit
 <LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_Init
 <LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DELAY_Init
-<LI><a href="#[20]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemInit
 </UL>
 
 <P><STRONG><a name="[75]"></a>__aeabi_idiv</STRONG> (Thumb, 434 bytes, Stack size 8 bytes, aeabi_sdivfast.o(.text_divfast))

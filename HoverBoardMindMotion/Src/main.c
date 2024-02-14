@@ -45,7 +45,7 @@ s32 main(void){
 	HALL_Init();
 	//hall timer init
 		#ifdef HALLTIM
-		HALLTIM_Init(65535, 100);
+		HALLTIM_Init(65535, 80);
 		//timer2 hall change interrupt config
 		if(HALLTIM==TIM2){
 			NVIC_Configure(TIM2_IRQn, 1);
@@ -57,7 +57,7 @@ s32 main(void){
 	//initialize 6 bldc pins
 	BLDC_init();
 	//initialize timer
-	TIM1_init(4095, 0);
+	TIM1_init(PWM_RES, 0);
 	//systick config
 	DELAY_Init();
 	//timer1 commutation interrupt config
