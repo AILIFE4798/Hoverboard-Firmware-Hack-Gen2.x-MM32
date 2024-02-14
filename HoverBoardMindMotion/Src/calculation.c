@@ -1,5 +1,6 @@
 #include "mm32_device.h"                // Device header
 #include "../Inc/calculation.h"   
+#include "../Inc/pinout.h"   
 
 int max = 4095;
 int min = -4095;
@@ -106,7 +107,9 @@ int PID2PWM(int pid){
 	return pwm;
 }
 
-
+uint32_t updateMotorRPM(uint32_t halltime){
+    return  60000000 / (halltime * 10 * WINDINGS);
+}
 
 
 

@@ -11,3 +11,4 @@ void avgspeed();
 int PID2PWM(int pid);
 void avgItotal();
 void avgvbat();
+uint32_t updateMotorRPM(uint32_t halltime);

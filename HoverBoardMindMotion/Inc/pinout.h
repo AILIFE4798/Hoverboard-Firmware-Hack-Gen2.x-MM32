@@ -4,6 +4,7 @@
 //¦¦+--¦¦¦¦¦¦   ¦¦¦+¦¦+ ¦¦++¦¦+--+  ¦¦+--¦¦+    ¦¦+--¦¦¦¦¦+--¦¦¦¦¦¦     ¦¦+-¦¦+     +¦¦+ ¦¦++¦¦+---+ 
 //¦¦¦  ¦¦¦+¦¦¦¦¦¦++ +¦¦¦¦++ ¦¦¦¦¦¦¦+¦¦¦  ¦¦¦    ¦¦¦  ¦¦¦¦¦¦  ¦¦¦+¦¦¦¦¦¦+¦¦¦  ¦¦+     +¦¦¦¦++ ¦¦¦¦¦¦¦+
 //+-+  +-+ +-----+   +---+  +------++-+  +-+    +-+  +-++-+  +-+ +-----++-+  +-+      +---+  +------+
+//version 116 :  
 //file for setting custom pinout before autodetect
 //pinout is for Layout2.8.1
 
@@ -66,6 +67,7 @@
 #define INVERT_LOWSIDE TIM_OCNPolarity_High   //when the low side gate driver is active HIGH
 //#define INVERT_LOWSIDE TIM_OCNPolarity_Low   //when the low side gate driver is active LOW
 #define PWM_RES 1024    //the higher the resolution, the lower the frequency
+#define WINDINGS 30
 
 //test
 #define SOFT_ILIMIT 1000    //software current limit, default to 10a, new plastic motor may need to be lowered

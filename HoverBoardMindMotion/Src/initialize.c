@@ -81,8 +81,8 @@ void HALLTIM_Init(u32 arr, u16 psc){
 
 	TIM_ICStructInit(&TIM_ICInitStruct);
 	TIM_ICInitStruct.TIM_Channel = TIM_Channel_1;
-	TIM_ICInitStruct.TIM_ICPolarity = TIM_ICPolarity_BothEdge;
-	TIM_ICInitStruct.TIM_ICSelection = TIM_ICSelection_DirectTI;
+	TIM_ICInitStruct.TIM_ICPolarity = TIM_ICPolarity_Rising;
+	TIM_ICInitStruct.TIM_ICSelection = TIM_ICSelection_TRC;
 	TIM_ICInitStruct.TIM_ICPrescaler = TIM_ICPSC_DIV1;
 	TIM_ICInitStruct.TIM_ICFilter = 0x0;
 	TIM_ICInit(HALLTIM, &TIM_ICInitStruct); 
