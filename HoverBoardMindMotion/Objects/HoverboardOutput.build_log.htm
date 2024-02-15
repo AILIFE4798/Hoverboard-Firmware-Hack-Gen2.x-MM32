@@ -27,6 +27,7 @@ Project File Date:  02/15/2024
 <h2>Output:</h2>
 *** Using Compiler 'V6.19', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'MM32SPIN05'
+compiling bldc.c...
 Src/main.c(111): warning: passing 'char[14]' to parameter of type 'u8 *' (aka 'unsigned char *') converts between pointers to integer types where one is of the unique plain 'char' type and the other is not [-Wpointer-sign]
         UART_SendString("hello World\n\r");
                         ^~~~~~~~~~~~~~~~~
@@ -35,7 +36,6 @@ void UART_SendString(u8* str);
                          ^
 1 warning generated.
 compiling main.c...
-compiling bldc.c...
 compiling initialize.c...
 compiling uart.c...
 compiling interrupt.c...
@@ -71,9 +71,9 @@ Package Vendor: MindMotion
 
    * Component: MindMotion::Device:Startup:1.0.0
       Include file:  Device/MM32SPIN06xx_s/Include/mm32_device.h
-      Source file:   Device/MM32SPIN06xx_s/Source/system_mm32spin06xx_s.c
       Source file:   Device/MM32SPIN06xx_s/Source/KEIL_StartAsm/startup_mm32spin06xx_s_keil.s
-Build Time Elapsed:  00:00:01
+      Source file:   Device/MM32SPIN06xx_s/Source/system_mm32spin06xx_s.c
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>

@@ -25,6 +25,7 @@
 
 #include "mm32_device.h"
 
+//#define MM32SPIN06    //it is very important to uncomment when using SPIN06, or you brick the board
 
 /// @}
 
@@ -757,14 +758,16 @@ void SetSysClockToXX_HSI(void)
     RCC->CR &= (u32)0x000FFFFF;
 
     RCC->CR |= (plln << 26) | (pllm << 20);
-
+		#ifdef MM32SPIN06
     //Enable PLL
-    //RCC->CR |= RCC_CR_PLLON;//removed by AILIFE, such register does not exist on mm32spin05!
+    RCC->CR |= RCC_CR_PLLON;//removed by AILIFE, such register does not exist on mm32spin05!
 
     //Wait till PLL is ready
-    //while((RCC->CR & RCC_CR_PLLRDY) == 0) {
-    //}
+    while((RCC->CR & RCC_CR_PLLRDY) == 0) {
+    }
+		#else
 		RCC->CR |= 0x01U<<20;//added by AILIFE, enable 72mhz HSI
+		#endif
     //Select PLL as system clock source
     RCC->CFGR &= (u32)((u32)~(RCC_CFGR_SW));
 
