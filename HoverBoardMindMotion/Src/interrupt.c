@@ -75,10 +75,13 @@ void ADC1_COMP_IRQHandler(void){
 			poweron++;
 		}else{
 			vbat = (double)VBAT_DIVIDER*(uint16_t)ADC1->VBATADC2*100;//read adc register
-			itotal = (double)ITOTAL_DIVIDER*((uint16_t)ADC1->ITOTALADC2-itotaloffset)*100;
+			int tmp = (uint16_t)ADC1->ITOTALADC2;//prevent overflow on negative value
+			itotal = (double)ITOTAL_DIVIDER*(tmp-itotaloffset)*100;
 			#ifdef IPHASEAPIN
-			iphasea = (double)IPHASE_DIVIDER*((uint16_t)ADC1->IPHASEAADC2-iphaseaoffset)*100;
-			iphaseb = (double)IPHASE_DIVIDER*((uint16_t)ADC1->IPHASEBADC2-iphaseboffset)*100;
+			tmp = (uint16_t)ADC1->IPHASEAADC2;
+			iphasea = (double)IPHASE_DIVIDER*(tmp-iphaseaoffset)*100;
+			tmp = (uint16_t)ADC1->IPHASEBADC2;
+			iphaseb = (double)IPHASE_DIVIDER*(tmp-iphaseboffset)*100;
 			#endif
 			avgvbat();
 			avgItotal();
@@ -104,7 +107,7 @@ void ADC1_COMP_IRQHandler(void){
 void TIM2_IRQHandler(void) {
 	if (TIM_GetITStatus(TIM2, TIM_IT_CC1) != RESET){
 		
-    realspeed = updateMotorRPM(TIM2->CCR1); // rpm is correct		
+    realspeed = updateMotorRPM(TIM2->CCR1); // rpm is correct			
 		TIM_ClearITPendingBit(TIM2, TIM_IT_CC1);
   }
   //realspeed = (long)80000 / (long)(TIM2->CCR1); // not correct

@@ -4,7 +4,7 @@
 //¦¦+--¦¦¦¦¦¦   ¦¦¦+¦¦+ ¦¦++¦¦+--+  ¦¦+--¦¦+    ¦¦+--¦¦¦¦¦+--¦¦¦¦¦¦     ¦¦+-¦¦+     +¦¦+ ¦¦++¦¦+---+ 
 //¦¦¦  ¦¦¦+¦¦¦¦¦¦++ +¦¦¦¦++ ¦¦¦¦¦¦¦+¦¦¦  ¦¦¦    ¦¦¦  ¦¦¦¦¦¦  ¦¦¦+¦¦¦¦¦¦+¦¦¦  ¦¦+     +¦¦¦¦++ ¦¦¦¦¦¦¦+
 //+-+  +-+ +-----+   +---+  +------++-+  +-+    +-+  +-++-+  +-+ +-----++-+  +-+      +---+  +------+
-//version 117 : revert commutation in adc interrupt+timing adjust+PID retune
+//version 118 : fix adc overflow
 //file for setting custom pinout
 //pinout is for Layout2.8.1
 
