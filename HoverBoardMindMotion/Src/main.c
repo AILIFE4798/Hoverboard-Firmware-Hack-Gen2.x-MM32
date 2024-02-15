@@ -37,7 +37,31 @@ extern u32 SystemCoreClock;
 
 
 
-s32 main(void){
+s32 main(void){	
+	DELAY_Init();
+	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOA, ENABLE);
+	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOB, ENABLE);
+	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOC, ENABLE);
+	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOD, ENABLE);
+	GPIO_InitTypeDef GPIO_InitStruct;
+  GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IPU;
+  GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
+  GPIO_InitStruct.GPIO_Pin = LEDBPIN;
+	GPIO_Init(LEDBPORT, &GPIO_InitStruct);
+	GPIO_InitStruct.GPIO_Pin = LEDGPIN;
+	GPIO_Init(LEDGPORT, &GPIO_InitStruct);
+	GPIO_InitStruct.GPIO_Pin = LATCHPIN;
+	GPIO_Init(LATCHPORT, &GPIO_InitStruct);
+	while(1) {
+		DELAY_Ms(1000);
+		GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IPU;
+		GPIO_InitStruct.GPIO_Pin = LEDRPIN;
+		GPIO_Init(LEDRPORT, &GPIO_InitStruct);
+		DELAY_Ms(1000);
+		GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IPD;
+		GPIO_InitStruct.GPIO_Pin = LEDRPIN;
+		GPIO_Init(LEDRPORT, &GPIO_InitStruct);
+	}
 	//initialize normal gpio
 	io_init();
 	//hall gpio init
