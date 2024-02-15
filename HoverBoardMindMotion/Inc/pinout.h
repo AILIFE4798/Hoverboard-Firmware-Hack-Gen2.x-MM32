@@ -4,7 +4,7 @@
 //¦¦+--¦¦¦¦¦¦   ¦¦¦+¦¦+ ¦¦++¦¦+--+  ¦¦+--¦¦+    ¦¦+--¦¦¦¦¦+--¦¦¦¦¦¦     ¦¦+-¦¦+     +¦¦+ ¦¦++¦¦+---+ 
 //¦¦¦  ¦¦¦+¦¦¦¦¦¦++ +¦¦¦¦++ ¦¦¦¦¦¦¦+¦¦¦  ¦¦¦    ¦¦¦  ¦¦¦¦¦¦  ¦¦¦+¦¦¦¦¦¦+¦¦¦  ¦¦+     +¦¦¦¦++ ¦¦¦¦¦¦¦+
 //+-+  +-+ +-----+   +---+  +------++-+  +-+    +-+  +-++-+  +-+ +-----++-+  +-+      +---+  +------+
-//version 118 : fix adc overflow
+//version 119 : 72MHZ clock
 //file for setting custom pinout
 //pinout is for Layout2.8.1
 
@@ -86,8 +86,8 @@
 #else
 #define HARD_LIMIT_POLARITY TIM_BreakPolarity_High
 #endif
-#define UARTEN UART1 //enable uart, PA2 PA3=UART2, PB4 PB6=UART1
-//#define TESTROTATE  //spin motor foward and backward automaticly
+//#define UARTEN UART1 //enable uart, PA2 PA3=UART2, PB4 PB6=UART1
+#define TESTROTATE  //spin motor foward and backward automaticly
 //#define WATCHDOG    //enable watchdog, to debug you must disable it
 #ifdef HALLAPIN    //no way to know real speed without hall!
 	#ifdef LEDRPIN

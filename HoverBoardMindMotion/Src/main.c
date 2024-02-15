@@ -45,7 +45,7 @@ s32 main(void){
 	HALL_Init();
 	//hall timer init
 		#ifdef HALLTIM
-		HALLTIM_Init(65535, 80);
+		HALLTIM_Init(65535, 360);//sysclock is 72mhz, but APB1 is using 2x clock divider
 		//timer2 hall change interrupt config
 		if(HALLTIM==TIM2){
 			NVIC_Configure(TIM2_IRQn, 1);

@@ -65,7 +65,7 @@
 //#define SYSCLK_HSI_24MHz  24000000
 //#define SYSCLK_HSI_36MHz  36000000
 //#define SYSCLK_HSI_48MHz  48000000
-//#define SYSCLK_HSI_XXMHz  72000000
+#define SYSCLK_HSI_XXMHz  72000000
 
 /// Uncomment the following line if you need to relocate your vector Table in
 /// Internal SRAM.
@@ -744,7 +744,7 @@ void SetSysClockToXX_HSI(void)
     }
     else {
         //PCLK1 = HCLK
-        RCC->CFGR |= (u32)RCC_CFGR_PPRE1_DIV2;
+        RCC->CFGR |= (u32)RCC_CFGR_PPRE1_DIV1;//originaly wrong
     }
 
     RCC->CFGR &= (u32)0xFFFCFFFF;
@@ -758,11 +758,12 @@ void SetSysClockToXX_HSI(void)
     RCC->CR |= (plln << 26) | (pllm << 20);
 
     //Enable PLL
-    RCC->CR |= RCC_CR_PLLON;
+    //RCC->CR |= RCC_CR_PLLON;//removed by AILIFE, such register does not exist on mm32spin05!
 
     //Wait till PLL is ready
-    while((RCC->CR & RCC_CR_PLLRDY) == 0) {
-    }
+    //while((RCC->CR & RCC_CR_PLLRDY) == 0) {
+    //}
+		RCC->CR |= 0x01U<<20;//added by AILIFE, enable 72mhz HSI
     //Select PLL as system clock source
     RCC->CFGR &= (u32)((u32)~(RCC_CFGR_SW));
 
