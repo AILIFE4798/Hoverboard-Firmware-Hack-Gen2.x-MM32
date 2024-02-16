@@ -40,4 +40,4 @@
   HAL_Lib\Inc\hal_wwdg.h HAL_Lib\Inc\hal_redefine.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h Src\..\Inc\pinout.h \
   Src\..\Inc\bldc.h Src\..\Inc\remoteUartBus.h Src\..\Inc\calculation.h \
-  Src\..\Inc\uart.h
+  Src\..\Inc\autodetect.h Src\..\Inc\uart.h

@@ -14,7 +14,6 @@
 
 uint8_t step=1;//very importatnt to set to 1 or it will not work
 uint32_t millis;
-uint32_t lastCommutation;
 uint32_t lastupdate;
 uint32_t iOdom;
 bool uart;
@@ -41,8 +40,8 @@ GPIO_InitTypeDef GPIO_InitStruct;
 uint8_t  masterslave;
 extern uint8_t banner;
 extern uint8_t pinstorage[16];
-
-
+extern uint8_t mode;
+extern uint8_t init;
 
 
 s32 main(void){	
@@ -61,14 +60,23 @@ s32 main(void){
 	DMA_NVIC_Config(DMA1_Channel3, (u32)&UART1->RDR, (u32)sRxBuffer, 1);
 	DELAY_Ms(2000);    //give time to release button 
 	masterslave = detectSelfHold();    //no self hold pin=slave, will release all other pins to floating
+	mode=1;
 	while(1){
-		while(1){
-			UART_Send_Group(&banner,457);
-			UART_SendString("Welcome to PinFinder\n\r");
-			UART_SendString("press enter to continue...\n\n\n\n\r");
-			DELAY_Ms(5000);
+		if(init){
+			init=0;
+			autoDetectInit();
 		}
-		
-	}
+		switch (mode){
+			case 1 :
+				UART_Send_Group(&banner,457);
+				UART_SendString("Welcome to PinFinder\n\r");
+				UART_SendString("press enter to continue...\n\n\n\n\r");
+				DELAY_Ms(5000);
+			break;
+			case 3 :
+				simhallupdate();
+			break;
+		}
+  }
 }
 

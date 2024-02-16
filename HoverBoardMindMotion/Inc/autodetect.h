@@ -3,9 +3,9 @@
 
 void selfhold();
 uint8_t detectSelfHold();
-
-
-
+void autoDetectSerialIt();
+void simhallupdate();
+void autoDetectInit();
 
 
 

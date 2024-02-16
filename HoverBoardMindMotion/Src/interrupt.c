@@ -6,6 +6,7 @@
 #include "../Inc/bldc.h"
 #include "../Inc/remoteUartBus.h"
 #include "../Inc/calculation.h"
+#include "../Inc/autodetect.h"
 
 extern uint8_t step;
 extern bool uart;
@@ -43,10 +44,11 @@ void TIM1_BRK_UP_TRG_COM_IRQHandler(void)
 }
 
 void DMA1_Channel2_3_IRQHandler(void){
-    if(DMA_GetITStatus(DMA1_IT_TC3)) {
-      DMA_ClearITPendingBit(DMA1_IT_GL3);
-			UART_Send_Byte(sRxBuffer[0]);
-    }
+	if(DMA_GetITStatus(DMA1_IT_TC3)) {
+		DMA_ClearITPendingBit(DMA1_IT_GL3);
+		UART_Send_Byte(sRxBuffer[0]);
+		autoDetectSerialIt();
+	}
 }	
 	
 void ADC1_COMP_IRQHandler(void){
