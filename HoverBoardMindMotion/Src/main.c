@@ -10,7 +10,7 @@
 #include "../Inc/initialize.h"
 #include "../Inc/uart.h"
 #include "../Inc/bldc.h"
-
+#include "../Inc/autodetect.h"
 
 uint8_t step=1;//very importatnt to set to 1 or it will not work
 uint32_t millis;
@@ -37,161 +37,23 @@ extern u32 SystemCoreClock;
 
 
 
+
+
+GPIO_InitTypeDef GPIO_InitStruct;
+uint8_t  masterslave;
+
+
+
+
 s32 main(void){	
-	DELAY_Init();
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOA, ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOB, ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOC, ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOD, ENABLE);
-	GPIO_InitTypeDef GPIO_InitStruct;
-  GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IPU;
-  GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
-  GPIO_InitStruct.GPIO_Pin = LEDBPIN;
-	GPIO_Init(LEDBPORT, &GPIO_InitStruct);
-	GPIO_InitStruct.GPIO_Pin = LEDGPIN;
-	GPIO_Init(LEDGPORT, &GPIO_InitStruct);
-	GPIO_InitStruct.GPIO_Pin = LATCHPIN;
-	GPIO_Init(LATCHPORT, &GPIO_InitStruct);
-	while(1) {
-		DELAY_Ms(1000);
-		GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IPU;
-		GPIO_InitStruct.GPIO_Pin = LEDRPIN;
-		GPIO_Init(LEDRPORT, &GPIO_InitStruct);
-		DELAY_Ms(1000);
-		GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IPD;
-		GPIO_InitStruct.GPIO_Pin = LEDRPIN;
-		GPIO_Init(LEDRPORT, &GPIO_InitStruct);
-	}
-	//initialize normal gpio
-	io_init();
-	//hall gpio init
-	#ifdef HALLAPIN
-	HALL_Init();
-	//hall timer init
-		#ifdef HALLTIM
-		HALLTIM_Init(65535, SystemCoreClock/100000);//sysclock is 72mhz
-		//timer2 hall change interrupt config
-		if(HALLTIM==TIM2){
-			NVIC_Configure(TIM2_IRQn, 1);
-		}else{
-			NVIC_Configure(TIM3_IRQn, 1);
-		}
-		#endif
-	#endif
-	//initialize 6 bldc pins
-	BLDC_init();
-	//initialize timer
-	TIM1_init(PWM_RES, 0);
-	//systick config
+	selfhold();
 	DELAY_Init();
-	//timer1 commutation interrupt config
-	NVIC_Configure(TIM1_BRK_UP_TRG_COM_IRQn, 1);
-	//vbat
-	#ifdef VBATPIN
-	adc_Init();
-	//adc interrupt
-	exNVIC_Configure(ADC_COMP_IRQn, 0, 1);
-	#endif
-	#ifdef WATCHDOG//watchdog
-	Iwdg_Init(IWDG_Prescaler_32, 0xff);
-	#endif
-	
-	#ifdef UARTEN
-	//serial1.begin(19200);
-	UARTX_Init(BAUD);
-	//uart interrupt
-	exNVIC_Configure(DMA1_Channel2_3_IRQn, 0, 0);
-	//uart dma
-	if(UARTEN==UART1){
-		DMA_NVIC_Config(DMA1_Channel3, (u32)&UART1->RDR, (u32)sRxBuffer, 1);
-	}else{
-		DMA_NVIC_Config(DMA1_Channel3, (u32)&UART2->RDR, (u32)sRxBuffer, 1);
-	}
-	#endif
-	TIM1->CCR1=0;//prevent motor starting automaticly
-	TIM1->CCR2=0;
-	TIM1->CCR3=0;
-	#ifdef LATCHPIN
-	//latch on power
-	GPIO_WriteBit(LATCHPORT, LATCHPIN, 1);
-	//wait while release button
-	while(GPIO_ReadInputDataBit(BTNPORT, BTNPIN)) {
-		#ifdef BZPIN
-		GPIO_WriteBit(BZPORT, BZPIN, 1);
-		DELAY_Ms(1);
-		GPIO_WriteBit(BZPORT, BZPIN, 0);
-		DELAY_Ms(1);
-		#else
-		__NOP();
-		#endif
-		IWDG_ReloadCounter();
-	}
-	//prevent turning back off imidiately
-	DELAY_Ms(50);	
-	#endif
-	#ifdef VBATPIN
-	ADC_SoftwareStartConvCmd(ADC1, ENABLE);    //Software start conversion
-	#endif
-	UART_SendString("hello World\n\r");
-  while(1) {
-		#ifdef HALL2LED
-		//rotating led
-    GPIO_WriteBit(LEDRPORT, LEDRPIN, GPIO_ReadInputDataBit(HALLAPORT, HALLAPIN));
-		GPIO_WriteBit(LEDGPORT, LEDGPIN, GPIO_ReadInputDataBit(HALLBPORT, HALLBPIN));
-		GPIO_WriteBit(LEDBPORT, LEDBPIN, GPIO_ReadInputDataBit(HALLCPORT, HALLCPIN));		
-		#endif
-		
-		if(millis-lastupdate>1){//speed pid loop
-			speedupdate();
-		  lastupdate=millis;
-		}
-		#ifndef HALLAPIN
-		//simulated hall sensor for commutation
-		if(millis-lastCommutation>30){
-			if(dir){
-				step++;
-			}else{
-				step--;
-			}
-			step=step+dir;
-			if(step>6){
-				step=1;
-			}
-			if(step<1){
-				step=6;
-			}
-			commutate();
-			lastCommutation=millis;
-		}
-		#endif
-		#ifdef LATCHPIN
-		//button press for shutdown
-		if(GPIO_ReadInputDataBit(BTNPORT, BTNPIN)){
-			TIM1->CCR1=0;    //shut down motor
-			TIM1->CCR2=0;
-			TIM1->CCR3=0;
-			//power off melody
-			for(int i=0;i<3;i++){
-			#ifdef BZPIN
-			GPIO_WriteBit(BZPORT, BZPIN, 1);
-		  DELAY_Ms(150);
-		  GPIO_WriteBit(BZPORT, BZPIN, 0);
-		  DELAY_Ms(150);
-			#endif	
-			}
-			//wait for release
-			while(GPIO_ReadInputDataBit(BTNPORT, BTNPIN)) {
-		    __NOP();
-				IWDG_ReloadCounter();
-	    }
-			//last line to ever be executed
-			GPIO_WriteBit(LATCHPORT, LATCHPIN, 0);
-			while(1);//incase the hardware failed...
-		}
-		#endif
-		//feed the watchdog
-		IWDG_ReloadCounter();
-  }//main loop
-	
+	DELAY_Ms(2000);
+	masterslave = detectSelfHold();
+	while(1);
 }
 

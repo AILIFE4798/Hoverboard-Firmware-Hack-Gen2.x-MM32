@@ -1,4 +1,4 @@
-./objects/main.o: Src\main.c \
+./objects/autodetect.o: Src\autodetect.c \
   C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\mm32_device.h \
   C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\mm32_reg.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdint.h \
@@ -30,10 +30,13 @@
   C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_uart.h \
   C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_wwdg.h \
   C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\mm32_reg_redefine_v1.h \
-  RTE\_MM32SPIN05\RTE_Components.h HAL_Lib\Inc\hal_gpio.h \
-  HAL_Lib\Inc\hal_rcc.h HAL_Lib\Inc\hal_adc.h HAL_Lib\Inc\hal_tim.h \
-  HAL_Lib\Inc\hal_iwdg.h Src\..\Inc\delay.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h Src\..\Inc\pinout.h \
-  Src\..\Inc\initialize.h Src\..\Inc\uart.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h Src\..\Inc\bldc.h \
-  Src\..\Inc\autodetect.h
+  HAL_Lib\Inc\hal_gpio.h HAL_Lib\Inc\hal_adc.h HAL_Lib\Inc\hal_conf.h \
+  HAL_Lib\Inc\hal_crc.h HAL_Lib\Inc\hal_comp.h HAL_Lib\Inc\hal_dbg.h \
+  HAL_Lib\Inc\hal_div.h HAL_Lib\Inc\hal_dma.h HAL_Lib\Inc\hal_exti.h \
+  HAL_Lib\Inc\hal_flash.h HAL_Lib\Inc\hal_i2c.h HAL_Lib\Inc\hal_iwdg.h \
+  HAL_Lib\Inc\hal_misc.h HAL_Lib\Inc\hal_pwr.h HAL_Lib\Inc\hal_rcc.h \
+  HAL_Lib\Inc\hal_spi.h HAL_Lib\Inc\hal_syscfg.h HAL_Lib\Inc\hal_tim.h \
+  HAL_Lib\Inc\hal_uart.h HAL_Lib\Inc\hal_uid.h HAL_Lib\Inc\hal_wwdg.h \
+  HAL_Lib\Inc\hal_redefine.h Src\..\Inc\hardware.h \
+  Src\..\Inc\initialize.h Src\..\Inc\delay.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h

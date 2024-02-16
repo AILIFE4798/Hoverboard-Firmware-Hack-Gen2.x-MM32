@@ -424,6 +424,16 @@
               <FileType>1</FileType>
               <FilePath>.\Src\calculation.c</FilePath>
             </File>
+            <File>
+              <FileName>autodetect.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\autodetect.c</FilePath>
+            </File>
+            <File>
+              <FileName>hardware.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\hardware.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -468,6 +478,16 @@
               <FileName>uart.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Inc\uart.h</FilePath>
+            </File>
+            <File>
+              <FileName>autodetect.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\autodetect.h</FilePath>
+            </File>
+            <File>
+              <FileName>hardware.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\hardware.h</FilePath>
             </File>
           </Files>
         </Group>
