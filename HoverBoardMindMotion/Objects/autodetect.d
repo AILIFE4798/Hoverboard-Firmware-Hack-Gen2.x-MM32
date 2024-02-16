@@ -39,4 +39,5 @@
   HAL_Lib\Inc\hal_uart.h HAL_Lib\Inc\hal_uid.h HAL_Lib\Inc\hal_wwdg.h \
   HAL_Lib\Inc\hal_redefine.h Src\..\Inc\hardware.h \
   Src\..\Inc\initialize.h Src\..\Inc\delay.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h Src\..\Inc\uart.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h

@@ -28,6 +28,12 @@ uint16_t iphaseb;
 uint32_t iphaseaoffset=0;
 uint32_t iphaseboffset=0;
 
+
+extern u8 sRxBuffer[10];
+#include "../Inc/uart.h"
+
+
+
 //commutation interrupt
 void TIM1_BRK_UP_TRG_COM_IRQHandler(void)
 {
@@ -36,14 +42,10 @@ void TIM1_BRK_UP_TRG_COM_IRQHandler(void)
     
 }
 
-void DMA1_Channel2_3_IRQHandler(void)
-{
+void DMA1_Channel2_3_IRQHandler(void){
     if(DMA_GetITStatus(DMA1_IT_TC3)) {
-        DMA_ClearITPendingBit(DMA1_IT_GL3);
-        // Check the received buffer
-			  #ifdef UARTEN
-        serialit();
-				#endif
+      DMA_ClearITPendingBit(DMA1_IT_GL3);
+			UART_Send_Byte(sRxBuffer[0]);
     }
 }	
 	

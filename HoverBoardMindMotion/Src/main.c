@@ -37,10 +37,10 @@ extern u32 SystemCoreClock;
 
 
 
-
-
 GPIO_InitTypeDef GPIO_InitStruct;
 uint8_t  masterslave;
+extern uint8_t banner;
+extern uint8_t pinstorage[16];
 
 
 
@@ -51,9 +51,24 @@ s32 main(void){
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOC, ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOD, ENABLE);
 	selfhold();
+	pinstorage[14] = 17;
+	pinstorage[15] = 19;
 	DELAY_Init();
+	BLDC_init();
+	TIM1_init(PWM_RES, 0);
+	UARTX_Init(BAUD);
+	exNVIC_Configure(DMA1_Channel2_3_IRQn, 0, 0);
+	DMA_NVIC_Config(DMA1_Channel3, (u32)&UART1->RDR, (u32)sRxBuffer, 1);
 	DELAY_Ms(2000);
 	masterslave = detectSelfHold();
-	while(1);
+	while(1){
+		while(1){
+			UART_Send_Group(&banner,457);
+			UART_SendString("Welcome to PinFinder\n\r");
+			UART_SendString("press enter to continue...\n\n\n\n\r");
+			DELAY_Ms(5000);
+		}
+		
+	}
 }
 

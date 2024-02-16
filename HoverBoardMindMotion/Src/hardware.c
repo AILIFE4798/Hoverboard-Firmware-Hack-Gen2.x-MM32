@@ -26,7 +26,7 @@ uint32_t pins[33][3] = {   // port,pin,pinsrc,ADC,ADC2,HALL AF,HALL TIM,UART AF
 {IOB,GPIO_Pin_6,GPIO_PinSource6},
 {IOB,GPIO_Pin_7,GPIO_PinSource7},
 {IOB,GPIO_Pin_8,GPIO_PinSource8},
-{IOB,GPIO_Pin_8,GPIO_PinSource9},
+{IOB,GPIO_Pin_9,GPIO_PinSource9},
 {IOB,GPIO_Pin_10,GPIO_PinSource10},
 {IOB,GPIO_Pin_11,GPIO_PinSource11},
 {IOB,GPIO_Pin_12,GPIO_PinSource12},
@@ -92,3 +92,19 @@ uint8_t digitalRead(uint8_t port,uint16_t pin){
 	}
 }
 
+void digitalWrite(uint8_t port,uint16_t pin,uint8_t state){
+	switch (port){
+		case IOA:
+			GPIO_WriteBit(GPIOA, pin, state);
+		break;
+		case IOB:
+			GPIO_WriteBit(GPIOA, pin, state);
+		break;
+		case IOC:
+			GPIO_WriteBit(GPIOA, pin, state);
+		break;
+		case IOD:
+			GPIO_WriteBit(GPIOA, pin, state);
+		break;
+	}
+}
