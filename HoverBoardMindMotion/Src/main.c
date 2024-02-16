@@ -50,17 +50,17 @@ s32 main(void){
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOB, ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOC, ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOD, ENABLE);
-	selfhold();
-	pinstorage[14] = 17;
+	selfhold();    //pull every pin high
+	pinstorage[14] = 17;    //serial tx rx is used,do not modify
 	pinstorage[15] = 19;
-	DELAY_Init();
-	BLDC_init();
+	DELAY_Init();    //delay needed in autodetect
+	BLDC_init();    //motor pin is always the same so initialize it first
 	TIM1_init(PWM_RES, 0);
-	UARTX_Init(BAUD);
+	UARTX_Init(BAUD);    //uart used for autodetect, only 4 possible pin combination on uart1
 	exNVIC_Configure(DMA1_Channel2_3_IRQn, 0, 0);
 	DMA_NVIC_Config(DMA1_Channel3, (u32)&UART1->RDR, (u32)sRxBuffer, 1);
-	DELAY_Ms(2000);
-	masterslave = detectSelfHold();
+	DELAY_Ms(2000);    //give time to release button 
+	masterslave = detectSelfHold();    //no self hold pin=slave, will release all other pins to floating
 	while(1){
 		while(1){
 			UART_Send_Group(&banner,457);

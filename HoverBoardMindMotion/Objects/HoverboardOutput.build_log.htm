@@ -27,24 +27,13 @@ Project File Date:  02/16/2024
 <h2>Output:</h2>
 *** Using Compiler 'V6.19', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'MM32SPIN05'
-Src/main.c(67): warning: passing 'char[23]' to parameter of type 'u8 *' (aka 'unsigned char *') converts between pointers to integer types where one is of the unique plain 'char' type and the other is not [-Wpointer-sign]
-                        UART_SendString("Welcome to PinFinder\n\r");
-                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~
-Src/../Inc/uart.h(5): note: passing argument to parameter 'str' here
-void UART_SendString(u8* str);
-                         ^
-Src/main.c(68): warning: passing 'char[32]' to parameter of type 'u8 *' (aka 'unsigned char *') converts between pointers to integer types where one is of the unique plain 'char' type and the other is not [-Wpointer-sign]
-                        UART_SendString("press enter to continue...\n\n\n\n\r");
-                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Src/../Inc/uart.h(5): note: passing argument to parameter 'str' here
-void UART_SendString(u8* str);
-                         ^
-2 warnings generated.
+compiling hardware.c...
+compiling autodetect.c...
 compiling main.c...
 linking...
-Program Size: Code=7030 RO-data=234 RW-data=880 ZI-data=2120  
+Program Size: Code=6962 RO-data=1086 RW-data=24 ZI-data=2120  
 FromELF: creating hex file...
-".\Objects\HoverboardOutput.axf" - 0 Error(s), 2 Warning(s).
+".\Objects\HoverboardOutput.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -73,7 +62,7 @@ Package Vendor: MindMotion
       Include file:  Device/MM32SPIN06xx_s/Include/mm32_device.h
       Source file:   Device/MM32SPIN06xx_s/Source/KEIL_StartAsm/startup_mm32spin06xx_s_keil.s
       Source file:   Device/MM32SPIN06xx_s/Source/system_mm32spin06xx_s.c
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

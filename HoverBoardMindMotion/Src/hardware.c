@@ -3,7 +3,7 @@
 extern GPIO_InitTypeDef GPIO_InitStruct;
 
 
-uint32_t pins[33][3] = {   // port,pin,pinsrc,ADC,ADC2,HALL AF,HALL TIM,UART AF
+const uint32_t pins[33][3] = {   // port,pin,pinsrc,ADC,ADC2,HALL AF,HALL TIM,UART AF
 {IOA,GPIO_Pin_0,GPIO_PinSource0},
 {IOA,GPIO_Pin_1,GPIO_PinSource1},
 {IOA,GPIO_Pin_2,GPIO_PinSource2},

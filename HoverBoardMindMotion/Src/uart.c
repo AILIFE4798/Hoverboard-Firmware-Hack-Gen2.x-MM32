@@ -15,7 +15,7 @@ void UART_Send_Group(u8* buf, u16 len)
         UART_Send_Byte(*buf++);
 }
 
-void UART_SendString(u8* str)
+void UART_SendString(char* str)
 {
     while(*str)
         UART_Send_Byte((u8)(*str++));
