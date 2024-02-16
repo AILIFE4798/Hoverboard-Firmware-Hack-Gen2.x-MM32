@@ -68,10 +68,14 @@ s32 main(void){
 		}
 		switch (mode){
 			case 1 :
+				UART_SendString("\n\n\n\n\r");
 				UART_Send_Group(&banner,457);
 				UART_SendString("Welcome to PinFinder\n\r");
-				UART_SendString("press enter to continue...\n\n\n\n\r");
-				DELAY_Ms(5000);
+				UART_SendString("press enter to continue");
+				for(uint8_t i=0;i<50;i++){
+					UART_SendString(".");
+					DELAY_Ms(100);
+				}
 			break;
 			case 3 :
 				simhallupdate();

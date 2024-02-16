@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\HoverboardOutput.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\HoverboardOutput.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Sat Feb 17 04:16:50 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Sat Feb 17 04:30:47 2024
 <BR><P>
 <H3>Maximum Stack Usage =         96 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -759,8 +759,8 @@ Global Symbols
 
 <P><STRONG><a name="[73]"></a>UART_GetFlagStatus</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, hal_uart.o(.text.UART_GetFlagStatus))
 <BR><BR>[Called By]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_Send_Byte
-<LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SendString
 <LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_Send_Group
+<LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SendString
 </UL>
 
 <P><STRONG><a name="[6d]"></a>UART_Init</STRONG> (Thumb, 112 bytes, Stack size 16 bytes, hal_uart.o(.text.UART_Init))
@@ -775,8 +775,8 @@ Global Symbols
 
 <P><STRONG><a name="[72]"></a>UART_SendData</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, hal_uart.o(.text.UART_SendData))
 <BR><BR>[Called By]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_Send_Byte
-<LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SendString
 <LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_Send_Group
+<LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SendString
 </UL>
 
 <P><STRONG><a name="[71]"></a>UART_SendString</STRONG> (Thumb, 44 bytes, Stack size 16 bytes, uart.o(.text.UART_SendString))
@@ -814,7 +814,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[2b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[51]"></a>autoDetectSerialIt</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, autodetect.o(.text.autoDetectSerialIt))
+<P><STRONG><a name="[51]"></a>autoDetectSerialIt</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, autodetect.o(.text.autoDetectSerialIt))
 <BR><BR>[Called By]<UL><LI><a href="#[10]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Channel2_3_IRQHandler
 </UL>
 
@@ -875,11 +875,11 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[12]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC1_COMP_IRQHandler
 </UL>
 
-<P><STRONG><a name="[2b]"></a>main</STRONG> (Thumb, 180 bytes, Stack size 0 bytes, main.o(.text.main))
+<P><STRONG><a name="[2b]"></a>main</STRONG> (Thumb, 204 bytes, Stack size 0 bytes, main.o(.text.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = main &rArr; detectSelfHold &rArr; vref_Init &rArr; ADC_RegularChannelConfig
 </UL>
-<BR>[Calls]<UL><LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SendString
-<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_Send_Group
+<BR>[Calls]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_Send_Group
+<LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SendString
 <LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;autoDetectInit
 <LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;simhallupdate
 <LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;detectSelfHold
