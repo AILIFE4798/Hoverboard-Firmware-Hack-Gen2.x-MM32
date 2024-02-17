@@ -7,6 +7,10 @@
 #include "../Inc/initialize.h"
 #include "hal_conf.h"
 #include "mm32_reg_redefine_v1.h"
+#include "../Inc/autodetect.h"
+#include "../Inc/hardware.h"
+
+
 
 
 //normal io
@@ -386,7 +390,19 @@ void vref_Init(){
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_VoltReference, 0, ADC_SampleTime_7_5Cycles);
 	ADC_TempSensorVrefintCmd(ENABLE);
 }
-
+void ADCALL_Init(){
+	ADC_DeInit(ADC1);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
+	ADC_InitTypeDef  ADC_InitStructure;
+	ADC_InitStructure.ADC_PRESCALE = ADC_PCLK2_PRESCALE_6;
+	ADC_InitStructure.ADC_Mode = ADC_Mode_Continue;
+	ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
+	ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_T1_CC4;
+	ADC_InitStructure.ADC_Resolution = ADC_Resolution_12b;
+	ADC_Init(ADC1, &ADC_InitStructure);
+	ADC_Cmd(ADC1, ENABLE);
+}
+	
 
 
 

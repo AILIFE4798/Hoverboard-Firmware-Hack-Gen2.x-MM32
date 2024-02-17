@@ -123,11 +123,11 @@ void commutate(){
 			TIM_CCxCmd(TIM1, TIM_Channel_2, TIM_CCx_Disable);
 			TIM_CCxNCmd(TIM1, TIM_Channel_2, TIM_CCxN_Enable);  
 		}else{//0,0,0
-			TIM_CCxCmd(TIM1, TIM_Channel_1, TIM_CCx_Disable);
+			TIM_CCxCmd(TIM1, TIM_Channel_1, TIM_CCx_Enable);
 			TIM_CCxNCmd(TIM1, TIM_Channel_1, TIM_CCxN_Disable);
-			TIM_CCxCmd(TIM1, TIM_Channel_2, TIM_CCx_Disable);
+			TIM_CCxCmd(TIM1, TIM_Channel_2, TIM_CCx_Enable);
 			TIM_CCxNCmd(TIM1, TIM_Channel_2, TIM_CCxN_Disable);
-			TIM_CCxCmd(TIM1, TIM_Channel_3, TIM_CCx_Disable);
+			TIM_CCxCmd(TIM1, TIM_Channel_3, TIM_CCx_Enable);
 			TIM_CCxNCmd(TIM1, TIM_Channel_3, TIM_CCxN_Disable);
 		}
 

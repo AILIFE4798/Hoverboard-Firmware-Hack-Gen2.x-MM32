@@ -39,6 +39,17 @@ const uint32_t pins[33][3] = {   // port,pin,pinsrc,ADC,ADC2,HALL AF,HALL TIM,UA
 {IOD,GPIO_Pin_3,GPIO_PinSource3},
 };
 
+const uint32_t adcs[10][3] = {
+{0,ADC_Channel_0,0},
+{1,ADC_Channel_1,1},
+{2,ADC_Channel_2,2},
+{3,ADC_Channel_3,3},
+{4,ADC_Channel_4,4},
+{5,ADC_Channel_5,5},
+{6,ADC_Channel_6,6},
+{7,ADC_Channel_7,7},
+{13,ADC_Channel_8,8},
+{14,ADC_Channel_9,9}};
 
 
 
@@ -108,3 +119,44 @@ void digitalWrite(uint8_t port,uint16_t pin,uint8_t state){
 		break;
 	}
 }
+
+
+uint16_t analogRead(uint16_t channel){
+	switch (channel){
+		case 0:
+			return ADC1->ADDR0;
+		break;
+		case 1:
+			return ADC1->ADDR1;
+		break;
+		case 2:
+			return ADC1->ADDR2;
+		break;
+		case 3:
+			return ADC1->ADDR3;
+		break;
+		case 4:
+			return ADC1->ADDR4;
+		break;
+		case 5:
+			return ADC1->ADDR5;
+		break;
+		case 6:
+			return ADC1->ADDR6;
+		break;
+		case 7:
+			return ADC1->ADDR7;
+		break;
+		case 8:
+			return ADC1->ADDR8;
+		break;
+		case 9:
+			return ADC1->ADDR9;
+		break;
+		default:
+			return 0;
+	}
+}
+
+
+

@@ -20,6 +20,6 @@
 
 void pinMode(uint8_t port,uint16_t pin,uint8_t state);
 uint8_t digitalRead(uint8_t port,uint16_t pin);
-
-
+uint16_t analogRead(uint16_t channel);
+void digitalWrite(uint8_t port,uint16_t pin,uint8_t state);
 

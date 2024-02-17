@@ -13,3 +13,4 @@ void HALL_Init(void);
 void Iwdg_Init(u16 IWDG_Prescaler, u16 Reload);
 void UART_GPIO_Init();
 void vref_Init();
+void ADCALL_Init();

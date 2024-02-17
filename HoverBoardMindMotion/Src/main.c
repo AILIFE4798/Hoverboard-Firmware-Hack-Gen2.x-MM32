@@ -42,7 +42,7 @@ extern uint8_t banner;
 extern uint8_t pinstorage[16];
 extern uint8_t mode;
 extern uint8_t init;
-
+float vcc;
 
 s32 main(void){	
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOA, ENABLE);
@@ -85,6 +85,9 @@ s32 main(void){
 			break;
 			case 4 :
 				blinkLEDupdate();
+			break;
+			case 5 :
+				printvoltage();
 			break;
 		}
   }

@@ -41,4 +41,5 @@
   HAL_Lib\Inc\hal_iwdg.h HAL_Lib\Inc\hal_misc.h HAL_Lib\Inc\hal_pwr.h \
   HAL_Lib\Inc\hal_spi.h HAL_Lib\Inc\hal_syscfg.h HAL_Lib\Inc\hal_uart.h \
   HAL_Lib\Inc\hal_uid.h HAL_Lib\Inc\hal_wwdg.h \
-  HAL_Lib\Inc\hal_redefine.h
+  HAL_Lib\Inc\hal_redefine.h Src\..\Inc\autodetect.h \
+  Src\..\Inc\hardware.h

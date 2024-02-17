@@ -9,12 +9,12 @@
 #include "../Inc/bldc.h"
 
 extern uint32_t pins[33][3];
+extern uint32_t adcs[10][3];
 extern uint32_t millis;
 uint8_t test;
 int tmp;
-uint8_t pinstorage[16];    //halla,hallb,hallc,ledr,ledg,ledb,ledup,leddown,buzzer,button,selfhold,charger,vbat,itotal,tx,rx
 uint8_t used(uint8_t pin);
-uint8_t mode=0;//0=startup,1=wait for serial,2=idle
+uint8_t mode=0;//0=startup,1=wait for serial,2=menu,3=hall,4=led,5=adc
 uint32_t lastCommutation;
 extern uint8_t step;
 uint8_t init=0;
@@ -28,10 +28,15 @@ uint16_t revolutions=0;
 uint8_t selpin=0;
 uint8_t blinkstate=0;
 uint32_t lastblink;
+extern float vcc;
+uint8_t adcleft[10];
+uint8_t showalladc=0;
 
 uint8_t hallA[33];
 uint8_t hallB[33];
 uint8_t hallC[33];
+uint8_t pinstorage[16]={0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff};    
+//halla,hallb,hallc,ledr,ledg,ledb,ledup,leddown,buzzer,button,selfhold,charger,vbat,itotal,tx,rx
 
 const uint8_t banner[]={0X20,0X20,0X5F,0X20,0X20,0X20,0X5F,0X20,0X20,0X5F,0X5F,0X5F,0X5F,0X5F,0X20,0X20,0X20,0X20,0X20,0X5F,0X5F,0X5F,0X5F,0X5F,0X5F,0X5F,0X20,0X5F,0X5F,0X5F,0X5F,0X20,0X20,0X20,0X20,0X5F,0X20,0X20,0X20,0X5F,0X20,0X20,0X20,0X20,0X5F,0X20,0X20,0X20,0X20,0X5F,0X5F,0X5F,0X5F,0X20,0X5F,0X20,0X20,0X5F,0X5F,0X20,0X5F,0X5F,0X20,0X20,0X20,0X20,0X20,0X5F,0X5F,0X5F,0X5F,0X5F,0X5F,0X20,0X20,0X0A,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X2F,0X20,0X5F,0X20,0X5C,0X20,0X5C,0X20,0X20,0X20,0X2F,0X20,0X2F,0X20,0X5F,0X5F,0X5F,0X5F,0X7C,0X20,0X20,0X5F,0X20,0X5C,0X20,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X20,0X2F,0X20,0X5C,0X20,0X20,0X2F,0X20,0X5F,0X5F,0X5F,0X7C,0X20,0X7C,0X2F,0X20,0X2F,0X20,0X5C,0X20,0X5C,0X20,0X20,0X20,0X2F,0X20,0X2F,0X5F,0X5F,0X5F,0X20,0X5C,0X20,0X0A,0X20,0X7C,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X5C,0X20,0X5C,0X20,0X2F,0X20,0X2F,0X7C,0X20,0X20,0X5F,0X7C,0X20,0X7C,0X20,0X7C,0X5F,0X29,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X20,0X2F,0X20,0X5F,0X20,0X5C,0X7C,0X20,0X7C,0X20,0X20,0X20,0X7C,0X20,0X27,0X20,0X2F,0X20,0X20,0X20,0X5C,0X20,0X5C,0X20,0X2F,0X20,0X2F,0X20,0X20,0X5F,0X5F,0X29,0X20,0X7C,0X0A,0X20,0X7C,0X20,0X20,0X5F,0X20,0X20,0X7C,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X5C,0X20,0X56,0X20,0X2F,0X20,0X7C,0X20,0X7C,0X5F,0X5F,0X5F,0X7C,0X20,0X20,0X5F,0X20,0X3C,0X20,0X20,0X7C,0X20,0X20,0X5F,0X20,0X20,0X7C,0X2F,0X20,0X5F,0X5F,0X5F,0X20,0X5C,0X20,0X7C,0X5F,0X5F,0X5F,0X7C,0X20,0X2E,0X20,0X5C,0X20,0X20,0X20,0X20,0X5C,0X20,0X56,0X20,0X2F,0X20,0X20,0X2F,0X20,0X5F,0X5F,0X2F,0X20,0X0A,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X5F,0X7C,0X5C,0X5F,0X5F,0X5F,0X2F,0X20,0X20,0X5C,0X5F,0X2F,0X20,0X20,0X7C,0X5F,0X5F,0X5F,0X5F,0X5F,0X7C,0X5F,0X7C,0X20,0X5C,0X5F,0X5C,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X5F,0X2F,0X5F,0X2F,0X20,0X20,0X20,0X5C,0X5F,0X5C,0X5F,0X5F,0X5F,0X5F,0X7C,0X5F,0X7C,0X5C,0X5F,0X5C,0X20,0X20,0X20,0X20,0X5C,0X5F,0X2F,0X20,0X20,0X7C,0X5F,0X5F,0X5F,0X5F,0X5F,0X7C,0X0A,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X0A,0X0A};
 uint8_t PXX[33][4]={"PA0 ","PA1 ","PA2 ","PA3 ","PA4 ","PA5 ","PA6 ","PA7 ","PA11","PA12","PA13","PA14","PA15","PB0 ","PB1 ","PB2 ","PB3 ","PB4 ","PB5 ","PB6 ","PB7 ","PB8 ","PB9 ","PB10","PB11","PB12","PC13","PC14","PC15","PD0 ","PD1 ","PD2 ","PD3 "};
@@ -51,7 +56,6 @@ uint8_t detectSelfHold(){
 	vref_Init();    //uses internal 1.2v refrence to detect vcc voltage
 	ADC_SoftwareStartConvCmd(ADC1, ENABLE);
 	DELAY_Ms(100);    //wait for adc stablize
-	float vcc;
 	uint8_t havelatch=0;
 	for(uint8_t i=0;i<33;i++){
 		if(!used(i)){
@@ -72,6 +76,8 @@ uint8_t detectSelfHold(){
 			}
 	  }
 	}	
+	uint16_t adcval = ADC1->CH15DR;
+	vcc=(double)4915.2/adcval;
 	return havelatch;
 }
 	
@@ -97,7 +103,7 @@ void autoDetectSerialIt(){
 			break;
 		case 3 :
 			if(sRxBuffer[0]=='\n'){
-				mode=4;
+				mode=5;
 				init=1;
 				sTimingDelay=0;
 			}
@@ -288,6 +294,7 @@ void simhallupdate(){    //does not work : (
 void autoDetectInit(){
 	switch (mode){
 		case 3 :
+			TIM_CtrlPWMOutputs(TIM1, ENABLE);
 			TIM1->CCR1=4000;    //spin motor at 50% pwm
 			TIM1->CCR2=4000;
 			TIM1->CCR3=4000;
@@ -320,8 +327,25 @@ void autoDetectInit(){
 				selpin++;
 			}
 		break;
-	
-	
+		case 5 :
+			TIM_CtrlPWMOutputs(TIM1, ENABLE);
+			TIM1->CCR1=8192;    //spin motor at 50% pwm
+			TIM1->CCR2=8192;
+			TIM1->CCR3=8192;
+			step=0;    //close all low side mosfet to prevent reading phase current
+			commutate();
+			ADCALL_Init();
+			for(uint8_t i=0;i<10;i++){
+				if(!used(adcs[i][0])){
+					ADC_RegularChannelConfig(ADC1, adcs[i][1], 0, ADC_SampleTime_7_5Cycles);
+					pinMode(pins[adcs[i][0]][0],pins[adcs[i][0]][1],GPIO_Mode_AIN);
+					adcleft[i]=1;
+				}else{
+					adcleft[i]=0;
+				}
+			}
+			ADC_SoftwareStartConvCmd(ADC1, ENABLE);
+		break;
 	
 	
 	
@@ -337,7 +361,23 @@ void blinkLEDupdate(){
 	
 }
 	
+
+void printvoltage(){
+	for(uint8_t i=0;i<10;i++){
+		if(adcleft[i]){
+			float vbattmp = (double)analogRead(adcs[i][2])*vcc*31/4096;
+			if(showalladc||(vbattmp>20&&vbattmp<45)){
+				char buffer[32];
+				UART_Send_Group(&PXX[adcs[i][0]][0],4);
+				sprintf(&buffer[0],":%fV\n",vbattmp);
+				UART_SendString(&buffer[0]);
+			}
+		}
+	}
+	UART_SendString("================\n");
+	DELAY_Ms(2000);
+}	
 	
 	
-	
-	
+
+
