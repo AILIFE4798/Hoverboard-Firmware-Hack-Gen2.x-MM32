@@ -73,6 +73,9 @@ s32 main(void){
 				UART_SendString("Welcome to PinFinder\n\r");
 				UART_SendString("press enter to continue");
 				for(uint8_t i=0;i<50;i++){
+					if(mode!=1){
+						break;
+					}
 					UART_SendString(".");
 					DELAY_Ms(100);
 				}
