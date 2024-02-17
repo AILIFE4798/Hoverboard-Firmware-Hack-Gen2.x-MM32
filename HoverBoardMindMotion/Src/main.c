@@ -83,6 +83,9 @@ s32 main(void){
 			case 3 :
 				simhallupdate();
 			break;
+			case 4 :
+				blinkLEDupdate();
+			break;
 		}
   }
 }

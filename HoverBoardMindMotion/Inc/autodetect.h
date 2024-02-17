@@ -6,7 +6,7 @@ uint8_t detectSelfHold();
 void autoDetectSerialIt();
 void simhallupdate();
 void autoDetectInit();
-
+void blinkLEDupdate();
 
 
 

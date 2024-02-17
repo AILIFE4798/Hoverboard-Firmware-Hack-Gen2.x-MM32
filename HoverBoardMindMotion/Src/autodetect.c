@@ -21,11 +21,13 @@ uint8_t init=0;
 extern __IO u32 sTimingDelay;
 extern u8 sRxBuffer[10];
 uint16_t revolutions=0;
-uint8_t scan=0;
-uint8_t halltmp[3];
-uint8_t laststate[33];
-uint32_t lastchange[33];
-
+//uint8_t scan=0;
+//uint8_t halltmp[3];
+//uint8_t laststate[33];
+//uint32_t lastchange[33];
+uint8_t selpin=0;
+uint8_t blinkstate=0;
+uint32_t lastblink;
 
 uint8_t hallA[33];
 uint8_t hallB[33];
@@ -95,16 +97,72 @@ void autoDetectSerialIt(){
 			break;
 		case 3 :
 			if(sRxBuffer[0]=='\n'){
-				mode=3;
+				mode=4;
 				init=1;
 				sTimingDelay=0;
 			}
+			break;
+		case 4 :
+			switch(sRxBuffer[0]){
+				case '\n':
+					mode=3;
+					init=1;
+					sTimingDelay=0;
+				break;
+				case 'w':
+				case 'r':
+				case 'g':
+				case 'b':
+				case 'u':
+				case 'l':
+				case 'z':
+					pinMode(pins[selpin][0],pins[selpin][1],sRxBuffer[0]=='w' ? GPIO_Mode_IPU : GPIO_Mode_FLOATING);
+					switch(sRxBuffer[0]){
+						case 'r':
+							pinstorage[3]=selpin;
+						break;
+						case 'g':
+							pinstorage[4]=selpin;
+						break;
+						case 'b':
+							pinstorage[5]=selpin;
+						break;
+						case 'u':
+							pinstorage[6]=selpin;
+						break;
+						case 'l':
+							pinstorage[7]=selpin;
+						break;
+						case 'z':
+							pinstorage[8]=selpin;
+						break;
+					}
+					do{
+						if(selpin==32){
+							selpin=0;
+						}else{
+							selpin++;
+						}
+					}while(used(selpin));
+				break;
+				case 's':
+					pinMode(pins[selpin][0],pins[selpin][1],GPIO_Mode_IPU);
+					do{
+						if(selpin==0){
+							selpin=32;
+						}else{
+							selpin--;
+						}
+					}while(used(selpin));
+				break;
+			}
+			
 			break;
 	}
 }
 	
 
-void simhallupdate(){    //does not work : (
+void simhallupdate(){    
 	while(pinstorage[0]==255||pinstorage[1]==255||pinstorage[2]==255){
 		for(uint8_t i=1;i<7;i++){
 			step=i;
@@ -179,11 +237,14 @@ void simhallupdate(){    //does not work : (
 			}
 		}
 	}
+	TIM1->CCR1=0;
+	TIM1->CCR2=0;
+	TIM1->CCR3=0;
 }	
 
 
 /*
-void simhallupdate(){ 
+void simhallupdate(){    //does not work : (
 	for(uint8_t i=0;i<33;i++){
 		if(!used(i)){
 			laststate[i]=digitalRead(pins[i][0],pins[i][1]);
@@ -248,7 +309,17 @@ void autoDetectInit(){
 			revolutions=0;
 		*/
 		break;
-	
+		case 4 :
+			for(uint8_t i=0;i<33;i++){    //find the first unused pin to start
+				if(!used(i)){
+					pinMode(pins[i][0],pins[i][1],GPIO_Mode_IPU);
+				}
+			}
+			selpin=0;
+			while(used(selpin)){
+				selpin++;
+			}
+		break;
 	
 	
 	
@@ -257,7 +328,14 @@ void autoDetectInit(){
 	}
 }
 	
+void blinkLEDupdate(){
+	if(millis-lastblink>200){
+		pinMode(pins[selpin][0],pins[selpin][1],blinkstate ? GPIO_Mode_IPU : GPIO_Mode_IPD);
+		blinkstate=!blinkstate;
+		lastblink=millis;
+	}
 	
+}
 	
 	
 	
