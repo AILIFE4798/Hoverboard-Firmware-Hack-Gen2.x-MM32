@@ -2,6 +2,7 @@
 #include "hal_gpio.h"
 #include "hal_adc.h"
 #include "hal_conf.h"
+#include "hal_uid.h"
 #include "../Inc/hardware.h"
 #include "../Inc/initialize.h"
 #include "../Inc/delay.h"
@@ -32,6 +33,9 @@ extern float vcc;
 uint8_t adcleft[10];
 uint8_t showalladc=0;
 uint8_t detectall=0;
+extern uint8_t masterslave;
+extern u8 device_id_data[12];
+uint8_t wait;
 
 uint8_t hallA[33];
 uint8_t hallB[33];
@@ -149,6 +153,9 @@ void autoDetectSerialIt(){
 					mode=2;
 					init=1;
 				}
+				wait=0;
+			}else if(sRxBuffer[0]=='y'){
+				wait=0;
 			}
 			break;
 		case 4 :
@@ -163,6 +170,11 @@ void autoDetectSerialIt(){
 						mode=2;
 						init=1;
 					}
+					for(uint8_t i=0;i<33;i++){
+						if(!used(i)){
+						pinMode(pins[i][0],pins[i][1],GPIO_Mode_FLOATING);
+						}
+					}
 				break;
 				case 'w':
 				case 'r':
@@ -175,21 +187,33 @@ void autoDetectSerialIt(){
 					switch(sRxBuffer[0]){
 						case 'r':
 							pinstorage[3]=selpin;
+							UART_SendString("\r\nLEDR:");
+							UART_Send_Group(&PXX[selpin][0],4);
 						break;
 						case 'g':
 							pinstorage[4]=selpin;
+							UART_SendString("\r\nLEDG:");
+							UART_Send_Group(&PXX[selpin][0],4);
 						break;
 						case 'b':
 							pinstorage[5]=selpin;
+							UART_SendString("\r\nLEDB:");
+							UART_Send_Group(&PXX[selpin][0],4);
 						break;
 						case 'u':
 							pinstorage[6]=selpin;
+							UART_SendString("\r\nUpper LED:");
+							UART_Send_Group(&PXX[selpin][0],4);
 						break;
 						case 'l':
 							pinstorage[7]=selpin;
+							UART_SendString("\r\nLower LED:");
+							UART_Send_Group(&PXX[selpin][0],4);
 						break;
 						case 'z':
 							pinstorage[8]=selpin;
+							UART_SendString("\r\nBuzzer:");
+							UART_Send_Group(&PXX[selpin][0],4);
 						break;
 					}
 					do{
@@ -356,8 +380,14 @@ void simhallupdate(){    //does not work : (
 void autoDetectInit(){
 	switch (mode){
 		case 2 :
+			GetChipUID();
 			UART_SendString("\n\n\n\n\r");
 			UART_Send_Group(&banner[0],464);
+			UART_SendString("Board type:");
+			UART_SendString(masterslave?"Master":"Slave");
+			char buffer[80];
+			sprintf(&buffer[0],"  MCU Voltage:%fV  Serial number:%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X\n\r",vcc,device_id_data[0],device_id_data[1],device_id_data[2],device_id_data[3],device_id_data[4],device_id_data[5],device_id_data[6],device_id_data[7],device_id_data[8],device_id_data[9],device_id_data[10],device_id_data[11]);
+			UART_SendString(&buffer[0]);
 			UART_SendString("Welcome to PinFinder, press number key to choose action.\n\r");
 			UART_SendString("  (1)-Auto detect all pins.\n\r");
 			UART_SendString("  (2)-Auto detect HALL sensor.\n\r");
@@ -370,36 +400,45 @@ void autoDetectInit(){
 			UART_SendString("  (9)-Power off.\n\r>");
 		break;
 		case 3 :
-			TIM_CtrlPWMOutputs(TIM1, ENABLE);
-			TIM1->CCR1=4000;    //spin motor at 50% pwm
-			TIM1->CCR2=4000;
-			TIM1->CCR3=4000;
-			for(uint8_t i=0;i<33;i++){
-				hallA[i] = 1;
-				hallB[i] = 1;
-				hallC[i] = 1;
+			UART_SendString("\n\rthis will spin motor slowly to detect hall sensor pins,if it takes too long please increase input voltage to 42v.\n\rpress Y to start,Enter to return to menu\n\r");
+			wait=1;
+			while(wait){
+				__NOP();
+				__NOP();
 			}
-			for(uint8_t i=0;i<33;i++){    //remove used pins from hall array
-				if(used(i)){
-					hallA[i]=0;
-					hallB[i]=0;
-					hallC[i]=0;
+			if(mode==3){
+				TIM_CtrlPWMOutputs(TIM1, ENABLE);
+				TIM1->CCR1=4000;    //spin motor at 50% pwm
+				TIM1->CCR2=4000;
+				TIM1->CCR3=4000;
+				for(uint8_t i=0;i<33;i++){
+					hallA[i] = 1;
+					hallB[i] = 1;
+					hallC[i] = 1;
 				}
+				for(uint8_t i=0;i<33;i++){    //remove used pins from hall array
+					if(used(i)){
+						hallA[i]=0;
+						hallB[i]=0;
+						hallC[i]=0;
+					}
+				}
+				pinstorage[0]=pinstorage[1]=pinstorage[2]=255;
+			/*
+				halltmp[0]=halltmp[1]=halltmp[2]=255;
+				revolutions=0;
+			*/
 			}
-			pinstorage[0]=pinstorage[1]=pinstorage[2]=255;
-		/*
-			halltmp[0]=halltmp[1]=halltmp[2]=255;
-			revolutions=0;
-		*/
 		break;
 		case 4 :
-			for(uint8_t i=0;i<33;i++){    //find the first unused pin to start
+			UART_SendString("\n\rAll pins will be set high, the selected pin will blink, the already saved pins will remain off. If a LED does not light up, it is broken.\r\npress W to go to next pin\r\npress S to go to previous pin\n\rPress R to save as red LED\r\nPress G to save as green LED\r\nPress B to save as blue LED(or orange on some board)\r\nPress U to save as upper LED\r\nPress L to save as lower LED\r\npress Enter to go back to main menu\r\n");
+			for(uint8_t i=0;i<33;i++){
 				if(!used(i)){
 					pinMode(pins[i][0],pins[i][1],GPIO_Mode_IPU);
 				}
 			}
 			selpin=0;
-			while(used(selpin)){
+			while(used(selpin)){    //find the first unused pin to start
 				selpin++;
 			}
 		break;
@@ -422,10 +461,7 @@ void autoDetectInit(){
 			}
 			ADC_SoftwareStartConvCmd(ADC1, ENABLE);
 		break;
-	
-	
-	
-	}
+	}		
 }
 	
 void blinkLEDupdate(){

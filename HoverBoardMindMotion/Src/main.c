@@ -42,6 +42,7 @@ extern uint8_t banner;
 extern uint8_t pinstorage[16];
 extern uint8_t mode;
 extern uint8_t init;
+extern uint8_t wait;
 float vcc;
 
 s32 main(void){	
@@ -90,6 +91,6 @@ s32 main(void){
 				printvoltage();
 			break;
 		}
-  }
+	}
 }
 
