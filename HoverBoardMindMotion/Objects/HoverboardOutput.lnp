@@ -9,6 +9,7 @@
 ".\objects\calculation.o"
 ".\objects\autodetect.o"
 ".\objects\hardware.o"
+".\objects\sim_eeprom.o"
 ".\objects\hal_adc.o"
 ".\objects\hal_comp.o"
 ".\objects\hal_crc.o"

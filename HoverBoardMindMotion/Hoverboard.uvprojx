@@ -434,6 +434,11 @@
               <FileType>1</FileType>
               <FilePath>.\Src\hardware.c</FilePath>
             </File>
+            <File>
+              <FileName>sim_eeprom.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\sim_eeprom.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -488,6 +493,11 @@
               <FileName>hardware.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Inc\hardware.h</FilePath>
+            </File>
+            <File>
+              <FileName>sim_eeprom.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\sim_eeprom.h</FilePath>
             </File>
           </Files>
         </Group>

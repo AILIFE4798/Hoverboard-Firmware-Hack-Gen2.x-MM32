@@ -8,6 +8,7 @@
 #include "../Inc/delay.h"
 #include "../Inc/uart.h"
 #include "../Inc/bldc.h"
+#include "../Inc/sim_eeprom.h"
 
 extern uint32_t pins[33][3];
 extern uint32_t adcs[10][3];
@@ -130,6 +131,7 @@ void autoDetectSerialIt(){
 					detectall=0;
 				break;
 				case '5':
+					UART_SendString("Feature not implemented.");
 				break;
 				case '6':
 					mode=7;
@@ -137,8 +139,15 @@ void autoDetectSerialIt(){
 					detectall=0;
 				break;
 				case '7':
+					EEPROM_Write((u8*)pinstorage, 2 * 16);
+					UART_SendString("Written to Flash");
 				break;
 				case '8':
+					EEPROM_Read((u8*)pinstorage, 2 * 16);
+					UART_SendString("Read from Flash");
+					char buffer[80];
+					sprintf(&buffer[0],"%i,%i,%i",pinstorage[0],pinstorage[1],pinstorage[2]);
+					UART_SendString(&buffer[0]);
 				break;
 				case '9':
 					if(masterslave){
@@ -248,7 +257,7 @@ void autoDetectSerialIt(){
 			case 5 :
 			if(sRxBuffer[0]=='\n'||sRxBuffer[0]=='\r'){
 				if(detectall){
-					mode=6;
+					mode=7;
 					init=1;
 					sTimingDelay=0;
 				}else{
@@ -541,13 +550,14 @@ void checkbutton(){
 			UART_SendString("Workaround failed");
 		}
 		doinloop=0;
-	}
-	for(uint8_t i=0;i<33;i++){
-		if(!used(i)){
-			if(!hallA[i]&&digitalRead(pins[i][0],pins[i][1])){
-				pinstorage[9]=i;
-				UART_SendString("\r\nButton:");
-				UART_Send_Group(&PXX[i][0],4);
+	}else{
+		for(uint8_t i=0;i<33;i++){
+			if(!used(i)){
+				if(!hallA[i]&&digitalRead(pins[i][0],pins[i][1])){
+					pinstorage[9]=i;
+					UART_SendString("\r\nButton:");
+					UART_Send_Group(&PXX[i][0],4);
+				}
 			}
 		}
 	}
