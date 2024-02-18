@@ -7,6 +7,7 @@
 #include "hal_tim.h"
 #include "hal_conf.h"
 #include "math.h"
+#include "../Inc/hardware.h"
 
 
 extern uint8_t step;
@@ -23,7 +24,8 @@ int testrotatedir=1;
 uint8_t hallpos(uint8_t dir);
 bool lastdir=0;
 extern uint8_t poweron;
-
+extern uint16_t pinstorage[64];
+extern uint32_t pins[33][3];
 
 
 const uint8_t hall_to_pos[8] =
@@ -47,9 +49,9 @@ uint8_t hallpos(uint8_t dir){
 	uint8_t HallC;
 	uint8_t HallValue;
 	
-	HallA = GPIO_ReadInputDataBit(HALLAPORT,HALLAPIN);
-	HallB = GPIO_ReadInputDataBit(HALLBPORT,HALLBPIN);
-	HallC = GPIO_ReadInputDataBit(HALLCPORT,HALLCPIN);
+	HallA = digitalRead(pins[pinstorage[0]][0],pins[pinstorage[0]][1]);
+	HallB = digitalRead(pins[pinstorage[1]][0],pins[pinstorage[1]][1]);
+	HallC = digitalRead(pins[pinstorage[2]][0],pins[pinstorage[2]][1]);
 	
 	if(dir == 1)
 	{

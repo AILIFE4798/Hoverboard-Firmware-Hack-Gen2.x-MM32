@@ -9,6 +9,8 @@
 #include "../Inc/uart.h"
 #include "../Inc/bldc.h"
 #include "../Inc/sim_eeprom.h"
+#include "../Inc/pinout.h"
+#include "math.h"
 
 extern uint32_t pins[33][3];
 extern uint32_t adcs[10][3];
@@ -38,12 +40,15 @@ extern uint8_t masterslave;
 extern u8 device_id_data[12];
 uint8_t wait;
 uint8_t doinloop=0;
+extern uint8_t hallposprev;
+extern bool dir;
+int testrotatespeed;
 
 uint8_t hallA[33];
 uint8_t hallB[33];
 uint8_t hallC[33];
-uint8_t pinstorage[16]={0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff};    
-//halla,hallb,hallc,ledr,ledg,ledb,ledup,leddown,buzzer,button,selfhold,charger,vbat,itotal,tx,rx
+extern uint16_t pinstorage[64];    
+//0:halla,1:hallb,2:hallc,3:ledr,4:ledg,5:ledb,6:ledup,7:leddown,8:buzzer,9:button,10:selfhold,11:charger,12:vbat,13:itotal,14:tx,15:rx,16:iphasea,17:iphaseb,18:iphasec,19~22:reserved,23:OCP,24:OCP ref,25:IR_L,26:IR_R,27:serial2tx,28:serial2rx,29~31:reserved,32:0XDCBA,33:vbat divider,34:itotal divider,35:iphase divider,36:baud,37:pwm resolution,38:slave ID,39:windings,40:invert lowside,41:soft current limit,42:hard limit awdg,43:UART,44:pid,45:bat 100%,46:bat0%,47:serial timeout,48~64:reserved 
 
 uint8_t banner[]={0X20,0X20,0X5F,0X20,0X20,0X20,0X5F,0X20,0X20,0X5F,0X5F,0X5F,0X5F,0X5F,0X20,0X20,0X20,0X20,0X20,0X5F,0X5F,0X5F,0X5F,0X5F,0X5F,0X5F,0X20,0X5F,0X5F,0X5F,0X5F,0X20,0X20,0X20,0X20,0X5F,0X20,0X20,0X20,0X5F,0X20,0X20,0X20,0X20,0X5F,0X20,0X20,0X20,0X20,0X5F,0X5F,0X5F,0X5F,0X20,0X5F,0X20,0X20,0X5F,0X5F,0X20,0X5F,0X5F,0X20,0X20,0X20,0X20,0X20,0X5F,0X5F,0X5F,0X5F,0X5F,0X5F,0X20,0X20,0X0A,0X0D,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X2F,0X20,0X5F,0X20,0X5C,0X20,0X5C,0X20,0X20,0X20,0X2F,0X20,0X2F,0X20,0X5F,0X5F,0X5F,0X5F,0X7C,0X20,0X20,0X5F,0X20,0X5C,0X20,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X20,0X2F,0X20,0X5C,0X20,0X20,0X2F,0X20,0X5F,0X5F,0X5F,0X7C,0X20,0X7C,0X2F,0X20,0X2F,0X20,0X5C,0X20,0X5C,0X20,0X20,0X20,0X2F,0X20,0X2F,0X5F,0X5F,0X5F,0X20,0X5C,0X20,0X0A,0X0D,0X20,0X7C,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X5C,0X20,0X5C,0X20,0X2F,0X20,0X2F,0X7C,0X20,0X20,0X5F,0X7C,0X20,0X7C,0X20,0X7C,0X5F,0X29,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X20,0X2F,0X20,0X5F,0X20,0X5C,0X7C,0X20,0X7C,0X20,0X20,0X20,0X7C,0X20,0X27,0X20,0X2F,0X20,0X20,0X20,0X5C,0X20,0X5C,0X20,0X2F,0X20,0X2F,0X20,0X20,0X5F,0X5F,0X29,0X20,0X7C,0X0A,0X0D,0X20,0X7C,0X20,0X20,0X5F,0X20,0X20,0X7C,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X5C,0X20,0X56,0X20,0X2F,0X20,0X7C,0X20,0X7C,0X5F,0X5F,0X5F,0X7C,0X20,0X20,0X5F,0X20,0X3C,0X20,0X20,0X7C,0X20,0X20,0X5F,0X20,0X20,0X7C,0X2F,0X20,0X5F,0X5F,0X5F,0X20,0X5C,0X20,0X7C,0X5F,0X5F,0X5F,0X7C,0X20,0X2E,0X20,0X5C,0X20,0X20,0X20,0X20,0X5C,0X20,0X56,0X20,0X2F,0X20,0X20,0X2F,0X20,0X5F,0X5F,0X2F,0X20,0X0A,0X0D,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X5F,0X7C,0X5C,0X5F,0X5F,0X5F,0X2F,0X20,0X20,0X5C,0X5F,0X2F,0X20,0X20,0X7C,0X5F,0X5F,0X5F,0X5F,0X5F,0X7C,0X5F,0X7C,0X20,0X5C,0X5F,0X5C,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X5F,0X2F,0X5F,0X2F,0X20,0X20,0X20,0X5C,0X5F,0X5C,0X5F,0X5F,0X5F,0X5F,0X7C,0X5F,0X7C,0X5C,0X5F,0X5C,0X20,0X20,0X20,0X20,0X5C,0X5F,0X2F,0X20,0X20,0X7C,0X5F,0X5F,0X5F,0X5F,0X5F,0X7C,0X0A,0X0D,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X0A,0X0D,0X0A,0X0D};
 uint8_t PXX[33][4]={"PA0 ","PA1 ","PA2 ","PA3 ","PA4 ","PA5 ","PA6 ","PA7 ","PA11","PA12","PA13","PA14","PA15","PB0 ","PB1 ","PB2 ","PB3 ","PB4 ","PB5 ","PB6 ","PB7 ","PB8 ","PB9 ","PB10","PB11","PB12","PC13","PC14","PC15","PD0 ","PD1 ","PD2 ","PD3 "};
@@ -143,11 +148,9 @@ void autoDetectSerialIt(){
 					UART_SendString("Written to Flash");
 				break;
 				case '8':
-					EEPROM_Read((u8*)pinstorage, 2 * 16);
-					UART_SendString("Read from Flash");
-					char buffer[80];
-					sprintf(&buffer[0],"%i,%i,%i",pinstorage[0],pinstorage[1],pinstorage[2]);
-					UART_SendString(&buffer[0]);
+					mode=9;
+					init=1;
+					detectall=0;
 				break;
 				case '9':
 					if(masterslave){
@@ -282,6 +285,35 @@ void autoDetectSerialIt(){
 					doinloop=1;
 				}
 			break;
+			case 9 :
+				switch(sRxBuffer[0]){
+					case '\r':
+					case '\n':
+						mode=2;
+						init=1;
+						sTimingDelay=0;
+						TIM_CtrlPWMOutputs(TIM1, DISABLE);
+					break;
+					case '+':
+						testrotatespeed+=100;
+						if(testrotatespeed>1000){
+							testrotatespeed=1000;
+						}
+						char buffer2[16];
+						sprintf(&buffer2[0],"\rSpeed:%i   ",testrotatespeed);
+						UART_SendString(&buffer2[0]);
+					break;
+					case '-':
+						testrotatespeed-=100;
+						if(testrotatespeed<-1000){
+							testrotatespeed=-1000;
+						}
+						char buffer[16];
+						sprintf(&buffer[0],"\rSpeed:%i   ",testrotatespeed);
+						UART_SendString(&buffer[0]);					
+					break;
+				}	
+			break;				
 	}
 }
 	
@@ -427,8 +459,8 @@ void autoDetectInit(){
 			UART_SendString("  (4)-Auto detect battery voltage.\n\r");
 			UART_SendString("  (5)-Auto detect total current.\n\r");
 			UART_SendString("  (6)-Auto detect power button.\n\r");
-			UART_SendString("  (7)-Enter command line interface.\n\r");
-			UART_SendString("  (8)-Erase all saved configurations.\n\r");
+			UART_SendString("  (7)-Modify configurations manually by command line.\n\r");
+			UART_SendString("  (8)-Test motor rotation.\n\r");
 			UART_SendString("  (9)-Power off.\n\r>");
 		break;
 		case 3 :
@@ -502,6 +534,17 @@ void autoDetectInit(){
 				}
 			}
 		break;
+		case 9 :
+			UART_SendString("\r\nTest the motor with hall sensor commutation\r\npress + to increase speed\r\npress - to decrease speed\r\nnegative speed to spin backward\r\npress Enter to return to main menu\n\n\r>");
+			TIM_CtrlPWMOutputs(TIM1, ENABLE);
+			TIM1->CCR1=0; 
+			TIM1->CCR2=0;
+			TIM1->CCR3=0;
+			testrotatespeed=0;
+			pinMode(pins[pinstorage[0]][0],pins[pinstorage[0]][1],GPIO_Mode_FLOATING);
+			pinMode(pins[pinstorage[1]][0],pins[pinstorage[1]][1],GPIO_Mode_FLOATING);
+			pinMode(pins[pinstorage[2]][0],pins[pinstorage[2]][1],GPIO_Mode_FLOATING);
+		break;
 	}		
 }
 	
@@ -562,4 +605,37 @@ void checkbutton(){
 		}
 	}
 }
+
+
+uint8_t restorecfg(){
+	uint16_t tmp[64];
+	EEPROM_Read((u8*)tmp, 2 * 64);
+	if(tmp[32]==0xDCBA){    //verify config is valid
+		for(uint8_t i=0;i<64;i++){
+			pinstorage[i]=tmp[i];
+		}
+		return 1;
+	}else{
+		return 0;
+	}
+}
+
+void testrotateloop(){
+	if(hallpos(dir)!=hallposprev){
+		hallposprev=hallpos(dir);
+		step=hallposprev;
+		commutate();
+	}
+	int pwm=testrotatespeed*PWM_RES/1000;//1000~-1000 for all pwm resolution
+	if(pwm>0){
+	dir=1;
+	}else{
+	dir=0;
+	}
+	unsigned int abspeed=fabs((double)pwm);    // 4095~-4095
+	TIM1->CCR1=abspeed;
+	TIM1->CCR2=abspeed;
+	TIM1->CCR3=abspeed;
+}
+
 

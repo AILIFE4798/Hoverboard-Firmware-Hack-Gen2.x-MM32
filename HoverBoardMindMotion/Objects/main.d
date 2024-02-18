@@ -36,4 +36,10 @@
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h Src\..\Inc\pinout.h \
   Src\..\Inc\initialize.h Src\..\Inc\uart.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h Src\..\Inc\bldc.h \
-  Src\..\Inc\autodetect.h
+  Src\..\Inc\autodetect.h Src\..\Inc\hardware.h HAL_Lib\Inc\hal_conf.h \
+  HAL_Lib\Inc\hal_crc.h HAL_Lib\Inc\hal_comp.h HAL_Lib\Inc\hal_dbg.h \
+  HAL_Lib\Inc\hal_div.h HAL_Lib\Inc\hal_dma.h HAL_Lib\Inc\hal_exti.h \
+  HAL_Lib\Inc\hal_flash.h HAL_Lib\Inc\hal_i2c.h HAL_Lib\Inc\hal_misc.h \
+  HAL_Lib\Inc\hal_pwr.h HAL_Lib\Inc\hal_spi.h HAL_Lib\Inc\hal_syscfg.h \
+  HAL_Lib\Inc\hal_uart.h HAL_Lib\Inc\hal_uid.h HAL_Lib\Inc\hal_wwdg.h \
+  HAL_Lib\Inc\hal_redefine.h

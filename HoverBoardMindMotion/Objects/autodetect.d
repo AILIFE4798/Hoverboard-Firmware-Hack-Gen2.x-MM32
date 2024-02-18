@@ -41,4 +41,5 @@
   Src\..\Inc\initialize.h Src\..\Inc\delay.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h Src\..\Inc\uart.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h Src\..\Inc\bldc.h \
-  Src\..\Inc\sim_eeprom.h
+  Src\..\Inc\sim_eeprom.h Src\..\Inc\pinout.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\math.h
