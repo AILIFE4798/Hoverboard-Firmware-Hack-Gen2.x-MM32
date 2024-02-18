@@ -29,6 +29,8 @@ https://youtu.be/hCaIlEKzI3A
 * constant torque
 * phase current
 * foc
+## auto detect
+If you do not want to trace the pin of your board manually,the [pinfinder](https://github.com/AILIFE4798/Hoverboard-Firmware-Hack-Gen2.x-MM32/tree/pin-finder) firmware will help you do it 
 ## Hardware
 any board equippted with MM32SPIN0X microcontroller should be supported, as of now you will nee to trace the pins of the boar manually like below, but im working on autodetect layout
 
