@@ -31,6 +31,7 @@ uint32_t lastblink;
 extern float vcc;
 uint8_t adcleft[10];
 uint8_t showalladc=0;
+uint8_t detectall=0;
 
 uint8_t hallA[33];
 uint8_t hallB[33];
@@ -38,7 +39,7 @@ uint8_t hallC[33];
 uint8_t pinstorage[16]={0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff,0xff};    
 //halla,hallb,hallc,ledr,ledg,ledb,ledup,leddown,buzzer,button,selfhold,charger,vbat,itotal,tx,rx
 
-const uint8_t banner[]={0X20,0X20,0X5F,0X20,0X20,0X20,0X5F,0X20,0X20,0X5F,0X5F,0X5F,0X5F,0X5F,0X20,0X20,0X20,0X20,0X20,0X5F,0X5F,0X5F,0X5F,0X5F,0X5F,0X5F,0X20,0X5F,0X5F,0X5F,0X5F,0X20,0X20,0X20,0X20,0X5F,0X20,0X20,0X20,0X5F,0X20,0X20,0X20,0X20,0X5F,0X20,0X20,0X20,0X20,0X5F,0X5F,0X5F,0X5F,0X20,0X5F,0X20,0X20,0X5F,0X5F,0X20,0X5F,0X5F,0X20,0X20,0X20,0X20,0X20,0X5F,0X5F,0X5F,0X5F,0X5F,0X5F,0X20,0X20,0X0A,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X2F,0X20,0X5F,0X20,0X5C,0X20,0X5C,0X20,0X20,0X20,0X2F,0X20,0X2F,0X20,0X5F,0X5F,0X5F,0X5F,0X7C,0X20,0X20,0X5F,0X20,0X5C,0X20,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X20,0X2F,0X20,0X5C,0X20,0X20,0X2F,0X20,0X5F,0X5F,0X5F,0X7C,0X20,0X7C,0X2F,0X20,0X2F,0X20,0X5C,0X20,0X5C,0X20,0X20,0X20,0X2F,0X20,0X2F,0X5F,0X5F,0X5F,0X20,0X5C,0X20,0X0A,0X20,0X7C,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X5C,0X20,0X5C,0X20,0X2F,0X20,0X2F,0X7C,0X20,0X20,0X5F,0X7C,0X20,0X7C,0X20,0X7C,0X5F,0X29,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X20,0X2F,0X20,0X5F,0X20,0X5C,0X7C,0X20,0X7C,0X20,0X20,0X20,0X7C,0X20,0X27,0X20,0X2F,0X20,0X20,0X20,0X5C,0X20,0X5C,0X20,0X2F,0X20,0X2F,0X20,0X20,0X5F,0X5F,0X29,0X20,0X7C,0X0A,0X20,0X7C,0X20,0X20,0X5F,0X20,0X20,0X7C,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X5C,0X20,0X56,0X20,0X2F,0X20,0X7C,0X20,0X7C,0X5F,0X5F,0X5F,0X7C,0X20,0X20,0X5F,0X20,0X3C,0X20,0X20,0X7C,0X20,0X20,0X5F,0X20,0X20,0X7C,0X2F,0X20,0X5F,0X5F,0X5F,0X20,0X5C,0X20,0X7C,0X5F,0X5F,0X5F,0X7C,0X20,0X2E,0X20,0X5C,0X20,0X20,0X20,0X20,0X5C,0X20,0X56,0X20,0X2F,0X20,0X20,0X2F,0X20,0X5F,0X5F,0X2F,0X20,0X0A,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X5F,0X7C,0X5C,0X5F,0X5F,0X5F,0X2F,0X20,0X20,0X5C,0X5F,0X2F,0X20,0X20,0X7C,0X5F,0X5F,0X5F,0X5F,0X5F,0X7C,0X5F,0X7C,0X20,0X5C,0X5F,0X5C,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X5F,0X2F,0X5F,0X2F,0X20,0X20,0X20,0X5C,0X5F,0X5C,0X5F,0X5F,0X5F,0X5F,0X7C,0X5F,0X7C,0X5C,0X5F,0X5C,0X20,0X20,0X20,0X20,0X5C,0X5F,0X2F,0X20,0X20,0X7C,0X5F,0X5F,0X5F,0X5F,0X5F,0X7C,0X0A,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X0A,0X0A};
+uint8_t banner[]={0X20,0X20,0X5F,0X20,0X20,0X20,0X5F,0X20,0X20,0X5F,0X5F,0X5F,0X5F,0X5F,0X20,0X20,0X20,0X20,0X20,0X5F,0X5F,0X5F,0X5F,0X5F,0X5F,0X5F,0X20,0X5F,0X5F,0X5F,0X5F,0X20,0X20,0X20,0X20,0X5F,0X20,0X20,0X20,0X5F,0X20,0X20,0X20,0X20,0X5F,0X20,0X20,0X20,0X20,0X5F,0X5F,0X5F,0X5F,0X20,0X5F,0X20,0X20,0X5F,0X5F,0X20,0X5F,0X5F,0X20,0X20,0X20,0X20,0X20,0X5F,0X5F,0X5F,0X5F,0X5F,0X5F,0X20,0X20,0X0A,0X0D,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X2F,0X20,0X5F,0X20,0X5C,0X20,0X5C,0X20,0X20,0X20,0X2F,0X20,0X2F,0X20,0X5F,0X5F,0X5F,0X5F,0X7C,0X20,0X20,0X5F,0X20,0X5C,0X20,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X20,0X2F,0X20,0X5C,0X20,0X20,0X2F,0X20,0X5F,0X5F,0X5F,0X7C,0X20,0X7C,0X2F,0X20,0X2F,0X20,0X5C,0X20,0X5C,0X20,0X20,0X20,0X2F,0X20,0X2F,0X5F,0X5F,0X5F,0X20,0X5C,0X20,0X0A,0X0D,0X20,0X7C,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X5C,0X20,0X5C,0X20,0X2F,0X20,0X2F,0X7C,0X20,0X20,0X5F,0X7C,0X20,0X7C,0X20,0X7C,0X5F,0X29,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X20,0X2F,0X20,0X5F,0X20,0X5C,0X7C,0X20,0X7C,0X20,0X20,0X20,0X7C,0X20,0X27,0X20,0X2F,0X20,0X20,0X20,0X5C,0X20,0X5C,0X20,0X2F,0X20,0X2F,0X20,0X20,0X5F,0X5F,0X29,0X20,0X7C,0X0A,0X0D,0X20,0X7C,0X20,0X20,0X5F,0X20,0X20,0X7C,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X5C,0X20,0X56,0X20,0X2F,0X20,0X7C,0X20,0X7C,0X5F,0X5F,0X5F,0X7C,0X20,0X20,0X5F,0X20,0X3C,0X20,0X20,0X7C,0X20,0X20,0X5F,0X20,0X20,0X7C,0X2F,0X20,0X5F,0X5F,0X5F,0X20,0X5C,0X20,0X7C,0X5F,0X5F,0X5F,0X7C,0X20,0X2E,0X20,0X5C,0X20,0X20,0X20,0X20,0X5C,0X20,0X56,0X20,0X2F,0X20,0X20,0X2F,0X20,0X5F,0X5F,0X2F,0X20,0X0A,0X0D,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X5F,0X7C,0X5C,0X5F,0X5F,0X5F,0X2F,0X20,0X20,0X5C,0X5F,0X2F,0X20,0X20,0X7C,0X5F,0X5F,0X5F,0X5F,0X5F,0X7C,0X5F,0X7C,0X20,0X5C,0X5F,0X5C,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X5F,0X2F,0X5F,0X2F,0X20,0X20,0X20,0X5C,0X5F,0X5C,0X5F,0X5F,0X5F,0X5F,0X7C,0X5F,0X7C,0X5C,0X5F,0X5C,0X20,0X20,0X20,0X20,0X5C,0X5F,0X2F,0X20,0X20,0X7C,0X5F,0X5F,0X5F,0X5F,0X5F,0X7C,0X0A,0X0D,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X0A,0X0D,0X0A,0X0D};
 uint8_t PXX[33][4]={"PA0 ","PA1 ","PA2 ","PA3 ","PA4 ","PA5 ","PA6 ","PA7 ","PA11","PA12","PA13","PA14","PA15","PB0 ","PB1 ","PB2 ","PB3 ","PB4 ","PB5 ","PB6 ","PB7 ","PB8 ","PB9 ","PB10","PB11","PB12","PC13","PC14","PC15","PD0 ","PD1 ","PD2 ","PD3 "};
 
 	
@@ -95,25 +96,73 @@ uint8_t used(uint8_t pin){
 void autoDetectSerialIt(){
 	switch (mode){
 		case 1 :
-			if(sRxBuffer[0]=='\n'){
-				mode=3;
+			if(sRxBuffer[0]=='\n'||sRxBuffer[0]=='\r'){
+				mode=2;
 				init=1;
 				sTimingDelay=0;
 			}
 			break;
+		case 2 :
+			switch(sRxBuffer[0]){
+				case '1':
+					mode=3;
+					init=1;
+					detectall=1;
+				break;
+				case '2':
+					mode=3;
+					init=1;
+					detectall=0;
+				break;
+				case '3':
+					mode=4;
+					init=1;
+					detectall=0;
+				break;
+				case '4':
+					mode=5;
+					init=1;
+					detectall=0;
+				break;
+				case '5':
+				break;
+				case '6':
+				break;
+				case '7':
+				break;
+				case '8':
+				break;
+				case '9':
+					UART_SendString("Thanks for choosing my firmware,goodbye.");
+					pinMode(pins[pinstorage[10]][0],pins[pinstorage[10]][1],GPIO_Mode_FLOATING);
+				break;
+				
+			}
+			break;
 		case 3 :
-			if(sRxBuffer[0]=='\n'){
-				mode=5;
-				init=1;
-				sTimingDelay=0;
+			if(sRxBuffer[0]=='\n'||sRxBuffer[0]=='\r'){
+				if(detectall){
+					mode=4;
+					init=1;
+					sTimingDelay=0;
+				}else{
+					mode=2;
+					init=1;
+				}
 			}
 			break;
 		case 4 :
 			switch(sRxBuffer[0]){
 				case '\n':
-					mode=3;
-					init=1;
-					sTimingDelay=0;
+				case '\r':
+					if(detectall){
+						mode=5;
+						init=1;
+						sTimingDelay=0;
+					}else{
+						mode=2;
+						init=1;
+					}
 				break;
 				case 'w':
 				case 'r':
@@ -163,6 +212,19 @@ void autoDetectSerialIt(){
 				break;
 			}
 			
+			break;
+			case 5 :
+			if(sRxBuffer[0]=='\n'||sRxBuffer[0]=='\r'){
+				if(detectall){
+					mode=6;
+					init=1;
+					sTimingDelay=0;
+				}else{
+					mode=2;
+					init=1;
+					sTimingDelay=0;
+				}
+			}
 			break;
 	}
 }
@@ -215,17 +277,17 @@ void simhallupdate(){
 		for(uint8_t i=0;i<33;i++){
 			if(hallA[i]){
 				pinstorage[0]=i;
-				UART_SendString("\nHALLA:");
+				UART_SendString("\r\nHALLA:");
 				UART_Send_Group(&PXX[i][0],4);
 			}
 			if(hallB[i]){
 				pinstorage[1]=i;
-				UART_SendString("\nHALLB:");
+				UART_SendString("\r\nHALLB:");
 				UART_Send_Group(&PXX[i][0],4);
 			}
 			if(hallC[i]){
 				pinstorage[2]=i;
-				UART_SendString("\nHALLC:");
+				UART_SendString("\r\nHALLC:");
 				UART_Send_Group(&PXX[i][0],4);
 			}
 			
@@ -293,6 +355,20 @@ void simhallupdate(){    //does not work : (
 
 void autoDetectInit(){
 	switch (mode){
+		case 2 :
+			UART_SendString("\n\n\n\n\r");
+			UART_Send_Group(&banner[0],464);
+			UART_SendString("Welcome to PinFinder, press number key to choose action.\n\r");
+			UART_SendString("  (1)-Auto detect all pins.\n\r");
+			UART_SendString("  (2)-Auto detect HALL sensor.\n\r");
+			UART_SendString("  (3)-Auto detect LED and buzzer.\n\r");
+			UART_SendString("  (4)-Auto detect battery voltage.\n\r");
+			UART_SendString("  (5)-Auto detect total current.\n\r");
+			UART_SendString("  (6)-Auto detect power button.\n\r");
+			UART_SendString("  (7)-Enter command line interface.\n\r");
+			UART_SendString("  (8)-Erase all saved configurations.\n\r");
+			UART_SendString("  (9)-Power off.\n\r>");
+		break;
 		case 3 :
 			TIM_CtrlPWMOutputs(TIM1, ENABLE);
 			TIM1->CCR1=4000;    //spin motor at 50% pwm
@@ -329,7 +405,7 @@ void autoDetectInit(){
 		break;
 		case 5 :
 			TIM_CtrlPWMOutputs(TIM1, ENABLE);
-			TIM1->CCR1=8192;    //spin motor at 50% pwm
+			TIM1->CCR1=8192;
 			TIM1->CCR2=8192;
 			TIM1->CCR3=8192;
 			step=0;    //close all low side mosfet to prevent reading phase current
@@ -369,12 +445,12 @@ void printvoltage(){
 			if(showalladc||(vbattmp>20&&vbattmp<45)){
 				char buffer[32];
 				UART_Send_Group(&PXX[adcs[i][0]][0],4);
-				sprintf(&buffer[0],":%fV\n",vbattmp);
+				sprintf(&buffer[0],":%fV\n\r",vbattmp);
 				UART_SendString(&buffer[0]);
 			}
 		}
 	}
-	UART_SendString("================\n");
+	UART_SendString("================\n\r");
 	DELAY_Ms(2000);
 }	
 	
