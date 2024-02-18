@@ -36,6 +36,7 @@ uint8_t detectall=0;
 extern uint8_t masterslave;
 extern u8 device_id_data[12];
 uint8_t wait;
+uint8_t doinloop=0;
 
 uint8_t hallA[33];
 uint8_t hallB[33];
@@ -131,14 +132,21 @@ void autoDetectSerialIt(){
 				case '5':
 				break;
 				case '6':
+					mode=7;
+					init=1;
+					detectall=0;
 				break;
 				case '7':
 				break;
 				case '8':
 				break;
 				case '9':
-					UART_SendString("Thanks for choosing my firmware,goodbye.");
-					pinMode(pins[pinstorage[10]][0],pins[pinstorage[10]][1],GPIO_Mode_FLOATING);
+					if(masterslave){
+						UART_SendString("Thanks for choosing my firmware,goodbye.");
+						pinMode(pins[pinstorage[10]][0],pins[pinstorage[10]][1],GPIO_Mode_FLOATING);
+					}else{
+						UART_SendString("I'm a Slave board.");
+					}
 				break;
 				
 			}
@@ -248,7 +256,22 @@ void autoDetectSerialIt(){
 					init=1;
 					sTimingDelay=0;
 				}
+			}else if(sRxBuffer[0]=='f'){
+				showalladc=!showalladc;
+			}else if(sRxBuffer[0]>='0'&&sRxBuffer[0]<='9'){
+				pinstorage[12]=adcs[sRxBuffer[0]-'0'][0];
+				UART_SendString("\r\nVBAT:");
+				UART_Send_Group(&PXX[pinstorage[12]][0],4);
 			}
+			break;
+			case 7 :
+				if(sRxBuffer[0]=='\n'||sRxBuffer[0]=='\r'){
+					mode=2;
+					init=1;
+					sTimingDelay=0;
+				}else if(sRxBuffer[0]=='e'){	
+					doinloop=1;
+				}
 			break;
 	}
 }
@@ -443,6 +466,7 @@ void autoDetectInit(){
 			}
 		break;
 		case 5 :
+			UART_SendString("\r\nA list of pin and voltage will be displayed, check the board input voltage with multimeter and select the closest one.\r\npress F to toggle automatic pin filtering\r\npress the number at the front of pin to save it\r\npress enter to return to main menu\r\n");
 			TIM_CtrlPWMOutputs(TIM1, ENABLE);
 			TIM1->CCR1=8192;
 			TIM1->CCR2=8192;
@@ -460,6 +484,14 @@ void autoDetectInit(){
 				}
 			}
 			ADC_SoftwareStartConvCmd(ADC1, ENABLE);
+		break;
+		case 7 :
+			UART_SendString("\r\nPress and release power button once to detect automaticly\r\nIf button press is not registered,press E to enable fix, the board may acidently power off\r\npress Enter to return to main menu\r\n");
+			for(uint8_t i=0;i<33;i++){
+				if(!used(i)){
+					hallA[i]=digitalRead(pins[i][0],pins[i][1]);
+				}
+			}
 		break;
 	}		
 }
@@ -480,6 +512,8 @@ void printvoltage(){
 			float vbattmp = (double)analogRead(adcs[i][2])*vcc*31/4096;
 			if(showalladc||(vbattmp>20&&vbattmp<45)){
 				char buffer[32];
+				sprintf(&buffer[0],"%i->",i);
+				UART_SendString(&buffer[0]);
 				UART_Send_Group(&PXX[adcs[i][0]][0],4);
 				sprintf(&buffer[0],":%fV\n\r",vbattmp);
 				UART_SendString(&buffer[0]);
@@ -491,5 +525,31 @@ void printvoltage(){
 }	
 	
 	
-
+void checkbutton(){
+	if(doinloop){
+		pinstorage[9]=pinstorage[10];
+		pinstorage[10]=255;
+		pinMode(pins[pinstorage[9]][0],pins[pinstorage[9]][1],GPIO_Mode_FLOATING);
+		selfhold();
+		masterslave = detectSelfHold();
+		if(masterslave){
+			UART_SendString("\r\nButton:");
+			UART_Send_Group(&PXX[pinstorage[9]][0],4);
+			UART_SendString("\r\nLatch:");
+			UART_Send_Group(&PXX[pinstorage[10]][0],4);
+		}else{
+			UART_SendString("Workaround failed");
+		}
+		doinloop=0;
+	}
+	for(uint8_t i=0;i<33;i++){
+		if(!used(i)){
+			if(!hallA[i]&&digitalRead(pins[i][0],pins[i][1])){
+				pinstorage[9]=i;
+				UART_SendString("\r\nButton:");
+				UART_Send_Group(&PXX[i][0],4);
+			}
+		}
+	}
+}
 

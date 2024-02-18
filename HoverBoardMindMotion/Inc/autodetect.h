@@ -9,7 +9,7 @@ void autoDetectInit();
 void blinkLEDupdate();
 uint8_t used(uint8_t pin);
 void printvoltage();
-
+void checkbutton();
 
 
 

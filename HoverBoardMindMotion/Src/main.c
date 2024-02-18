@@ -90,6 +90,9 @@ s32 main(void){
 			case 5 :
 				printvoltage();
 			break;
+			case 7 :
+				checkbutton();
+			break;
 		}
 	}
 }

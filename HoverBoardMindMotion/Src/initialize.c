@@ -378,6 +378,7 @@ void Iwdg_Init(u16 IWDG_Prescaler, u16 Reload){
 }
 
 void vref_Init(){
+	ADC_DeInit(ADC1);
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
 	ADC_InitTypeDef  ADC_InitStructure;
 	ADC_InitStructure.ADC_PRESCALE = ADC_PCLK2_PRESCALE_6;
