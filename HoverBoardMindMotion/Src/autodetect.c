@@ -46,7 +46,7 @@ extern bool dir;
 int testrotatespeed;
 uint8_t command;
 uint8_t address;
-uint8_t data;
+uint16_t data;
 uint8_t stage;
 
 uint8_t hallA[33];
@@ -335,7 +335,7 @@ void autoDetectSerialIt(){
 									tmperase[i]=0xffff;
 								}
 								if(EEPROM_Write((u8*)tmperase, 2 * 64)){
-									UART_SendString("\r\nEEPROM erase complete");
+									UART_SendString("\r\nEEPROM erase complete,reboot needed without saving to take effect");
 								}else{
 									UART_SendString("\r\nEEPROM erase failed");
 								}
@@ -737,7 +737,7 @@ void checkbutton(){
 uint8_t restorecfg(){
 	uint16_t tmp[64];
 	EEPROM_Read((u8*)tmp, 2 * 64);
-	if(tmp[32]==0xDCBA){    //verify config is valid
+	if(tmp[32]==0xDCAB){    //verify config is valid
 		for(uint8_t i=0;i<64;i++){
 			pinstorage[i]=tmp[i];
 		}
