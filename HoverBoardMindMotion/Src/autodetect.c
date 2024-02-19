@@ -16,10 +16,10 @@
 extern uint32_t pins[33][3];
 extern uint32_t adcs[10][3];
 extern uint32_t millis;
+modes_t mode=0;
 uint8_t test;
 int tmp;
 uint8_t used(uint8_t pin);
-uint8_t mode=0;//0=startup,1=wait for serial,2=menu,3=hall,4=led,5=vbat,6=itotal,7=button,8=cmd,9=testrotate,10=writeEE
 uint32_t lastCommutation;
 extern uint8_t step;
 uint8_t init=0;
@@ -88,14 +88,14 @@ uint8_t detectSelfHold(){
 					havelatch=1;
 					DELAY_Ms(10);    //capacitor charge back up
 				}
-				if(millis>timeout){
+				if(millis>timeout){    //wrong pin
 					break;
 				}
 			}
 	  }
 	}	
 	uint16_t adcval = ADC1->CH15DR;
-	vcc=(double)4915.2/adcval;
+	vcc=(double)4915.2/adcval;    //vcc saved to calculate accurate vbat
 	return havelatch;
 }
 	
@@ -110,56 +110,60 @@ uint8_t used(uint8_t pin){
 }
 	
 	
-void autoDetectSerialIt(){
+void autoDetectSerialIt(){    //serial dma interrupt
 	switch (mode){
-		case 1 :
-			if(sRxBuffer[0]=='\n'||sRxBuffer[0]=='\r'){
-				mode=2;
+		case MODE_WAIT_UART :
+			if(sRxBuffer[0]=='\n'||sRxBuffer[0]=='\r'){    //go to main menu after enter pressed
+				mode=MODE_MENU;
 				init=1;
 				sTimingDelay=0;
 			}
 			break;
-		case 2 :
-			switch(sRxBuffer[0]){
-				case '1':
-					mode=3;
+		case MODE_MENU :
+			switch(sRxBuffer[0]){    //choose action in menu
+				case '1':    //(1)-Auto detect all pins.
+					mode=MODE_HALL;
 					init=1;
-					detectall=1;
+					detectall=1;    //only exit to main menu after all step completed 
 				break;
-				case '2':
-					mode=3;
-					init=1;
-					detectall=0;
-				break;
-				case '3':
-					mode=4;
+				case '2':    //(2)-Auto detect HALL sensor.
+					mode=MODE_HALL;
 					init=1;
 					detectall=0;
 				break;
-				case '4':
-					mode=5;
+				case '3':    //(3)-Auto detect LED and buzzer.
+					mode=MODE_LED;
 					init=1;
 					detectall=0;
 				break;
-				case '5':
+				case '4':    //(4)-Auto detect battery voltage.
+					mode=MODE_VBAT;
+					init=1;
+					detectall=0;
+				break;
+				case '5':    //(5)-Auto detect total current.
 					UART_SendString("Feature not implemented.");
 				break;
-				case '6':
-					mode=7;
+				case '6':    //(6)-Auto detect power button.
+					if(masterslave){
+						mode=MODE_BUTTON;
+						init=1;
+						detectall=0;
+					}else{
+						UART_SendString("I'm a Slave board.");
+					}
+				break;
+				case '7':    //(7)-Modify configurations manually by command line.
+					mode=MODE_CLI;
 					init=1;
 					detectall=0;
 				break;
-				case '7':
-					mode=8;
+				case '8':    //(8)-Test motor rotation.
+					mode=MODE_TESTROTATE;
 					init=1;
 					detectall=0;
 				break;
-				case '8':
-					mode=9;
-					init=1;
-					detectall=0;
-				break;
-				case '9':
+				case '9':    //(9)-Power off.
 					if(masterslave){
 						UART_SendString("Thanks for choosing my firmware,goodbye.");
 						pinMode(pins[pinstorage[10]][0],pins[pinstorage[10]][1],GPIO_Mode_FLOATING);
@@ -170,26 +174,26 @@ void autoDetectSerialIt(){
 				
 			}
 			break;
-		case 3 :
+		case MODE_HALL :
 			if(sRxBuffer[0]=='\n'||sRxBuffer[0]=='\r'){
 				if(detectall){
-					mode=4;
+					mode=MODE_LED;    //next step
 					init=1;
 					sTimingDelay=0;
 				}else{
-					saveNexit();
+					saveNexit();    //save config if it is changed
 				}
 				wait=0;
 			}else if(sRxBuffer[0]=='y'){
-				wait=0;
+				wait=0;    //continue running after user confirmed
 			}
 			break;
-		case 4 :
+		case MODE_LED :
 			switch(sRxBuffer[0]){
 				case '\n':
 				case '\r':
 					if(detectall){
-						mode=5;
+						mode=MODE_VBAT;
 						init=1;
 						sTimingDelay=0;
 					}else{
@@ -197,7 +201,7 @@ void autoDetectSerialIt(){
 					}
 					for(uint8_t i=0;i<33;i++){
 						if(!used(i)){
-						pinMode(pins[i][0],pins[i][1],GPIO_Mode_FLOATING);
+							pinMode(pins[i][0],pins[i][1],GPIO_Mode_FLOATING);    //turn all pins back off after leaving
 						}
 					}
 				break;
@@ -209,6 +213,7 @@ void autoDetectSerialIt(){
 				case 'l':
 				case 'z':
 					pinMode(pins[selpin][0],pins[selpin][1],sRxBuffer[0]=='w' ? GPIO_Mode_IPU : GPIO_Mode_FLOATING);
+					//if pin is saved turn it off, if its not left it on so easy to see what led is still left
 					switch(sRxBuffer[0]){
 						case 'r':
 							pinstorage[3]=selpin;
@@ -247,7 +252,7 @@ void autoDetectSerialIt(){
 						}else{
 							selpin++;
 						}
-					}while(used(selpin));
+					}while(used(selpin));    //find next unused pin
 				break;
 				case 's':
 					pinMode(pins[selpin][0],pins[selpin][1],GPIO_Mode_IPU);
@@ -260,38 +265,37 @@ void autoDetectSerialIt(){
 					}while(used(selpin));
 				break;
 			}
-			
 			break;
-			case 5 :
+			case MODE_VBAT :
 			if(sRxBuffer[0]=='\n'||sRxBuffer[0]=='\r'){
-				if(detectall){
-					mode=7;
+				if(detectall&&masterslave){    //slave cannot detect button
+					mode=MODE_BUTTON;
 					init=1;
 					sTimingDelay=0;
 				}else{
 					saveNexit();
 				}
 			}else if(sRxBuffer[0]=='f'){
-				showalladc=!showalladc;
-			}else if(sRxBuffer[0]>='0'&&sRxBuffer[0]<='9'){
-				pinstorage[12]=adcs[sRxBuffer[0]-'0'][0];
+				showalladc=!showalladc;    //toggle extreme value filtering
+			}else if(sRxBuffer[0]>='0'&&sRxBuffer[0]<='9'){    //number pressed
+				pinstorage[12]=adcs[sRxBuffer[0]-'0'][0];    //save pin
 				UART_SendString("\r\nVBAT:");
 				UART_Send_Group(&PXX[pinstorage[12]][0],4);
 			}
 			break;
-			case 7 :
+			case MODE_BUTTON :
 				if(sRxBuffer[0]=='\n'||sRxBuffer[0]=='\r'){
-					saveNexit();
+					saveNexit();    //last stage always exit
 				}else if(sRxBuffer[0]=='e'){	
-					doinloop=1;
+					doinloop=1;    //button pin latch pin workaround
 				}
 			break;
-			case 8 :
+			case MODE_CLI :
 				switch(sRxBuffer[0]){
-					case '\r':
+					case '\r':    //run command entered before
 					case '\n':
 						switch(command){
-							case 'r':
+							case 'r':    //read address
 								if(address<64){
 									char buffer[16];
 									sprintf(&buffer[0],"\r\nindex %i : %i",address,pinstorage[address]);
@@ -300,7 +304,7 @@ void autoDetectSerialIt(){
 									UART_SendString("\r\nInvalid address");
 								}
 							break;
-							case 'w':
+							case 'w':    //write to address
 								if(address<64){
 									pinstorage[address]=data;
 									char buffer[16];
@@ -310,26 +314,26 @@ void autoDetectSerialIt(){
 									UART_SendString("\r\nInvalid address");
 								}
 							break;
-							case 'h':
+							case 'h':    //help
 								UART_SendString("\r\n\nThis tool allow you to modify and view all saved pinouts and settings\n\r\n\rUsage:  [command] <address> <value>\n\r\n\rCommands: \n\r\n\r r     read saved data\n\r w     write data\n\r h     display this help page\n\r l     list all data\n\r g     generate pinstorage variable initializer to copy in firmware\n\r e     erase all data\n\r x     exit command line tool and go back to main menu\n\r\n\rAddress description:\n\r\n\r0 : HALL sensor A pin\n\r1 : HALL sensor B pin\n\r2 : HALL sensor B pin\n\r3 : red LED pin\n\r4 : green LED pin\n\r5 : blue LED pin\n\r6 : upper LED pin\n\r7 : lower LED pin\n\r8 : Buzzer pin\n\r9 : Button pin\n\r10 : latch pin\n\r11 : charger pin\n\r12 : battery voltage pin\n\r13 : total current DC pin\n\r14 : UART TX pin\n\r15 : UART RX pin\n\r16~22 : reserved\n\r23 : over current protection pin\n\r24 : over current protection comparator refrence pin\n\r25~31:reserved\n\r\n\r33 : vbat divider\n\r34 : itotal divider\n\r35 : iphase divider\n\r36 : baud\n\r37 : pwm resolution\n\r38 : slave ID\n\r39 : windings\n\r40 : invert lowside\n\r41 : soft current limit\n\r42 : hard limit awdg\n\r43 : UART\n\r44 : pid\n\r45 : bat 100%\n\r46 : bat 0%\n\r47 : serial timeout\n\r48~64 : reserved\n");
 							break;
-							case 'l':
+							case 'l':    //list all values
 								for(uint8_t i=0;i<64;i++){			
 									char buffer[16];
 									sprintf(&buffer[0],"\r\nindex %i : %i",i,pinstorage[i]);
 									UART_SendString(&buffer[0]);
 								}
 							break;
-							case 'g':
+							case 'g':    //generate pinout file to compile custom firmware
 								UART_SendString("\r\nuint16_t pinstorage[64]={");
 								for(uint8_t i=0;i<64;i++){			
 									char buffer[16];
 									sprintf(&buffer[0],"%i, ",pinstorage[i]);
 									UART_SendString(&buffer[0]);
 								}
-								UART_SendString("\b\b};");
+								UART_SendString("\b\b};");    //\b to delete extra ,
 							break;
-							case 'e':{
+							case 'e':{    //write all ff to eeprom to erase it
 								uint16_t tmperase[64];
 								for(uint8_t i=0;i<64;i++){
 									tmperase[i]=0xffff;
@@ -342,39 +346,39 @@ void autoDetectSerialIt(){
 							}
 							break;
 							case 'x':
-								saveNexit();
+								saveNexit();    //leave terminal
 							break;
 							case 0:
-								__NOP();
+								__NOP();    //display new line only if no command is entered
 							break;
-							default:
+							default:    //command not found
 								UART_SendString("\r\nCommand\"");
 								UART_Send_Byte(command);
 								UART_SendString("\"does not exist");
 							break;
 						}
 						UART_SendString("\r\npinfinder~$ ");
-						command=0;
+						command=0;    //reset for next time
 						address=0;
 						data=0;
 						stage=0;
 					break;
-					case ' ':
+					case ' ':    //space as seperator for command
 						stage++;
 					break;
-					default:
+					default:    //parse command without using sscanf
 						switch(stage){
-							case 0 :
-								if(command==0){
+							case 0 :    //command
+								if(command==0){    //only capture first digit
 									command=sRxBuffer[0];
 								}
 							break;
-							case 1 :
+							case 1 :    //address
 								if(sRxBuffer[0]>='0'&&sRxBuffer[0]<='9'){
-									address=address*10+(sRxBuffer[0]-'0');
+									address=address*10+(sRxBuffer[0]-'0');    //shift left and add new value
 								}
 							break;
-							case 2 :
+							case 2 :    //value
 								if(sRxBuffer[0]>='0'&&sRxBuffer[0]<='9'){
 									data=data*10+(sRxBuffer[0]-'0');
 								}
@@ -383,13 +387,13 @@ void autoDetectSerialIt(){
 					break;
 				}
 			break;
-			case 9 :
+			case MODE_TESTROTATE :
 				switch(sRxBuffer[0]){
 					case '\r':
 					case '\n':
-						mode=2;
+						mode=MODE_MENU;
 						init=1;
-						TIM_CtrlPWMOutputs(TIM1, DISABLE);
+						TIM_CtrlPWMOutputs(TIM1, DISABLE);    //stop motor after exit
 					break;
 					case '+':
 						testrotatespeed+=100;
@@ -411,20 +415,22 @@ void autoDetectSerialIt(){
 					break;
 				}	
 			break;	
-			case 10 :
+			case MODE_SAVE :
 				switch(sRxBuffer[0]){
 					case 'y':
 						if(EEPROM_Write((u8*)pinstorage, 2 * 64)){
 							UART_SendString("\r\nconfiguration saved\r\n");
+							mode=MODE_MENU;
+							init=1;
 						}else{
 							UART_SendString("\r\nEEPROM write failed\r\n");
 						}
 					case 'n':
-						mode=2;
+						mode=MODE_MENU;
 						init=1;
 					break;
 					default:
-						UART_SendString("\r\nY/N?");
+						UART_SendString("\r\nY/N?");    //prevent acidently cancellation you have to press y or n
 					break;
 				}
 			break;
@@ -433,20 +439,20 @@ void autoDetectSerialIt(){
 	
 
 void simhallupdate(){    
-	while(pinstorage[0]==255||pinstorage[1]==255||pinstorage[2]==255){
+	while(pinstorage[0]==255||pinstorage[1]==255||pinstorage[2]==255){    //wait till every sensor is found
 		for(uint8_t i=1;i<7;i++){
-			step=i;
+			step=i;    //sensorless drive
 			commutate();
 			DELAY_Ms(30);
 			for(uint8_t i=0;i<33;i++){
-				if(!used(i)){
+				if(!used(i)){    //check every possible pin
 					switch (step){
-						case 1:
+						case 1:    //if current state does not match what it should,remove from possible pins list
 							hallA[i]=!digitalRead(pins[i][0],pins[i][1])&&hallA[i];
 							hallB[i]=digitalRead(pins[i][0],pins[i][1])&&hallB[i];
 							hallC[i]=digitalRead(pins[i][0],pins[i][1])&&hallC[i];
 						break;
-						case 2:
+						case 2:    //if a pin have been removed not add it back in next step
 							hallA[i]=!digitalRead(pins[i][0],pins[i][1])&&hallA[i];
 							hallB[i]=!digitalRead(pins[i][0],pins[i][1])&&hallB[i];
 							hallC[i]=digitalRead(pins[i][0],pins[i][1])&&hallC[i];
@@ -478,7 +484,7 @@ void simhallupdate(){
 		
 		for(uint8_t i=0;i<33;i++){
 			if(hallA[i]){
-				pinstorage[0]=i;
+				pinstorage[0]=i;    //save and print found pin
 				UART_SendString("\r\nHALLA:");
 				UART_Send_Group(&PXX[i][0],4);
 			}
@@ -494,12 +500,12 @@ void simhallupdate(){
 			}
 			
 		}
-		for(uint8_t i=0;i<33;i++){
+		for(uint8_t i=0;i<33;i++){    //everything is possible
 			hallA[i] = 1;
 			hallB[i] = 1;
 			hallC[i] = 1;
 		}
-		for(uint8_t i=0;i<33;i++){    //remove used pins from hall array
+		for(uint8_t i=0;i<33;i++){    //remove used pins from possible pins
 			if(used(i)){
 				hallA[i]=0;
 				hallB[i]=0;
@@ -507,7 +513,7 @@ void simhallupdate(){
 			}
 		}
 	}
-	TIM1->CCR1=0;
+	TIM1->CCR1=0;    //disable motor after all pins is found
 	TIM1->CCR2=0;
 	TIM1->CCR3=0;
 }	
@@ -557,7 +563,7 @@ void simhallupdate(){    //does not work : (
 
 void autoDetectInit(){
 	switch (mode){
-		case 2 :
+		case MODE_MENU :
 			GetChipUID();
 			UART_SendString("\n\n\n\n\r");
 			UART_Send_Group(&banner[0],464);
@@ -580,14 +586,14 @@ void autoDetectInit(){
 				prevpinstorage[i]=pinstorage[i];
 			}
 		break;
-		case 3 :
+		case MODE_HALL :
 			UART_SendString("\n\rthis will spin motor slowly to detect hall sensor pins,if it takes too long please increase input voltage to 42v.\n\rpress Y to start,Enter to return to menu\n\r");
 			wait=1;
 			while(wait){
 				__NOP();
 				__NOP();
 			}
-			if(mode==3){
+			if(mode==MODE_HALL){
 				TIM_CtrlPWMOutputs(TIM1, ENABLE);
 				TIM1->CCR1=4000;    //spin motor at 50% pwm
 				TIM1->CCR2=4000;
@@ -611,7 +617,7 @@ void autoDetectInit(){
 			*/
 			}
 		break;
-		case 4 :
+		case MODE_LED :
 			UART_SendString("\n\rAll pins will be set high, the selected pin will blink, the already saved pins will remain off. If a LED does not light up, it is broken.\r\npress W to go to next pin\r\npress S to go to previous pin\n\rPress R to save as red LED\r\nPress G to save as green LED\r\nPress B to save as blue LED(or orange on some board)\r\nPress U to save as upper LED\r\nPress L to save as lower LED\r\npress Enter to go back to main menu\r\n");
 			for(uint8_t i=0;i<33;i++){
 				if(!used(i)){
@@ -623,7 +629,7 @@ void autoDetectInit(){
 				selpin++;
 			}
 		break;
-		case 5 :
+		case MODE_VBAT :
 			UART_SendString("\r\nA list of pin and voltage will be displayed, check the board input voltage with multimeter and select the closest one.\r\npress F to toggle automatic pin filtering\r\npress the number at the front of pin to save it\r\npress enter to return to main menu\r\n");
 			TIM_CtrlPWMOutputs(TIM1, ENABLE);
 			TIM1->CCR1=8192;
@@ -631,9 +637,9 @@ void autoDetectInit(){
 			TIM1->CCR3=8192;
 			step=0;    //close all low side mosfet to prevent reading phase current
 			commutate();
-			ADCALL_Init();
+			ADCALL_Init();    //enable every adc pins to be scanned at same time
 			for(uint8_t i=0;i<10;i++){
-				if(!used(adcs[i][0])){
+				if(!used(adcs[i][0])){    //coresponding gpio is free
 					ADC_RegularChannelConfig(ADC1, adcs[i][1], 0, ADC_SampleTime_7_5Cycles);
 					pinMode(pins[adcs[i][0]][0],pins[adcs[i][0]][1],GPIO_Mode_AIN);
 					adcleft[i]=1;
@@ -641,35 +647,35 @@ void autoDetectInit(){
 					adcleft[i]=0;
 				}
 			}
-			ADC_SoftwareStartConvCmd(ADC1, ENABLE);
+			ADC_SoftwareStartConvCmd(ADC1, ENABLE);    //enable adc
 		break;
-		case 7 :
+		case MODE_BUTTON :
 			UART_SendString("\r\nPress and release power button once to detect automaticly\r\nIf button press is not registered,press E to enable fix, the board may acidently power off\r\npress Enter to return to main menu\r\n");
 			for(uint8_t i=0;i<33;i++){
 				if(!used(i)){
-					hallA[i]=digitalRead(pins[i][0],pins[i][1]);
+					hallA[i]=digitalRead(pins[i][0],pins[i][1]);    //hall array reused to detect change in io state for button
 				}
 			}
 		break;
-		case 8 :
+		case MODE_CLI :
 			UART_SendString("\r\nWelcome to command line interface,type h for help\n\rpinfinder~$ ");
-			command=0;
+			command=0;    //initialize command
 			address=0;
 			data=0;
 			stage=0;
 		break;
-		case 9 :
+		case MODE_TESTROTATE :
 			UART_SendString("\r\nTest the motor with hall sensor commutation\r\npress + to increase speed\r\npress - to decrease speed\r\nnegative speed to spin backward\r\npress Enter to return to main menu\n\n\r");
 			TIM_CtrlPWMOutputs(TIM1, ENABLE);
 			TIM1->CCR1=0; 
 			TIM1->CCR2=0;
 			TIM1->CCR3=0;
 			testrotatespeed=0;
-			pinMode(pins[pinstorage[0]][0],pins[pinstorage[0]][1],GPIO_Mode_FLOATING);
+			pinMode(pins[pinstorage[0]][0],pins[pinstorage[0]][1],GPIO_Mode_FLOATING);    //hall sensor floating input
 			pinMode(pins[pinstorage[1]][0],pins[pinstorage[1]][1],GPIO_Mode_FLOATING);
 			pinMode(pins[pinstorage[2]][0],pins[pinstorage[2]][1],GPIO_Mode_FLOATING);
 		break;
-		case 10 :
+		case MODE_SAVE :
 			UART_SendString("\r\nChanges were made to the configurations, do you want to save it permanantly?Y/N\r\n>");
 		break;
 	}		
@@ -677,7 +683,7 @@ void autoDetectInit(){
 	
 void blinkLEDupdate(){
 	if(millis-lastblink>200){
-		pinMode(pins[selpin][0],pins[selpin][1],blinkstate ? GPIO_Mode_IPU : GPIO_Mode_IPD);
+		pinMode(pins[selpin][0],pins[selpin][1],blinkstate ? GPIO_Mode_IPU : GPIO_Mode_IPD);    //toggle pullup pulldown to blink
 		blinkstate=!blinkstate;
 		lastblink=millis;
 	}
@@ -688,8 +694,8 @@ void blinkLEDupdate(){
 void printvoltage(){
 	for(uint8_t i=0;i<10;i++){
 		if(adcleft[i]){
-			float vbattmp = (double)analogRead(adcs[i][2])*vcc*31/4096;
-			if(showalladc||(vbattmp>20&&vbattmp<45)){
+			float vbattmp = (double)analogRead(adcs[i][2])*vcc*31/4096;    //auto calibrate for 5v and 3.3v board
+			if(showalladc||(vbattmp>20&&vbattmp<45)){    //max battery voltage is 42v and some tollarance 45v, 20v is needed for gate driver to work
 				char buffer[32];
 				sprintf(&buffer[0],"%i->",i);
 				UART_SendString(&buffer[0]);
@@ -705,11 +711,11 @@ void printvoltage(){
 	
 	
 void checkbutton(){
-	if(doinloop){
-		pinstorage[9]=pinstorage[10];
+	if(doinloop){    //workaround
+		pinstorage[9]=pinstorage[10];    //the current latch pin is actually buttonpin, so swap it
 		pinstorage[10]=255;
-		pinMode(pins[pinstorage[9]][0],pins[pinstorage[9]][1],GPIO_Mode_FLOATING);
-		selfhold();
+		pinMode(pins[pinstorage[9]][0],pins[pinstorage[9]][1],GPIO_Mode_FLOATING);    //release fake latch pin
+		selfhold();    //detect self hold again with remaining pin
 		masterslave = detectSelfHold();
 		if(masterslave){
 			UART_SendString("\r\nButton:");
@@ -723,7 +729,7 @@ void checkbutton(){
 	}else{
 		for(uint8_t i=0;i<33;i++){
 			if(!used(i)){
-				if(!hallA[i]&&digitalRead(pins[i][0],pins[i][1])){
+				if(!hallA[i]&&digitalRead(pins[i][0],pins[i][1])){    //pin start as low and state changed to high
 					pinstorage[9]=i;
 					UART_SendString("\r\nButton:");
 					UART_Send_Group(&PXX[i][0],4);
@@ -747,7 +753,7 @@ uint8_t restorecfg(){
 	}
 }
 
-void testrotateloop(){
+void testrotateloop(){    //adc is not initialized in pinfinder, so commutation done in main loop
 	if(hallpos(dir)!=hallposprev){
 		hallposprev=hallpos(dir);
 		step=hallposprev;
@@ -765,16 +771,16 @@ void testrotateloop(){
 	TIM1->CCR3=abspeed;
 }
 
-void saveNexit(){
+void saveNexit(){    //check if saving is required
 	for(uint8_t i=0;i<64;i++){
 		if(prevpinstorage[i]!=pinstorage[i]){
-			mode=10;
+			mode=MODE_SAVE;
 			init=1;
 			detectall=0;
 			return;
 		}
 	}
-	mode=2;
+	mode=MODE_MENU;
 	init=1;
 	return;
 }

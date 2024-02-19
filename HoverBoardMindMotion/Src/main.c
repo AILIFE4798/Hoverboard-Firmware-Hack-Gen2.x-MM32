@@ -41,7 +41,7 @@ GPIO_InitTypeDef GPIO_InitStruct;
 uint8_t  masterslave;
 extern uint8_t banner;
 uint16_t pinstorage[64]={0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xDCAB, 31, 250, 0, 19200, 8192, 1, 30, 0, 10, 300, 1, 1, 42000, 32000, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-extern uint8_t mode;
+extern modes_t mode;
 extern uint8_t init;
 extern uint8_t wait;
 float vcc;
@@ -68,19 +68,19 @@ s32 main(void){
 		DELAY_Ms(1000);    //give time to release button 
 		masterslave = detectSelfHold();    //no self hold pin=slave, will release all other pins to floating
 	}
-	mode=1;
+	mode=MODE_WAIT_UART;
 	while(1){
-		if(init){
+		if(init){    //initialization or startup message needed
 			init=0;
 			autoDetectInit();
 		}
 		switch (mode){
-			case 1 :
+			case MODE_WAIT_UART :
 				UART_SendString("\n\n\n\n\r");
 				UART_Send_Group(&banner,464);
 				UART_SendString("Welcome to PinFinder\n\r");
 				UART_SendString("press enter to continue");
-				for(uint8_t i=0;i<50;i++){
+				for(uint8_t i=0;i<50;i++){    //keep printing to help find tx rx line
 					if(mode!=1){
 						break;
 					}
@@ -88,19 +88,19 @@ s32 main(void){
 					DELAY_Ms(100);
 				}
 			break;
-			case 3 :
+			case MODE_HALL :
 				simhallupdate();
 			break;
-			case 4 :
+			case MODE_LED :
 				blinkLEDupdate();
 			break;
-			case 5 :
+			case MODE_VBAT :
 				printvoltage();
 			break;
-			case 7 :
+			case MODE_BUTTON :
 				checkbutton();
 			break;
-			case 9 :
+			case MODE_TESTROTATE :
 				testrotateloop();
 			break;
 		}

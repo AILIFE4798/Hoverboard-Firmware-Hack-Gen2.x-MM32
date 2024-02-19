@@ -16,7 +16,19 @@ void saveNexit();
 
 
 
-
+typedef enum{
+  MODE_STARTUP=0,
+  MODE_WAIT_UART=1,
+  MODE_MENU=2,
+  MODE_HALL=3,
+  MODE_LED=4,
+  MODE_VBAT=5,
+  MODE_ITOTAL=6,
+  MODE_BUTTON=7,
+  MODE_CLI=8,
+  MODE_TESTROTATE=9,
+  MODE_SAVE=10,
+}modes_t;
 
 
 
