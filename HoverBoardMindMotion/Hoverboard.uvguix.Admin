@@ -3667,18 +3667,18 @@
       </Doc>
       <Doc>
         <Name>.\Src\autodetect.c</Name>
-        <ColumnNumber>19</ColumnNumber>
-        <TopLine>292</TopLine>
-        <CurrentLine>306</CurrentLine>
+        <ColumnNumber>1258</ColumnNumber>
+        <TopLine>306</TopLine>
+        <CurrentLine>314</CurrentLine>
         <Folding>1</Folding>
-        <ContractedFolders>401</ContractedFolders>
+        <ContractedFolders>515</ContractedFolders>
         <PaneID>0</PaneID>
       </Doc>
       <Doc>
         <Name>.\Inc\autodetect.h</Name>
-        <ColumnNumber>22</ColumnNumber>
+        <ColumnNumber>17</ColumnNumber>
         <TopLine>1</TopLine>
-        <CurrentLine>14</CurrentLine>
+        <CurrentLine>15</CurrentLine>
         <Folding>1</Folding>
         <ContractedFolders></ContractedFolders>
         <PaneID>0</PaneID>
@@ -3686,7 +3686,7 @@
       <Doc>
         <Name>.\Src\hardware.c</Name>
         <ColumnNumber>0</ColumnNumber>
-        <TopLine>140</TopLine>
+        <TopLine>122</TopLine>
         <CurrentLine>88</CurrentLine>
         <Folding>1</Folding>
         <ContractedFolders></ContractedFolders>
@@ -3696,8 +3696,8 @@
   </MDIGroups>
 
   <Bookmarks>
-    <ListItem>.\Src\autodetect.c 454</ListItem>
-    <ListItem>.\Src\autodetect.c 453</ListItem>
+    <ListItem>.\Src\autodetect.c 568</ListItem>
+    <ListItem>.\Src\autodetect.c 567</ListItem>
   </Bookmarks>
 
 </ProjectGui>

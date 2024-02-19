@@ -12,7 +12,7 @@ void printvoltage();
 void checkbutton();
 uint8_t restorecfg();
 void testrotateloop();
-
+void saveNexit();
 
 
 

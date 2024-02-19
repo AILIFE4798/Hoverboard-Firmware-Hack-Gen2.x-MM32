@@ -3,6 +3,7 @@
 #include "hal_adc.h"
 #include "hal_conf.h"
 #include "hal_uid.h"
+#include "../Inc/autodetect.h"
 #include "../Inc/hardware.h"
 #include "../Inc/initialize.h"
 #include "../Inc/delay.h"
@@ -18,7 +19,7 @@ extern uint32_t millis;
 uint8_t test;
 int tmp;
 uint8_t used(uint8_t pin);
-uint8_t mode=0;//0=startup,1=wait for serial,2=menu,3=hall,4=led,5=adc
+uint8_t mode=0;//0=startup,1=wait for serial,2=menu,3=hall,4=led,5=vbat,6=itotal,7=button,8=cmd,9=testrotate,10=writeEE
 uint32_t lastCommutation;
 extern uint8_t step;
 uint8_t init=0;
@@ -43,12 +44,17 @@ uint8_t doinloop=0;
 extern uint8_t hallposprev;
 extern bool dir;
 int testrotatespeed;
+uint8_t command;
+uint8_t address;
+uint8_t data;
+uint8_t stage;
 
 uint8_t hallA[33];
 uint8_t hallB[33];
 uint8_t hallC[33];
 extern uint16_t pinstorage[64];    
 //0:halla,1:hallb,2:hallc,3:ledr,4:ledg,5:ledb,6:ledup,7:leddown,8:buzzer,9:button,10:selfhold,11:charger,12:vbat,13:itotal,14:tx,15:rx,16:iphasea,17:iphaseb,18:iphasec,19~22:reserved,23:OCP,24:OCP ref,25:IR_L,26:IR_R,27:serial2tx,28:serial2rx,29~31:reserved,32:0XDCBA,33:vbat divider,34:itotal divider,35:iphase divider,36:baud,37:pwm resolution,38:slave ID,39:windings,40:invert lowside,41:soft current limit,42:hard limit awdg,43:UART,44:pid,45:bat 100%,46:bat0%,47:serial timeout,48~64:reserved 
+uint16_t prevpinstorage[64];    
 
 uint8_t banner[]={0X20,0X20,0X5F,0X20,0X20,0X20,0X5F,0X20,0X20,0X5F,0X5F,0X5F,0X5F,0X5F,0X20,0X20,0X20,0X20,0X20,0X5F,0X5F,0X5F,0X5F,0X5F,0X5F,0X5F,0X20,0X5F,0X5F,0X5F,0X5F,0X20,0X20,0X20,0X20,0X5F,0X20,0X20,0X20,0X5F,0X20,0X20,0X20,0X20,0X5F,0X20,0X20,0X20,0X20,0X5F,0X5F,0X5F,0X5F,0X20,0X5F,0X20,0X20,0X5F,0X5F,0X20,0X5F,0X5F,0X20,0X20,0X20,0X20,0X20,0X5F,0X5F,0X5F,0X5F,0X5F,0X5F,0X20,0X20,0X0A,0X0D,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X2F,0X20,0X5F,0X20,0X5C,0X20,0X5C,0X20,0X20,0X20,0X2F,0X20,0X2F,0X20,0X5F,0X5F,0X5F,0X5F,0X7C,0X20,0X20,0X5F,0X20,0X5C,0X20,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X20,0X2F,0X20,0X5C,0X20,0X20,0X2F,0X20,0X5F,0X5F,0X5F,0X7C,0X20,0X7C,0X2F,0X20,0X2F,0X20,0X5C,0X20,0X5C,0X20,0X20,0X20,0X2F,0X20,0X2F,0X5F,0X5F,0X5F,0X20,0X5C,0X20,0X0A,0X0D,0X20,0X7C,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X5C,0X20,0X5C,0X20,0X2F,0X20,0X2F,0X7C,0X20,0X20,0X5F,0X7C,0X20,0X7C,0X20,0X7C,0X5F,0X29,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X20,0X2F,0X20,0X5F,0X20,0X5C,0X7C,0X20,0X7C,0X20,0X20,0X20,0X7C,0X20,0X27,0X20,0X2F,0X20,0X20,0X20,0X5C,0X20,0X5C,0X20,0X2F,0X20,0X2F,0X20,0X20,0X5F,0X5F,0X29,0X20,0X7C,0X0A,0X0D,0X20,0X7C,0X20,0X20,0X5F,0X20,0X20,0X7C,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X5C,0X20,0X56,0X20,0X2F,0X20,0X7C,0X20,0X7C,0X5F,0X5F,0X5F,0X7C,0X20,0X20,0X5F,0X20,0X3C,0X20,0X20,0X7C,0X20,0X20,0X5F,0X20,0X20,0X7C,0X2F,0X20,0X5F,0X5F,0X5F,0X20,0X5C,0X20,0X7C,0X5F,0X5F,0X5F,0X7C,0X20,0X2E,0X20,0X5C,0X20,0X20,0X20,0X20,0X5C,0X20,0X56,0X20,0X2F,0X20,0X20,0X2F,0X20,0X5F,0X5F,0X2F,0X20,0X0A,0X0D,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X5F,0X7C,0X5C,0X5F,0X5F,0X5F,0X2F,0X20,0X20,0X5C,0X5F,0X2F,0X20,0X20,0X7C,0X5F,0X5F,0X5F,0X5F,0X5F,0X7C,0X5F,0X7C,0X20,0X5C,0X5F,0X5C,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X5F,0X2F,0X5F,0X2F,0X20,0X20,0X20,0X5C,0X5F,0X5C,0X5F,0X5F,0X5F,0X5F,0X7C,0X5F,0X7C,0X5C,0X5F,0X5C,0X20,0X20,0X20,0X20,0X5C,0X5F,0X2F,0X20,0X20,0X7C,0X5F,0X5F,0X5F,0X5F,0X5F,0X7C,0X0A,0X0D,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X0A,0X0D,0X0A,0X0D};
 uint8_t PXX[33][4]={"PA0 ","PA1 ","PA2 ","PA3 ","PA4 ","PA5 ","PA6 ","PA7 ","PA11","PA12","PA13","PA14","PA15","PB0 ","PB1 ","PB2 ","PB3 ","PB4 ","PB5 ","PB6 ","PB7 ","PB8 ","PB9 ","PB10","PB11","PB12","PC13","PC14","PC15","PD0 ","PD1 ","PD2 ","PD3 "};
@@ -144,8 +150,9 @@ void autoDetectSerialIt(){
 					detectall=0;
 				break;
 				case '7':
-					EEPROM_Write((u8*)pinstorage, 2 * 16);
-					UART_SendString("Written to Flash");
+					mode=8;
+					init=1;
+					detectall=0;
 				break;
 				case '8':
 					mode=9;
@@ -170,8 +177,7 @@ void autoDetectSerialIt(){
 					init=1;
 					sTimingDelay=0;
 				}else{
-					mode=2;
-					init=1;
+					saveNexit();
 				}
 				wait=0;
 			}else if(sRxBuffer[0]=='y'){
@@ -187,8 +193,7 @@ void autoDetectSerialIt(){
 						init=1;
 						sTimingDelay=0;
 					}else{
-						mode=2;
-						init=1;
+						saveNexit();
 					}
 					for(uint8_t i=0;i<33;i++){
 						if(!used(i)){
@@ -264,9 +269,7 @@ void autoDetectSerialIt(){
 					init=1;
 					sTimingDelay=0;
 				}else{
-					mode=2;
-					init=1;
-					sTimingDelay=0;
+					saveNexit();
 				}
 			}else if(sRxBuffer[0]=='f'){
 				showalladc=!showalladc;
@@ -278,11 +281,106 @@ void autoDetectSerialIt(){
 			break;
 			case 7 :
 				if(sRxBuffer[0]=='\n'||sRxBuffer[0]=='\r'){
-					mode=2;
-					init=1;
-					sTimingDelay=0;
+					saveNexit();
 				}else if(sRxBuffer[0]=='e'){	
 					doinloop=1;
+				}
+			break;
+			case 8 :
+				switch(sRxBuffer[0]){
+					case '\r':
+					case '\n':
+						switch(command){
+							case 'r':
+								if(address<64){
+									char buffer[16];
+									sprintf(&buffer[0],"\r\nindex %i : %i",address,pinstorage[address]);
+									UART_SendString(&buffer[0]);
+								}else{
+									UART_SendString("\r\nInvalid address");
+								}
+							break;
+							case 'w':
+								if(address<64){
+									pinstorage[address]=data;
+									char buffer[16];
+									sprintf(&buffer[0],"\r\nindex %i : %i",address,pinstorage[address]);
+									UART_SendString(&buffer[0]);
+								}else{
+									UART_SendString("\r\nInvalid address");
+								}
+							break;
+							case 'h':
+								UART_SendString("\r\n\nThis tool allow you to modify and view all saved pinouts and settings\n\r\n\rUsage:  [command] <address> <value>\n\r\n\rCommands: \n\r\n\r r     read saved data\n\r w     write data\n\r h     display this help page\n\r l     list all data\n\r g     generate pinstorage variable initializer to copy in firmware\n\r e     erase all data\n\r x     exit command line tool and go back to main menu\n\r\n\rAddress description:\n\r\n\r0 : HALL sensor A pin\n\r1 : HALL sensor B pin\n\r2 : HALL sensor B pin\n\r3 : red LED pin\n\r4 : green LED pin\n\r5 : blue LED pin\n\r6 : upper LED pin\n\r7 : lower LED pin\n\r8 : Buzzer pin\n\r9 : Button pin\n\r10 : latch pin\n\r11 : charger pin\n\r12 : battery voltage pin\n\r13 : total current DC pin\n\r14 : UART TX pin\n\r15 : UART RX pin\n\r16~22 : reserved\n\r23 : over current protection pin\n\r24 : over current protection comparator refrence pin\n\r25~31:reserved\n\r\n\r33 : vbat divider\n\r34 : itotal divider\n\r35 : iphase divider\n\r36 : baud\n\r37 : pwm resolution\n\r38 : slave ID\n\r39 : windings\n\r40 : invert lowside\n\r41 : soft current limit\n\r42 : hard limit awdg\n\r43 : UART\n\r44 : pid\n\r45 : bat 100%\n\r46 : bat 0%\n\r47 : serial timeout\n\r48~64 : reserved\n");
+							break;
+							case 'l':
+								for(uint8_t i=0;i<64;i++){			
+									char buffer[16];
+									sprintf(&buffer[0],"\r\nindex %i : %i",i,pinstorage[i]);
+									UART_SendString(&buffer[0]);
+								}
+							break;
+							case 'g':
+								UART_SendString("\r\nuint16_t pinstorage[64]={");
+								for(uint8_t i=0;i<64;i++){			
+									char buffer[16];
+									sprintf(&buffer[0],"%i, ",pinstorage[i]);
+									UART_SendString(&buffer[0]);
+								}
+								UART_SendString("\b\b};");
+							break;
+							case 'e':{
+								uint16_t tmperase[64];
+								for(uint8_t i=0;i<64;i++){
+									tmperase[i]=0xffff;
+								}
+								if(EEPROM_Write((u8*)tmperase, 2 * 64)){
+									UART_SendString("\r\nEEPROM erase complete");
+								}else{
+									UART_SendString("\r\nEEPROM erase failed");
+								}
+							}
+							break;
+							case 'x':
+								saveNexit();
+							break;
+							case 0:
+								__NOP();
+							break;
+							default:
+								UART_SendString("\r\nCommand\"");
+								UART_Send_Byte(command);
+								UART_SendString("\"does not exist");
+							break;
+						}
+						UART_SendString("\r\npinfinder~$ ");
+						command=0;
+						address=0;
+						data=0;
+						stage=0;
+					break;
+					case ' ':
+						stage++;
+					break;
+					default:
+						switch(stage){
+							case 0 :
+								if(command==0){
+									command=sRxBuffer[0];
+								}
+							break;
+							case 1 :
+								if(sRxBuffer[0]>='0'&&sRxBuffer[0]<='9'){
+									address=address*10+(sRxBuffer[0]-'0');
+								}
+							break;
+							case 2 :
+								if(sRxBuffer[0]>='0'&&sRxBuffer[0]<='9'){
+									data=data*10+(sRxBuffer[0]-'0');
+								}
+							break;
+						}
+					break;
 				}
 			break;
 			case 9 :
@@ -291,7 +389,6 @@ void autoDetectSerialIt(){
 					case '\n':
 						mode=2;
 						init=1;
-						sTimingDelay=0;
 						TIM_CtrlPWMOutputs(TIM1, DISABLE);
 					break;
 					case '+':
@@ -313,7 +410,24 @@ void autoDetectSerialIt(){
 						UART_SendString(&buffer[0]);					
 					break;
 				}	
-			break;				
+			break;	
+			case 10 :
+				switch(sRxBuffer[0]){
+					case 'y':
+						if(EEPROM_Write((u8*)pinstorage, 2 * 64)){
+							UART_SendString("\r\nconfiguration saved\r\n");
+						}else{
+							UART_SendString("\r\nEEPROM write failed\r\n");
+						}
+					case 'n':
+						mode=2;
+						init=1;
+					break;
+					default:
+						UART_SendString("\r\nY/N?");
+					break;
+				}
+			break;
 	}
 }
 	
@@ -462,6 +576,9 @@ void autoDetectInit(){
 			UART_SendString("  (7)-Modify configurations manually by command line.\n\r");
 			UART_SendString("  (8)-Test motor rotation.\n\r");
 			UART_SendString("  (9)-Power off.\n\r>");
+			for(uint8_t i=0;i<64;i++){
+				prevpinstorage[i]=pinstorage[i];
+			}
 		break;
 		case 3 :
 			UART_SendString("\n\rthis will spin motor slowly to detect hall sensor pins,if it takes too long please increase input voltage to 42v.\n\rpress Y to start,Enter to return to menu\n\r");
@@ -534,8 +651,15 @@ void autoDetectInit(){
 				}
 			}
 		break;
+		case 8 :
+			UART_SendString("\r\nWelcome to command line interface,type h for help\n\rpinfinder~$ ");
+			command=0;
+			address=0;
+			data=0;
+			stage=0;
+		break;
 		case 9 :
-			UART_SendString("\r\nTest the motor with hall sensor commutation\r\npress + to increase speed\r\npress - to decrease speed\r\nnegative speed to spin backward\r\npress Enter to return to main menu\n\n\r>");
+			UART_SendString("\r\nTest the motor with hall sensor commutation\r\npress + to increase speed\r\npress - to decrease speed\r\nnegative speed to spin backward\r\npress Enter to return to main menu\n\n\r");
 			TIM_CtrlPWMOutputs(TIM1, ENABLE);
 			TIM1->CCR1=0; 
 			TIM1->CCR2=0;
@@ -544,6 +668,9 @@ void autoDetectInit(){
 			pinMode(pins[pinstorage[0]][0],pins[pinstorage[0]][1],GPIO_Mode_FLOATING);
 			pinMode(pins[pinstorage[1]][0],pins[pinstorage[1]][1],GPIO_Mode_FLOATING);
 			pinMode(pins[pinstorage[2]][0],pins[pinstorage[2]][1],GPIO_Mode_FLOATING);
+		break;
+		case 10 :
+			UART_SendString("\r\nChanges were made to the configurations, do you want to save it permanantly?Y/N\r\n>");
 		break;
 	}		
 }
@@ -636,6 +763,20 @@ void testrotateloop(){
 	TIM1->CCR1=abspeed;
 	TIM1->CCR2=abspeed;
 	TIM1->CCR3=abspeed;
+}
+
+void saveNexit(){
+	for(uint8_t i=0;i<64;i++){
+		if(prevpinstorage[i]!=pinstorage[i]){
+			mode=10;
+			init=1;
+			detectall=0;
+			return;
+		}
+	}
+	mode=2;
+	init=1;
+	return;
 }
 
 
