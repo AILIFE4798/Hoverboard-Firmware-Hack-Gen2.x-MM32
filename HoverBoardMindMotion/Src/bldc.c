@@ -47,9 +47,9 @@ uint8_t hallpos(uint8_t dir){
 	uint8_t HallC;
 	uint8_t HallValue;
 	
-	HallA = GPIO_ReadInputDataBit(HALLAPORT,HALLAPIN);
-	HallB = GPIO_ReadInputDataBit(HALLBPORT,HALLBPIN);
-	HallC = GPIO_ReadInputDataBit(HALLCPORT,HALLCPIN);
+	HallA = digitalRead(HALLAPIN);
+	HallB = digitalRead(HALLBPIN);
+	HallC = digitalRead(HALLCPIN);
 	
 	if(dir == 1)
 	{
@@ -139,39 +139,20 @@ void commutate(){
 
 void speedupdate(){
 	if(poweron>127){
-		#ifdef TESTROTATE	
-		if(millis-lasttestrotate>50){
-			speed+=2*testrotatedir; //keep changing speed
-			if(speed>300){    //reverse dir
-				testrotatedir=-1;
-			}
-			if(speed<-300){
-				testrotatedir=1;
-			}	
-			lasttestrotate=millis;
-		}
-			#ifndef HALLAPIN
-				speed=300;
-			#endif
-		#else	
-		#ifdef UARTEN
-		RemoteUpdate();
-		#endif
-		#endif
-		
+		RemoteUpdate();	
 		avgspeed();//speed filter prevent oscilation
 		if(millis-lastcommutate>500){//zero out speed
 			realspeed=0;
 			frealspeed=0;
 		}	
-		#ifdef CONSTSPEED	
-		pwm= PID2PWM((PID(speed,frealspeed)/50));// command the required RPM
-		if(speed==0){
-			pwm=0;
+		if(CONSTSPEED){	
+			pwm= PID2PWM((PID(speed,frealspeed)/50));// command the required RPM
+			if(speed==0){
+				pwm=0;
+			}
+		}else{
+			pwm=speed*PWM_RES/1000;//1000~-1000 for all pwm resolution
 		}
-		#else
-		pwm=speed*PWM_RES/1000;//1000~-1000 for all pwm resolution
-		#endif
 		
 		if(pwm>0){
 		dir=1;

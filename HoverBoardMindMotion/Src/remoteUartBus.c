@@ -19,7 +19,6 @@
 #include "../Inc/remoteUartBus.h"
 #include "hal_crc.h"
 
-#ifdef UARTEN
 #pragma pack(1)
 
 extern uint32_t millis;
@@ -133,7 +132,7 @@ void AnswerMaster(void){
 	// Ask for steer input
 	SerialHover2Server oData;
 	oData.cStart = START_FRAME;
-	oData.iSlave = SLAVEID;
+	oData.iSlave = SLAVE_ID;
 	oData.iVolt = (uint16_t)	(fvbat);
 	oData.iAmp = (int16_t) 	(fitotal);
 	oData.iSpeed = (int16_t) (frealspeed	*10);
@@ -142,9 +141,9 @@ void AnswerMaster(void){
 
 	oData.checksum = 	CalcCRC((uint8_t*) &oData, sizeof(oData) - 2);	// (first bytes except crc)
 
-	#ifdef UARTEN
-		UART_Send_Group((uint8_t*) &oData, sizeof(oData));
-	#endif
+	
+	UART_Send_Group((uint8_t*) &oData, sizeof(oData));
+	
 
 }
 
@@ -157,9 +156,8 @@ uint8_t iRxDataSize;
 // static int16_t iReceivePos = -1;		// if >= 0 incoming bytes are recorded until message size reached
 void serialit(void){
 
-	#ifdef UARTEN
-		uint8_t cRead = sRxBuffer[0];
-	#endif
+
+	uint8_t cRead = sRxBuffer[0];
 	//DEBUG_LedSet((steerCounter%20) < 10,0)	// 	
 	
 	if (iReceivePos < 0)		// data reading not yet begun
@@ -195,7 +193,7 @@ void serialit(void){
 	iReceivePos = -1;
 	if (iCRC == CalcCRC(aReceiveBuffer, iRxDataSize - 2))	//  first bytes except crc
 	{
-		if (aReceiveBuffer[2] == SLAVEID)
+		if (aReceiveBuffer[2] == SLAVE_ID)
 		{
 			iTimeLastRx = millis;
 			
@@ -229,4 +227,3 @@ void serialit(void){
 	}
 }
 
-#endif

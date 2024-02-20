@@ -22,29 +22,73 @@ Dialog DLL:      TARMCM1.DLL V1.14.6.0
  
 <h2>Project:</h2>
 C:\Users\Admin\Documents\GitHub\Hoverboard-Firmware-Hack-Gen2.x-MM32\HoverBoardMindMotion\Hoverboard.uvprojx
-Project File Date:  02/15/2024
+Project File Date:  02/20/2024
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.19', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'MM32SPIN05'
-Src/main.c(111): warning: passing 'char[14]' to parameter of type 'u8 *' (aka 'unsigned char *') converts between pointers to integer types where one is of the unique plain 'char' type and the other is not [-Wpointer-sign]
-        UART_SendString("hello World\n\r");
-                        ^~~~~~~~~~~~~~~~~
-Src/../Inc/uart.h(5): note: passing argument to parameter 'str' here
-void UART_SendString(u8* str);
-                         ^
-1 warning generated.
+Src/initialize.c(10): warning: In file included from...
+Src/../Inc/hardware.h(29): error: typedef redefinition with different types ('struct MM32GPIO' vs 'struct MM32GPIO')
+}MM32GPIO;
+ ^
+Src/../Inc/pinout.h(12): note: 'Src/../Inc/hardware.h' included multiple times, additional include site here
+#include "../Inc/hardware.h"
+         ^
+Src/initialize.c(10): note: 'Src/../Inc/hardware.h' included multiple times, additional include site here
+#include "../Inc/hardware.h"
+         ^
+Src/../Inc/hardware.h(29): note: unguarded header; consider using #ifdef guards or #pragma once
+}MM32GPIO;
+ ^
+Src/initialize.c(10): warning: In file included from...
+Src/../Inc/hardware.h(33): error: typedef redefinition with different types ('struct MM32ADC' vs 'struct MM32ADC')
+}MM32ADC;
+ ^
+Src/../Inc/pinout.h(12): note: 'Src/../Inc/hardware.h' included multiple times, additional include site here
+#include "../Inc/hardware.h"
+         ^
+Src/initialize.c(10): note: 'Src/../Inc/hardware.h' included multiple times, additional include site here
+#include "../Inc/hardware.h"
+         ^
+Src/../Inc/hardware.h(33): note: unguarded header; consider using #ifdef guards or #pragma once
+}MM32ADC;
+ ^
+Src/initialize.c(10): warning: In file included from...
+Src/../Inc/hardware.h(38): error: typedef redefinition with different types ('struct MM32TIM23' vs 'struct MM32TIM23')
+}MM32TIM23;
+ ^
+Src/../Inc/pinout.h(12): note: 'Src/../Inc/hardware.h' included multiple times, additional include site here
+#include "../Inc/hardware.h"
+         ^
+Src/initialize.c(10): note: 'Src/../Inc/hardware.h' included multiple times, additional include site here
+#include "../Inc/hardware.h"
+         ^
+Src/../Inc/hardware.h(38): note: unguarded header; consider using #ifdef guards or #pragma once
+}MM32TIM23;
+ ^
+Src/initialize.c(10): warning: In file included from...
+Src/../Inc/hardware.h(43): error: typedef redefinition with different types ('struct MM32UART1' vs 'struct MM32UART1')
+}MM32UART1;
+ ^
+Src/../Inc/pinout.h(12): note: 'Src/../Inc/hardware.h' included multiple times, additional include site here
+#include "../Inc/hardware.h"
+         ^
+Src/initialize.c(10): note: 'Src/../Inc/hardware.h' included multiple times, additional include site here
+#include "../Inc/hardware.h"
+         ^
+Src/../Inc/hardware.h(43): note: unguarded header; consider using #ifdef guards or #pragma once
+}MM32UART1;
+ ^
+4 errors generated.
+compiling initialize.c...
 compiling main.c...
 compiling bldc.c...
-compiling initialize.c...
 compiling uart.c...
 compiling interrupt.c...
 compiling remoteUartBus.c...
 compiling calculation.c...
-linking...
-Program Size: Code=8670 RO-data=234 RW-data=36 ZI-data=2524  
-FromELF: creating hex file...
-".\Objects\HoverboardOutput.axf" - 0 Error(s), 1 Warning(s).
+compiling sim_eeprom.c...
+".\Objects\HoverboardOutput.axf" - 4 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -70,9 +114,10 @@ Package Vendor: MindMotion
    * Component: ARM::CMSIS:CORE:5.6.0
 
    * Component: MindMotion::Device:Startup:1.0.0
-      Include file:  Device/MM32SPIN06xx_s/Include/mm32_device.h
       Source file:   Device/MM32SPIN06xx_s/Source/KEIL_StartAsm/startup_mm32spin06xx_s_keil.s
       Source file:   Device/MM32SPIN06xx_s/Source/system_mm32spin06xx_s.c
+      Include file:  Device/MM32SPIN06xx_s/Include/mm32_device.h
+Target not created.
 Build Time Elapsed:  00:00:02
 </pre>
 </body>

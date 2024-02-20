@@ -27,24 +27,19 @@ uint16_t iphasea;
 uint16_t iphaseb;
 uint32_t iphaseaoffset=0;
 uint32_t iphaseboffset=0;
+extern MM32ADC adcs[10];
+
 
 //commutation interrupt
-void TIM1_BRK_UP_TRG_COM_IRQHandler(void)
-{
+void TIM1_BRK_UP_TRG_COM_IRQHandler(void){
   TIM_ClearITPendingBit(TIM1, TIM_IT_COM);
-	
-    
 }
 
-void DMA1_Channel2_3_IRQHandler(void)
-{
-    if(DMA_GetITStatus(DMA1_IT_TC3)) {
-        DMA_ClearITPendingBit(DMA1_IT_GL3);
-        // Check the received buffer
-			  #ifdef UARTEN
-        serialit();
-				#endif
-    }
+void DMA1_Channel2_3_IRQHandler(void){
+  if(DMA_GetITStatus(DMA1_IT_TC3)) {
+    DMA_ClearITPendingBit(DMA1_IT_GL3);
+    serialit();
+  }
 }	
 	
 void ADC1_COMP_IRQHandler(void){
@@ -54,28 +49,30 @@ void ADC1_COMP_IRQHandler(void){
   }
 	if(RESET != ADC_GetITStatus(ADC1, ADC_IT_EOC)) {
 		if(poweron<127){//cancel out adc offset
-			itotaloffset+=(uint16_t)ADC1->ITOTALADC2;
-			#ifdef IPHASEAPIN
-			iphaseaoffset+=(uint16_t)ADC1->IPHASEAADC2;
-			iphaseboffset+=(uint16_t)ADC1->IPHASEBADC2;
-			#endif
+			itotaloffset+=analogRead(ITOTALPIN);
 			poweron++;
 		}else if(poweron==127){//divide by 128
 			itotaloffset = itotaloffset>>7;
-			#ifdef IPHASEAPIN
-			iphaseaoffset = iphaseaoffset>>7;
-			iphaseboffset = iphaseboffset>>7;
-			#endif
-			#ifdef HARD_ILIMIT_AWDG
+			if(AWDG){
 				ADC_AnalogWatchdogCmd(ADC1, ENABLE);
-				ADC_AnalogWatchdogThresholdsConfig(ADC1, (uint16_t)(HARD_ILIMIT_AWDG+itotaloffset), 0);
-				ADC_AnalogWatchdogSingleChannelConfig(ADC1, ITOTALADC);
+				ADC_AnalogWatchdogThresholdsConfig(ADC1, (uint16_t)(AWDG+itotaloffset), 0);
+				for(uint8_t i=0;i<ADCCOUNT;i++){
+					if(adcs[i].io==ITOTALPIN){
+						ADC_AnalogWatchdogSingleChannelConfig(ADC1, adcs[i].channel);
+						break;
+					}
+				}
 				ADC_ITConfig(ADC1, ADC_IT_AWD, ENABLE);
-			#endif
+			}
 			poweron++;
 		}else{
-			vbat = (double)VBAT_DIVIDER*(uint16_t)ADC1->VBATADC2*100;//read adc register
-			int tmp = (uint16_t)ADC1->ITOTALADC2;//prevent overflow on negative value
+			if(hallpos(dir)!=hallposprev){
+				hallposprev=hallpos(dir);
+				step=hallposprev;
+				commutate();
+			}
+			vbat = (double)VBAT_DIVIDER*analogRead(VBATPIN)*100;//read adc register
+			int tmp = analogRead(ITOTALPIN);//prevent overflow on negative value
 			itotal = (double)ITOTAL_DIVIDER*(tmp-itotaloffset)*100;
 			#ifdef IPHASEAPIN
 			tmp = (uint16_t)ADC1->IPHASEAADC2;
@@ -85,20 +82,13 @@ void ADC1_COMP_IRQHandler(void){
 			#endif
 			avgvbat();
 			avgItotal();
-			#ifdef SOFT_ILIMIT
+			if(SOFT_ILIMIT>0&&SOFT_ILIMIT<30){
 				if(itotal>SOFT_ILIMIT){
 					TIM_CtrlPWMOutputs(TIM1, DISABLE);
 				}else{
 					TIM_CtrlPWMOutputs(TIM1, ENABLE);
 				}
-			#endif
-			#ifdef HALLAPIN
-			if(hallpos(dir)!=hallposprev){
-				hallposprev=hallpos(dir);
-				step=hallposprev;
-				commutate();
 			}
-    	#endif
 		}
 		ADC_ClearITPendingBit(ADC1, ADC_IT_EOC);
 	}

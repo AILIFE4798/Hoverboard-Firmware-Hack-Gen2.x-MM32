@@ -41,19 +41,9 @@ s32 main(void){
 	//initialize normal gpio
 	io_init();
 	//hall gpio init
-	#ifdef HALLAPIN
 	HALL_Init();
 	//hall timer init
-		#ifdef HALLTIM
-		HALLTIM_Init(65535, SystemCoreClock/100000);//sysclock is 72mhz
-		//timer2 hall change interrupt config
-		if(HALLTIM==TIM2){
-			NVIC_Configure(TIM2_IRQn, 1);
-		}else{
-			NVIC_Configure(TIM3_IRQn, 1);
-		}
-		#endif
-	#endif
+	HALLTIM_Init(65535, SystemCoreClock/100000);//sysclock is 72mhz
 	//initialize 6 bldc pins
 	BLDC_init();
 	//initialize timer
@@ -63,52 +53,45 @@ s32 main(void){
 	//timer1 commutation interrupt config
 	NVIC_Configure(TIM1_BRK_UP_TRG_COM_IRQn, 1);
 	//vbat
-	#ifdef VBATPIN
 	adc_Init();
 	//adc interrupt
 	exNVIC_Configure(ADC_COMP_IRQn, 0, 1);
-	#endif
 	#ifdef WATCHDOG//watchdog
 	Iwdg_Init(IWDG_Prescaler_32, 0xff);
 	#endif
-	
-	#ifdef UARTEN
 	//serial1.begin(19200);
-	UARTX_Init(BAUD);
+	UARTX_Init((uint32_t)BAUD);
 	//uart interrupt
 	exNVIC_Configure(DMA1_Channel2_3_IRQn, 0, 0);
 	//uart dma
-	if(UARTEN==UART1){
-		DMA_NVIC_Config(DMA1_Channel3, (u32)&UART1->RDR, (u32)sRxBuffer, 1);
-	}else{
-		DMA_NVIC_Config(DMA1_Channel3, (u32)&UART2->RDR, (u32)sRxBuffer, 1);
-	}
-	#endif
-	TIM1->CCR1=0;//prevent motor starting automaticly
-	TIM1->CCR2=0;
-	TIM1->CCR3=0;
-	#ifdef LATCHPIN
+	DMA_NVIC_Config(DMA1_Channel3, (u32)&UART1->RDR, (u32)sRxBuffer, 1);
 	//latch on power
-	GPIO_WriteBit(LATCHPORT, LATCHPIN, 1);
-	//wait while release button
-	while(GPIO_ReadInputDataBit(BTNPORT, BTNPIN)) {
-		#ifdef BZPIN
-		GPIO_WriteBit(BZPORT, BZPIN, 1);
-		DELAY_Ms(1);
-		GPIO_WriteBit(BZPORT, BZPIN, 0);
-		DELAY_Ms(1);
-		#else
-		__NOP();
-		#endif
-		IWDG_ReloadCounter();
+	if(LATCHPIN<PINCOUNT-1){    //have latch
+		DELAY_Ms(50);    //some board the micro controller can reset in time and turn back on
+		digitalWrite(LATCHPIN, 1);
+		while(digitalRead(BUTTONPIN)){    //wait while release button
+			if(BUZZERPIN<PINCOUNT-1){    //have buzzer
+				digitalWrite(BUZZERPIN, 1);
+				DELAY_Ms(2);
+				digitalWrite(BUZZERPIN, 0);
+				DELAY_Ms(2);
+			}else{
+				__NOP();
+				__NOP();
+			}
+			IWDG_ReloadCounter();
+		}
+		if(BUZZERPIN<PINCOUNT-1){
+			for(int i=0;i<5;i++){    //power on melody
+				digitalWrite(BUZZERPIN, 1);
+				DELAY_Ms(50);
+				digitalWrite(BUZZERPIN, 0);
+				DELAY_Ms(50);
+			}
+		}
 	}
-	//prevent turning back off imidiately
-	DELAY_Ms(50);	
-	#endif
-	#ifdef VBATPIN
 	ADC_SoftwareStartConvCmd(ADC1, ENABLE);    //Software start conversion
-	#endif
-	UART_SendString("hello World\n\r");
+	UART_SendString("hello World\n\r");    //debug uart
   while(1) {
 		#ifdef HALL2LED
 		//rotating led
@@ -121,53 +104,29 @@ s32 main(void){
 			speedupdate();
 		  lastupdate=millis;
 		}
-		#ifndef HALLAPIN
-		//simulated hall sensor for commutation
-		if(millis-lastCommutation>30){
-			if(dir){
-				step++;
-			}else{
-				step--;
+		
+		if(LATCHPIN<PINCOUNT-1){
+			if(digitalRead(BUTTONPIN)){    //button press for shutdown
+				TIM1->CCR1=0;    //shut down motor
+				TIM1->CCR2=0;
+				TIM1->CCR3=0;
+				if(BUZZERPIN<PINCOUNT-1){
+					for(int i=0;i<3;i++){    //power off melody
+					digitalWrite(BUZZERPIN, 1);
+					DELAY_Ms(150);
+					digitalWrite(BUZZERPIN, 0);
+					DELAY_Ms(150);
+					}
+				}
+				while(digitalRead(BUTTONPIN)) {    //wait for release
+					__NOP();
+					IWDG_ReloadCounter();
+				}
+				digitalWrite(LATCHPIN, 0);    //last line to ever be executed
+				while(1);//incase the hardware failed...
 			}
-			step=step+dir;
-			if(step>6){
-				step=1;
-			}
-			if(step<1){
-				step=6;
-			}
-			commutate();
-			lastCommutation=millis;
 		}
-		#endif
-		#ifdef LATCHPIN
-		//button press for shutdown
-		if(GPIO_ReadInputDataBit(BTNPORT, BTNPIN)){
-			TIM1->CCR1=0;    //shut down motor
-			TIM1->CCR2=0;
-			TIM1->CCR3=0;
-			//power off melody
-			for(int i=0;i<3;i++){
-			#ifdef BZPIN
-			GPIO_WriteBit(BZPORT, BZPIN, 1);
-		  DELAY_Ms(150);
-		  GPIO_WriteBit(BZPORT, BZPIN, 0);
-		  DELAY_Ms(150);
-			#endif	
-			}
-			//wait for release
-			while(GPIO_ReadInputDataBit(BTNPORT, BTNPIN)) {
-		    __NOP();
-				IWDG_ReloadCounter();
-	    }
-			//last line to ever be executed
-			GPIO_WriteBit(LATCHPORT, LATCHPIN, 0);
-			while(1);//incase the hardware failed...
-		}
-		#endif
-		//feed the watchdog
-		IWDG_ReloadCounter();
-  }//main loop
-	
+		IWDG_ReloadCounter();    //feed the watchdog
+  }//main loop	
 }
 
