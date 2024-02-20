@@ -3,6 +3,11 @@
 #include "hal_gpio.h" 
 #include "hal_adc.h" 
 
+#ifndef HARDWARE_H
+#define HARDWARE_H    //keil bug workaround typedef redefinition with different types
+
+
+
 #define IOA 1
 #define IOB 2
 #define IOC 3
@@ -49,3 +54,8 @@ uint8_t digitalRead(uint8_t io);
 uint16_t analogRead(uint8_t io);
 void digitalWrite(uint8_t io, uint8_t state);
 void pinModeAF(uint8_t io,uint8_t af);
+
+
+
+
+#endif

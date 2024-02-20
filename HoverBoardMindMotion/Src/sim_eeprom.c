@@ -239,7 +239,7 @@ s32 FLASH_SIM_EEPROM_Test(void)
 uint8_t restorecfg(){
 	uint16_t tmp[64];
 	EEPROM_Read((u8*)tmp, 2 * 64);
-	if(tmp[32]==MAGIC_NUMBER){    //verify config is valid
+	if(tmp[MAGICNUM_POS]==MAGIC_NUMBER){    //verify config is valid
 		for(uint8_t i=0;i<64;i++){
 			pinstorage[i]=tmp[i];
 		}

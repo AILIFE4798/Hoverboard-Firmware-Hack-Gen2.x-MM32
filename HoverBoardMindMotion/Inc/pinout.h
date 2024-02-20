@@ -11,8 +11,7 @@
 
 #include "../Inc/hardware.h"
 extern MM32GPIO pins[33];
-uint16_t pinstorage[64]={0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xDCAB, 31, 250, 0, 19200, 8192, 1, 30, 0, 10, 300, 1, 1, 42000, 32000, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-
+extern uint16_t pinstorage[64];
 	
 
 #define HALLAPIN pinstorage[0]
@@ -33,7 +32,6 @@ uint16_t pinstorage[64]={0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF,
 #define OCPPIN pinstorage[23]
 #define OCPREFPIN pinstorage[24]
 
-#define MAGICNUM_POS pinstorage[32]
 #define VBAT_DIVIDER pinstorage[33]
 #define ITOTAL_DIVIDER pinstorage[34]
 #define BAUD pinstorage[36]
@@ -49,6 +47,7 @@ uint16_t pinstorage[64]={0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF,
 #define SERIAL_TIMEOUT pinstorage[47]
 
 
+#define MAGICNUM_POS 32
 #define MAGIC_NUMBER 0xDCAB
 
 
