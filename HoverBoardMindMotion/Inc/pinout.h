@@ -4,7 +4,7 @@
 /* |  _  | |_| |\ V / | |___|  _ <  |  _  |/ ___ \ |___| . \    \ V /  / __/ */
 /* |_| |_|\___/  \_/  |_____|_| \_\ |_| |_/_/   \_\____|_|\_\    \_/  |_____|*/
 /*                                                                           */
-//version 128 : first working version to support eeprom config
+//version 129 : added over discharge protection, fixed motor direction bug, retune PID
 //file for setting custom pinout
 //pinout is for Layout2.8.1
 

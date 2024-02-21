@@ -113,7 +113,7 @@ uint16_t CalcCRC(uint8_t *ptr, int count){    //file checksum calculation
 
 void RemoteUpdate(void){
 	
-	if (millis - iTimeLastRx > SREIALTIMEOUT){
+	if (millis - iTimeLastRx > SERIAL_TIMEOUT){
 		speed = 0;
 	}
 	if (bAnswerMaster)

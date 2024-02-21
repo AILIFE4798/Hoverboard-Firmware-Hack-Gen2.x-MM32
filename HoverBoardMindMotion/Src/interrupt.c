@@ -29,7 +29,7 @@ uint32_t iphaseaoffset=0;
 uint32_t iphaseboffset=0;
 extern MM32ADC adcs[10];
 float vcc;
-
+uint8_t realdir=0;
 
 //commutation interrupt
 void TIM1_BRK_UP_TRG_COM_IRQHandler(void){
@@ -68,9 +68,14 @@ void ADC1_COMP_IRQHandler(void){
 			poweron++;
 		}else{
 			if(hallpos(dir)!=hallposprev){
-				hallposprev=hallpos(dir);
-				step=hallposprev;
+				step=hallpos(dir);
 				commutate();
+				if(hallpos(dir)>hallposprev||(hallpos(dir)==1&&hallposprev==6)){
+					realdir=0;
+				}else{
+					realdir=1;
+				}
+				hallposprev=hallpos(dir);
 			}
 			uint16_t tmp = ADC1->CH15DR;
 			vcc=(double)4915.2/tmp;
@@ -79,13 +84,14 @@ void ADC1_COMP_IRQHandler(void){
 			itotal = (double)ITOTAL_DIVIDER*(tmp-itotaloffset)*vcc*100/4096;
 			avgvbat();
 			avgItotal();
-			if(SOFT_ILIMIT>0&&SOFT_ILIMIT<30){
-				if(itotal>SOFT_ILIMIT){
-					TIM_CtrlPWMOutputs(TIM1, DISABLE);
-				}else{
-					TIM_CtrlPWMOutputs(TIM1, ENABLE);
-				}
+			if(SOFT_ILIMIT>1&&SOFT_ILIMIT<30&&itotal>SOFT_ILIMIT){
+				TIM_CtrlPWMOutputs(TIM1, DISABLE);
+			}else if(BAT_EMPTY>20&&BAT_EMPTY<100&&vbat<BAT_EMPTY){	
+				TIM_CtrlPWMOutputs(TIM1, DISABLE);
+			}else{
+				TIM_CtrlPWMOutputs(TIM1, ENABLE);
 			}
+
 		}
 		ADC_ClearITPendingBit(ADC1, ADC_IT_EOC);
 	}
@@ -98,11 +104,11 @@ void TIM2_IRQHandler(void) {
 		TIM_ClearITPendingBit(TIM2, TIM_IT_CC1);
   }
   //realspeed = (long)80000 / (long)(TIM2->CCR1); // not correct
-  if (dir == 0){ // negative speed spinning backward
+  if (realdir == 0){ // negative speed spinning backward
     realspeed *= -1;
 	}
   lastcommutate = millis;
-  if (dir == 1){
+  if (realdir == 1){
     iOdom++;
   }else{
     iOdom--;
@@ -116,11 +122,11 @@ void TIM3_IRQHandler(void) {
 		TIM_ClearITPendingBit(TIM3, TIM_IT_CC1);
   }
   //realspeed = (long)80000 / (long)(TIM2->CCR1); // not correct
-  if (dir == 0){ // negative speed spinning backward
+  if (realdir == 0){ // negative speed spinning backward
     realspeed *= -1;
 	}
   lastcommutate = millis;
-  if (dir == 1){
+  if (realdir == 1){
     iOdom++;
   }else{
     iOdom--;

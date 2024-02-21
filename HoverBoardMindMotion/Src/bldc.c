@@ -141,14 +141,15 @@ void speedupdate(){
 	if(poweron>127){
 		RemoteUpdate();	
 		avgspeed();//speed filter prevent oscilation
-		if(millis-lastcommutate>500){//zero out speed
+		if(millis-lastcommutate>250){//zero out speed
 			realspeed=0;
 			frealspeed=0;
 		}	
 		if(CONSTSPEED){	
-			pwm= PID2PWM((PID(speed,frealspeed)/50));// command the required RPM
+			pwm= PID2PWM((PID(speed,realspeed)/50));// command the required RPM
 			if(speed==0){
 				pwm=0;
+				PIDrst();
 			}
 		}else{
 			pwm=speed*PWM_RES/1000;//1000~-1000 for all pwm resolution
