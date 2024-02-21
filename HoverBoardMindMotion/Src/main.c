@@ -45,25 +45,25 @@ extern modes_t mode;
 extern uint8_t init;
 extern uint8_t wait;
 float vcc;
-extern uint32_t pins[33][3];
-extern uint32_t adcs[10][3];
+extern MM32GPIO pins[PINCOUNT];
+extern MM32ADC adcs[ADCCOUNT];
 
 s32 main(void){	
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOA, ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOB, ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOC, ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOD, ENABLE);
-	pinstorage[14] = 17;    //serial tx rx is used,do not modify
-	pinstorage[15] = 19;
+	TXPIN = 17;    //serial tx rx is used,do not modify
+	RXPIN = 19;
 	DELAY_Init();    //delay needed in autodetect
 	BLDC_init();    //motor pin is always the same so initialize it first
-	TIM1_init(PWM_RES, 0);
-	UARTX_Init(BAUD);    //uart used for autodetect, only 4 possible pin combination on uart1
+	TIM1_init(PWM_RES_AD, 0);
+	UARTX_Init(BAUD_AD);    //uart used for autodetect, only 4 possible pin combination on uart1
 	exNVIC_Configure(DMA1_Channel2_3_IRQn, 0, 0);
 	DMA_NVIC_Config(DMA1_Channel3, (u32)&UART1->RDR, (u32)sRxBuffer, 1);
 	if(restorecfg()){
-		if(pinstorage[10]<33){
-			pinMode(pins[pinstorage[10]][0],pins[pinstorage[10]][1],GPIO_Mode_IPU);
+		if(LATCHPIN<PINCOUNT){
+			pinMode(LATCHPIN,INPUT_PULLUP);
 			masterslave = 1;
 		}
 	}else{

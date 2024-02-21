@@ -5,7 +5,6 @@
 ".\objects\initialize.o"
 ".\objects\interrupt.o"
 ".\objects\uart.o"
-".\objects\remoteuartbus.o"
 ".\objects\calculation.o"
 ".\objects\autodetect.o"
 ".\objects\hardware.o"

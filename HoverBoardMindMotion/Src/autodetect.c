@@ -13,8 +13,8 @@
 #include "../Inc/pinout.h"
 #include "math.h"
 
-extern uint32_t pins[33][3];
-extern uint32_t adcs[10][3];
+extern MM32GPIO pins[PINCOUNT];
+extern MM32ADC adcs[ADCCOUNT];
 extern uint32_t millis;
 modes_t mode=0;
 uint8_t test;
@@ -49,23 +49,23 @@ uint8_t address;
 uint16_t data;
 uint8_t stage;
 
-uint8_t hallA[33];
-uint8_t hallB[33];
-uint8_t hallC[33];
+uint8_t hallA[PINCOUNT];
+uint8_t hallB[PINCOUNT];
+uint8_t hallC[PINCOUNT];
 extern uint16_t pinstorage[64];    
 //0:halla,1:hallb,2:hallc,3:ledr,4:ledg,5:ledb,6:ledup,7:leddown,8:buzzer,9:button,10:selfhold,11:charger,12:vbat,13:itotal,14:tx,15:rx,16:iphasea,17:iphaseb,18:iphasec,19~22:reserved,23:OCP,24:OCP ref,25:IR_L,26:IR_R,27:serial2tx,28:serial2rx,29~31:reserved,32:0XDCBA,33:vbat divider,34:itotal divider,35:iphase divider,36:baud,37:pwm resolution,38:slave ID,39:windings,40:invert lowside,41:soft current limit,42:hard limit awdg,43:UART,44:pid,45:bat 100%,46:bat0%,47:serial timeout,48~64:reserved 
 uint16_t prevpinstorage[64];    
 
 uint8_t banner[]={0X20,0X20,0X5F,0X20,0X20,0X20,0X5F,0X20,0X20,0X5F,0X5F,0X5F,0X5F,0X5F,0X20,0X20,0X20,0X20,0X20,0X5F,0X5F,0X5F,0X5F,0X5F,0X5F,0X5F,0X20,0X5F,0X5F,0X5F,0X5F,0X20,0X20,0X20,0X20,0X5F,0X20,0X20,0X20,0X5F,0X20,0X20,0X20,0X20,0X5F,0X20,0X20,0X20,0X20,0X5F,0X5F,0X5F,0X5F,0X20,0X5F,0X20,0X20,0X5F,0X5F,0X20,0X5F,0X5F,0X20,0X20,0X20,0X20,0X20,0X5F,0X5F,0X5F,0X5F,0X5F,0X5F,0X20,0X20,0X0A,0X0D,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X2F,0X20,0X5F,0X20,0X5C,0X20,0X5C,0X20,0X20,0X20,0X2F,0X20,0X2F,0X20,0X5F,0X5F,0X5F,0X5F,0X7C,0X20,0X20,0X5F,0X20,0X5C,0X20,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X20,0X2F,0X20,0X5C,0X20,0X20,0X2F,0X20,0X5F,0X5F,0X5F,0X7C,0X20,0X7C,0X2F,0X20,0X2F,0X20,0X5C,0X20,0X5C,0X20,0X20,0X20,0X2F,0X20,0X2F,0X5F,0X5F,0X5F,0X20,0X5C,0X20,0X0A,0X0D,0X20,0X7C,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X5C,0X20,0X5C,0X20,0X2F,0X20,0X2F,0X7C,0X20,0X20,0X5F,0X7C,0X20,0X7C,0X20,0X7C,0X5F,0X29,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X20,0X2F,0X20,0X5F,0X20,0X5C,0X7C,0X20,0X7C,0X20,0X20,0X20,0X7C,0X20,0X27,0X20,0X2F,0X20,0X20,0X20,0X5C,0X20,0X5C,0X20,0X2F,0X20,0X2F,0X20,0X20,0X5F,0X5F,0X29,0X20,0X7C,0X0A,0X0D,0X20,0X7C,0X20,0X20,0X5F,0X20,0X20,0X7C,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X5C,0X20,0X56,0X20,0X2F,0X20,0X7C,0X20,0X7C,0X5F,0X5F,0X5F,0X7C,0X20,0X20,0X5F,0X20,0X3C,0X20,0X20,0X7C,0X20,0X20,0X5F,0X20,0X20,0X7C,0X2F,0X20,0X5F,0X5F,0X5F,0X20,0X5C,0X20,0X7C,0X5F,0X5F,0X5F,0X7C,0X20,0X2E,0X20,0X5C,0X20,0X20,0X20,0X20,0X5C,0X20,0X56,0X20,0X2F,0X20,0X20,0X2F,0X20,0X5F,0X5F,0X2F,0X20,0X0A,0X0D,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X5F,0X7C,0X5C,0X5F,0X5F,0X5F,0X2F,0X20,0X20,0X5C,0X5F,0X2F,0X20,0X20,0X7C,0X5F,0X5F,0X5F,0X5F,0X5F,0X7C,0X5F,0X7C,0X20,0X5C,0X5F,0X5C,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X5F,0X2F,0X5F,0X2F,0X20,0X20,0X20,0X5C,0X5F,0X5C,0X5F,0X5F,0X5F,0X5F,0X7C,0X5F,0X7C,0X5C,0X5F,0X5C,0X20,0X20,0X20,0X20,0X5C,0X5F,0X2F,0X20,0X20,0X7C,0X5F,0X5F,0X5F,0X5F,0X5F,0X7C,0X0A,0X0D,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X0A,0X0D,0X0A,0X0D};
-uint8_t PXX[33][4]={"PA0 ","PA1 ","PA2 ","PA3 ","PA4 ","PA5 ","PA6 ","PA7 ","PA11","PA12","PA13","PA14","PA15","PB0 ","PB1 ","PB2 ","PB3 ","PB4 ","PB5 ","PB6 ","PB7 ","PB8 ","PB9 ","PB10","PB11","PB12","PC13","PC14","PC15","PD0 ","PD1 ","PD2 ","PD3 "};
+char PXX[PINCOUNT][5]={"PA0\0","PA1\0","PA2\0","PA3\0","PA4\0","PA5\0","PA6\0","PA7\0","PA11\0","PA12\0","PA13\0","PA14\0","PA15\0","PB0\0","PB1\0","PB2\0","PB3\0","PB4\0","PB5\0","PB6\0","PB7\0","PB8\0","PB9\0","PB10\0","PB11\0","PB12\0","PC13\0","PC14\0","PC15\0","PD0\0","PD1\0","PD2\0","PD3\0"};
 
 	
 void autoDetectInit();
 
 void selfhold(){
-	for(uint8_t i=0;i<33;i++){
+	for(uint8_t i=0;i<PINCOUNT;i++){
 		if(!used(i)){
-			pinMode(pins[i][0],pins[i][1],GPIO_Mode_IPU);    //pull up insted of output high to protect micro controller
+			pinMode(i,INPUT_PULLUP);    //pull up insted of output high to protect micro controller
 		}
 	}
 }
@@ -75,16 +75,16 @@ uint8_t detectSelfHold(){
 	ADC_SoftwareStartConvCmd(ADC1, ENABLE);
 	DELAY_Ms(100);    //wait for adc stablize
 	uint8_t havelatch=0;
-	for(uint8_t i=0;i<33;i++){
+	for(uint8_t i=0;i<PINCOUNT;i++){
 		if(!used(i)){
 			uint32_t timeout = millis+50;    //10ms not enough for capacitor to discharge
-			uint32_t treshold = (uint16_t)ADC1->CH15DR+10;
-			pinMode(pins[i][0],pins[i][1],GPIO_Mode_FLOATING);    //release latch
+			uint32_t treshold = (uint16_t)ADC1->CH15DR+10;    //refrence is very stable, 10 is enough to detect change(0.05v drop)
+			pinMode(i,INPUT);    //release latch
 			while(1){
 				tmp = (uint16_t)ADC1->CH15DR;
 				if(tmp>treshold){
-					pinMode(pins[i][0],pins[i][1],GPIO_Mode_IPU);    //set it back quickly
-					pinstorage[10] = i;    //save the pin
+					pinMode(i,INPUT_PULLUP);    //set it back quickly
+					LATCHPIN = i;    //save the pin
 					havelatch=1;
 					DELAY_Ms(10);    //capacitor charge back up
 				}
@@ -101,8 +101,8 @@ uint8_t detectSelfHold(){
 	
 	
 uint8_t used(uint8_t pin){
-	for(uint8_t j=0;j<16;j++){
-		if(pinstorage[j]==pin){
+	for(uint8_t i=0;i<16;i++){
+		if(pinstorage[i]==pin){
 			return 1;    //pin already used
 		}
 	}
@@ -166,7 +166,7 @@ void autoDetectSerialIt(){    //serial dma interrupt
 				case '9':    //(9)-Power off.
 					if(masterslave){
 						UART_SendString("Thanks for choosing my firmware,goodbye.");
-						pinMode(pins[pinstorage[10]][0],pins[pinstorage[10]][1],GPIO_Mode_FLOATING);
+						pinMode(LATCHPIN,INPUT);
 					}else{
 						UART_SendString("I'm a Slave board.");
 					}
@@ -199,9 +199,9 @@ void autoDetectSerialIt(){    //serial dma interrupt
 					}else{
 						saveNexit();
 					}
-					for(uint8_t i=0;i<33;i++){
+					for(uint8_t i=0;i<PINCOUNT;i++){
 						if(!used(i)){
-							pinMode(pins[i][0],pins[i][1],GPIO_Mode_FLOATING);    //turn all pins back off after leaving
+							pinMode(i,INPUT);    //turn all pins back off after leaving
 						}
 					}
 				break;
@@ -212,42 +212,42 @@ void autoDetectSerialIt(){    //serial dma interrupt
 				case 'u':
 				case 'l':
 				case 'z':
-					pinMode(pins[selpin][0],pins[selpin][1],sRxBuffer[0]=='w' ? GPIO_Mode_IPU : GPIO_Mode_FLOATING);
+					pinMode(selpin, sRxBuffer[0]=='w' ? INPUT_PULLUP : INPUT);
 					//if pin is saved turn it off, if its not left it on so easy to see what led is still left
 					switch(sRxBuffer[0]){
 						case 'r':
-							pinstorage[3]=selpin;
+							LEDRPIN=selpin;
 							UART_SendString("\r\nLEDR:");
-							UART_Send_Group(&PXX[selpin][0],4);
+							UART_SendString(&PXX[selpin][0]);
 						break;
 						case 'g':
-							pinstorage[4]=selpin;
+							LEDGPIN=selpin;
 							UART_SendString("\r\nLEDG:");
-							UART_Send_Group(&PXX[selpin][0],4);
+							UART_SendString(&PXX[selpin][0]);
 						break;
 						case 'b':
-							pinstorage[5]=selpin;
+							LEDBPIN=selpin;
 							UART_SendString("\r\nLEDB:");
-							UART_Send_Group(&PXX[selpin][0],4);
+							UART_SendString(&PXX[selpin][0]);
 						break;
 						case 'u':
-							pinstorage[6]=selpin;
+							LEDUPIN=selpin;
 							UART_SendString("\r\nUpper LED:");
-							UART_Send_Group(&PXX[selpin][0],4);
+							UART_SendString(&PXX[selpin][0]);
 						break;
 						case 'l':
-							pinstorage[7]=selpin;
+							LEDDPIN=selpin;
 							UART_SendString("\r\nLower LED:");
-							UART_Send_Group(&PXX[selpin][0],4);
+							UART_SendString(&PXX[selpin][0]);
 						break;
 						case 'z':
-							pinstorage[8]=selpin;
+							BUZZERPIN=selpin;
 							UART_SendString("\r\nBuzzer:");
-							UART_Send_Group(&PXX[selpin][0],4);
+							UART_SendString(&PXX[selpin][0]);
 						break;
 					}
 					do{
-						if(selpin==32){
+						if(selpin==PINCOUNT-1){
 							selpin=0;
 						}else{
 							selpin++;
@@ -255,10 +255,10 @@ void autoDetectSerialIt(){    //serial dma interrupt
 					}while(used(selpin));    //find next unused pin
 				break;
 				case 's':
-					pinMode(pins[selpin][0],pins[selpin][1],GPIO_Mode_IPU);
+					pinMode(selpin,INPUT_PULLUP);
 					do{
 						if(selpin==0){
-							selpin=32;
+							selpin=PINCOUNT-1;
 						}else{
 							selpin--;
 						}
@@ -273,14 +273,15 @@ void autoDetectSerialIt(){    //serial dma interrupt
 					init=1;
 					sTimingDelay=0;
 				}else{
+					sTimingDelay=0;
 					saveNexit();
 				}
 			}else if(sRxBuffer[0]=='f'){
 				showalladc=!showalladc;    //toggle extreme value filtering
 			}else if(sRxBuffer[0]>='0'&&sRxBuffer[0]<='9'){    //number pressed
-				pinstorage[12]=adcs[sRxBuffer[0]-'0'][0];    //save pin
+				VBATPIN=adcs[sRxBuffer[0]-'0'].io;    //save pin
 				UART_SendString("\r\nVBAT:");
-				UART_Send_Group(&PXX[pinstorage[12]][0],4);
+				UART_SendString(&PXX[VBATPIN][0]);
 			}
 			break;
 			case MODE_BUTTON :
@@ -444,68 +445,68 @@ void simhallupdate(){
 			step=i;    //sensorless drive
 			commutate();
 			DELAY_Ms(30);
-			for(uint8_t i=0;i<33;i++){
+			for(uint8_t i=0;i<PINCOUNT;i++){
 				if(!used(i)){    //check every possible pin
 					switch (step){
 						case 1:    //if current state does not match what it should,remove from possible pins list
-							hallA[i]=!digitalRead(pins[i][0],pins[i][1])&&hallA[i];
-							hallB[i]=digitalRead(pins[i][0],pins[i][1])&&hallB[i];
-							hallC[i]=digitalRead(pins[i][0],pins[i][1])&&hallC[i];
+							hallA[i]=!digitalRead(i)&&hallA[i];
+							hallB[i]=digitalRead(i)&&hallB[i];
+							hallC[i]=digitalRead(i)&&hallC[i];
 						break;
 						case 2:    //if a pin have been removed not add it back in next step
-							hallA[i]=!digitalRead(pins[i][0],pins[i][1])&&hallA[i];
-							hallB[i]=!digitalRead(pins[i][0],pins[i][1])&&hallB[i];
-							hallC[i]=digitalRead(pins[i][0],pins[i][1])&&hallC[i];
+							hallA[i]=!digitalRead(i)&&hallA[i];
+							hallB[i]=!digitalRead(i)&&hallB[i];
+							hallC[i]=digitalRead(i)&&hallC[i];
 						break;
 						case 3:
-							hallA[i]=digitalRead(pins[i][0],pins[i][1])&&hallA[i];
-							hallB[i]=!digitalRead(pins[i][0],pins[i][1])&&hallB[i];
-							hallC[i]=digitalRead(pins[i][0],pins[i][1])&&hallC[i];
+							hallA[i]=digitalRead(i)&&hallA[i];
+							hallB[i]=!digitalRead(i)&&hallB[i];
+							hallC[i]=digitalRead(i)&&hallC[i];
 						break;
 						case 4:
-							hallA[i]=digitalRead(pins[i][0],pins[i][1])&&hallA[i];
-							hallB[i]=!digitalRead(pins[i][0],pins[i][1])&&hallB[i];
-							hallC[i]=!digitalRead(pins[i][0],pins[i][1])&&hallC[i];
+							hallA[i]=digitalRead(i)&&hallA[i];
+							hallB[i]=!digitalRead(i)&&hallB[i];
+							hallC[i]=!digitalRead(i)&&hallC[i];
 						break;
 						case 5:
-							hallA[i]=digitalRead(pins[i][0],pins[i][1])&&hallA[i];
-							hallB[i]=digitalRead(pins[i][0],pins[i][1])&&hallB[i];
-							hallC[i]=!digitalRead(pins[i][0],pins[i][1])&&hallC[i];
+							hallA[i]=digitalRead(i)&&hallA[i];
+							hallB[i]=digitalRead(i)&&hallB[i];
+							hallC[i]=!digitalRead(i)&&hallC[i];
 						break;
 						case 6:
-							hallA[i]=!digitalRead(pins[i][0],pins[i][1])&&hallA[i];
-							hallB[i]=digitalRead(pins[i][0],pins[i][1])&&hallB[i];
-							hallC[i]=!digitalRead(pins[i][0],pins[i][1])&&hallC[i];
+							hallA[i]=!digitalRead(i)&&hallA[i];
+							hallB[i]=digitalRead(i)&&hallB[i];
+							hallC[i]=!digitalRead(i)&&hallC[i];
 						break;
 					}
 				}
 			}
 		}
 		
-		for(uint8_t i=0;i<33;i++){
+		for(uint8_t i=0;i<PINCOUNT;i++){
 			if(hallA[i]){
 				pinstorage[0]=i;    //save and print found pin
 				UART_SendString("\r\nHALLA:");
-				UART_Send_Group(&PXX[i][0],4);
+				UART_SendString(&PXX[i][0]);
 			}
 			if(hallB[i]){
 				pinstorage[1]=i;
 				UART_SendString("\r\nHALLB:");
-				UART_Send_Group(&PXX[i][0],4);
+				UART_SendString(&PXX[i][0]);
 			}
 			if(hallC[i]){
 				pinstorage[2]=i;
 				UART_SendString("\r\nHALLC:");
-				UART_Send_Group(&PXX[i][0],4);
+				UART_SendString(&PXX[i][0]);
 			}
 			
 		}
-		for(uint8_t i=0;i<33;i++){    //everything is possible
+		for(uint8_t i=0;i<PINCOUNT;i++){    //everything is possible
 			hallA[i] = 1;
 			hallB[i] = 1;
 			hallC[i] = 1;
 		}
-		for(uint8_t i=0;i<33;i++){    //remove used pins from possible pins
+		for(uint8_t i=0;i<PINCOUNT;i++){    //remove used pins from possible pins
 			if(used(i)){
 				hallA[i]=0;
 				hallB[i]=0;
@@ -598,12 +599,12 @@ void autoDetectInit(){
 				TIM1->CCR1=4000;    //spin motor at 50% pwm
 				TIM1->CCR2=4000;
 				TIM1->CCR3=4000;
-				for(uint8_t i=0;i<33;i++){
+				for(uint8_t i=0;i<PINCOUNT;i++){
 					hallA[i] = 1;
 					hallB[i] = 1;
 					hallC[i] = 1;
 				}
-				for(uint8_t i=0;i<33;i++){    //remove used pins from hall array
+				for(uint8_t i=0;i<PINCOUNT;i++){    //remove used pins from hall array
 					if(used(i)){
 						hallA[i]=0;
 						hallB[i]=0;
@@ -619,9 +620,9 @@ void autoDetectInit(){
 		break;
 		case MODE_LED :
 			UART_SendString("\n\rAll pins will be set high, the selected pin will blink, the already saved pins will remain off. If a LED does not light up, it is broken.\r\npress W to go to next pin\r\npress S to go to previous pin\n\rPress R to save as red LED\r\nPress G to save as green LED\r\nPress B to save as blue LED(or orange on some board)\r\nPress U to save as upper LED\r\nPress L to save as lower LED\r\npress Enter to go back to main menu\r\n");
-			for(uint8_t i=0;i<33;i++){
+			for(uint8_t i=0;i<PINCOUNT;i++){
 				if(!used(i)){
-					pinMode(pins[i][0],pins[i][1],GPIO_Mode_IPU);
+					pinMode(i,INPUT_PULLUP);
 				}
 			}
 			selpin=0;
@@ -638,10 +639,10 @@ void autoDetectInit(){
 			step=0;    //close all low side mosfet to prevent reading phase current
 			commutate();
 			ADCALL_Init();    //enable every adc pins to be scanned at same time
-			for(uint8_t i=0;i<10;i++){
-				if(!used(adcs[i][0])){    //coresponding gpio is free
-					ADC_RegularChannelConfig(ADC1, adcs[i][1], 0, ADC_SampleTime_7_5Cycles);
-					pinMode(pins[adcs[i][0]][0],pins[adcs[i][0]][1],GPIO_Mode_AIN);
+			for(uint8_t i=0;i<ADCCOUNT;i++){
+				if(!used(adcs[i].io)){    //coresponding gpio is free
+					ADC_RegularChannelConfig(ADC1, adcs[i].channel, 0, ADC_SampleTime_7_5Cycles);
+					pinMode(adcs[i].io,INPUT_ADC);
 					adcleft[i]=1;
 				}else{
 					adcleft[i]=0;
@@ -651,9 +652,9 @@ void autoDetectInit(){
 		break;
 		case MODE_BUTTON :
 			UART_SendString("\r\nPress and release power button once to detect automaticly\r\nIf button press is not registered,press E to enable fix, the board may acidently power off\r\npress Enter to return to main menu\r\n");
-			for(uint8_t i=0;i<33;i++){
+			for(uint8_t i=0;i<PINCOUNT;i++){
 				if(!used(i)){
-					hallA[i]=digitalRead(pins[i][0],pins[i][1]);    //hall array reused to detect change in io state for button
+					hallA[i]=digitalRead(i);    //hall array reused to detect change in io state for button
 				}
 			}
 		break;
@@ -671,9 +672,9 @@ void autoDetectInit(){
 			TIM1->CCR2=0;
 			TIM1->CCR3=0;
 			testrotatespeed=0;
-			pinMode(pins[pinstorage[0]][0],pins[pinstorage[0]][1],GPIO_Mode_FLOATING);    //hall sensor floating input
-			pinMode(pins[pinstorage[1]][0],pins[pinstorage[1]][1],GPIO_Mode_FLOATING);
-			pinMode(pins[pinstorage[2]][0],pins[pinstorage[2]][1],GPIO_Mode_FLOATING);
+			pinMode(HALLAPIN,INPUT);    //hall sensor floating input
+			pinMode(HALLBPIN,INPUT);
+			pinMode(HALLCPIN,INPUT);
 		break;
 		case MODE_SAVE :
 			UART_SendString("\r\nChanges were made to the configurations, do you want to save it permanantly?Y/N\r\n>");
@@ -683,7 +684,7 @@ void autoDetectInit(){
 	
 void blinkLEDupdate(){
 	if(millis-lastblink>200){
-		pinMode(pins[selpin][0],pins[selpin][1],blinkstate ? GPIO_Mode_IPU : GPIO_Mode_IPD);    //toggle pullup pulldown to blink
+		pinMode(selpin,blinkstate ? INPUT : INPUT_PULLUP);    //toggle pullup pulldown to blink
 		blinkstate=!blinkstate;
 		lastblink=millis;
 	}
@@ -692,14 +693,14 @@ void blinkLEDupdate(){
 	
 
 void printvoltage(){
-	for(uint8_t i=0;i<10;i++){
+	for(uint8_t i=0;i<ADCCOUNT;i++){
 		if(adcleft[i]){
-			float vbattmp = (double)analogRead(adcs[i][2])*vcc*31/4096;    //auto calibrate for 5v and 3.3v board
+			float vbattmp = (double)analogRead(adcs[i].io)*vcc*31/4096;    //auto calibrate for 5v and 3.3v board
 			if(showalladc||(vbattmp>20&&vbattmp<45)){    //max battery voltage is 42v and some tollarance 45v, 20v is needed for gate driver to work
 				char buffer[32];
 				sprintf(&buffer[0],"%i->",i);
 				UART_SendString(&buffer[0]);
-				UART_Send_Group(&PXX[adcs[i][0]][0],4);
+				UART_SendString(&PXX[adcs[i].io][0]);
 				sprintf(&buffer[0],":%fV\n\r",vbattmp);
 				UART_SendString(&buffer[0]);
 			}
@@ -712,27 +713,27 @@ void printvoltage(){
 	
 void checkbutton(){
 	if(doinloop){    //workaround
-		pinstorage[9]=pinstorage[10];    //the current latch pin is actually buttonpin, so swap it
-		pinstorage[10]=255;
-		pinMode(pins[pinstorage[9]][0],pins[pinstorage[9]][1],GPIO_Mode_FLOATING);    //release fake latch pin
+		BUTTONPIN=LATCHPIN;    //the current latch pin is actually buttonpin, so swap it
+		LATCHPIN=255;
+		pinMode(BUTTONPIN,INPUT);    //release fake latch pin
 		selfhold();    //detect self hold again with remaining pin
 		masterslave = detectSelfHold();
 		if(masterslave){
 			UART_SendString("\r\nButton:");
-			UART_Send_Group(&PXX[pinstorage[9]][0],4);
+			UART_SendString(&PXX[BUTTONPIN][0]);
 			UART_SendString("\r\nLatch:");
-			UART_Send_Group(&PXX[pinstorage[10]][0],4);
+			UART_SendString(&PXX[LATCHPIN][0]);
 		}else{
 			UART_SendString("Workaround failed");
 		}
 		doinloop=0;
 	}else{
-		for(uint8_t i=0;i<33;i++){
+		for(uint8_t i=0;i<PINCOUNT;i++){
 			if(!used(i)){
-				if(!hallA[i]&&digitalRead(pins[i][0],pins[i][1])){    //pin start as low and state changed to high
-					pinstorage[9]=i;
+				if(!hallA[i]&&digitalRead(i)){    //pin start as low and state changed to high
+					BUTTONPIN=i;
 					UART_SendString("\r\nButton:");
-					UART_Send_Group(&PXX[i][0],4);
+					UART_SendString(&PXX[i][0]);
 				}
 			}
 		}
@@ -743,7 +744,7 @@ void checkbutton(){
 uint8_t restorecfg(){
 	uint16_t tmp[64];
 	EEPROM_Read((u8*)tmp, 2 * 64);
-	if(tmp[32]==0xDCAB){    //verify config is valid
+	if(tmp[MAGICNUM_POS]==MAGIC_NUMBER){    //verify config is valid
 		for(uint8_t i=0;i<64;i++){
 			pinstorage[i]=tmp[i];
 		}

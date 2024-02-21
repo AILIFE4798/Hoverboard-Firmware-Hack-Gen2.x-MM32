@@ -415,11 +415,6 @@
               <FilePath>.\Src\uart.c</FilePath>
             </File>
             <File>
-              <FileName>remoteUartBus.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Src\remoteUartBus.c</FilePath>
-            </File>
-            <File>
               <FileName>calculation.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Src\calculation.c</FilePath>
@@ -473,11 +468,6 @@
               <FileName>pinout.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Inc\pinout.h</FilePath>
-            </File>
-            <File>
-              <FileName>remoteUartBus.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Inc\remoteUartBus.h</FilePath>
             </File>
             <File>
               <FileName>uart.h</FileName>

@@ -25,7 +25,7 @@ uint8_t hallpos(uint8_t dir);
 bool lastdir=0;
 extern uint8_t poweron;
 extern uint16_t pinstorage[64];
-extern uint32_t pins[33][3];
+extern MM32GPIO pins[PINCOUNT];
 
 
 const uint8_t hall_to_pos[8] =
@@ -49,9 +49,9 @@ uint8_t hallpos(uint8_t dir){
 	uint8_t HallC;
 	uint8_t HallValue;
 	
-	HallA = digitalRead(pins[pinstorage[0]][0],pins[pinstorage[0]][1]);
-	HallB = digitalRead(pins[pinstorage[1]][0],pins[pinstorage[1]][1]);
-	HallC = digitalRead(pins[pinstorage[2]][0],pins[pinstorage[2]][1]);
+	HallA = digitalRead(HALLAPIN);
+	HallB = digitalRead(HALLBPIN);
+	HallC = digitalRead(HALLCPIN);
 	
 	if(dir == 1)
 	{
@@ -138,55 +138,6 @@ void commutate(){
 
 
 
-
-void speedupdate(){
-	if(poweron>127){
-		#ifdef TESTROTATE	
-		if(millis-lasttestrotate>50){
-			speed+=2*testrotatedir; //keep changing speed
-			if(speed>300){    //reverse dir
-				testrotatedir=-1;
-			}
-			if(speed<-300){
-				testrotatedir=1;
-			}	
-			lasttestrotate=millis;
-		}
-			#ifndef HALLAPIN
-				speed=300;
-			#endif
-		#else	
-		#ifdef UARTEN
-		RemoteUpdate();
-		#endif
-		#endif
-		
-		avgspeed();//speed filter prevent oscilation
-		if(millis-lastcommutate>500){//zero out speed
-			realspeed=0;
-			frealspeed=0;
-		}	
-		#ifdef CONSTSPEED	
-		pwm= PID2PWM((PID(speed,frealspeed)/50));// command the required RPM
-		if(speed==0){
-			pwm=0;
-		}
-		#else
-		pwm=speed*PWM_RES/1000;//1000~-1000 for all pwm resolution
-		#endif
-		
-		if(pwm>0){
-		dir=1;
-		}else{
-		dir=0;
-		}
-
-		unsigned int abspeed=fabs((double)pwm);    // 4095~-4095
-		TIM1->CCR1=abspeed;
-		TIM1->CCR2=abspeed;
-		TIM1->CCR3=abspeed;
- }
-}
 
 
 
