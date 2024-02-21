@@ -48,7 +48,7 @@ int PID(int setpoint,int real){
 	}else if(qdSum <= min){
 		qdSum = (min);
 	}
-	Ui = qdSum;
+	Ui = qdSum/100;
 	Ud=(Error-lasterr)*Kd;
 	lasterr=Error;
 	qOut = Up + Ui + Ud;		

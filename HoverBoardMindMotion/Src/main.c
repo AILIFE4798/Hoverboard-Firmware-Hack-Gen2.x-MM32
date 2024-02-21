@@ -160,7 +160,7 @@ s32 main(void){
 		}
 		if(millis-lastflicker>700){//speed pid loop
 			flicker=!flicker;
-		  lastupdate=millis;
+		  lastflicker=millis;
 		}
 		if(LATCHPIN<PINCOUNT){
 			if(digitalRead(BUTTONPIN)){    //button press for shutdown
