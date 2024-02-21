@@ -18,6 +18,7 @@ uint8_t step=1;//very importatnt to set to 1 or it will not work
 uint32_t millis;
 uint32_t lastCommutation;
 uint32_t lastupdate;
+uint32_t lastflicker;
 uint32_t iOdom;
 bool uart;
 bool adc;
@@ -37,7 +38,7 @@ int frealspeed=0;
 uint8_t  wState;
 extern u32 SystemCoreClock;
 uint16_t pinstorage[64]={0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xDCAB, 31, 250, 0, 19200, 8192, 1, 30, 0, 10, 300, 1, 1, 42000, 32000, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-
+uint8_t flicker=0;
 
 s32 main(void){
 	DELAY_Init();
@@ -114,16 +115,53 @@ s32 main(void){
 	}
 	ADC_SoftwareStartConvCmd(ADC1, ENABLE);    //Software start conversion
 	UART_SendString("hello World\n\r");    //debug uart
+	uint16_t bat_0 = BAT_EMPTY;
+	uint16_t bat_10 = BAT_EMPTY+((float)(BAT_FULL-BAT_EMPTY)/100*10);
+	uint16_t bat_20 = BAT_EMPTY+((float)(BAT_FULL-BAT_EMPTY)/100*20);
+	uint16_t bat_50 = BAT_EMPTY+((float)(BAT_FULL-BAT_EMPTY)/100*50);
+	uint16_t bat_60 = BAT_EMPTY+((float)(BAT_FULL-BAT_EMPTY)/100*60);
+	uint16_t bat_70 = BAT_EMPTY+((float)(BAT_FULL-BAT_EMPTY)/100*70);
+	uint16_t bat_100 = BAT_FULL;
   while(1) {
-		digitalWrite(LEDRPIN,digitalRead(HALLAPIN));
-		digitalWrite(LEDGPIN,digitalRead(HALLBPIN));
-		digitalWrite(LEDBPIN,digitalRead(HALLCPIN));
-		
+		if(BAT_FULL>20&&BAT_FULL<100){
+			if(vbat>bat_70){
+				digitalWrite(LEDRPIN,0);
+				digitalWrite(LEDGPIN,1);
+				digitalWrite(LEDBPIN,0);
+			}else if(vbat>bat_60){
+				digitalWrite(LEDRPIN,0);
+				digitalWrite(LEDGPIN,1);
+				digitalWrite(LEDBPIN,1);
+			}else if(vbat>bat_50){
+				digitalWrite(LEDRPIN,0);
+				digitalWrite(LEDGPIN,1);
+				digitalWrite(LEDBPIN,0);	
+			}else if(vbat>bat_20){
+				digitalWrite(LEDRPIN,1);
+				digitalWrite(LEDGPIN,1);
+				digitalWrite(LEDBPIN,0);
+			}else if(vbat>bat_10){
+				digitalWrite(LEDRPIN,1);
+				digitalWrite(LEDGPIN,0);
+				digitalWrite(LEDBPIN,0);
+			}else{
+				digitalWrite(LEDRPIN,flicker);
+				digitalWrite(LEDGPIN,0);
+				digitalWrite(LEDBPIN,0);
+			}
+		}else{
+			digitalWrite(LEDRPIN,digitalRead(HALLAPIN));
+			digitalWrite(LEDGPIN,digitalRead(HALLBPIN));
+			digitalWrite(LEDBPIN,digitalRead(HALLCPIN));
+		}
 		if(millis-lastupdate>1){//speed pid loop
 			speedupdate();
 		  lastupdate=millis;
 		}
-		
+		if(millis-lastflicker>700){//speed pid loop
+			flicker=!flicker;
+		  lastflicker=millis;
+		}
 		if(LATCHPIN<PINCOUNT){
 			if(digitalRead(BUTTONPIN)){    //button press for shutdown
 				TIM1->CCR1=0;    //shut down motor

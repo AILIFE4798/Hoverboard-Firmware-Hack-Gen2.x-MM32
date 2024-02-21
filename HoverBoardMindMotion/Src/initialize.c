@@ -13,6 +13,7 @@ extern MM32GPIO pins[33];
 extern MM32UART1 uarts[4];
 extern MM32ADC adcs[10];
 extern MM32TIM23 halltims[18];
+extern MM32TIMBK ocps[4];
 
 
 //normal io
@@ -167,9 +168,9 @@ void TIM1_init(u16 arr, u16 psc){
 	TIM_BDTRInitStructure.TIM_LOCKLevel = TIM_LOCKLevel_OFF;
 	TIM_BDTRInitStructure.TIM_AutomaticOutput = TIM_AutomaticOutput_Enable;
 	TIM_BDTRConfig(TIM1, &TIM_BDTRInitStructure);
-	/*
 	if(!AWDG){
 		if(OCPREFPIN<PINCOUNT){
+			/*
 			RCC_APB2PeriphClockCmd(RCC_APB2ENR_COMP, ENABLE);
 			GPIO_InitTypeDef GPIO_InitStruct;
 			GPIO_InitStruct.GPIO_Mode = GPIO_Mode_AIN;
@@ -190,16 +191,16 @@ void TIM1_init(u16 arr, u16 psc){
 			COMP_InitStructure.COMP_Filter      			= COMP_Filter_4_Period;
 			COMP_Init(COMP1, &COMP_InitStructure);
 			COMP_Cmd(COMP1, ENABLE);
+			*/
 		}else{
-			GPIO_InitTypeDef GPIO_InitStruct;
-			GPIO_InitStruct.GPIO_Mode = GPIO_Mode_FLOATING;
-			GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
-			GPIO_InitStruct.GPIO_Pin = HARD_ILIMIT_PIN;
-			GPIO_Init(HARD_ILIMIT_PORT, &GPIO_InitStruct);
-			GPIO_PinAFConfig(HARD_ILIMIT_PORT, HARD_ILIMIT_PINSRC, HARD_ILIMIT_AF);
+			pinMode(OCPPIN, INPUT);
+			for(uint8_t i=0;i<TIMBKCOUNT;i++){
+				if(ocps[i].io==OCPPIN){
+					pinModeAF(OCPPIN, ocps[i].af);
+				}
+			}
 		}	
 	}
-	*/
 	TIM_Cmd(TIM1, ENABLE);
 }
 

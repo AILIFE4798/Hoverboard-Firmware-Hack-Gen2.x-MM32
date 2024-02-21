@@ -4,7 +4,7 @@
 /* |  _  | |_| |\ V / | |___|  _ <  |  _  |/ ___ \ |___| . \    \ V /  / __/ */
 /* |_| |_|\___/  \_/  |_____|_| \_\ |_| |_/_/   \_\____|_|\_\    \_/  |_____|*/
 /*                                                                           */
-//version 129 : added over discharge protection, fixed motor direction bug, retune PID
+//version 132 : PID retune(again)
 //file for setting custom pinout
 //pinout is for Layout2.8.1
 
