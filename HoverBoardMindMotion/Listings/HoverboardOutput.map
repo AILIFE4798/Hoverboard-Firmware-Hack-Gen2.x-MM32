@@ -2924,87 +2924,87 @@ Image Symbol Table
     [Anonymous Symbol]                       0x08004374   Section        0  bldc.o(.text.hallpos)
     __arm_cp.0_2                             0x080043d8   Number         4  bldc.o(.text.hallpos)
     [Anonymous Symbol]                       0x080043dc   Section        0  main.o(.text.main)
-    __arm_cp.0_0                             0x08004500   Number         4  main.o(.text.main)
-    __arm_cp.0_1                             0x08004504   Number         4  main.o(.text.main)
-    __arm_cp.0_2                             0x08004508   Number         4  main.o(.text.main)
-    __arm_cp.0_3                             0x0800450c   Number         4  main.o(.text.main)
-    __arm_cp.0_4                             0x08004510   Number         4  main.o(.text.main)
-    __arm_cp.0_5                             0x08004514   Number         4  main.o(.text.main)
-    __arm_cp.0_6                             0x08004518   Number         4  main.o(.text.main)
-    __arm_cp.0_7                             0x0800451c   Number         4  main.o(.text.main)
-    __arm_cp.0_9                             0x08004528   Number         4  main.o(.text.main)
-    [Anonymous Symbol]                       0x08004560   Section        0  hardware.o(.text.pinMode)
-    __arm_cp.0_0                             0x08004594   Number         4  hardware.o(.text.pinMode)
-    __arm_cp.0_1                             0x08004598   Number         4  hardware.o(.text.pinMode)
-    __arm_cp.0_2                             0x0800459c   Number         4  hardware.o(.text.pinMode)
-    __arm_cp.0_3                             0x080045a0   Number         4  hardware.o(.text.pinMode)
-    [Anonymous Symbol]                       0x080045a4   Section        0  autodetect.o(.text.printvoltage)
-    __arm_cp.7_0                             0x08004664   Number         4  autodetect.o(.text.printvoltage)
-    __arm_cp.7_1                             0x08004668   Number         4  autodetect.o(.text.printvoltage)
-    __arm_cp.7_2                             0x0800466c   Number         4  autodetect.o(.text.printvoltage)
-    __arm_cp.7_3                             0x08004670   Number         4  autodetect.o(.text.printvoltage)
-    __arm_cp.7_4                             0x08004674   Number         4  autodetect.o(.text.printvoltage)
-    __arm_cp.7_5                             0x08004678   Number         4  autodetect.o(.text.printvoltage)
-    __arm_cp.7_6                             0x0800467c   Number         4  autodetect.o(.text.printvoltage)
-    __arm_cp.7_7                             0x08004680   Number         4  autodetect.o(.text.printvoltage)
-    __arm_cp.7_9                             0x0800468c   Number         4  autodetect.o(.text.printvoltage)
-    [Anonymous Symbol]                       0x080046ac   Section        0  autodetect.o(.text.restorecfg)
-    __arm_cp.9_0                             0x080046dc   Number         4  autodetect.o(.text.restorecfg)
-    [Anonymous Symbol]                       0x080046e0   Section        0  autodetect.o(.text.saveNexit)
-    __arm_cp.11_0                            0x08004744   Number         4  autodetect.o(.text.saveNexit)
-    __arm_cp.11_1                            0x08004748   Number         4  autodetect.o(.text.saveNexit)
-    __arm_cp.11_2                            0x0800474c   Number         4  autodetect.o(.text.saveNexit)
-    __arm_cp.11_3                            0x08004750   Number         4  autodetect.o(.text.saveNexit)
-    __arm_cp.11_4                            0x08004754   Number         4  autodetect.o(.text.saveNexit)
-    [Anonymous Symbol]                       0x08004758   Section        0  autodetect.o(.text.selfhold)
-    __arm_cp.0_0                             0x080047a4   Number         4  autodetect.o(.text.selfhold)
-    [Anonymous Symbol]                       0x080047a8   Section        0  autodetect.o(.text.simhallupdate)
-    __arm_cp.4_0                             0x08004ac4   Number         4  autodetect.o(.text.simhallupdate)
-    __arm_cp.4_1                             0x08004ac8   Number         4  autodetect.o(.text.simhallupdate)
-    __arm_cp.4_2                             0x08004acc   Number         4  autodetect.o(.text.simhallupdate)
-    __arm_cp.4_3                             0x08004ad0   Number         4  autodetect.o(.text.simhallupdate)
-    __arm_cp.4_4                             0x08004ad4   Number         4  autodetect.o(.text.simhallupdate)
-    __arm_cp.4_5                             0x08004ad8   Number         4  autodetect.o(.text.simhallupdate)
-    __arm_cp.4_6                             0x08004adc   Number         4  autodetect.o(.text.simhallupdate)
-    [Anonymous Symbol]                       0x08004b04   Section        0  autodetect.o(.text.testrotateloop)
-    __arm_cp.10_0                            0x08004b54   Number         4  autodetect.o(.text.testrotateloop)
-    __arm_cp.10_1                            0x08004b58   Number         4  autodetect.o(.text.testrotateloop)
-    __arm_cp.10_2                            0x08004b5c   Number         4  autodetect.o(.text.testrotateloop)
-    __arm_cp.10_3                            0x08004b60   Number         4  autodetect.o(.text.testrotateloop)
-    __arm_cp.10_4                            0x08004b64   Number         4  autodetect.o(.text.testrotateloop)
-    [Anonymous Symbol]                       0x08004b68   Section        0  calculation.o(.text.updateMotorRPM)
-    __arm_cp.5_0                             0x08004b78   Number         4  calculation.o(.text.updateMotorRPM)
-    [Anonymous Symbol]                       0x08004b7c   Section        0  initialize.o(.text.vref_Init)
-    __arm_cp.12_0                            0x08004bcc   Number         4  initialize.o(.text.vref_Init)
-    .text_divfast                            0x08004bd0   Section      502  aeabi_sdivfast.o(.text_divfast)
-    i.__ARM_common_ll_muluu                  0x08004dc6   Section        0  btod.o(i.__ARM_common_ll_muluu)
-    i.__ARM_fpclassify                       0x08004df8   Section        0  fpclassify.o(i.__ARM_fpclassify)
-    i._fgeq                                  0x08004e24   Section        0  fcmp.o(i._fgeq)
-    i._fleq                                  0x08004e3a   Section        0  fcmp.o(i._fleq)
-    i._is_digit                              0x08004e54   Section        0  __printf_wp.o(i._is_digit)
-    locale$$code                             0x08004e64   Section       44  lc_numeric_c.o(locale$$code)
-    x$fpl$fgeqf                              0x08004e90   Section       84  fgef.o(x$fpl$fgeqf)
-    x$fpl$fleqf                              0x08004ee4   Section       84  flef.o(x$fpl$fleqf)
-    x$fpl$printf1                            0x08004f38   Section       16  printf1.o(x$fpl$printf1)
-    uc_hextab                                0x08004f48   Data          20  _printf_hex_int.o(.constdata)
-    .constdata                               0x08004f48   Section       40  _printf_hex_int.o(.constdata)
-    x$fpl$usenofp                            0x08004f48   Section        0  usenofp.o(x$fpl$usenofp)
-    lc_hextab                                0x08004f5c   Data          20  _printf_hex_int.o(.constdata)
-    maptable                                 0x08004f70   Data          17  __printf_flags_wp.o(.constdata)
-    .constdata                               0x08004f70   Section       17  __printf_flags_wp.o(.constdata)
-    ddiv_reciptbl                            0x08004f81   Data         128  ddiv.o(.constdata)
-    .constdata                               0x08004f81   Section      128  ddiv.o(.constdata)
-    tenpwrs_x                                0x08005004   Data          60  bigflt0.o(.constdata)
-    .constdata                               0x08005004   Section      148  bigflt0.o(.constdata)
-    tenpwrs_i                                0x08005040   Data          64  bigflt0.o(.constdata)
-    [Anonymous Symbol]                       0x080052a4   Section        0  autodetect.o(.rodata.str1.1)
-    locale$$data                             0x08005ecc   Section       28  lc_numeric_c.o(locale$$data)
-    __lcnum_c_name                           0x08005ed0   Data           2  lc_numeric_c.o(locale$$data)
-    __lcnum_c_start                          0x08005ed8   Data           0  lc_numeric_c.o(locale$$data)
-    __lcnum_c_point                          0x08005ee4   Data           0  lc_numeric_c.o(locale$$data)
-    __lcnum_c_thousands                      0x08005ee6   Data           0  lc_numeric_c.o(locale$$data)
-    __lcnum_c_grouping                       0x08005ee7   Data           0  lc_numeric_c.o(locale$$data)
-    __lcnum_c_end                            0x08005ee8   Data           0  lc_numeric_c.o(locale$$data)
+    __arm_cp.0_0                             0x08004508   Number         4  main.o(.text.main)
+    __arm_cp.0_1                             0x0800450c   Number         4  main.o(.text.main)
+    __arm_cp.0_2                             0x08004510   Number         4  main.o(.text.main)
+    __arm_cp.0_3                             0x08004514   Number         4  main.o(.text.main)
+    __arm_cp.0_4                             0x08004518   Number         4  main.o(.text.main)
+    __arm_cp.0_5                             0x0800451c   Number         4  main.o(.text.main)
+    __arm_cp.0_6                             0x08004520   Number         4  main.o(.text.main)
+    __arm_cp.0_7                             0x08004524   Number         4  main.o(.text.main)
+    __arm_cp.0_9                             0x08004530   Number         4  main.o(.text.main)
+    [Anonymous Symbol]                       0x08004568   Section        0  hardware.o(.text.pinMode)
+    __arm_cp.0_0                             0x0800459c   Number         4  hardware.o(.text.pinMode)
+    __arm_cp.0_1                             0x080045a0   Number         4  hardware.o(.text.pinMode)
+    __arm_cp.0_2                             0x080045a4   Number         4  hardware.o(.text.pinMode)
+    __arm_cp.0_3                             0x080045a8   Number         4  hardware.o(.text.pinMode)
+    [Anonymous Symbol]                       0x080045ac   Section        0  autodetect.o(.text.printvoltage)
+    __arm_cp.7_0                             0x0800466c   Number         4  autodetect.o(.text.printvoltage)
+    __arm_cp.7_1                             0x08004670   Number         4  autodetect.o(.text.printvoltage)
+    __arm_cp.7_2                             0x08004674   Number         4  autodetect.o(.text.printvoltage)
+    __arm_cp.7_3                             0x08004678   Number         4  autodetect.o(.text.printvoltage)
+    __arm_cp.7_4                             0x0800467c   Number         4  autodetect.o(.text.printvoltage)
+    __arm_cp.7_5                             0x08004680   Number         4  autodetect.o(.text.printvoltage)
+    __arm_cp.7_6                             0x08004684   Number         4  autodetect.o(.text.printvoltage)
+    __arm_cp.7_7                             0x08004688   Number         4  autodetect.o(.text.printvoltage)
+    __arm_cp.7_9                             0x08004694   Number         4  autodetect.o(.text.printvoltage)
+    [Anonymous Symbol]                       0x080046b4   Section        0  autodetect.o(.text.restorecfg)
+    __arm_cp.9_0                             0x080046e4   Number         4  autodetect.o(.text.restorecfg)
+    [Anonymous Symbol]                       0x080046e8   Section        0  autodetect.o(.text.saveNexit)
+    __arm_cp.11_0                            0x0800474c   Number         4  autodetect.o(.text.saveNexit)
+    __arm_cp.11_1                            0x08004750   Number         4  autodetect.o(.text.saveNexit)
+    __arm_cp.11_2                            0x08004754   Number         4  autodetect.o(.text.saveNexit)
+    __arm_cp.11_3                            0x08004758   Number         4  autodetect.o(.text.saveNexit)
+    __arm_cp.11_4                            0x0800475c   Number         4  autodetect.o(.text.saveNexit)
+    [Anonymous Symbol]                       0x08004760   Section        0  autodetect.o(.text.selfhold)
+    __arm_cp.0_0                             0x080047ac   Number         4  autodetect.o(.text.selfhold)
+    [Anonymous Symbol]                       0x080047b0   Section        0  autodetect.o(.text.simhallupdate)
+    __arm_cp.4_0                             0x08004acc   Number         4  autodetect.o(.text.simhallupdate)
+    __arm_cp.4_1                             0x08004ad0   Number         4  autodetect.o(.text.simhallupdate)
+    __arm_cp.4_2                             0x08004ad4   Number         4  autodetect.o(.text.simhallupdate)
+    __arm_cp.4_3                             0x08004ad8   Number         4  autodetect.o(.text.simhallupdate)
+    __arm_cp.4_4                             0x08004adc   Number         4  autodetect.o(.text.simhallupdate)
+    __arm_cp.4_5                             0x08004ae0   Number         4  autodetect.o(.text.simhallupdate)
+    __arm_cp.4_6                             0x08004ae4   Number         4  autodetect.o(.text.simhallupdate)
+    [Anonymous Symbol]                       0x08004b0c   Section        0  autodetect.o(.text.testrotateloop)
+    __arm_cp.10_0                            0x08004b5c   Number         4  autodetect.o(.text.testrotateloop)
+    __arm_cp.10_1                            0x08004b60   Number         4  autodetect.o(.text.testrotateloop)
+    __arm_cp.10_2                            0x08004b64   Number         4  autodetect.o(.text.testrotateloop)
+    __arm_cp.10_3                            0x08004b68   Number         4  autodetect.o(.text.testrotateloop)
+    __arm_cp.10_4                            0x08004b6c   Number         4  autodetect.o(.text.testrotateloop)
+    [Anonymous Symbol]                       0x08004b70   Section        0  calculation.o(.text.updateMotorRPM)
+    __arm_cp.5_0                             0x08004b80   Number         4  calculation.o(.text.updateMotorRPM)
+    [Anonymous Symbol]                       0x08004b84   Section        0  initialize.o(.text.vref_Init)
+    __arm_cp.12_0                            0x08004bd4   Number         4  initialize.o(.text.vref_Init)
+    .text_divfast                            0x08004bd8   Section      502  aeabi_sdivfast.o(.text_divfast)
+    i.__ARM_common_ll_muluu                  0x08004dce   Section        0  btod.o(i.__ARM_common_ll_muluu)
+    i.__ARM_fpclassify                       0x08004e00   Section        0  fpclassify.o(i.__ARM_fpclassify)
+    i._fgeq                                  0x08004e2c   Section        0  fcmp.o(i._fgeq)
+    i._fleq                                  0x08004e42   Section        0  fcmp.o(i._fleq)
+    i._is_digit                              0x08004e5c   Section        0  __printf_wp.o(i._is_digit)
+    locale$$code                             0x08004e6c   Section       44  lc_numeric_c.o(locale$$code)
+    x$fpl$fgeqf                              0x08004e98   Section       84  fgef.o(x$fpl$fgeqf)
+    x$fpl$fleqf                              0x08004eec   Section       84  flef.o(x$fpl$fleqf)
+    x$fpl$printf1                            0x08004f40   Section       16  printf1.o(x$fpl$printf1)
+    uc_hextab                                0x08004f50   Data          20  _printf_hex_int.o(.constdata)
+    .constdata                               0x08004f50   Section       40  _printf_hex_int.o(.constdata)
+    x$fpl$usenofp                            0x08004f50   Section        0  usenofp.o(x$fpl$usenofp)
+    lc_hextab                                0x08004f64   Data          20  _printf_hex_int.o(.constdata)
+    maptable                                 0x08004f78   Data          17  __printf_flags_wp.o(.constdata)
+    .constdata                               0x08004f78   Section       17  __printf_flags_wp.o(.constdata)
+    ddiv_reciptbl                            0x08004f89   Data         128  ddiv.o(.constdata)
+    .constdata                               0x08004f89   Section      128  ddiv.o(.constdata)
+    tenpwrs_x                                0x0800500c   Data          60  bigflt0.o(.constdata)
+    .constdata                               0x0800500c   Section      148  bigflt0.o(.constdata)
+    tenpwrs_i                                0x08005048   Data          64  bigflt0.o(.constdata)
+    [Anonymous Symbol]                       0x080052ac   Section        0  autodetect.o(.rodata.str1.1)
+    locale$$data                             0x08005ed4   Section       28  lc_numeric_c.o(locale$$data)
+    __lcnum_c_name                           0x08005ed8   Data           2  lc_numeric_c.o(locale$$data)
+    __lcnum_c_start                          0x08005ee0   Data           0  lc_numeric_c.o(locale$$data)
+    __lcnum_c_point                          0x08005eec   Data           0  lc_numeric_c.o(locale$$data)
+    __lcnum_c_thousands                      0x08005eee   Data           0  lc_numeric_c.o(locale$$data)
+    __lcnum_c_grouping                       0x08005eef   Data           0  lc_numeric_c.o(locale$$data)
+    __lcnum_c_end                            0x08005ef0   Data           0  lc_numeric_c.o(locale$$data)
     .bss                                     0x200002f0   Section       96  libspace.o(.bss)
     Heap_Mem                                 0x20000640   Data         512  startup_mm32spin06xx_s_keil.o(HEAP)
     HEAP                                     0x20000640   Section      512  startup_mm32spin06xx_s_keil.o(HEAP)
@@ -3300,36 +3300,36 @@ Image Symbol Table
     exNVIC_Init                              0x08004311   Thumb Code    68  hal_misc.o(.text.exNVIC_Init)
     exRCC_APB2PeriphReset                    0x08004361   Thumb Code    16  hal_rcc.o(.text.exRCC_APB2PeriphReset)
     hallpos                                  0x08004375   Thumb Code   100  bldc.o(.text.hallpos)
-    main                                     0x080043dd   Thumb Code   292  main.o(.text.main)
-    pinMode                                  0x08004561   Thumb Code    52  hardware.o(.text.pinMode)
-    printvoltage                             0x080045a5   Thumb Code   192  autodetect.o(.text.printvoltage)
-    restorecfg                               0x080046ad   Thumb Code    48  autodetect.o(.text.restorecfg)
-    saveNexit                                0x080046e1   Thumb Code   100  autodetect.o(.text.saveNexit)
-    selfhold                                 0x08004759   Thumb Code    76  autodetect.o(.text.selfhold)
-    simhallupdate                            0x080047a9   Thumb Code   796  autodetect.o(.text.simhallupdate)
-    testrotateloop                           0x08004b05   Thumb Code    80  autodetect.o(.text.testrotateloop)
-    updateMotorRPM                           0x08004b69   Thumb Code    16  calculation.o(.text.updateMotorRPM)
-    vref_Init                                0x08004b7d   Thumb Code    80  initialize.o(.text.vref_Init)
-    __aeabi_uidiv                            0x08004bd1   Thumb Code    68  aeabi_sdivfast.o(.text_divfast)
-    __aeabi_idiv                             0x08004c15   Thumb Code   434  aeabi_sdivfast.o(.text_divfast)
-    __ARM_common_ll_muluu                    0x08004dc7   Thumb Code    48  btod.o(i.__ARM_common_ll_muluu)
-    __ARM_fpclassify                         0x08004df9   Thumb Code    40  fpclassify.o(i.__ARM_fpclassify)
-    __aeabi_fcmpge                           0x08004e25   Thumb Code     0  fcmp.o(i._fgeq)
-    _fgeq                                    0x08004e25   Thumb Code    22  fcmp.o(i._fgeq)
-    __aeabi_fcmple                           0x08004e3b   Thumb Code     0  fcmp.o(i._fleq)
-    _fleq                                    0x08004e3b   Thumb Code    26  fcmp.o(i._fleq)
-    _is_digit                                0x08004e55   Thumb Code    14  __printf_wp.o(i._is_digit)
-    _get_lc_numeric                          0x08004e65   Thumb Code    44  lc_numeric_c.o(locale$$code)
-    _fcmpge                                  0x08004e91   Thumb Code    78  fgef.o(x$fpl$fgeqf)
-    __aeabi_cfcmple                          0x08004ee5   Thumb Code     0  flef.o(x$fpl$fleqf)
-    _fcmple                                  0x08004ee5   Thumb Code    78  flef.o(x$fpl$fleqf)
-    _printf_fp_dec                           0x08004f39   Thumb Code    16  printf1.o(x$fpl$printf1)
-    __I$use$fp                               0x08004f48   Number         0  usenofp.o(x$fpl$usenofp)
-    adcs                                     0x08005098   Data         120  hardware.o(.rodata.adcs)
-    hall_to_pos                              0x08005110   Data           8  bldc.o(.rodata.hall_to_pos)
-    pins                                     0x08005118   Data         396  hardware.o(.rodata.pins)
-    Region$$Table$$Base                      0x08005eac   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08005ecc   Number         0  anon$$obj.o(Region$$Table)
+    main                                     0x080043dd   Thumb Code   300  main.o(.text.main)
+    pinMode                                  0x08004569   Thumb Code    52  hardware.o(.text.pinMode)
+    printvoltage                             0x080045ad   Thumb Code   192  autodetect.o(.text.printvoltage)
+    restorecfg                               0x080046b5   Thumb Code    48  autodetect.o(.text.restorecfg)
+    saveNexit                                0x080046e9   Thumb Code   100  autodetect.o(.text.saveNexit)
+    selfhold                                 0x08004761   Thumb Code    76  autodetect.o(.text.selfhold)
+    simhallupdate                            0x080047b1   Thumb Code   796  autodetect.o(.text.simhallupdate)
+    testrotateloop                           0x08004b0d   Thumb Code    80  autodetect.o(.text.testrotateloop)
+    updateMotorRPM                           0x08004b71   Thumb Code    16  calculation.o(.text.updateMotorRPM)
+    vref_Init                                0x08004b85   Thumb Code    80  initialize.o(.text.vref_Init)
+    __aeabi_uidiv                            0x08004bd9   Thumb Code    68  aeabi_sdivfast.o(.text_divfast)
+    __aeabi_idiv                             0x08004c1d   Thumb Code   434  aeabi_sdivfast.o(.text_divfast)
+    __ARM_common_ll_muluu                    0x08004dcf   Thumb Code    48  btod.o(i.__ARM_common_ll_muluu)
+    __ARM_fpclassify                         0x08004e01   Thumb Code    40  fpclassify.o(i.__ARM_fpclassify)
+    __aeabi_fcmpge                           0x08004e2d   Thumb Code     0  fcmp.o(i._fgeq)
+    _fgeq                                    0x08004e2d   Thumb Code    22  fcmp.o(i._fgeq)
+    __aeabi_fcmple                           0x08004e43   Thumb Code     0  fcmp.o(i._fleq)
+    _fleq                                    0x08004e43   Thumb Code    26  fcmp.o(i._fleq)
+    _is_digit                                0x08004e5d   Thumb Code    14  __printf_wp.o(i._is_digit)
+    _get_lc_numeric                          0x08004e6d   Thumb Code    44  lc_numeric_c.o(locale$$code)
+    _fcmpge                                  0x08004e99   Thumb Code    78  fgef.o(x$fpl$fgeqf)
+    __aeabi_cfcmple                          0x08004eed   Thumb Code     0  flef.o(x$fpl$fleqf)
+    _fcmple                                  0x08004eed   Thumb Code    78  flef.o(x$fpl$fleqf)
+    _printf_fp_dec                           0x08004f41   Thumb Code    16  printf1.o(x$fpl$printf1)
+    __I$use$fp                               0x08004f50   Number         0  usenofp.o(x$fpl$usenofp)
+    adcs                                     0x080050a0   Data         120  hardware.o(.rodata.adcs)
+    hall_to_pos                              0x08005118   Data           8  bldc.o(.rodata.hall_to_pos)
+    pins                                     0x08005120   Data         396  hardware.o(.rodata.pins)
+    Region$$Table$$Base                      0x08005eb4   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08005ed4   Number         0  anon$$obj.o(Region$$Table)
     PXX                                      0x20000000   Data         132  autodetect.o(.data.PXX)
     SystemCoreClock                          0x20000084   Data           4  system_mm32spin06xx_s.o(.data.SystemCoreClock)
     banner                                   0x20000088   Data         464  autodetect.o(.data.banner)
@@ -3391,9 +3391,9 @@ Memory Map of the image
 
   Image Entry point : 0x080000c1
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x000061d8, Max: 0x00008000, ABSOLUTE, COMPRESSED[0x00006050])
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x000061e0, Max: 0x00008000, ABSOLUTE, COMPRESSED[0x00006058])
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00005ee8, Max: 0x00008000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00005ef0, Max: 0x00008000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -3599,44 +3599,44 @@ Memory Map of the image
     0x08004310   0x08004310   0x00000050   Code   RO          704    .text.exNVIC_Init   hal_misc.o
     0x08004360   0x08004360   0x00000014   Code   RO          808    .text.exRCC_APB2PeriphReset  hal_rcc.o
     0x08004374   0x08004374   0x00000068   Code   RO           51    .text.hallpos       bldc.o
-    0x080043dc   0x080043dc   0x00000184   Code   RO            2    .text.main          main.o
-    0x08004560   0x08004560   0x00000044   Code   RO          259    .text.pinMode       hardware.o
-    0x080045a4   0x080045a4   0x00000108   Code   RO          215    .text.printvoltage  autodetect.o
-    0x080046ac   0x080046ac   0x00000034   Code   RO          219    .text.restorecfg    autodetect.o
-    0x080046e0   0x080046e0   0x00000078   Code   RO          223    .text.saveNexit     autodetect.o
-    0x08004758   0x08004758   0x00000050   Code   RO          201    .text.selfhold      autodetect.o
-    0x080047a8   0x080047a8   0x0000035c   Code   RO          209    .text.simhallupdate  autodetect.o
-    0x08004b04   0x08004b04   0x00000064   Code   RO          221    .text.testrotateloop  autodetect.o
-    0x08004b68   0x08004b68   0x00000014   Code   RO          177    .text.updateMotorRPM  calculation.o
-    0x08004b7c   0x08004b7c   0x00000054   Code   RO           94    .text.vref_Init     initialize.o
-    0x08004bd0   0x08004bd0   0x000001f6   Code   RO         1284    .text_divfast       c_p.l(aeabi_sdivfast.o)
-    0x08004dc6   0x08004dc6   0x00000030   Code   RO         1384    i.__ARM_common_ll_muluu  c_p.l(btod.o)
-    0x08004df6   0x08004df6   0x00000002   PAD
-    0x08004df8   0x08004df8   0x0000002c   Code   RO         1395    i.__ARM_fpclassify  m_ps.l(fpclassify.o)
-    0x08004e24   0x08004e24   0x00000016   Code   RO         1311    i._fgeq             fz_ps.l(fcmp.o)
-    0x08004e3a   0x08004e3a   0x0000001a   Code   RO         1313    i._fleq             fz_ps.l(fcmp.o)
-    0x08004e54   0x08004e54   0x0000000e   Code   RO         1263    i._is_digit         c_p.l(__printf_wp.o)
-    0x08004e62   0x08004e62   0x00000002   PAD
-    0x08004e64   0x08004e64   0x0000002c   Code   RO         1389    locale$$code        c_p.l(lc_numeric_c.o)
-    0x08004e90   0x08004e90   0x00000054   Code   RO         1346    x$fpl$fgeqf         fz_ps.l(fgef.o)
-    0x08004ee4   0x08004ee4   0x00000054   Code   RO         1348    x$fpl$fleqf         fz_ps.l(flef.o)
-    0x08004f38   0x08004f38   0x00000010   Code   RO         1322    x$fpl$printf1       fz_ps.l(printf1.o)
-    0x08004f48   0x08004f48   0x00000000   Code   RO         1350    x$fpl$usenofp       fz_ps.l(usenofp.o)
-    0x08004f48   0x08004f48   0x00000028   Data   RO         1236    .constdata          c_p.l(_printf_hex_int.o)
-    0x08004f70   0x08004f70   0x00000011   Data   RO         1266    .constdata          c_p.l(__printf_flags_wp.o)
-    0x08004f81   0x08004f81   0x00000080   Data   RO         1298    .constdata          fz_ps.l(ddiv.o)
-    0x08005001   0x08005001   0x00000003   PAD
-    0x08005004   0x08005004   0x00000094   Data   RO         1380    .constdata          c_p.l(bigflt0.o)
-    0x08005098   0x08005098   0x00000078   Data   RO          268    .rodata.adcs        hardware.o
-    0x08005110   0x08005110   0x00000008   Data   RO           59    .rodata.hall_to_pos  bldc.o
-    0x08005118   0x08005118   0x0000018c   Data   RO          267    .rodata.pins        hardware.o
-    0x080052a4   0x080052a4   0x00000c05   Data   RO          236    .rodata.str1.1      autodetect.o
-    0x08005ea9   0x08005ea9   0x00000003   PAD
-    0x08005eac   0x08005eac   0x00000020   Data   RO         1561    Region$$Table       anon$$obj.o
-    0x08005ecc   0x08005ecc   0x0000001c   Data   RO         1388    locale$$data        c_p.l(lc_numeric_c.o)
+    0x080043dc   0x080043dc   0x0000018c   Code   RO            2    .text.main          main.o
+    0x08004568   0x08004568   0x00000044   Code   RO          259    .text.pinMode       hardware.o
+    0x080045ac   0x080045ac   0x00000108   Code   RO          215    .text.printvoltage  autodetect.o
+    0x080046b4   0x080046b4   0x00000034   Code   RO          219    .text.restorecfg    autodetect.o
+    0x080046e8   0x080046e8   0x00000078   Code   RO          223    .text.saveNexit     autodetect.o
+    0x08004760   0x08004760   0x00000050   Code   RO          201    .text.selfhold      autodetect.o
+    0x080047b0   0x080047b0   0x0000035c   Code   RO          209    .text.simhallupdate  autodetect.o
+    0x08004b0c   0x08004b0c   0x00000064   Code   RO          221    .text.testrotateloop  autodetect.o
+    0x08004b70   0x08004b70   0x00000014   Code   RO          177    .text.updateMotorRPM  calculation.o
+    0x08004b84   0x08004b84   0x00000054   Code   RO           94    .text.vref_Init     initialize.o
+    0x08004bd8   0x08004bd8   0x000001f6   Code   RO         1284    .text_divfast       c_p.l(aeabi_sdivfast.o)
+    0x08004dce   0x08004dce   0x00000030   Code   RO         1384    i.__ARM_common_ll_muluu  c_p.l(btod.o)
+    0x08004dfe   0x08004dfe   0x00000002   PAD
+    0x08004e00   0x08004e00   0x0000002c   Code   RO         1395    i.__ARM_fpclassify  m_ps.l(fpclassify.o)
+    0x08004e2c   0x08004e2c   0x00000016   Code   RO         1311    i._fgeq             fz_ps.l(fcmp.o)
+    0x08004e42   0x08004e42   0x0000001a   Code   RO         1313    i._fleq             fz_ps.l(fcmp.o)
+    0x08004e5c   0x08004e5c   0x0000000e   Code   RO         1263    i._is_digit         c_p.l(__printf_wp.o)
+    0x08004e6a   0x08004e6a   0x00000002   PAD
+    0x08004e6c   0x08004e6c   0x0000002c   Code   RO         1389    locale$$code        c_p.l(lc_numeric_c.o)
+    0x08004e98   0x08004e98   0x00000054   Code   RO         1346    x$fpl$fgeqf         fz_ps.l(fgef.o)
+    0x08004eec   0x08004eec   0x00000054   Code   RO         1348    x$fpl$fleqf         fz_ps.l(flef.o)
+    0x08004f40   0x08004f40   0x00000010   Code   RO         1322    x$fpl$printf1       fz_ps.l(printf1.o)
+    0x08004f50   0x08004f50   0x00000000   Code   RO         1350    x$fpl$usenofp       fz_ps.l(usenofp.o)
+    0x08004f50   0x08004f50   0x00000028   Data   RO         1236    .constdata          c_p.l(_printf_hex_int.o)
+    0x08004f78   0x08004f78   0x00000011   Data   RO         1266    .constdata          c_p.l(__printf_flags_wp.o)
+    0x08004f89   0x08004f89   0x00000080   Data   RO         1298    .constdata          fz_ps.l(ddiv.o)
+    0x08005009   0x08005009   0x00000003   PAD
+    0x0800500c   0x0800500c   0x00000094   Data   RO         1380    .constdata          c_p.l(bigflt0.o)
+    0x080050a0   0x080050a0   0x00000078   Data   RO          268    .rodata.adcs        hardware.o
+    0x08005118   0x08005118   0x00000008   Data   RO           59    .rodata.hall_to_pos  bldc.o
+    0x08005120   0x08005120   0x0000018c   Data   RO          267    .rodata.pins        hardware.o
+    0x080052ac   0x080052ac   0x00000c05   Data   RO          236    .rodata.str1.1      autodetect.o
+    0x08005eb1   0x08005eb1   0x00000003   PAD
+    0x08005eb4   0x08005eb4   0x00000020   Data   RO         1561    Region$$Table       anon$$obj.o
+    0x08005ed4   0x08005ed4   0x0000001c   Data   RO         1388    locale$$data        c_p.l(lc_numeric_c.o)
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08005ee8, Size: 0x00000c40, Max: 0x00001000, ABSOLUTE, COMPRESSED[0x00000168])
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08005ef0, Size: 0x00000c40, Max: 0x00001000, ABSOLUTE, COMPRESSED[0x00000168])
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -3729,14 +3729,14 @@ Image component sizes
        264         68        516          0          0       3776   hardware.o
        770         32          0          0          0      16391   initialize.o
        564         80          0          0          5       4572   interrupt.o
-       388        106          0        131         47       3957   main.o
+       396        106          0        131         47       3975   main.o
        536         12          0          0          0       5868   sim_eeprom.o
        124         58        192          0       1536        740   startup_mm32spin06xx_s_keil.o
        372         40          0          4          0       3445   system_mm32spin06xx_s.o
        120          4          0          0          0       1803   uart.o
 
     ----------------------------------------------------------------------
-     11616       1802       3828        748       2292     149731   Object Totals
+     11624       1802       3828        748       2292     149749   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         14          0          3          1         28          0   (incl. Padding)
 
@@ -3831,15 +3831,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     20104       2042       4192        748       2388     151307   Grand Totals
-     20104       2042       4192        360       2388     151307   ELF Image Totals (compressed)
-     20104       2042       4192        360          0          0   ROM Totals
+     20112       2042       4192        748       2388     151325   Grand Totals
+     20112       2042       4192        360       2388     151325   ELF Image Totals (compressed)
+     20112       2042       4192        360          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                24296 (  23.73kB)
+    Total RO  Size (Code + RO Data)                24304 (  23.73kB)
     Total RW  Size (RW Data + ZI Data)              3136 (   3.06kB)
-    Total ROM Size (Code + RO Data + RW Data)      24656 (  24.08kB)
+    Total ROM Size (Code + RO Data + RW Data)      24664 (  24.09kB)
 
 ==============================================================================
 

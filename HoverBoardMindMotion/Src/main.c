@@ -62,7 +62,10 @@ s32 main(void){
 	exNVIC_Configure(DMA1_Channel2_3_IRQn, 0, 0);
 	DMA_NVIC_Config(DMA1_Channel3, (u32)&UART1->RDR, (u32)sRxBuffer, 1);
 	if(restorecfg()){
-		pinMode(pins[pinstorage[10]][0],pins[pinstorage[10]][1],GPIO_Mode_IPU);
+		if(pinstorage[10]<33){
+			pinMode(pins[pinstorage[10]][0],pins[pinstorage[10]][1],GPIO_Mode_IPU);
+			masterslave = 1;
+		}
 	}else{
 		selfhold();    //pull every pin high
 		DELAY_Ms(1000);    //give time to release button 
