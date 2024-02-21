@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\HoverboardOutput.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\HoverboardOutput.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Thu Feb 22 04:38:27 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Thu Feb 22 04:56:05 2024
 <BR><P>
 <H3>Maximum Stack Usage =        368 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -71,8 +71,8 @@ Function Pointers
 Global Symbols
 </H3>
 <P><STRONG><a name="[21]"></a>__main</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, __main.o(!!!main))
-<BR><BR>[Calls]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry
-<LI><a href="#[25]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
+<BR><BR>[Calls]<UL><LI><a href="#[25]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
+<LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_mm32spin06xx_s_keil.o(.text)
 </UL>
@@ -1171,7 +1171,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[7a]"></a>autoDetectSerialIt</STRONG> (Thumb, 1704 bytes, Stack size 168 bytes, autodetect.o(.text.autoDetectSerialIt))
+<P><STRONG><a name="[7a]"></a>autoDetectSerialIt</STRONG> (Thumb, 1728 bytes, Stack size 168 bytes, autodetect.o(.text.autoDetectSerialIt))
 <BR><BR>[Stack]<UL><LI>Max Depth = 296 + Unknown Stack Size
 <LI>Call Chain = autoDetectSerialIt &rArr; __2sprintf &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -1179,6 +1179,7 @@ Global Symbols
 <LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EEPROM_Write
 <LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_Send_Byte
 <LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CtrlPWMOutputs
+<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;commutate
 <LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SendString
 <LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pinMode
 <LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset4
@@ -1214,7 +1215,8 @@ Global Symbols
 <LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxNCmd
 <LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxCmd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;simhallupdate
+<BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;autoDetectSerialIt
+<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;simhallupdate
 <LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;testrotateloop
 <LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;autoDetectInit
 </UL>
@@ -1363,7 +1365,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[bd]"></a>simhallupdate</STRONG> (Thumb, 696 bytes, Stack size 32 bytes, autodetect.o(.text.simhallupdate))
+<P><STRONG><a name="[bd]"></a>simhallupdate</STRONG> (Thumb, 712 bytes, Stack size 32 bytes, autodetect.o(.text.simhallupdate))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = simhallupdate &rArr; commutate &rArr; TIM_SelectOCxM
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;commutate

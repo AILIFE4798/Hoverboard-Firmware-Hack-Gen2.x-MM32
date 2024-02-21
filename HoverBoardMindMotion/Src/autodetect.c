@@ -130,6 +130,7 @@ void autoDetectSerialIt(){    //serial dma interrupt
 					mode=MODE_HALL;
 					init=1;
 					detectall=0;
+					doinloop=1;
 				break;
 				case '3':    //(3)-Auto detect LED and buzzer.
 					mode=MODE_LED;
@@ -392,9 +393,14 @@ void autoDetectSerialIt(){    //serial dma interrupt
 				switch(sRxBuffer[0]){
 					case '\r':
 					case '\n':
+						TIM1->CCR1=0;
+						TIM1->CCR2=0;
+						TIM1->CCR3=0;
+						TIM_CtrlPWMOutputs(TIM1, DISABLE);    //stop motor after exit
+						step=0;
+						commutate();
 						mode=MODE_MENU;
 						init=1;
-						TIM_CtrlPWMOutputs(TIM1, DISABLE);    //stop motor after exit
 					break;
 					case '+':
 						testrotatespeed+=100;
@@ -517,6 +523,10 @@ void simhallupdate(){
 	TIM1->CCR1=0;    //disable motor after all pins is found
 	TIM1->CCR2=0;
 	TIM1->CCR3=0;
+	if(doinloop){
+		UART_SendString("\r\nDetection sucessful");
+		doinloop=0;
+	}
 }	
 
 
