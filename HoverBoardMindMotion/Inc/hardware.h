@@ -14,9 +14,10 @@
 #define IOD 4
 
 #define PINCOUNT 33
-#define ADCCOUNT 33
-#define TIMCOUNT 33
-#define UARTCOUNT 33
+#define ADCCOUNT 10
+#define TIMCOUNT 14
+#define UARTCOUNT 4
+#define TIMBKCOUNT 4
 
 #define OUTPUT GPIO_Mode_Out_PP
 #define OUTPUT_AF GPIO_Mode_AF_PP
@@ -46,7 +47,10 @@ typedef struct{
   uint8_t af;
   uint8_t tx;
 }MM32UART1;
-
+typedef struct{
+  uint8_t io;
+  uint16_t af;
+}MM32TIMBK;
 
 
 void pinMode(uint8_t io,uint8_t state);

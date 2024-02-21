@@ -76,6 +76,13 @@ const MM32UART1 uarts[4] = {
 {20,GPIO_AF_0,0},
 };
 
+const MM32TIMBK ocps[4] = {
+{4,GPIO_AF_3},
+{6,GPIO_AF_2},
+{10,GPIO_AF_7},
+{25,GPIO_AF_2},
+};
+
 
 void pinMode(uint8_t io,uint8_t state){
 	switch (pins[io].port){
