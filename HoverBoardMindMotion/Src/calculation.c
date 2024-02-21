@@ -24,6 +24,10 @@ int aavgarr[64];
 extern int itotal;
 extern int fitotal;
 
+void PIDrst(){
+	lasterr=qdSum=prevpwm=0;
+}
+
 
 int PID(int setpoint,int real){
 	
@@ -37,11 +41,7 @@ int PID(int setpoint,int real){
 	//Calc proportional
 	Up = (Kp * Error);
 	//Calc integral
-	#ifdef DYNKi
 	qdSum = qdSum + Ki * Error;
-	#else
-	qdSum=0;
-	#endif
 	//Limit integral 
 	if(qdSum >= (max)){
 		qdSum = (max);
