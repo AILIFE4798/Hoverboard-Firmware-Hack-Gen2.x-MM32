@@ -150,13 +150,13 @@ void digitalWrite(uint8_t io, uint8_t state){
 			GPIO_WriteBit(GPIOA, pins[io].pin, state);
 		break;
 		case IOB:
-			GPIO_WriteBit(GPIOA, pins[io].pin, state);
+			GPIO_WriteBit(GPIOB, pins[io].pin, state);
 		break;
 		case IOC:
-			GPIO_WriteBit(GPIOA, pins[io].pin, state);
+			GPIO_WriteBit(GPIOC, pins[io].pin, state);
 		break;
 		case IOD:
-			GPIO_WriteBit(GPIOA, pins[io].pin, state);
+			GPIO_WriteBit(GPIOD, pins[io].pin, state);
 		break;
 	}
 }

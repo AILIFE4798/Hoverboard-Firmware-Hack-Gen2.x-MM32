@@ -243,7 +243,11 @@ uint8_t restorecfg(){
 		for(uint8_t i=0;i<64;i++){
 			pinstorage[i]=tmp[i];
 		}
-		return 1;
+		if(HALLAPIN<PINCOUNT&&HALLBPIN<PINCOUNT&&HALLCPIN<PINCOUNT&&TXPIN<PINCOUNT&&RXPIN<PINCOUNT){
+			return 1;
+		}else{
+			return 0;
+		}
 	}else{
 		return 0;
 	}

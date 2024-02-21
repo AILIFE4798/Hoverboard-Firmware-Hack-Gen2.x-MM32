@@ -3,8 +3,8 @@
 #include "hal_gpio.h" 
 #include "hal_adc.h" 
 
-#ifndef HARDWARE_H
-#define HARDWARE_H    //keil bug workaround typedef redefinition with different types
+#ifndef _HARDWARE_H
+#define _HARDWARE_H    //keil bug workaround typedef redefinition with different types
 
 
 
@@ -22,8 +22,8 @@
 #define OUTPUT_AF GPIO_Mode_AF_PP
 #define OUTPUT_OD GPIO_Mode_Out_OD
 #define INPUT GPIO_Mode_FLOATING
-#define INPUT_PULLUP GPIO_Mode_Out_PP
-#define INPUT_PULLDOWN GPIO_Mode_Out_PP
+#define INPUT_PULLUP GPIO_Mode_IPU
+#define INPUT_PULLDOWN GPIO_Mode_IPD
 #define INPUT_ADC GPIO_Mode_AIN
 
 

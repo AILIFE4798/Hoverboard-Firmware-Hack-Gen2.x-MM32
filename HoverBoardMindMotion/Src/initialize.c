@@ -22,22 +22,22 @@ void io_init(){
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOB, ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOC, ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOD, ENABLE);
-	if(LEDRPIN<PINCOUNT-1){
+	if(LEDRPIN<PINCOUNT){
 		pinMode(LEDRPIN, OUTPUT);
 	}
-	if(LEDGPIN<PINCOUNT-1){
+	if(LEDGPIN<PINCOUNT){
 		pinMode(LEDGPIN, OUTPUT);
 	}
-	if(LEDBPIN<PINCOUNT-1){
+	if(LEDBPIN<PINCOUNT){
 		pinMode(LEDBPIN, OUTPUT);
 	}
-	if(LATCHPIN<PINCOUNT-1){
+	if(LATCHPIN<PINCOUNT){
 		pinMode(LATCHPIN, OUTPUT);
 	}
-	if(BUTTONPIN<PINCOUNT-1){
+	if(BUTTONPIN<PINCOUNT){
 		pinMode(BUTTONPIN, INPUT);
 	}
-	if(BUZZERPIN<PINCOUNT-1){
+	if(BUZZERPIN<PINCOUNT){
 		pinMode(BUZZERPIN, OUTPUT);
 	}
 }
@@ -169,7 +169,7 @@ void TIM1_init(u16 arr, u16 psc){
 	TIM_BDTRConfig(TIM1, &TIM_BDTRInitStructure);
 	/*
 	if(!AWDG){
-		if(OCPREFPIN<PINCOUNT-1){
+		if(OCPREFPIN<PINCOUNT){
 			RCC_APB2PeriphClockCmd(RCC_APB2ENR_COMP, ENABLE);
 			GPIO_InitTypeDef GPIO_InitStruct;
 			GPIO_InitStruct.GPIO_Mode = GPIO_Mode_AIN;
@@ -297,8 +297,10 @@ void adc_Init(void){
 	ADC_InitStructure.ADC_Resolution = ADC_Resolution_12b;
 	ADC_Init(ADC1, &ADC_InitStructure);
 	ADC_ExternalTrigConvCmd(ADC1,ENABLE);
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_VoltReference, 0, ADC_SampleTime_7_5Cycles);
+	ADC_TempSensorVrefintCmd(ENABLE);
 	ADC_Cmd(ADC1, ENABLE);
-	if(VBATPIN<PINCOUNT-1){
+	if(VBATPIN<PINCOUNT){
 		pinMode(VBATPIN, INPUT_ADC);
 		for(uint8_t i=0;i<ADCCOUNT;i++){
 			if(adcs[i].io==VBATPIN){
@@ -307,7 +309,7 @@ void adc_Init(void){
 			}
 		}
 	}
-	if(ITOTALPIN<PINCOUNT-1){
+	if(ITOTALPIN<PINCOUNT){
 		pinMode(ITOTALPIN, INPUT_ADC);
 		for(uint8_t i=0;i<ADCCOUNT;i++){
 			if(adcs[i].io==ITOTALPIN){

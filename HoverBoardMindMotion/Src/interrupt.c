@@ -28,6 +28,7 @@ uint16_t iphaseb;
 uint32_t iphaseaoffset=0;
 uint32_t iphaseboffset=0;
 extern MM32ADC adcs[10];
+float vcc;
 
 
 //commutation interrupt
@@ -71,15 +72,11 @@ void ADC1_COMP_IRQHandler(void){
 				step=hallposprev;
 				commutate();
 			}
-			vbat = (double)VBAT_DIVIDER*analogRead(VBATPIN)*100;//read adc register
-			int tmp = analogRead(ITOTALPIN);//prevent overflow on negative value
-			itotal = (double)ITOTAL_DIVIDER*(tmp-itotaloffset)*100;
-			#ifdef IPHASEAPIN
-			tmp = (uint16_t)ADC1->IPHASEAADC2;
-			iphasea = (double)IPHASE_DIVIDER*(tmp-iphaseaoffset)*100;
-			tmp = (uint16_t)ADC1->IPHASEBADC2;
-			iphaseb = (double)IPHASE_DIVIDER*(tmp-iphaseboffset)*100;
-			#endif
+			uint16_t tmp = ADC1->CH15DR;
+			vcc=(double)4915.2/tmp;
+			vbat = (double)VBAT_DIVIDER*analogRead(VBATPIN)*vcc*100/4096;//read adc register
+			tmp = analogRead(ITOTALPIN);//prevent overflow on negative value
+			itotal = (double)ITOTAL_DIVIDER*(tmp-itotaloffset)*vcc*100/4096;
 			avgvbat();
 			avgItotal();
 			if(SOFT_ILIMIT>0&&SOFT_ILIMIT<30){

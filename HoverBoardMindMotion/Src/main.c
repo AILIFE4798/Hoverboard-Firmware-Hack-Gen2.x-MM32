@@ -10,6 +10,8 @@
 #include "../Inc/initialize.h"
 #include "../Inc/uart.h"
 #include "../Inc/bldc.h"
+#include "../Inc/sim_eeprom.h"
+#include "../Inc/hardware.h"
 
 
 uint8_t step=1;//very importatnt to set to 1 or it will not work
@@ -37,8 +39,28 @@ extern u32 SystemCoreClock;
 uint16_t pinstorage[64]={0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xDCAB, 31, 250, 0, 19200, 8192, 1, 30, 0, 10, 300, 1, 1, 42000, 32000, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 
-
 s32 main(void){
+	DELAY_Init();
+	if(!restorecfg()){    //if data in eeprom is not valid, do not boot up
+		RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOA, ENABLE);
+		RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOB, ENABLE);
+		RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOC, ENABLE);
+		RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOD, ENABLE);
+		while(1){
+			for(uint8_t i=0;i<33;i++){
+				if(i!=10&&i!=11){
+					pinMode(i, INPUT_PULLUP);
+				}
+			}	
+			DELAY_Ms(1000);
+			for(uint8_t i=0;i<33;i++){
+				if(i!=10&&i!=11){
+					pinMode(i, INPUT_PULLDOWN);
+				}
+			}	
+			DELAY_Ms(1000);
+		}
+	}
 	//initialize normal gpio
 	io_init();
 	//hall gpio init
@@ -50,7 +72,6 @@ s32 main(void){
 	//initialize timer
 	TIM1_init(PWM_RES, 0);
 	//systick config
-	DELAY_Init();
 	//timer1 commutation interrupt config
 	NVIC_Configure(TIM1_BRK_UP_TRG_COM_IRQn, 1);
 	//vbat
@@ -67,11 +88,11 @@ s32 main(void){
 	//uart dma
 	DMA_NVIC_Config(DMA1_Channel3, (u32)&UART1->RDR, (u32)sRxBuffer, 1);
 	//latch on power
-	if(LATCHPIN<PINCOUNT-1){    //have latch
+	if(LATCHPIN<PINCOUNT){    //have latch
 		DELAY_Ms(50);    //some board the micro controller can reset in time and turn back on
 		digitalWrite(LATCHPIN, 1);
 		while(digitalRead(BUTTONPIN)){    //wait while release button
-			if(BUZZERPIN<PINCOUNT-1){    //have buzzer
+			if(BUZZERPIN<PINCOUNT){    //have buzzer
 				digitalWrite(BUZZERPIN, 1);
 				DELAY_Ms(2);
 				digitalWrite(BUZZERPIN, 0);
@@ -81,42 +102,39 @@ s32 main(void){
 				__NOP();
 			}
 			IWDG_ReloadCounter();
-		}
-		if(BUZZERPIN<PINCOUNT-1){
-			for(int i=0;i<5;i++){    //power on melody
-				digitalWrite(BUZZERPIN, 1);
-				DELAY_Ms(50);
-				digitalWrite(BUZZERPIN, 0);
-				DELAY_Ms(50);
-			}
+		}	
+	}
+	if(BUZZERPIN<PINCOUNT){
+		for(int i=0;i<5;i++){    //power on melody
+			digitalWrite(BUZZERPIN, 1);
+			DELAY_Ms(50);
+			digitalWrite(BUZZERPIN, 0);
+			DELAY_Ms(50);
 		}
 	}
 	ADC_SoftwareStartConvCmd(ADC1, ENABLE);    //Software start conversion
 	UART_SendString("hello World\n\r");    //debug uart
   while(1) {
-		#ifdef HALL2LED
-		//rotating led
-    GPIO_WriteBit(LEDRPORT, LEDRPIN, GPIO_ReadInputDataBit(HALLAPORT, HALLAPIN));
-		GPIO_WriteBit(LEDGPORT, LEDGPIN, GPIO_ReadInputDataBit(HALLBPORT, HALLBPIN));
-		GPIO_WriteBit(LEDBPORT, LEDBPIN, GPIO_ReadInputDataBit(HALLCPORT, HALLCPIN));		
-		#endif
+		digitalWrite(LEDRPIN,digitalRead(HALLAPIN));
+		digitalWrite(LEDGPIN,digitalRead(HALLBPIN));
+		digitalWrite(LEDBPIN,digitalRead(HALLCPIN));
 		
 		if(millis-lastupdate>1){//speed pid loop
 			speedupdate();
 		  lastupdate=millis;
 		}
 		
-		if(LATCHPIN<PINCOUNT-1){
+		if(LATCHPIN<PINCOUNT){
 			if(digitalRead(BUTTONPIN)){    //button press for shutdown
 				TIM1->CCR1=0;    //shut down motor
 				TIM1->CCR2=0;
 				TIM1->CCR3=0;
-				if(BUZZERPIN<PINCOUNT-1){
+				if(BUZZERPIN<PINCOUNT){
 					for(int i=0;i<3;i++){    //power off melody
-					digitalWrite(BUZZERPIN, 1);
-					DELAY_Ms(150);
-					digitalWrite(BUZZERPIN, 0);
-					DELAY_Ms(150);
+						digitalWrite(BUZZERPIN, 1);
+						DELAY_Ms(150);
+						digitalWrite(BUZZERPIN, 0);
+						DELAY_Ms(150);
 					}
 				}
 				while(digitalRead(BUTTONPIN)) {    //wait for release
