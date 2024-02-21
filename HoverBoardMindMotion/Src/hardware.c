@@ -70,10 +70,10 @@ const MM32TIM23 halltims[18] = {
 
 
 const MM32UART1 uarts[4] = {
-{3,GPIO_AF_3,1},
-{4,GPIO_AF_3,0},
-{6,GPIO_AF_0,1},
-{7,GPIO_AF_0,0},
+{16,GPIO_AF_3,1},
+{17,GPIO_AF_3,0},
+{19,GPIO_AF_0,1},
+{20,GPIO_AF_0,0},
 };
 
 
