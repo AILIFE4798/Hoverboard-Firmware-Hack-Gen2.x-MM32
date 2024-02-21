@@ -16,7 +16,7 @@ https://github.com/reed-dan/hoverboard_hack_esp32_manualspeed
 The firmware is already 90% functional, basic motor control should all work, but more testing is needed
 
 https://youtu.be/hCaIlEKzI3A
-
+* compatiable with 99.9% of boards without recompile
 * working method to unlock and flash the mcu
 * motor and hall sensor commutation
 * RemoteUartBus protocol(used by gen2.x gd32)
@@ -24,15 +24,21 @@ https://youtu.be/hCaIlEKzI3A
 * self hold
 * voltage and total current
 * software and hardware over current protection
+## auto detect
+
+1. first flash the [pinfinder](https://github.com/AILIFE4798/Hoverboard-Firmware-Hack-Gen2.x-MM32/tree/pin-finder) firmware, make sure to choose the correct serial pin version
+2. use autodetect for pins it can detect, and use command line to edit other parameters, there is full guide of how to use auto detect in the serial terminal to guide you through all steps
+3. save the configurations permanantly to eeprom
+4. flash the normal firmware, make sure to choose erase pages and not erase full chip so the configuration remains
+5. now the board should use your configuration file, if all the leds are blinking together it cannot parse the config file you have done something wrong
+6. if auto detect fail to detect your layout please use command line to added it manually
 ## todo
 * optimizations
 * constant torque
 * phase current
 * foc
-## auto detect
-If you do not want to trace the pin of your board manually,the [pinfinder](https://github.com/AILIFE4798/Hoverboard-Firmware-Hack-Gen2.x-MM32/tree/pin-finder) firmware will help you do it 
 ## Hardware
-any board equippted with MM32SPIN0X microcontroller should be supported, as of now you will nee to trace the pins of the boar manually like below, but im working on autodetect layout
+any board equippted with MM32SPIN0X microcontroller should be supported
 
 if you are buying a brand new board online, please get a board that have comparators for sensing phase current, so it may support foc in the future
 
