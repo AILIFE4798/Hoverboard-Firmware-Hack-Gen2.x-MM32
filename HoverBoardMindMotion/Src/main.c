@@ -123,24 +123,24 @@ s32 main(void){
 	uint16_t bat_70 = BAT_EMPTY+((float)(BAT_FULL-BAT_EMPTY)/100*70);
 	uint16_t bat_100 = BAT_FULL;
   while(1) {
-		if(BAT_FULL>20&&BAT_FULL<100){
-			if(vbat>bat_70){
+		if(BAT_FULL>20000&&BAT_FULL<65000){
+			if(vbat*10>bat_70){
 				digitalWrite(LEDRPIN,0);
 				digitalWrite(LEDGPIN,1);
 				digitalWrite(LEDBPIN,0);
-			}else if(vbat>bat_60){
+			}else if(vbat*10>bat_60){
 				digitalWrite(LEDRPIN,0);
 				digitalWrite(LEDGPIN,1);
 				digitalWrite(LEDBPIN,1);
-			}else if(vbat>bat_50){
+			}else if(vbat*10>bat_50){
 				digitalWrite(LEDRPIN,0);
-				digitalWrite(LEDGPIN,1);
-				digitalWrite(LEDBPIN,0);	
-			}else if(vbat>bat_20){
+				digitalWrite(LEDGPIN,0);
+				digitalWrite(LEDBPIN,1);	
+			}else if(vbat*10>bat_20){
 				digitalWrite(LEDRPIN,1);
-				digitalWrite(LEDGPIN,1);
-				digitalWrite(LEDBPIN,0);
-			}else if(vbat>bat_10){
+				digitalWrite(LEDGPIN,0);
+				digitalWrite(LEDBPIN,1);
+			}else if(vbat*10>bat_10){
 				digitalWrite(LEDRPIN,1);
 				digitalWrite(LEDGPIN,0);
 				digitalWrite(LEDBPIN,0);

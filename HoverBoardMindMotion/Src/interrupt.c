@@ -86,7 +86,7 @@ void ADC1_COMP_IRQHandler(void){
 			avgItotal();
 			if(SOFT_ILIMIT>1&&SOFT_ILIMIT<30&&itotal>SOFT_ILIMIT){
 				TIM_CtrlPWMOutputs(TIM1, DISABLE);
-			}else if(BAT_EMPTY>20&&BAT_EMPTY<100&&vbat<BAT_EMPTY*100){	
+			}else if(BAT_EMPTY>20000&&BAT_EMPTY<65000&&vbat*10<BAT_EMPTY){	
 				TIM_CtrlPWMOutputs(TIM1, DISABLE);
 			}else{
 				TIM_CtrlPWMOutputs(TIM1, ENABLE);

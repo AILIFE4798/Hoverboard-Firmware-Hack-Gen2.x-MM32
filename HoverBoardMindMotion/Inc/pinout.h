@@ -4,7 +4,7 @@
 /* |  _  | |_| |\ V / | |___|  _ <  |  _  |/ ___ \ |___| . \    \ V /  / __/ */
 /* |_| |_|\___/  \_/  |_____|_| \_\ |_| |_/_/   \_\____|_|\_\    \_/  |_____|*/
 /*                                                                           */
-//version 132 : PID retune(again)
+//version 135 : battery indicator fix
 //file for setting custom pinout
 //pinout is for Layout2.8.1
 
