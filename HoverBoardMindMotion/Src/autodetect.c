@@ -769,7 +769,7 @@ void autoDetectInit(){
 			}
 		break;
 		case MODE_LED :
-			UART_SendString("\n\rAll pins will be set high, the selected pin will blink, the already saved pins will remain off. If a LED does not light up, it is broken.\r\npress W to go to next pin\r\npress S to go to previous pin\n\rPress R to save as red LED\r\nPress G to save as green LED\r\nPress B to save as blue LED(or orange on some board)\r\nPress U to save as upper LED\r\nPress L to save as lower LED\r\npress Enter to go back to main menu\r\n");
+			UART_SendString("\n\rAll pins will be set high, the selected pin will blink, the already saved pins will remain off. If a LED does not light up, it is broken.\r\npress W to go to next pin\r\npress S to go to previous pin\n\rPress R to save as red LED\r\nPress G to save as green LED\r\nPress B to save as blue LED(or orange on some board)\r\nPress U to save as upper LED\r\nPress L to save as lower LED\r\nPress Z to save as buzzer\r\npress Enter to go back to main menu\r\n");
 			for(uint8_t i=0;i<PINCOUNT;i++){
 				if(!used(i)){
 					pinMode(i,INPUT_PULLUP);
