@@ -441,7 +441,13 @@ void autoDetectSerialIt(){    //serial dma interrupt
 							break;
 							case 'h':    //help
 								UART_SendString("\r\n\nThis tool allow you to modify and view all saved pinouts and settings\n\r\n\rUsage:  [command] <address> <value>\n\r\n\rCommands: \n\r\n\r r     read saved data\n\r w     write data\n\r h     display this help page\n\r l     list all data\n\r g     generate pinstorage variable initializer to copy in firmware\n\r e     erase all data\n\r x     exit command line tool and go back to main menu\n\r\n\rAddresses:\r\n\n");
-								
+								for(uint8_t i=0;i<64;i++){
+									char buffer[16];
+									sprintf(&buffer[0],"index %i: ",i);
+									UART_SendString(&buffer[0]);
+									UART_SendString(&addrdescription[i][0]);
+									UART_SendString("\r\n");
+								}
 							break;
 							case 'l':    //list all values
 								for(uint8_t i=0;i<64;i++){

@@ -4,35 +4,19 @@
 /* |  _  | |_| |\ V / | |___|  _ <  |  _  |/ ___ \ |___| . \    \ V /  / __/ */
 /* |_| |_|\___/  \_/  |_____|_| \_\ |_| |_/_/   \_\____|_|\_\    \_/  |_____|*/
 /*                                                                           */
-//version 132 : PID retune(again)
-//file for setting custom pinout
-//pinout is for Layout2.8.1
-
-
-#define BAUD_AD 19200
-#define INVERT_LOWSIDE_AD TIM_OCNPolarity_High   //when the low side gate driver is active HIGH
-//#define INVERT_LOWSIDE TIM_OCNPolarity_Low   //when the low side gate driver is active LOW
-#define PWM_RES_AD 8192    //the higher the resolution, the lower the frequency
-
-
-
-#define HARD_LIMIT_POLARITY TIM_BreakPolarity_High
-#define UARTEN UART1 //enable uart, PA2 PA3=UART2, PB4 PB6=UART1
-#define SERIALTXPIN GPIO_Pin_6
-#define SERIALTXPINSRC GPIO_PinSource6
-#define SERIALTXPORT GPIOB
-#define SERIALTXAF GPIO_AF_0    //serial alternate function
-#define SERIALRXPIN GPIO_Pin_4
-#define SERIALRXPINSRC GPIO_PinSource4
-#define SERIALRXPORT GPIOB
-#define SERIALRXAF GPIO_AF_3    //serial alternate function 
-
-
 
 #include "../Inc/hardware.h"
 extern MM32GPIO pins[33];
 extern uint16_t pinstorage[64];
 	
+
+
+#define BAUD_AD 19200
+#define INVERT_LOWSIDE_AD TIM_OCNPolarity_High   //when the low side gate driver is active HIGH
+#define PWM_RES_AD 8192    //the higher the resolution, the lower the frequency
+#define TX_AD 17
+#define RX_AD 19
+
 
 #define HALLAPIN pinstorage[0]
 #define HALLBPIN pinstorage[1]
@@ -69,7 +53,3 @@ extern uint16_t pinstorage[64];
 
 #define MAGICNUM_POS 32
 #define MAGIC_NUMBER 0xDCAB
-
-
-
-//#define WATCHDOG
