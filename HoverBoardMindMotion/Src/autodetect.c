@@ -48,6 +48,13 @@ uint8_t command;
 uint8_t address;
 uint16_t data;
 uint8_t stage;
+char addrstr[16];
+char datastr[4];
+uint8_t addrparsemode;
+uint8_t dataparsemode;
+uint8_t addrlen=0;
+uint8_t datalen=0;
+
 
 uint8_t hallA[PINCOUNT];
 uint8_t hallB[PINCOUNT];
@@ -58,7 +65,72 @@ uint16_t prevpinstorage[64];
 
 uint8_t banner[]={0X20,0X20,0X5F,0X20,0X20,0X20,0X5F,0X20,0X20,0X5F,0X5F,0X5F,0X5F,0X5F,0X20,0X20,0X20,0X20,0X20,0X5F,0X5F,0X5F,0X5F,0X5F,0X5F,0X5F,0X20,0X5F,0X5F,0X5F,0X5F,0X20,0X20,0X20,0X20,0X5F,0X20,0X20,0X20,0X5F,0X20,0X20,0X20,0X20,0X5F,0X20,0X20,0X20,0X20,0X5F,0X5F,0X5F,0X5F,0X20,0X5F,0X20,0X20,0X5F,0X5F,0X20,0X5F,0X5F,0X20,0X20,0X20,0X20,0X20,0X5F,0X5F,0X5F,0X5F,0X5F,0X5F,0X20,0X20,0X0A,0X0D,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X2F,0X20,0X5F,0X20,0X5C,0X20,0X5C,0X20,0X20,0X20,0X2F,0X20,0X2F,0X20,0X5F,0X5F,0X5F,0X5F,0X7C,0X20,0X20,0X5F,0X20,0X5C,0X20,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X20,0X2F,0X20,0X5C,0X20,0X20,0X2F,0X20,0X5F,0X5F,0X5F,0X7C,0X20,0X7C,0X2F,0X20,0X2F,0X20,0X5C,0X20,0X5C,0X20,0X20,0X20,0X2F,0X20,0X2F,0X5F,0X5F,0X5F,0X20,0X5C,0X20,0X0A,0X0D,0X20,0X7C,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X5C,0X20,0X5C,0X20,0X2F,0X20,0X2F,0X7C,0X20,0X20,0X5F,0X7C,0X20,0X7C,0X20,0X7C,0X5F,0X29,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X20,0X2F,0X20,0X5F,0X20,0X5C,0X7C,0X20,0X7C,0X20,0X20,0X20,0X7C,0X20,0X27,0X20,0X2F,0X20,0X20,0X20,0X5C,0X20,0X5C,0X20,0X2F,0X20,0X2F,0X20,0X20,0X5F,0X5F,0X29,0X20,0X7C,0X0A,0X0D,0X20,0X7C,0X20,0X20,0X5F,0X20,0X20,0X7C,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X5C,0X20,0X56,0X20,0X2F,0X20,0X7C,0X20,0X7C,0X5F,0X5F,0X5F,0X7C,0X20,0X20,0X5F,0X20,0X3C,0X20,0X20,0X7C,0X20,0X20,0X5F,0X20,0X20,0X7C,0X2F,0X20,0X5F,0X5F,0X5F,0X20,0X5C,0X20,0X7C,0X5F,0X5F,0X5F,0X7C,0X20,0X2E,0X20,0X5C,0X20,0X20,0X20,0X20,0X5C,0X20,0X56,0X20,0X2F,0X20,0X20,0X2F,0X20,0X5F,0X5F,0X2F,0X20,0X0A,0X0D,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X5F,0X7C,0X5C,0X5F,0X5F,0X5F,0X2F,0X20,0X20,0X5C,0X5F,0X2F,0X20,0X20,0X7C,0X5F,0X5F,0X5F,0X5F,0X5F,0X7C,0X5F,0X7C,0X20,0X5C,0X5F,0X5C,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X5F,0X2F,0X5F,0X2F,0X20,0X20,0X20,0X5C,0X5F,0X5C,0X5F,0X5F,0X5F,0X5F,0X7C,0X5F,0X7C,0X5C,0X5F,0X5C,0X20,0X20,0X20,0X20,0X5C,0X5F,0X2F,0X20,0X20,0X7C,0X5F,0X5F,0X5F,0X5F,0X5F,0X7C,0X0A,0X0D,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X0A,0X0D,0X0A,0X0D};
 char PXX[PINCOUNT][5]={"PA0\0","PA1\0","PA2\0","PA3\0","PA4\0","PA5\0","PA6\0","PA7\0","PA11\0","PA12\0","PA13\0","PA14\0","PA15\0","PB0\0","PB1\0","PB2\0","PB3\0","PB4\0","PB5\0","PB6\0","PB7\0","PB8\0","PB9\0","PB10\0","PB11\0","PB12\0","PC13\0","PC14\0","PC15\0","PD0\0","PD1\0","PD2\0","PD3\0"};
-
+char addrdescription[64][14]={
+{"halla\0"},
+{"hallb\0"},
+{"hallc\0"},
+{"ledr\0"},
+{"ledg\0"},
+{"ledb\0"},
+{"ledu\0"},
+{"ledd\0"},
+{"buzzer\0"},
+{"button\0"},
+{"latch\0"},
+{"charge\0"},
+{"vbat\0"},
+{"itotal\0"},
+{"tx\0"},
+{"rx\0"},
+{"iphasea\0"},
+{"iphaseb\0"},
+{"reserved\0"},
+{"reserved\0"},
+{"reserved\0"},
+{"reserved\0"},
+{"reserved\0"},
+{"ocp\0"},
+{"ocpref\0"},
+{"irl\0"},
+{"irr\0"},
+{"reserved\0"},
+{"reserved\0"},
+{"reserved\0"},
+{"reserved\0"},
+{"reserved\0"},
+{"magicnum\0"},
+{"vbatdivider\0"},
+{"itotaldivider\0"},
+{"reserved\0"},
+{"baud\0"},
+{"pwmres\0"},
+{"slaveid\0"},
+{"windings\0"},
+{"invlowside\0"},
+{"softocp\0"},
+{"hardocp\0"},
+{"reserved\0"},
+{"constspeed\0"},
+{"batfull\0"},
+{"batempty\0"},
+{"timeout\0"},
+{"reserved\0"},
+{"reserved\0"},
+{"reserved\0"},
+{"reserved\0"},
+{"reserved\0"},
+{"reserved\0"},
+{"reserved\0"},
+{"reserved\0"},
+{"reserved\0"},
+{"reserved\0"},
+{"reserved\0"},
+{"reserved\0"},
+{"reserved\0"},
+{"reserved\0"},
+{"reserved\0"},
+{"reserved\0"},
+};
 	
 void autoDetectInit();
 
@@ -298,32 +370,82 @@ void autoDetectSerialIt(){    //serial dma interrupt
 					case '\n':
 						switch(command){
 							case 'r':    //read address
+								if(addrparsemode==2){
+									addrstr[addrlen]='\0';
+									uint8_t parsedata=255;
+									for(uint8_t i=0;i<64;i++){
+										if(!strcmp((const char *)addrstr,(const char *)addrdescription[i])){
+											parsedata=i;
+											break;
+										}
+									}
+									if(parsedata!=255){
+										address=parsedata;
+									}else{
+										UART_SendString("\r\naddress \"");
+										UART_SendString(&addrstr[0]);
+										UART_SendString("\" does not exist");
+										break;
+									}
+								}
 								if(address<64){
-									char buffer[16];
-									sprintf(&buffer[0],"\r\nindex %i : %i",address,pinstorage[address]);
-									UART_SendString(&buffer[0]);
+									printstorage(address);
 								}else{
 									UART_SendString("\r\nInvalid address");
 								}
 							break;
 							case 'w':    //write to address
+								if(addrparsemode==2){
+									addrstr[addrlen]='\0';
+									uint8_t parsedata=255;
+									for(uint8_t i=0;i<64;i++){
+										if(!strcmp((const char *)addrstr,(const char *)addrdescription[i])){
+											parsedata=i;
+											break;
+										}
+									}
+									if(parsedata!=255){
+										address=parsedata;
+									}else{
+										UART_SendString("\r\naddress \"");
+										UART_SendString(&addrstr[0]);
+										UART_SendString("\" does not exist");
+										break;
+									}
+								}
+								if(dataparsemode==2){
+									datastr[datalen]='\0';
+									uint8_t parsedata=255;
+									for(uint8_t i=0;i<PINCOUNT;i++){
+										if(!strcmp((const char *)datastr,(const char *)PXX[i])){
+											parsedata=i;
+											break;
+										}
+									}
+									if(parsedata!=255){
+										data=parsedata;
+									}else{
+										UART_SendString("\r\npin \"");
+										UART_SendString(&datastr[0]);
+										UART_SendString("\" does not exist");
+										break;
+									}
+								}
 								if(address<64){
 									pinstorage[address]=data;
-									char buffer[16];
-									sprintf(&buffer[0],"\r\nindex %i : %i",address,pinstorage[address]);
-									UART_SendString(&buffer[0]);
+									printstorage(address);
 								}else{
 									UART_SendString("\r\nInvalid address");
 								}
+								
 							break;
 							case 'h':    //help
-								UART_SendString("\r\n\nThis tool allow you to modify and view all saved pinouts and settings\n\r\n\rUsage:  [command] <address> <value>\n\r\n\rCommands: \n\r\n\r r     read saved data\n\r w     write data\n\r h     display this help page\n\r l     list all data\n\r g     generate pinstorage variable initializer to copy in firmware\n\r e     erase all data\n\r x     exit command line tool and go back to main menu\n\r\n\rAddress description:\n\r\n\r0 : HALL sensor A pin\n\r1 : HALL sensor B pin\n\r2 : HALL sensor B pin\n\r3 : red LED pin\n\r4 : green LED pin\n\r5 : blue LED pin\n\r6 : upper LED pin\n\r7 : lower LED pin\n\r8 : Buzzer pin\n\r9 : Button pin\n\r10 : latch pin\n\r11 : charger pin\n\r12 : battery voltage pin\n\r13 : total current DC pin\n\r14 : UART TX pin\n\r15 : UART RX pin\n\r16~22 : reserved\n\r23 : over current protection pin\n\r24 : over current protection comparator refrence pin\n\r25~31:reserved\n\r\n\r33 : vbat divider\n\r34 : itotal divider\n\r35 : iphase divider\n\r36 : baud\n\r37 : pwm resolution\n\r38 : slave ID\n\r39 : windings\n\r40 : invert lowside\n\r41 : soft current limit\n\r42 : hard limit awdg\n\r43 : UART\n\r44 : pid\n\r45 : bat 100%\n\r46 : bat 0%\n\r47 : serial timeout\n\r48~64 : reserved\n");
+								UART_SendString("\r\n\nThis tool allow you to modify and view all saved pinouts and settings\n\r\n\rUsage:  [command] <address> <value>\n\r\n\rCommands: \n\r\n\r r     read saved data\n\r w     write data\n\r h     display this help page\n\r l     list all data\n\r g     generate pinstorage variable initializer to copy in firmware\n\r e     erase all data\n\r x     exit command line tool and go back to main menu\n\r\n\rAddresses:\r\n\n");
+								
 							break;
 							case 'l':    //list all values
-								for(uint8_t i=0;i<64;i++){			
-									char buffer[16];
-									sprintf(&buffer[0],"\r\nindex %i : %i",i,pinstorage[i]);
-									UART_SendString(&buffer[0]);
+								for(uint8_t i=0;i<64;i++){
+									printstorage(i);
 								}
 							break;
 							case 'g':    //generate pinout file to compile custom firmware
@@ -364,6 +486,10 @@ void autoDetectSerialIt(){    //serial dma interrupt
 						address=0;
 						data=0;
 						stage=0;
+						datalen=0;
+						addrlen=0;
+						dataparsemode=0;
+						addrparsemode=0;
 					break;
 					case ' ':    //space as seperator for command
 						stage++;
@@ -376,13 +502,21 @@ void autoDetectSerialIt(){    //serial dma interrupt
 								}
 							break;
 							case 1 :    //address
-								if(sRxBuffer[0]>='0'&&sRxBuffer[0]<='9'){
+								if(!(sRxBuffer[0]>='0'&&sRxBuffer[0]<='9')||addrparsemode==2){
+									addrstr[addrlen++]=sRxBuffer[0];
+									addrparsemode=2;
+								}else{
 									address=address*10+(sRxBuffer[0]-'0');    //shift left and add new value
+									addrparsemode=1;
 								}
 							break;
 							case 2 :    //value
-								if(sRxBuffer[0]>='0'&&sRxBuffer[0]<='9'){
+								if(!(sRxBuffer[0]>='0'&&sRxBuffer[0]<='9')||dataparsemode==2){
+									datastr[datalen++]=sRxBuffer[0];
+									dataparsemode=2;
+								}else{
 									data=data*10+(sRxBuffer[0]-'0');
+									dataparsemode=1;
 								}
 							break;
 						}
@@ -796,4 +930,22 @@ void saveNexit(){    //check if saving is required
 	return;
 }
 
-
+void printstorage(uint8_t i){
+	UART_SendString("\r\n");
+	UART_SendString(&addrdescription[i][0]);
+	for(uint8_t j=0;j<(13-strlen(addrdescription[i]));j++){
+		UART_Send_Byte(' ');
+	}
+	char buffer[32];
+	sprintf(&buffer[0],"(%2i): %5i ",i,pinstorage[i]);
+	UART_SendString(&buffer[0]);
+	if(i<32){
+		UART_Send_Byte('(');
+		if(pinstorage[i]<PINCOUNT){
+			UART_SendString(&PXX[pinstorage[i]][0]);
+		}else{
+			UART_SendString("not set");
+		}
+		UART_Send_Byte(')');
+	}
+}

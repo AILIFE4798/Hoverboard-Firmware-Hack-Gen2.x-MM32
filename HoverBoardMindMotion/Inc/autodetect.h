@@ -13,6 +13,7 @@ void checkbutton();
 uint8_t restorecfg();
 void testrotateloop();
 void saveNexit();
+void printstorage(uint8_t i);
 
 
 
