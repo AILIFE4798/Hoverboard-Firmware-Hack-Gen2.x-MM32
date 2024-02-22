@@ -84,14 +84,11 @@ void ADC1_COMP_IRQHandler(void){
 			itotal = (double)ITOTAL_DIVIDER*(tmp-itotaloffset)*vcc*100/4096;
 			avgvbat();
 			avgItotal();
-			if(SOFT_ILIMIT>1&&SOFT_ILIMIT<30&&itotal>SOFT_ILIMIT){
-				TIM_CtrlPWMOutputs(TIM1, DISABLE);
-			}else if(BAT_EMPTY>20000&&BAT_EMPTY<65000&&vbat*10<BAT_EMPTY){	
-				TIM_CtrlPWMOutputs(TIM1, DISABLE);
-			}else{
-				TIM_CtrlPWMOutputs(TIM1, ENABLE);
+			if(SOFT_ILIMIT>100&&SOFT_ILIMIT<3000&&itotal>SOFT_ILIMIT*100){
+				TIM1->CCR1=0;
+				TIM1->CCR2=0;
+				TIM1->CCR3=0;
 			}
-
 		}
 		ADC_ClearITPendingBit(ADC1, ADC_IT_EOC);
 	}

@@ -23,7 +23,7 @@ int testrotatedir=1;
 uint8_t hallpos(uint8_t dir);
 bool lastdir=0;
 extern uint8_t poweron;
-
+extern int vbat;
 
 
 const uint8_t hall_to_pos[8] =
@@ -145,16 +145,19 @@ void speedupdate(){
 			realspeed=0;
 			frealspeed=0;
 		}	
-		if(CONSTSPEED){	
-			pwm= PID2PWM((PID(speed,realspeed)/50));// command the required RPM
-			if(speed==0){
-				pwm=0;
-				PIDrst();
-			}
+		if(BAT_EMPTY>20000&&BAT_EMPTY<65000&&vbat*10<BAT_EMPTY){
+			pwm=0;
 		}else{
-			pwm=speed*PWM_RES/1000;//1000~-1000 for all pwm resolution
+			if(CONSTSPEED){	
+				pwm= PID2PWM((PID(speed,realspeed)/50));// command the required RPM
+				if(speed==0){
+					pwm=0;
+					PIDrst();
+				}
+			}else{
+				pwm=speed*PWM_RES/1000;//1000~-1000 for all pwm resolution
+			}
 		}
-		
 		if(pwm>0){
 		dir=1;
 		}else{

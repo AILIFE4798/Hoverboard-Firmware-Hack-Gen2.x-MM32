@@ -192,7 +192,7 @@ void TIM1_init(u16 arr, u16 psc){
 			COMP_Init(COMP1, &COMP_InitStructure);
 			COMP_Cmd(COMP1, ENABLE);
 			*/
-		}else{
+		}else if(OCPPIN<PINCOUNT){
 			pinMode(OCPPIN, INPUT);
 			for(uint8_t i=0;i<TIMBKCOUNT;i++){
 				if(ocps[i].io==OCPPIN){
