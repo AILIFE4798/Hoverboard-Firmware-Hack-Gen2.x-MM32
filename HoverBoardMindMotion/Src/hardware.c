@@ -3,6 +3,7 @@
 extern GPIO_InitTypeDef GPIO_InitStruct;
 
 
+
 const MM32GPIO pins[33] = {   // port,pin,pinsrc
 {IOA,GPIO_Pin_0,GPIO_PinSource0},
 {IOA,GPIO_Pin_1,GPIO_PinSource1},

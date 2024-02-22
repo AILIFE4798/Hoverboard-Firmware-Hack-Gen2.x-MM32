@@ -27,6 +27,41 @@
 #define INPUT_PULLDOWN GPIO_Mode_IPD
 #define INPUT_ADC GPIO_Mode_AIN
 
+enum{
+	PA0=0,
+	PA1=1,
+	PA2=2,
+	PA3=3,
+	PA4=4,
+	PA5=5,
+	PA6=6,
+	PA7=7,
+	PA11=8,
+	PA12=9,
+	PA13=10,
+	PA14=11,
+	PA15=12,	
+	PB0=13,
+	PB1=14,
+	PB2=15,
+	PB3=16,
+	PB4=17,
+	PB5=18,
+	PB6=19,
+	PB7=20,
+	PB8=21,
+	PB9=22,
+	PB10=23,
+	PB11=24,
+	PB12=25,
+	PC13=26,
+	PC14=27,
+	PC15=28,
+	PD0=29,
+	PD1=30,
+	PD2=31,
+	PD3=32,
+};
 
 typedef struct{
   uint8_t port;

@@ -14,8 +14,8 @@ extern uint16_t pinstorage[64];
 #define BAUD_AD 19200
 #define INVERT_LOWSIDE_AD TIM_OCNPolarity_High   //when the low side gate driver is active HIGH
 #define PWM_RES_AD 8192    //the higher the resolution, the lower the frequency
-#define TX_AD 17
-#define RX_AD 19
+#define TX_AD PB4
+#define RX_AD PB6
 
 
 #define HALLAPIN pinstorage[0]

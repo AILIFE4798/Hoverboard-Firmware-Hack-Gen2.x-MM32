@@ -53,8 +53,8 @@ s32 main(void){
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOB, ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOC, ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOD, ENABLE);
-	TXPIN = 17;    //serial tx rx is used,do not modify
-	RXPIN = 19;
+	TXPIN = TX_AD;    //serial tx rx is used,do not modify
+	RXPIN = RX_AD;
 	DELAY_Init();    //delay needed in autodetect
 	BLDC_init();    //motor pin is always the same so initialize it first
 	TIM1_init(PWM_RES_AD, 0);
