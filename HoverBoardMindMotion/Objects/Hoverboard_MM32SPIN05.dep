@@ -1,6 +1,6 @@
 Dependencies for Project 'Hoverboard', Target 'MM32SPIN05': (DO NOT MODIFY !)
 CompilerVersion: 6190000::V6.19::ARMCLANG
-F (.\Src\main.c)(0x65DBFEF3)(-xc -std=c11 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./library/MM32SPIN05/HAL_Lib/Inc -I ./RTE/_MM32SPIN05-I./RTE/_MM32SPIN05-IC:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/Admin/AppData/Local/Arm/Packs/MindMotion/MM32SPIN0x_DFP/1.0.8/Device/MM32SPIN06xx_s/Include-D__UVISION_VERSION="538" -D_RTE_ -DMM32SPIN05PF -D_RTE_-o ./objects/main.o -MD)
+F (.\Src\main.c)(0x65DBFF63)(-xc -std=c11 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./library/MM32SPIN05/HAL_Lib/Inc -I ./RTE/_MM32SPIN05-I./RTE/_MM32SPIN05-IC:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/Admin/AppData/Local/Arm/Packs/MindMotion/MM32SPIN0x_DFP/1.0.8/Device/MM32SPIN06xx_s/Include-D__UVISION_VERSION="538" -D_RTE_ -DMM32SPIN05PF -D_RTE_-o ./objects/main.o -MD)
 I (C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\mm32_device.h)(0x60866B54)
 I (C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\mm32_reg.h)(0x60866B54)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x63884908)
@@ -40,8 +40,8 @@ I (library\MM32SPIN05\HAL_Lib\Inc\hal_tim.h)(0x65DBC698)
 I (library\MM32SPIN05\HAL_Lib\Inc\hal_iwdg.h)(0x65DBC698)
 I (Src\..\Inc\delay.h)(0x65DBE23C)
 I (C:\Keil_v5\ARM\ARMCLANG\include\string.h)(0x63884908)
-I (Src\..\Inc\pinout.h)(0x65DBC698)
-I (Src\..\Inc\..\Inc\hardware.h)(0x65DBE4D6)
+I (Src\..\Inc\pinout.h)(0x65DC1934)
+I (Src\..\Inc\..\Inc\hardware.h)(0x65DC1659)
 I (library\MM32SPIN05\HAL_Lib\Inc\hal_conf.h)(0x65DBC698)
 I (library\MM32SPIN05\HAL_Lib\Inc\hal_crc.h)(0x65DBC698)
 I (library\MM32SPIN05\HAL_Lib\Inc\hal_comp.h)(0x65DBC698)
@@ -64,7 +64,7 @@ I (Src\..\Inc\uart.h)(0x65DBE2AA)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdio.h)(0x63884908)
 I (Src\..\Inc\bldc.h)(0x65DBE2B3)
 I (Src\..\Inc\autodetect.h)(0x65DBE289)
-I (Src\..\Inc\hardware.h)(0x65DBE4D6)
+I (Src\..\Inc\hardware.h)(0x65DC1659)
 F (.\Src\delay.c)(0x65DBC699)(-xc -std=c11 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./library/MM32SPIN05/HAL_Lib/Inc -I ./RTE/_MM32SPIN05-I./RTE/_MM32SPIN05-IC:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/Admin/AppData/Local/Arm/Packs/MindMotion/MM32SPIN0x_DFP/1.0.8/Device/MM32SPIN06xx_s/Include-D__UVISION_VERSION="538" -D_RTE_ -DMM32SPIN05PF -D_RTE_-o ./objects/delay.o -MD)
 I (Src\..\Inc\delay.h)(0x65DBE23C)
 I (C:\Keil_v5\ARM\ARMCLANG\include\string.h)(0x63884908)
@@ -133,8 +133,8 @@ I (C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device
 I (C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_wwdg.h)(0x60866B54)
 I (C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\mm32_reg_redefine_v1.h)(0x60866B54)
 I (library\MM32SPIN05\HAL_Lib\Inc\hal_gpio.h)(0x65DBC698)
-I (Src\..\Inc\pinout.h)(0x65DBC698)
-I (Src\..\Inc\..\Inc\hardware.h)(0x65DBE4D6)
+I (Src\..\Inc\pinout.h)(0x65DC1934)
+I (Src\..\Inc\..\Inc\hardware.h)(0x65DC1659)
 I (library\MM32SPIN05\HAL_Lib\Inc\hal_conf.h)(0x65DBC698)
 I (library\MM32SPIN05\HAL_Lib\Inc\hal_adc.h)(0x65DBC698)
 I (library\MM32SPIN05\HAL_Lib\Inc\hal_crc.h)(0x65DBC698)
@@ -160,8 +160,8 @@ I (Src\..\Inc\remoteUartBus.h)(0x65DBE534)
 I (Src\..\Inc\bldc.h)(0x65DBE2B3)
 I (Src\..\Inc\calculation.h)(0x65DBE8F5)
 I (C:\Keil_v5\ARM\ARMCLANG\include\math.h)(0x63884908)
-I (Src\..\Inc\hardware.h)(0x65DBE4D6)
-F (.\Src\initialize.c)(0x65DBFEA2)(-xc -std=c11 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./library/MM32SPIN05/HAL_Lib/Inc -I ./RTE/_MM32SPIN05-I./RTE/_MM32SPIN05-IC:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/Admin/AppData/Local/Arm/Packs/MindMotion/MM32SPIN0x_DFP/1.0.8/Device/MM32SPIN06xx_s/Include-D__UVISION_VERSION="538" -D_RTE_ -DMM32SPIN05PF -D_RTE_-o ./objects/initialize.o -MD)
+I (Src\..\Inc\hardware.h)(0x65DC1659)
+F (.\Src\initialize.c)(0x65DC195F)(-xc -std=c11 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./library/MM32SPIN05/HAL_Lib/Inc -I ./RTE/_MM32SPIN05-I./RTE/_MM32SPIN05-IC:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/Admin/AppData/Local/Arm/Packs/MindMotion/MM32SPIN0x_DFP/1.0.8/Device/MM32SPIN06xx_s/Include-D__UVISION_VERSION="538" -D_RTE_ -DMM32SPIN05PF -D_RTE_-o ./objects/initialize.o -MD)
 I (library\MM32SPIN05\HAL_Lib\Inc\hal_gpio.h)(0x65DBC698)
 I (C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\types.h)(0x60866B54)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x63884908)
@@ -215,11 +215,11 @@ I (library\MM32SPIN05\HAL_Lib\Inc\hal_uart.h)(0x65DBC698)
 I (library\MM32SPIN05\HAL_Lib\Inc\hal_uid.h)(0x65DBC698)
 I (library\MM32SPIN05\HAL_Lib\Inc\hal_wwdg.h)(0x65DBC698)
 I (library\MM32SPIN05\HAL_Lib\Inc\hal_redefine.h)(0x65DBC698)
-I (Src\..\Inc\pinout.h)(0x65DBC698)
-I (Src\..\Inc\..\Inc\hardware.h)(0x65DBE4D6)
+I (Src\..\Inc\pinout.h)(0x65DC1934)
+I (Src\..\Inc\..\Inc\hardware.h)(0x65DC1659)
 I (Src\..\Inc\initialize.h)(0x65DBE2A3)
 I (Src\..\Inc\autodetect.h)(0x65DBE289)
-I (Src\..\Inc\hardware.h)(0x65DBE4D6)
+I (Src\..\Inc\hardware.h)(0x65DC1659)
 F (.\Src\interrupt.c)(0x65DBC699)(-xc -std=c11 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./library/MM32SPIN05/HAL_Lib/Inc -I ./RTE/_MM32SPIN05-I./RTE/_MM32SPIN05-IC:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/Admin/AppData/Local/Arm/Packs/MindMotion/MM32SPIN0x_DFP/1.0.8/Device/MM32SPIN06xx_s/Include-D__UVISION_VERSION="538" -D_RTE_ -DMM32SPIN05PF -D_RTE_-o ./objects/interrupt.o -MD)
 I (library\MM32SPIN05\HAL_Lib\Inc\hal_tim.h)(0x65DBC698)
 I (C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\types.h)(0x60866B54)
@@ -275,8 +275,8 @@ I (library\MM32SPIN05\HAL_Lib\Inc\hal_uid.h)(0x65DBC698)
 I (library\MM32SPIN05\HAL_Lib\Inc\hal_wwdg.h)(0x65DBC698)
 I (library\MM32SPIN05\HAL_Lib\Inc\hal_redefine.h)(0x65DBC698)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdio.h)(0x63884908)
-I (Src\..\Inc\pinout.h)(0x65DBC698)
-I (Src\..\Inc\..\Inc\hardware.h)(0x65DBE4D6)
+I (Src\..\Inc\pinout.h)(0x65DC1934)
+I (Src\..\Inc\..\Inc\hardware.h)(0x65DC1659)
 I (Src\..\Inc\bldc.h)(0x65DBE2B3)
 I (Src\..\Inc\remoteUartBus.h)(0x65DBE534)
 I (Src\..\Inc\calculation.h)(0x65DBE8F5)
@@ -288,8 +288,8 @@ I (C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x63884908)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdbool.h)(0x63884908)
 I (C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\types.h)(0x60866B54)
-I (Src\..\Inc\\pinout.h)(0x65DBC698)
-I (Src\..\Inc\..\Inc\hardware.h)(0x65DBE4D6)
+I (Src\..\Inc\\pinout.h)(0x65DC1934)
+I (Src\..\Inc\..\Inc\hardware.h)(0x65DC1659)
 I (C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\mm32_device.h)(0x60866B54)
 I (C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\mm32_reg.h)(0x60866B54)
 I (C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_common.h)(0x60866B54)
@@ -371,8 +371,8 @@ I (C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device
 I (C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_wwdg.h)(0x60866B54)
 I (C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\mm32_reg_redefine_v1.h)(0x60866B54)
 I (Src\..\Inc\calculation.h)(0x65DBE8F5)
-I (Src\..\Inc\pinout.h)(0x65DBC698)
-I (Src\..\Inc\..\Inc\hardware.h)(0x65DBE4D6)
+I (Src\..\Inc\pinout.h)(0x65DC1934)
+I (Src\..\Inc\..\Inc\hardware.h)(0x65DC1659)
 I (library\MM32SPIN05\HAL_Lib\Inc\hal_conf.h)(0x65DBC698)
 I (library\MM32SPIN05\HAL_Lib\Inc\hal_adc.h)(0x65DBC698)
 I (library\MM32SPIN05\HAL_Lib\Inc\hal_crc.h)(0x65DBC698)
@@ -395,7 +395,7 @@ I (library\MM32SPIN05\HAL_Lib\Inc\hal_uart.h)(0x65DBC698)
 I (library\MM32SPIN05\HAL_Lib\Inc\hal_uid.h)(0x65DBC698)
 I (library\MM32SPIN05\HAL_Lib\Inc\hal_wwdg.h)(0x65DBC698)
 I (library\MM32SPIN05\HAL_Lib\Inc\hal_redefine.h)(0x65DBC698)
-F (.\Src\autodetect.c)(0x65DBF1F0)(-xc -std=c11 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./library/MM32SPIN05/HAL_Lib/Inc -I ./RTE/_MM32SPIN05-I./RTE/_MM32SPIN05-IC:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/Admin/AppData/Local/Arm/Packs/MindMotion/MM32SPIN0x_DFP/1.0.8/Device/MM32SPIN06xx_s/Include-D__UVISION_VERSION="538" -D_RTE_ -DMM32SPIN05PF -D_RTE_-o ./objects/autodetect.o -MD)
+F (.\Src\autodetect.c)(0x65DC0038)(-xc -std=c11 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./library/MM32SPIN05/HAL_Lib/Inc -I ./RTE/_MM32SPIN05-I./RTE/_MM32SPIN05-IC:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/Admin/AppData/Local/Arm/Packs/MindMotion/MM32SPIN0x_DFP/1.0.8/Device/MM32SPIN06xx_s/Include-D__UVISION_VERSION="538" -D_RTE_ -DMM32SPIN05PF -D_RTE_-o ./objects/autodetect.o -MD)
 I (C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\mm32_device.h)(0x60866B54)
 I (C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\mm32_reg.h)(0x60866B54)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x63884908)
@@ -450,7 +450,7 @@ I (library\MM32SPIN05\HAL_Lib\Inc\hal_uart.h)(0x65DBC698)
 I (library\MM32SPIN05\HAL_Lib\Inc\hal_wwdg.h)(0x65DBC698)
 I (library\MM32SPIN05\HAL_Lib\Inc\hal_redefine.h)(0x65DBC698)
 I (Src\..\Inc\autodetect.h)(0x65DBE289)
-I (Src\..\Inc\hardware.h)(0x65DBE4D6)
+I (Src\..\Inc\hardware.h)(0x65DC1659)
 I (Src\..\Inc\initialize.h)(0x65DBE2A3)
 I (Src\..\Inc\delay.h)(0x65DBE23C)
 I (C:\Keil_v5\ARM\ARMCLANG\include\string.h)(0x63884908)
@@ -458,11 +458,11 @@ I (Src\..\Inc\uart.h)(0x65DBE2AA)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdio.h)(0x63884908)
 I (Src\..\Inc\bldc.h)(0x65DBE2B3)
 I (Src\..\Inc\sim_eeprom.h)(0x65DBE2BB)
-I (Src\..\Inc\pinout.h)(0x65DBC698)
-I (Src\..\Inc\..\Inc\hardware.h)(0x65DBE4D6)
+I (Src\..\Inc\pinout.h)(0x65DC1934)
+I (Src\..\Inc\..\Inc\hardware.h)(0x65DC1659)
 I (C:\Keil_v5\ARM\ARMCLANG\include\math.h)(0x63884908)
-F (.\Src\hardware.c)(0x65DBE8B0)(-xc -std=c11 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./library/MM32SPIN05/HAL_Lib/Inc -I ./RTE/_MM32SPIN05-I./RTE/_MM32SPIN05-IC:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/Admin/AppData/Local/Arm/Packs/MindMotion/MM32SPIN0x_DFP/1.0.8/Device/MM32SPIN06xx_s/Include-D__UVISION_VERSION="538" -D_RTE_ -DMM32SPIN05PF -D_RTE_-o ./objects/hardware.o -MD)
-I (Src\..\Inc\hardware.h)(0x65DBE4D6)
+F (.\Src\hardware.c)(0x65DC16DD)(-xc -std=c11 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./library/MM32SPIN05/HAL_Lib/Inc -I ./RTE/_MM32SPIN05-I./RTE/_MM32SPIN05-IC:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/Admin/AppData/Local/Arm/Packs/MindMotion/MM32SPIN0x_DFP/1.0.8/Device/MM32SPIN06xx_s/Include-D__UVISION_VERSION="538" -D_RTE_ -DMM32SPIN05PF -D_RTE_-o ./objects/hardware.o -MD)
+I (Src\..\Inc\hardware.h)(0x65DC1659)
 I (C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\mm32_device.h)(0x60866B54)
 I (C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\mm32_reg.h)(0x60866B54)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x63884908)
@@ -577,10 +577,10 @@ F (.\Inc\calculation.h)(0x65DBE8F5)()
 F (.\Inc\delay.h)(0x65DBE23C)()
 F (.\Inc\initialize.h)(0x65DBE2A3)()
 F (.\Inc\interrupt.h)(0x65BE30DF)()
-F (.\Inc\pinout.h)(0x65DBC698)()
+F (.\Inc\pinout.h)(0x65DC1934)()
 F (.\Inc\uart.h)(0x65DBE2AA)()
 F (.\Inc\autodetect.h)(0x65DBE289)()
-F (.\Inc\hardware.h)(0x65DBE4D6)()
+F (.\Inc\hardware.h)(0x65DC1659)()
 F (.\Inc\sim_eeprom.h)(0x65DBE2BB)()
 F (.\Library\MM32SPIN05\HAL_Lib\Src\hal_adc.c)(0x65DBDFF2)(-xc -std=c11 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./library/MM32SPIN05/HAL_Lib/Inc -I ./RTE/_MM32SPIN05-I./RTE/_MM32SPIN05-IC:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/Admin/AppData/Local/Arm/Packs/MindMotion/MM32SPIN0x_DFP/1.0.8/Device/MM32SPIN06xx_s/Include-D__UVISION_VERSION="538" -D_RTE_ -DMM32SPIN05PF -D_RTE_-o ./objects/hal_adc.o -MD)
 I (library\MM32SPIN05\HAL_Lib\Inc\hal_adc.h)(0x65DBC698)
@@ -847,9 +847,10 @@ F (.\Library\MM32SPIN25\HAL_lib\src\HAL_syscfg.c)(0x5D8DDCC4)()
 F (.\Library\MM32SPIN25\HAL_lib\src\HAL_tim.c)(0x5D8DDCC4)()
 F (.\Library\MM32SPIN25\HAL_lib\src\HAL_uart.c)(0x5D8DDCC4)()
 F (.\Library\MM32SPIN25\HAL_lib\src\HAL_wwdg.c)(0x5D8DDCC4)()
+F (.\Library\MM32SPIN25\HAL_lib\src\hal_uid.c)(0x65DC0085)()
 F (.\Library\MM32SPIN25\HAL_lib\inc\spin25-redefine.h)(0x65DBFEA2)()
 F (RTE/Device/MM32SPIN05PF/startup_mm32spin06xx_s_keil.s)(0x65CDE306)(--target=arm-arm-none-eabi -mcpu=cortex-m0 -masm=auto  -Wa,armasm,--diag_suppress=A1950W -c-gdwarf-4-I./RTE/_MM32SPIN05-IC:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/Admin/AppData/Local/Arm/Packs/MindMotion/MM32SPIN0x_DFP/1.0.8/Device/MM32SPIN06xx_s/Include-Wa,armasm,--pd,"__UVISION_VERSION SETA 538" -Wa,armasm,--pd,"_RTE_ SETA 1" -Wa,armasm,--pd,"MM32SPIN05PF SETA 1" -Wa,armasm,--pd,"_RTE_ SETA 1"-o ./objects/startup_mm32spin06xx_s_keil.o)
-F (RTE/Device/MM32SPIN05PF/system_mm32spin06xx_s.c)(0x65DA9343)(-xc -std=c11 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./library/MM32SPIN05/HAL_Lib/Inc -I ./RTE/_MM32SPIN05-I./RTE/_MM32SPIN05-IC:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/Admin/AppData/Local/Arm/Packs/MindMotion/MM32SPIN0x_DFP/1.0.8/Device/MM32SPIN06xx_s/Include-D__UVISION_VERSION="538" -D_RTE_ -DMM32SPIN05PF -D_RTE_-o ./objects/system_mm32spin06xx_s.o -MD)
+F (RTE/Device/MM32SPIN05PF/system_mm32spin06xx_s.c)(0x65DC0252)(-xc -std=c11 --target=arm-arm-none-eabi -mcpu=cortex-m0 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ./library/MM32SPIN05/HAL_Lib/Inc -I ./RTE/_MM32SPIN05-I./RTE/_MM32SPIN05-IC:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/Admin/AppData/Local/Arm/Packs/MindMotion/MM32SPIN0x_DFP/1.0.8/Device/MM32SPIN06xx_s/Include-D__UVISION_VERSION="538" -D_RTE_ -DMM32SPIN05PF -D_RTE_-o ./objects/system_mm32spin06xx_s.o -MD)
 I (C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\mm32_device.h)(0x60866B54)
 I (C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\mm32_reg.h)(0x60866B54)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x63884908)

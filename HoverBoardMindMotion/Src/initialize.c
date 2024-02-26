@@ -13,11 +13,11 @@
 #include "HAL_device.h"
 #endif
 
-extern MM32GPIO pins[33];
-extern MM32UART1 uarts[4];
-extern MM32ADC adcs[10];
-extern MM32TIM23 halltims[18];
-extern MM32TIMBK ocps[4];
+extern MM32GPIO pins[PINCOUNT];
+extern MM32UART1 uarts[UARTCOUNT];
+extern MM32ADC adcs[ADCCOUNT];
+extern MM32TIM23 halltims[TIMCOUNT];
+extern MM32TIMBK ocps[TIMBKCOUNT];
 
 
 
