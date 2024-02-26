@@ -1,8 +1,12 @@
+#ifdef TARGET_MM32SPIN25
+#include "HAL_device.h"                 // Device header
+#else
 #include "mm32_device.h"                // Device header
+#endif
+#include "hal_uid.h"
+#include "hal_conf.h"
 #include "hal_gpio.h"
 #include "hal_adc.h"
-#include "hal_conf.h"
-#include "hal_uid.h"
 #include "../Inc/autodetect.h"
 #include "../Inc/hardware.h"
 #include "../Inc/initialize.h"
@@ -12,6 +16,7 @@
 #include "../Inc/sim_eeprom.h"
 #include "../Inc/pinout.h"
 #include "math.h"
+
 
 extern MM32GPIO pins[PINCOUNT];
 extern MM32ADC adcs[ADCCOUNT];
@@ -150,10 +155,10 @@ uint8_t detectSelfHold(){
 	for(uint8_t i=0;i<PINCOUNT;i++){
 		if(!used(i)){
 			uint32_t timeout = millis+50;    //10ms not enough for capacitor to discharge
-			uint32_t treshold = (uint16_t)ADC1->CH15DR+10;    //refrence is very stable, 10 is enough to detect change(0.05v drop)
+			uint32_t treshold = (uint16_t)ADC1->ADDR15+10;    //refrence is very stable, 10 is enough to detect change(0.05v drop)
 			pinMode(i,INPUT);    //release latch
 			while(1){
-				tmp = (uint16_t)ADC1->CH15DR;
+				tmp = (uint16_t)ADC1->ADDR15;
 				if(tmp>treshold){
 					pinMode(i,INPUT_PULLUP);    //set it back quickly
 					LATCHPIN = i;    //save the pin
@@ -166,7 +171,7 @@ uint8_t detectSelfHold(){
 			}
 	  }
 	}	
-	uint16_t adcval = ADC1->CH15DR;
+	uint16_t adcval = ADC1->ADDR15;
 	vcc=(double)4915.2/adcval;    //vcc saved to calculate accurate vbat
 	return havelatch;
 }

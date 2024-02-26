@@ -17,28 +17,81 @@ Library Manager: ArmAr.exe V6.19
 Hex Converter:   FromElf.exe V6.19
 CPU DLL:         SARMCM3.DLL V5.38.0.0
 Dialog DLL:      DARMCM1.DLL V1.19.6.0
-Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.1.0.0
+Target DLL:      UL2CM3.DLL V1.164.8.0
 Dialog DLL:      TARMCM1.DLL V1.14.6.0
  
 <h2>Project:</h2>
 C:\Users\Admin\Documents\GitHub\Hoverboard-Firmware-Hack-Gen2.x-MM32\HoverBoardMindMotion\Hoverboard.uvprojx
-Project File Date:  02/22/2024
+Project File Date:  02/26/2024
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.19', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
-Build target 'MM32SPIN05'
-Src/autodetect.c(186): warning: enumeration values 'MODE_STARTUP' and 'MODE_ITOTAL' not handled in switch [-Wswitch]
+Rebuild target 'MM32SPIN25'
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\HAL_adc.c' - object file renamed from '.\Objects\HAL_adc.o' to '.\Objects\hal_adc_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\HAL_comp.c' - object file renamed from '.\Objects\HAL_comp.o' to '.\Objects\hal_comp_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\HAL_crc.c' - object file renamed from '.\Objects\HAL_crc.o' to '.\Objects\hal_crc_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\HAL_div.c' - object file renamed from '.\Objects\HAL_div.o' to '.\Objects\hal_div_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\HAL_dma.c' - object file renamed from '.\Objects\HAL_dma.o' to '.\Objects\hal_dma_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\HAL_exti.c' - object file renamed from '.\Objects\HAL_exti.o' to '.\Objects\hal_exti_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\HAL_flash.c' - object file renamed from '.\Objects\HAL_flash.o' to '.\Objects\hal_flash_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\HAL_gpio.c' - object file renamed from '.\Objects\HAL_gpio.o' to '.\Objects\hal_gpio_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\HAL_i2c.c' - object file renamed from '.\Objects\HAL_i2c.o' to '.\Objects\hal_i2c_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\HAL_iwdg.c' - object file renamed from '.\Objects\HAL_iwdg.o' to '.\Objects\hal_iwdg_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\HAL_misc.c' - object file renamed from '.\Objects\HAL_misc.o' to '.\Objects\hal_misc_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\HAL_pwr.c' - object file renamed from '.\Objects\HAL_pwr.o' to '.\Objects\hal_pwr_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\HAL_rcc.c' - object file renamed from '.\Objects\HAL_rcc.o' to '.\Objects\hal_rcc_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\HAL_spi.c' - object file renamed from '.\Objects\HAL_spi.o' to '.\Objects\hal_spi_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\HAL_tim.c' - object file renamed from '.\Objects\HAL_tim.o' to '.\Objects\hal_tim_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\HAL_uart.c' - object file renamed from '.\Objects\HAL_uart.o' to '.\Objects\hal_uart_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\HAL_wwdg.c' - object file renamed from '.\Objects\HAL_wwdg.o' to '.\Objects\hal_wwdg_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\hal_uid.c' - object file renamed from '.\Objects\hal_uid.o' to '.\Objects\hal_uid_1.o'.
+compiling delay.c...
+Src/main.c(84): warning: 5 enumeration values not handled in switch: 'MODE_STARTUP', 'MODE_MENU', 'MODE_ITOTAL'... [-Wswitch]
+                switch (mode){
+                        ^~~~
+1 warning generated.
+compiling main.c...
+compiling bldc.c...
+compiling interrupt.c...
+compiling initialize.c...
+compiling uart.c...
+compiling calculation.c...
+compiling hardware.c...
+compiling HAL_adc.c...
+compiling sim_eeprom.c...
+compiling HAL_comp.c...
+Src/autodetect.c(191): warning: enumeration values 'MODE_STARTUP' and 'MODE_ITOTAL' not handled in switch [-Wswitch]
         switch (mode){
                 ^~~~
-Src/autodetect.c(716): warning: enumeration values 'MODE_STARTUP', 'MODE_WAIT_UART', and 'MODE_ITOTAL' not handled in switch [-Wswitch]
+Src/autodetect.c(721): warning: enumeration values 'MODE_STARTUP', 'MODE_WAIT_UART', and 'MODE_ITOTAL' not handled in switch [-Wswitch]
         switch (mode){
                 ^~~~
 2 warnings generated.
 compiling autodetect.c...
+compiling HAL_crc.c...
+compiling HAL_div.c...
+compiling HAL_exti.c...
+compiling HAL_dma.c...
+compiling HAL_gpio.c...
+compiling HAL_i2c.c...
+compiling HAL_iwdg.c...
+compiling HAL_misc.c...
+compiling HAL_op.c...
+compiling HAL_flash.c...
+compiling HAL_pwr.c...
+compiling HAL_spi.c...
+compiling HAL_syscfg.c...
+compiling HAL_rcc.c...
+compiling HAL_wwdg.c...
+compiling HAL_uart.c...
+compiling hal_uid.c...
+assembling startup_MM32SPIN2xx_p.s...
+compiling system_MM32SPIN2xx_p.c...
+compiling HAL_tim.c...
 linking...
-Program Size: Code=19584 RO-data=3256 RW-data=1680 ZI-data=1984  
+Program Size: Code=20336 RO-data=3260 RW-data=1664 ZI-data=1984  
 FromELF: creating hex file...
-".\Objects\HoverboardOutput.axf" - 0 Error(s), 2 Warning(s).
+".\Objects\HoverboardOutput.axf" - 0 Error(s), 3 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -49,25 +102,27 @@ Package Vendor: ARM
    * Component: CORE Version: 5.6.0
 
 Package Vendor: MindMotion
-                http://www.mindmotion.com.cn/Download/MDK_KEIL/MindMotion.MM32SPIN0x_DFP.1.0.8.pack
-                MindMotion.MM32SPIN0x_DFP.1.0.8
-                MindMotion MM32SPIN0x Series Device Support, Drivers and Examples
-   * Component: Startup Version: 1.0.0
+                http://www.mindmotion.com.cn/Download/MDK_KEIL/MindMotion.MM32SPIN2x_DFP.1.1.6.pack
+                MindMotion.MM32SPIN2x_DFP.1.1.6
+                MindMotion MM32SPIN2x Series Device Support, Drivers and Examples
+   * Component: Startup Version: 1.0.4
 
 <h2>Collection of Component include folders:</h2>
-  ./RTE/_MM32SPIN05
+  ./RTE/_MM32SPIN25
   C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include
-  C:/Users/Admin/AppData/Local/Arm/Packs/MindMotion/MM32SPIN0x_DFP/1.0.8/Device/MM32SPIN06xx_s/Include
+  C:/Users/Admin/AppData/Local/Arm/Packs/MindMotion/MM32SPIN2x_DFP/1.1.6/Device/MM32SPIN2x/Include
+  C:/Users/Admin/AppData/Local/Arm/Packs/MindMotion/MM32SPIN2x_DFP/1.1.6/Device/MM32SPIN2x/Source
 
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.6.0
 
-   * Component: MindMotion::Device:Startup:1.0.0
-      Source file:   Device/MM32SPIN06xx_s/Source/system_mm32spin06xx_s.c
-      Include file:  Device/MM32SPIN06xx_s/Include/mm32_device.h
-      Source file:   Device/MM32SPIN06xx_s/Source/KEIL_StartAsm/startup_mm32spin06xx_s_keil.s
-Build Time Elapsed:  00:00:02
+   * Component: MindMotion::Device:Startup:1.0.4
+      Include file:  Device/MM32SPIN2x/Source/system_MM32SPIN2xx_p.h
+      Source file:   Device/MM32SPIN2x/Source/system_MM32SPIN2xx_p.c
+      Include file:  Device/MM32SPIN2x/Include/HAL_device.h
+      Source file:   Device/MM32SPIN2x/Source/KEIL_StartAsm/startup_MM32SPIN2xx_p.s
+Build Time Elapsed:  00:00:05
 </pre>
 </body>
 </html>

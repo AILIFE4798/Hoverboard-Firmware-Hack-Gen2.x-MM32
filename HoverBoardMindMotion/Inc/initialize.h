@@ -1,4 +1,8 @@
-#include "mm32_device.h"  
+#ifdef TARGET_MM32SPIN25
+#include "HAL_device.h"                 // Device header
+#else
+#include "mm32_device.h"                // Device header
+#endif
 
 void io_init();
 void TIM1_init(u16 arr, u16 psc);

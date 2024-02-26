@@ -1,4 +1,9 @@
+#ifdef TARGET_MM32SPIN25
+#include "HAL_device.h"                 // Device header
+#include "spin25-redefine.h"
+#else
 #include "mm32_device.h"                // Device header
+#endif
 #include "hal_conf.h"
 #include "hal_gpio.h" 
 #include "hal_adc.h" 
