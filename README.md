@@ -48,6 +48,11 @@ if you are buying a brand new board online, please get a board that have compara
 ### [Layout 2](https://github.com/RoboDurden/Hoverboard-Firmware-Hack-Gen2.x/issues/61)
 ![303005959-978f0a8c-0b84-4eb5-9011-176705d9b6e9](https://github.com/AILIFE4798/Hoverboard-Firmware-Hack-Gen2.x-MM32/assets/142502122/c4e70bda-5ef6-4b0c-80b7-7830203dcfcc)
 
+## support
+join this server to get support
+
+https://discord.gg/dvrKS9uyV7
+
 ## Contributions
 if you had any feature request or bug report please create issue or use the [discussions](https://github.com/AILIFE4798/Hoverboard-Firmware-Hack-Gen2.x-MM32/discussions) feature, because im working on this project actively now dont use pr unless you asked me first because it will get desynced and cannot merge
 
