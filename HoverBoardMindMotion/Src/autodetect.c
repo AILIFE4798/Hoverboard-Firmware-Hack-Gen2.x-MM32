@@ -149,7 +149,6 @@ void selfhold(){
 
 uint8_t detectSelfHold(){
 	vref_Init();    //uses internal 1.2v refrence to detect vcc voltage
-	ADC_SoftwareStartConvCmd(ADC1, ENABLE);
 	DELAY_Ms(100);    //wait for adc stablize
 	uint8_t havelatch=0;
 	for(uint8_t i=0;i<PINCOUNT;i++){
@@ -237,9 +236,13 @@ void autoDetectSerialIt(){    //serial dma interrupt
 					detectall=0;
 				break;
 				case '8':    //(8)-Test motor rotation.
-					mode=MODE_TESTROTATE;
-					init=1;
-					detectall=0;
+					if(HALLAPIN<PINCOUNT&&HALLBPIN<PINCOUNT&&HALLCPIN<PINCOUNT){
+						mode=MODE_TESTROTATE;
+						init=1;
+						detectall=0;
+					}else{
+						UART_SendString("HALL sensor not configured, please detect it first.");
+					}
 				break;
 				case '9':    //(9)-Power off.
 					if(masterslave){
@@ -324,6 +327,9 @@ void autoDetectSerialIt(){    //serial dma interrupt
 							UART_SendString(&PXX[selpin][0]);
 						break;
 					}
+					if(sRxBuffer[0]!='w'){
+						UART_SendString("\r\n");
+					}
 					do{
 						if(selpin==PINCOUNT-1){
 							selpin=0;
@@ -343,6 +349,9 @@ void autoDetectSerialIt(){    //serial dma interrupt
 					}while(used(selpin));
 				break;
 			}
+			UART_SendString("\rNow trying:");
+			UART_SendString(&PXX[selpin][0]);
+			UART_SendString("  ");
 			break;
 			case MODE_VBAT :
 			if(sRxBuffer[0]=='\n'||sRxBuffer[0]=='\r'){
@@ -784,6 +793,9 @@ void autoDetectInit(){
 			while(used(selpin)){    //find the first unused pin to start
 				selpin++;
 			}
+			UART_SendString("\rNow trying:");
+			UART_SendString(&PXX[selpin][0]);
+			UART_SendString("  ");
 		break;
 		case MODE_VBAT :
 			UART_SendString("\r\nA list of pin and voltage will be displayed, check the board input voltage with multimeter and select the closest one.\r\npress F to toggle automatic pin filtering\r\npress the number at the front of pin to save it\r\npress enter to return to main menu\r\n");

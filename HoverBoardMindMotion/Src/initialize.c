@@ -209,6 +209,7 @@ void vref_Init(){
 	ADC_Cmd(ADC1, ENABLE);
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_VoltReference, 0, ADC_SampleTime_7_5Cycles);
 	ADC_VrefintCmd(ENABLE);
+	ADC_SoftwareStartConvCmd(ADC1, ENABLE);
 }
 void ADCALL_Init(){
 	ADC_DeInit(ADC1);

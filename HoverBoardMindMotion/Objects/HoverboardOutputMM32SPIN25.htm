@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\HoverboardOutputMM32SPIN25.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\HoverboardOutputMM32SPIN25.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Mon Feb 26 12:56:08 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Tue Feb 27 10:29:43 2024
 <BR><P>
 <H3>Maximum Stack Usage =        368 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -560,6 +560,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;printvoltage
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;detectSelfHold
+<LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[102]"></a>_d2f</STRONG> (Thumb, 120 bytes, Stack size 12 bytes, d2f.o(.text), UNUSED)
@@ -568,6 +569,7 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = __aeabi_ddiv
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;detectSelfHold
+<LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[56]"></a>_ddiv</STRONG> (Thumb, 1072 bytes, Stack size 64 bytes, ddiv.o(.text), UNUSED)
@@ -596,6 +598,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;testrotateloop
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;detectSelfHold
+<LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[104]"></a>_dflt</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, dflti.o(.text), UNUSED)
@@ -829,13 +832,13 @@ Global Symbols
 <P><STRONG><a name="[ad]"></a>ADC_RegularChannelConfig</STRONG> (Thumb, 60 bytes, Stack size 8 bytes, hal_adc_1.o(.text.ADC_RegularChannelConfig))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = ADC_RegularChannelConfig
 </UL>
-<BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vref_Init
-<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;autoDetectInit
+<BR>[Called By]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;autoDetectInit
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vref_Init
 </UL>
 
 <P><STRONG><a name="[af]"></a>ADC_SoftwareStartConvCmd</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, hal_adc_1.o(.text.ADC_SoftwareStartConvCmd))
 <BR><BR>[Called By]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;autoDetectInit
-<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;detectSelfHold
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vref_Init
 </UL>
 
 <P><STRONG><a name="[cf]"></a>ADC_VrefintCmd</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, hal_adc_1.o(.text.ADC_VrefintCmd))
@@ -1224,13 +1227,13 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;printvoltage
 </UL>
 
-<P><STRONG><a name="[aa]"></a>autoDetectInit</STRONG> (Thumb, 856 bytes, Stack size 176 bytes, autodetect.o(.text.autoDetectInit))
+<P><STRONG><a name="[aa]"></a>autoDetectInit</STRONG> (Thumb, 884 bytes, Stack size 176 bytes, autodetect.o(.text.autoDetectInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 304 + Unknown Stack Size
 <LI>Call Chain = autoDetectInit &rArr; __2sprintf &rArr; _printf_char_common &rArr; __printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetChipUID
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_SoftwareStartConvCmd
 <LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCALL_Init
+<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_SoftwareStartConvCmd
 <LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_RegularChannelConfig
 <LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CtrlPWMOutputs
 <LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;commutate
@@ -1238,15 +1241,15 @@ Global Symbols
 <LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_Send_Group
 <LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SendString
 <LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pinMode
-<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
 <LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset4
 <LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 <LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
+<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
 </UL>
 <BR>[Called By]<UL><LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[81]"></a>autoDetectSerialIt</STRONG> (Thumb, 2216 bytes, Stack size 168 bytes, autodetect.o(.text.autoDetectSerialIt))
+<P><STRONG><a name="[81]"></a>autoDetectSerialIt</STRONG> (Thumb, 2280 bytes, Stack size 168 bytes, autodetect.o(.text.autoDetectSerialIt))
 <BR><BR>[Stack]<UL><LI>Max Depth = 352 + Unknown Stack Size
 <LI>Call Chain = autoDetectSerialIt &rArr; printstorage &rArr; __2sprintf &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -1274,7 +1277,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[b5]"></a>checkbutton</STRONG> (Thumb, 240 bytes, Stack size 24 bytes, autodetect.o(.text.checkbutton))
-<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = checkbutton &rArr; detectSelfHold &rArr; __aeabi_ddiv
+<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = checkbutton &rArr; detectSelfHold &rArr; __aeabi_ddiv
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;digitalRead
 <LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SendString
@@ -1298,12 +1301,11 @@ Global Symbols
 <LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;autoDetectInit
 </UL>
 
-<P><STRONG><a name="[b6]"></a>detectSelfHold</STRONG> (Thumb, 188 bytes, Stack size 32 bytes, autodetect.o(.text.detectSelfHold))
-<BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = detectSelfHold &rArr; __aeabi_ddiv
+<P><STRONG><a name="[b6]"></a>detectSelfHold</STRONG> (Thumb, 176 bytes, Stack size 24 bytes, autodetect.o(.text.detectSelfHold))
+<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = detectSelfHold &rArr; __aeabi_ddiv
 </UL>
-<BR>[Calls]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_SoftwareStartConvCmd
+<BR>[Calls]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DELAY_Ms
 <LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vref_Init
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DELAY_Ms
 <LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pinMode
 <LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
 <LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
@@ -1340,7 +1342,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;testrotateloop
 </UL>
 
-<P><STRONG><a name="[3f]"></a>main</STRONG> (Thumb, 292 bytes, Stack size 8 bytes, main.o(.text.main))
+<P><STRONG><a name="[3f]"></a>main</STRONG> (Thumb, 336 bytes, Stack size 8 bytes, main.o(.text.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 312 + Unknown Stack Size
 <LI>Call Chain = main &rArr; autoDetectInit &rArr; __2sprintf &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -1353,8 +1355,9 @@ Global Symbols
 <LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;testrotateloop
 <LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;autoDetectInit
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;detectSelfHold
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DELAY_Ms
 <LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;selfhold
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DELAY_Ms
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vref_Init
 <LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pinMode
 <LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;restorecfg
 <LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_NVIC_Config
@@ -1364,6 +1367,9 @@ Global Symbols
 <LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BLDC_init
 <LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DELAY_Init
 <LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHBPeriphClockCmd
+<LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
+<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
+<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2f
 </UL>
 <BR>[Called By]<UL><LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
@@ -1410,13 +1416,13 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;analogRead
 <LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SendString
 <LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DELAY_Ms
-<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
 <LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
 <LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
 <LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2f
 <LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 <LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fcmple
 <LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fcmpge
+<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
 </UL>
 <BR>[Called By]<UL><LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -1468,10 +1474,11 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[bb]"></a>vref_Init</STRONG> (Thumb, 80 bytes, Stack size 40 bytes, initialize.o(.text.vref_Init))
+<P><STRONG><a name="[bb]"></a>vref_Init</STRONG> (Thumb, 88 bytes, Stack size 40 bytes, initialize.o(.text.vref_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = vref_Init &rArr; ADC_RegularChannelConfig
 </UL>
-<BR>[Calls]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_VrefintCmd
+<BR>[Calls]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_SoftwareStartConvCmd
+<LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_VrefintCmd
 <LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_RegularChannelConfig
 <LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Cmd
 <LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Init
@@ -1479,6 +1486,7 @@ Global Symbols
 <LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;detectSelfHold
+<LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[7d]"></a>__aeabi_uidiv</STRONG> (Thumb, 68 bytes, Stack size 0 bytes, aeabi_sdivfast.o(.text_divfast))

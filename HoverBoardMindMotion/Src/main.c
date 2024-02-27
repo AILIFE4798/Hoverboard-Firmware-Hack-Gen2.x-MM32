@@ -59,6 +59,7 @@ s32 main(void){
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOD, ENABLE);
 	TXPIN = TX_AD;    //serial tx rx is used,do not modify
 	RXPIN = RX_AD;
+	INVERT_LOWSIDE = INVERT_LOWSIDE_AD == TIM_OCNPolarity_High ? 0 : 1;
 	DELAY_Init();    //delay needed in autodetect
 	BLDC_init();    //motor pin is always the same so initialize it first
 	TIM1_init(PWM_RES_AD, 0);
@@ -70,6 +71,10 @@ s32 main(void){
 			pinMode(LATCHPIN,INPUT_PULLUP);
 			masterslave = 1;
 		}
+		vref_Init();    //uses internal 1.2v refrence to detect vcc voltage
+		DELAY_Ms(100);
+		uint16_t adcval = ADC1->ADDR15;
+		vcc=(double)4915.2/adcval;    //vcc saved to calculate accurate vbat
 	}else{
 		selfhold();    //pull every pin high
 		DELAY_Ms(1000);    //give time to release button 
