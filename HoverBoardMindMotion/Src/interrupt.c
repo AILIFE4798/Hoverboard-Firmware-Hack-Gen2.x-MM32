@@ -77,7 +77,7 @@ void ADC1_COMP_IRQHandler(void){
 				}
 				hallposprev=hallpos(dir);
 			}
-			uint16_t tmp = ADC1->CH15DR;
+			uint16_t tmp = ADC1->ADDR15;
 			vcc=(double)4915.2/tmp;
 			vbat = (double)VBAT_DIVIDER*analogRead(VBATPIN)*vcc*100/4096;//read adc register
 			tmp = analogRead(ITOTALPIN);//prevent overflow on negative value

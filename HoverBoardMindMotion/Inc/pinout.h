@@ -10,7 +10,7 @@
 
 
 #include "../Inc/hardware.h"
-extern MM32GPIO pins[33];
+extern MM32GPIO pins[PINCOUNT];
 extern uint16_t pinstorage[64];
 	
 

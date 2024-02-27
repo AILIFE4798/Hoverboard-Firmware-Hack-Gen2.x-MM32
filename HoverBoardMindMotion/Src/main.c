@@ -1,4 +1,9 @@
+#ifdef TARGET_MM32SPIN25
+#include "HAL_device.h"                 // Device header
+#include "spin25-redefine.h" 
+#else
 #include "mm32_device.h"                // Device header
+#endif
 #include "RTE_Components.h"             // Component selection
 #include "hal_gpio.h"
 #include "hal_rcc.h"
@@ -78,14 +83,14 @@ s32 main(void){
 	//vbat
 	adc_Init();
 	//adc interrupt
-	exNVIC_Configure(ADC_COMP_IRQn, 0, 1);
+	NVIC_Configure(ADC_COMP_IRQn, 0);
 	#ifdef WATCHDOG//watchdog
 	Iwdg_Init(IWDG_Prescaler_32, 0xff);
 	#endif
 	//serial1.begin(19200);
 	UARTX_Init((uint32_t)BAUD);
 	//uart interrupt
-	exNVIC_Configure(DMA1_Channel2_3_IRQn, 0, 0);
+	NVIC_Configure(DMA1_Channel2_3_IRQn, 1);
 	//uart dma
 	DMA_NVIC_Config(DMA1_Channel3, (u32)&UART1->RDR, (u32)sRxBuffer, 1);
 	//latch on power

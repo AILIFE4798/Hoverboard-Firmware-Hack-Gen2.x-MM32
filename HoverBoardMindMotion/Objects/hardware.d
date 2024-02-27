@@ -30,11 +30,25 @@
   C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_uart.h \
   C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_wwdg.h \
   C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\mm32_reg_redefine_v1.h \
-  HAL_Lib\Inc\hal_conf.h HAL_Lib\Inc\hal_adc.h HAL_Lib\Inc\hal_crc.h \
-  HAL_Lib\Inc\hal_comp.h HAL_Lib\Inc\hal_dbg.h HAL_Lib\Inc\hal_div.h \
-  HAL_Lib\Inc\hal_dma.h HAL_Lib\Inc\hal_exti.h HAL_Lib\Inc\hal_flash.h \
-  HAL_Lib\Inc\hal_gpio.h HAL_Lib\Inc\hal_i2c.h HAL_Lib\Inc\hal_iwdg.h \
-  HAL_Lib\Inc\hal_misc.h HAL_Lib\Inc\hal_pwr.h HAL_Lib\Inc\hal_rcc.h \
-  HAL_Lib\Inc\hal_spi.h HAL_Lib\Inc\hal_syscfg.h HAL_Lib\Inc\hal_tim.h \
-  HAL_Lib\Inc\hal_uart.h HAL_Lib\Inc\hal_uid.h HAL_Lib\Inc\hal_wwdg.h \
-  HAL_Lib\Inc\hal_redefine.h
+  Library\MM32SPIN05\HAL_Lib\Inc\hal_conf.h \
+  Library\MM32SPIN05\HAL_Lib\Inc\hal_adc.h \
+  Library\MM32SPIN05\HAL_Lib\Inc\hal_crc.h \
+  Library\MM32SPIN05\HAL_Lib\Inc\hal_comp.h \
+  Library\MM32SPIN05\HAL_Lib\Inc\hal_dbg.h \
+  Library\MM32SPIN05\HAL_Lib\Inc\hal_div.h \
+  Library\MM32SPIN05\HAL_Lib\Inc\hal_dma.h \
+  Library\MM32SPIN05\HAL_Lib\Inc\hal_exti.h \
+  Library\MM32SPIN05\HAL_Lib\Inc\hal_flash.h \
+  Library\MM32SPIN05\HAL_Lib\Inc\hal_gpio.h \
+  Library\MM32SPIN05\HAL_Lib\Inc\hal_i2c.h \
+  Library\MM32SPIN05\HAL_Lib\Inc\hal_iwdg.h \
+  Library\MM32SPIN05\HAL_Lib\Inc\hal_misc.h \
+  Library\MM32SPIN05\HAL_Lib\Inc\hal_pwr.h \
+  Library\MM32SPIN05\HAL_Lib\Inc\hal_rcc.h \
+  Library\MM32SPIN05\HAL_Lib\Inc\hal_spi.h \
+  Library\MM32SPIN05\HAL_Lib\Inc\hal_syscfg.h \
+  Library\MM32SPIN05\HAL_Lib\Inc\hal_tim.h \
+  Library\MM32SPIN05\HAL_Lib\Inc\hal_uart.h \
+  Library\MM32SPIN05\HAL_Lib\Inc\hal_uid.h \
+  Library\MM32SPIN05\HAL_Lib\Inc\hal_wwdg.h \
+  Library\MM32SPIN05\HAL_Lib\Inc\hal_redefine.h
