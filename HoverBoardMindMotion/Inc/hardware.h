@@ -1,4 +1,9 @@
+#ifdef TARGET_MM32SPIN25
+#include "HAL_device.h"                 // Device header
+#include "spin25-redefine.h"
+#else
 #include "mm32_device.h"                // Device header
+#endif
 #include "hal_conf.h"
 #include "hal_gpio.h" 
 #include "hal_adc.h" 
@@ -13,11 +18,20 @@
 #define IOC 3
 #define IOD 4
 
+#ifdef TARGET_MM32SPIN25
+#define PINCOUNT 34
+#define ADCCOUNT 13
+#define TIMCOUNT 22
+#define UARTCOUNT 6
+#define TIMBKCOUNT 4
+#else
 #define PINCOUNT 33
 #define ADCCOUNT 10
 #define TIMCOUNT 14
 #define UARTCOUNT 4
 #define TIMBKCOUNT 4
+#endif
+
 
 #define OUTPUT GPIO_Mode_Out_PP
 #define OUTPUT_AF GPIO_Mode_AF_PP
@@ -61,6 +75,7 @@ enum{
 	PD1=30,
 	PD2=31,
 	PD3=32,
+	PD7=33,
 };
 
 typedef struct{

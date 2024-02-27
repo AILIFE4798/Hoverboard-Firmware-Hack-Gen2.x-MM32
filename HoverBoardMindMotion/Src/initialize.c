@@ -1,21 +1,23 @@
 //initialize all pheberals
-#include "../Inc/pinout.h"
 #include "hal_gpio.h"
 #include "hal_rcc.h"
 #include "hal_comp.h"
 #include "hal_tim.h"
-#include "../Inc/initialize.h"
 #include "hal_conf.h"
-#include "mm32_reg_redefine_v1.h"
+#include "../Inc/pinout.h"
+#include "../Inc/initialize.h"
 #include "../Inc/autodetect.h"
 #include "../Inc/hardware.h"
+#ifdef TARGET_MM32SPIN25
+#include "spin25-redefine.h"
+#include "HAL_device.h"
+#endif
 
-
-extern MM32GPIO pins[33];
-extern MM32UART1 uarts[4];
-extern MM32ADC adcs[10];
-extern MM32TIM23 halltims[18];
-extern MM32TIMBK ocps[4];
+extern MM32GPIO pins[PINCOUNT];
+extern MM32UART1 uarts[UARTCOUNT];
+extern MM32ADC adcs[ADCCOUNT];
+extern MM32TIM23 halltims[TIMCOUNT];
+extern MM32TIMBK ocps[TIMBKCOUNT];
 
 
 
@@ -88,7 +90,7 @@ void TIM1_init(u16 arr, u16 psc){
 
 	TIM_BDTRStructInit(&TIM_BDTRInitStructure);
 	// Automatic Output enable, Break, dead time and lock configuration
-	TIM_BDTRInitStructure.TIM_OSSIState = (TIMOSSI_Typedef) TIM_OSSRState_Enable;
+	TIM_BDTRInitStructure.TIM_OSSIState = TIM_OSSRState_Enable;
 	TIM_BDTRInitStructure.TIM_OSSRState = TIM_OSSRState_Enable;
 	TIM_BDTRInitStructure.TIM_Break = TIM_Break_Enable;
 	TIM_BDTRInitStructure.TIM_BreakPolarity = TIM_BreakPolarity_High;
@@ -103,13 +105,11 @@ void TIM1_init(u16 arr, u16 psc){
 
 void exNVIC_Configure(u8 ch, u8 pri, u8 sub)
 {
-	exNVIC_Init_TypeDef  NVIC_InitStruct;
+	NVIC_InitTypeDef  NVIC_InitStruct;
 	NVIC_InitStruct.NVIC_IRQChannel = ch;
-	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = pri;
-	NVIC_InitStruct.NVIC_IRQChannelSubPriority = sub;
+	NVIC_InitStruct.NVIC_IRQChannelPriority = pri;
 	NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
-
-	exNVIC_Init(&NVIC_InitStruct);
+	NVIC_Init(&NVIC_InitStruct);
 }
 //uart
 void UARTX_Init(u32 baudrate){
@@ -167,7 +167,6 @@ void DMA_NVIC_Config(DMA_Channel_TypeDef* dam_chx, u32 cpar, u32 cmar, u16 cndtr
 	DMA_InitStructure.DMA_Priority = DMA_Priority_Low;
 	//M2M mode is disabled
 	DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
-	DMA_InitStructure.DMA_Auto_reload = DMA_Auto_Reload_Disable;
 	DMA_Init(dam_chx, &DMA_InitStructure);
 	// Enable UARTy_DMA1_Channel Transfer complete interrupt
 	DMA_ITConfig(dam_chx, DMA_IT_TC, ENABLE);
@@ -187,7 +186,6 @@ void Iwdg_Init(u16 IWDG_Prescaler, u16 Reload){
 	PVU_CheckStatus();
 	IWDG_WriteAccessCmd(0x5555);
 	IWDG_SetPrescaler(IWDG_Prescaler);
-
 	//Setting overload register values
 	RVU_CheckStatus();
 	IWDG_WriteAccessCmd(0x5555);
@@ -210,7 +208,7 @@ void vref_Init(){
 	ADC_Init(ADC1, &ADC_InitStructure);
 	ADC_Cmd(ADC1, ENABLE);
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_VoltReference, 0, ADC_SampleTime_7_5Cycles);
-	ADC_TempSensorVrefintCmd(ENABLE);
+	ADC_VrefintCmd(ENABLE);
 }
 void ADCALL_Init(){
 	ADC_DeInit(ADC1);
