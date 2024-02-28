@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\HoverboardOutputMM32SPIN25.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\HoverboardOutputMM32SPIN25.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Wed Feb 28 20:41:02 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Wed Feb 28 21:46:22 2024
 <BR><P>
 <H3>Maximum Stack Usage =        368 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1022,9 +1022,9 @@ Global Symbols
 
 <P><STRONG><a name="[74]"></a>RCC_APB2PeriphClockCmd</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, hal_rcc_1.o(.text.RCC_APB2PeriphClockCmd))
 <BR><BR>[Called By]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCALL_Init
+<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM1_init
 <LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vref_Init
 <LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UARTX_Init
-<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM1_init
 </UL>
 
 <P><STRONG><a name="[77]"></a>RCC_APB2PeriphResetCmd</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, hal_rcc_1.o(.text.RCC_APB2PeriphResetCmd))
@@ -1050,7 +1050,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_mm32spin2xx_p.o(.text)
 </UL>
-<P><STRONG><a name="[92]"></a>TIM1_init</STRONG> (Thumb, 180 bytes, Stack size 80 bytes, initialize.o(.text.TIM1_init))
+<P><STRONG><a name="[92]"></a>TIM1_init</STRONG> (Thumb, 188 bytes, Stack size 80 bytes, initialize.o(.text.TIM1_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 100<LI>Call Chain = TIM1_init &rArr; TIM_OC3Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Cmd
@@ -1277,7 +1277,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[81]"></a>autoDetectSerialIt</STRONG> (Thumb, 2440 bytes, Stack size 168 bytes, autodetect.o(.text.autoDetectSerialIt))
+<P><STRONG><a name="[81]"></a>autoDetectSerialIt</STRONG> (Thumb, 2452 bytes, Stack size 168 bytes, autodetect.o(.text.autoDetectSerialIt))
 <BR><BR>[Stack]<UL><LI>Max Depth = 352 + Unknown Stack Size
 <LI>Call Chain = autoDetectSerialIt &rArr; printstorage &rArr; __2sprintf &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -1288,8 +1288,8 @@ Global Symbols
 <LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CtrlPWMOutputs
 <LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;commutate
 <LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SendString
-<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pinMode
 <LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM1_init
+<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pinMode
 <LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strcmp
 <LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset4
 <LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
@@ -1399,6 +1399,7 @@ Global Symbols
 <LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;testrotateloop
 <LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;autoDetectInit
 <LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_GPIO_Init
+<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM1_init
 <LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;detectSelfHold
 <LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;selfhold
 <LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DELAY_Ms
@@ -1408,7 +1409,6 @@ Global Symbols
 <LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_NVIC_Config
 <LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exNVIC_Configure
 <LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UARTX_Init
-<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM1_init
 <LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BLDC_init
 <LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DELAY_Init
 <LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHBPeriphClockCmd

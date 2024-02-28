@@ -285,6 +285,12 @@ void autoDetectSerialIt(){    //serial dma interrupt
 				UART_SendString("\n\rlowside ");
 				UART_SendString(INVERT_LOWSIDE ? "inverted" : "normal");
 				TIM1_init(PWM_RES_AD, 0);
+				if(!wait){
+					TIM_CtrlPWMOutputs(TIM1, ENABLE);
+					TIM1->CCR1=4000;    //spin motor at 50% pwm
+					TIM1->CCR2=4000;
+					TIM1->CCR3=4000;
+				}
 			}
 			break;
 		case MODE_LED :
