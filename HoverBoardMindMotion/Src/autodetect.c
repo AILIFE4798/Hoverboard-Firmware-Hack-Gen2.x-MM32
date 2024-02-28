@@ -60,7 +60,8 @@ uint8_t dataparsemode;
 uint8_t addrlen=0;
 uint8_t datalen=0;
 extern MM32TIM23 halltims[TIMCOUNT];
-
+extern MM32UART1 uarts[UARTCOUNT];
+uint8_t receiveuart;
 
 uint8_t hallA[PINCOUNT];
 uint8_t hallB[PINCOUNT];
@@ -186,6 +187,9 @@ uint8_t detectSelfHold(){
 	
 	
 uint8_t used(uint8_t pin){
+	if(pin==PA13||pin==PA14){
+		return 1;    //swd cannot be used
+	}
 	for(uint8_t i=0;i<16;i++){
 		if(pinstorage[i]==pin){
 			return 1;    //pin already used
@@ -1016,3 +1020,66 @@ void printstorage(uint8_t i){
 		UART_Send_Byte(')');
 	}
 }
+
+void finduartloop(){
+	char teststr[] = "HelloWorld";
+	uint8_t txs[UARTCOUNT/2], rxs[UARTCOUNT/2];
+	uint8_t tindex=0;
+	uint8_t rindex=0;
+	uint8_t found=0;
+	for(uint8_t i=0;i<UARTCOUNT;i++){
+		if(uarts[i].tx){
+			txs[tindex++]=i;
+		}else{
+			rxs[rindex++]=i;
+		}
+		pinMode(uarts[i].io, INPUT);
+		pinModeAF(uarts[i].io,uarts[i].af+1);
+	}
+	for(uint8_t r=0;r<UARTCOUNT/2;r++){
+		for(uint8_t t=0;t<UARTCOUNT/2;t++){
+			found=1;
+			pinModeAF(uarts[txs[t]].io,uarts[txs[t]].af);
+			pinModeAF(uarts[rxs[r]].io,uarts[rxs[r]].af);
+			pinMode(uarts[txs[t]].io, OUTPUT_AF);
+			pinMode(uarts[rxs[r]].io, INPUT);
+			for(uint8_t i=0;i<10;i++){
+				receiveuart=0;
+				for(uint8_t i=0;i<PINCOUNT;i++){
+					if(!(used(i)||i==uarts[txs[t]].io||i==uarts[rxs[r]].io)){
+						pinMode(i, INPUT_PULLUP);
+					}
+				}	
+        UART_Send_Byte((u8)(teststr[i]));
+				DELAY_Ms(10);
+				if(receiveuart!=teststr[i]){
+					for(uint8_t i=0;i<PINCOUNT;i++){
+						if(!(used(i)||i==uarts[txs[t]].io||i==uarts[rxs[r]].io)){
+							pinMode(i, INPUT);
+						}
+					}
+					found=0;
+					DELAY_Ms(100);
+					break;
+				}
+			}
+			if(found){
+				TXPIN=uarts[txs[t]].io;
+				RXPIN=uarts[rxs[r]].io;
+				EEPROM_Write((u8*)pinstorage, 2 * 64);
+				t=100;
+				r=100;
+				mode=MODE_WAIT_UART;
+				DELAY_Ms(1000);
+				for(uint8_t i=0;i<PINCOUNT;i++){
+					if(!used(i)){
+						pinMode(i, INPUT);
+					}
+				}	
+				UART_GPIO_Init();
+			}
+		}
+	}
+}
+	
+

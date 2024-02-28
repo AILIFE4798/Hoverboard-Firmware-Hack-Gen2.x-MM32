@@ -57,8 +57,6 @@ s32 main(void){
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOB, ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOC, ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOD, ENABLE);
-	TXPIN = TX_AD;    //serial tx rx is used,do not modify
-	RXPIN = RX_AD;
 	DELAY_Init();    //delay needed in autodetect
 	BLDC_init();    //motor pin is always the same so initialize it first
 	TIM1_init(PWM_RES_AD, 0);
@@ -79,13 +77,21 @@ s32 main(void){
 		DELAY_Ms(1000);    //give time to release button 
 		masterslave = detectSelfHold();    //no self hold pin=slave, will release all other pins to floating
 	}
-	mode=MODE_WAIT_UART;
+	if(TXPIN<PINCOUNT&&RXPIN<PINCOUNT){
+		UART_GPIO_Init();
+		mode=MODE_WAIT_UART;
+	}else{
+		mode=MODE_UART;
+	}
 	while(1){
 		if(init){    //initialization or startup message needed
 			init=0;
 			autoDetectInit();
 		}
 		switch (mode){
+			case MODE_UART :
+				finduartloop();
+			break;
 			case MODE_WAIT_UART :
 				UART_SendString("\n\n\n\n\r");
 				UART_Send_Group(&banner,464);

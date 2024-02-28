@@ -126,7 +126,6 @@ void UARTX_Init(u32 baudrate){
 	UART_InitStructure.Mode = UART_Mode_Rx | UART_Mode_Tx;
 	UART_Init(UART1, &UART_InitStructure);
 	UART_Cmd(UART1, ENABLE);
-	UART_GPIO_Init();
 }
 
 void UART_GPIO_Init(){

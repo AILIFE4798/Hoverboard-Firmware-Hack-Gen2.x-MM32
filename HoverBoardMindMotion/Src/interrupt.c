@@ -28,7 +28,8 @@ uint16_t iphasea;
 uint16_t iphaseb;
 uint32_t iphaseaoffset=0;
 uint32_t iphaseboffset=0;
-
+extern uint8_t receiveuart;
+extern modes_t mode;
 
 extern u8 sRxBuffer[10];
 #include "../Inc/uart.h"
@@ -36,8 +37,12 @@ extern u8 sRxBuffer[10];
 void DMA1_Channel2_3_IRQHandler(void){
 	if(DMA_GetITStatus(DMA1_IT_TC3)) {
 		DMA_ClearITPendingBit(DMA1_IT_GL3);
-		UART_Send_Byte(sRxBuffer[0]);
-		autoDetectSerialIt();
+		if(mode==MODE_UART){
+			receiveuart=sRxBuffer[0];
+		}else{
+			UART_Send_Byte(sRxBuffer[0]);
+			autoDetectSerialIt();
+		}
 	}
 }	
 	
