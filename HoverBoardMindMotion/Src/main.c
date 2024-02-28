@@ -51,6 +51,7 @@ extern uint8_t wait;
 float vcc;
 extern MM32GPIO pins[PINCOUNT];
 extern MM32ADC adcs[ADCCOUNT];
+extern char PXX[PINCOUNT][5];	
 
 s32 main(void){	
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOA, ENABLE);
@@ -63,6 +64,7 @@ s32 main(void){
 	exNVIC_Configure(DMA1_Channel2_3_IRQn, 0, 0);
 	DMA_NVIC_Config(DMA1_Channel3, (u32)&UART1->RDR, (u32)sRxBuffer, 1);
 	if(restorecfg()){    //valid config is present
+		LATCHPIN=PB2;
 		if(LATCHPIN<PINCOUNT){
 			pinMode(LATCHPIN,INPUT_PULLUP);
 			masterslave = 1;

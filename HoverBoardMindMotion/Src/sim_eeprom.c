@@ -15,7 +15,7 @@
 #define M16(adr) (*((vu16 *) (adr)))
 
 
-#define BASED_FLASH_SECTOR_ADDRESS   0x08007C00
+#define BASED_FLASH_SECTOR_ADDRESS   0x08007800
 ////////////////////////////////////////////////////////////////////////////////
 /// @addtogroup MM32_Example_Layer
 /// @{

@@ -1039,11 +1039,13 @@ void finduartloop(){
 		}else{
 			rxs[rindex++]=i;
 		}
-		pinMode(uarts[i].io, INPUT);
-		pinModeAF(uarts[i].io,uarts[i].af+1);
 	}
 	for(uint8_t r=0;r<UARTCOUNT/2;r++){
 		for(uint8_t t=0;t<UARTCOUNT/2;t++){
+			for(uint8_t i=0;i<UARTCOUNT;i++){
+				pinMode(uarts[i].io, OUTPUT);
+		    pinModeAF(uarts[i].io,uarts[i].af+1);
+			}
 			found=1;
 			pinModeAF(uarts[txs[t]].io,uarts[txs[t]].af);
 			pinModeAF(uarts[rxs[r]].io,uarts[rxs[r]].af);
@@ -1051,17 +1053,18 @@ void finduartloop(){
 			pinMode(uarts[rxs[r]].io, INPUT);
 			for(uint8_t i=0;i<10;i++){
 				receiveuart=0;
-				for(uint8_t i=0;i<PINCOUNT;i++){
-					if(!(used(i)||i==uarts[txs[t]].io||i==uarts[rxs[r]].io)){
-						pinMode(i, INPUT_PULLUP);
-					}
-				}	
         UART_Send_Byte((u8)(teststr[i]));
 				DELAY_Ms(10);
 				if(receiveuart!=teststr[i]){
-					for(uint8_t i=0;i<PINCOUNT;i++){
-						if(!(used(i)||i==uarts[txs[t]].io||i==uarts[rxs[r]].io)){
-							pinMode(i, INPUT);
+					for(uint8_t j=0;j<PINCOUNT;j++){
+						if(!(used(j)||j==uarts[txs[t]].io||j==uarts[rxs[r]].io)){
+							pinMode(j, INPUT_PULLUP);
+						}
+					}
+					DELAY_Ms(10);
+					for(uint8_t j=0;j<PINCOUNT;j++){
+						if(!(used(j)||j==uarts[txs[t]].io||j==uarts[rxs[r]].io)){
+							pinMode(j, INPUT);
 						}
 					}
 					found=0;
@@ -1076,6 +1079,11 @@ void finduartloop(){
 				t=100;
 				r=100;
 				mode=MODE_WAIT_UART;
+				for(uint8_t j=0;j<PINCOUNT;j++){
+					if(!(used(j)||j==uarts[txs[t]].io||j==uarts[rxs[r]].io)){
+						pinMode(j, INPUT_PULLUP);
+					}
+				}
 				DELAY_Ms(1000);
 				for(uint8_t i=0;i<PINCOUNT;i++){
 					if(!used(i)){
