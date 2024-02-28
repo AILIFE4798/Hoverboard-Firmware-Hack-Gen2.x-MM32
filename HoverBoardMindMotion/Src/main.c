@@ -59,7 +59,6 @@ s32 main(void){
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOD, ENABLE);
 	TXPIN = TX_AD;    //serial tx rx is used,do not modify
 	RXPIN = RX_AD;
-	INVERT_LOWSIDE = INVERT_LOWSIDE_AD == TIM_OCNPolarity_High ? 0 : 1;
 	DELAY_Init();    //delay needed in autodetect
 	BLDC_init();    //motor pin is always the same so initialize it first
 	TIM1_init(PWM_RES_AD, 0);

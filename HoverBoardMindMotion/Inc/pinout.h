@@ -12,8 +12,6 @@ extern uint16_t pinstorage[64];
 
 
 #define BAUD_AD 19200
-//#define INVERT_LOWSIDE_AD TIM_OCNPolarity_High   //when the low side gate driver is active HIGH
-#define INVERT_LOWSIDE_AD TIM_OCNPolarity_Low   //when the low side gate driver is active LOW
 #define PWM_RES_AD 8192    //the higher the resolution, the lower the frequency
 #ifdef TARGET_MM32SPIN25
 #define TX_AD PD0
@@ -21,10 +19,10 @@ extern uint16_t pinstorage[64];
 //#define TX_AD PB6
 //#define RX_AD PB7
 #else
-//#define TX_AD PB6
-//#define RX_AD PB7
-#define TX_AD PB4
-#define RX_AD PB6
+#define TX_AD PB6
+#define RX_AD PB7
+//#define TX_AD PB4
+//#define RX_AD PB6
 #endif
 
 

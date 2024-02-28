@@ -276,6 +276,11 @@ void autoDetectSerialIt(){    //serial dma interrupt
 				wait=0;
 			}else if(sRxBuffer[0]=='y'){
 				wait=0;    //continue running after user confirmed
+			}else if(sRxBuffer[0]=='i'){
+				INVERT_LOWSIDE = !INVERT_LOWSIDE;
+				UART_SendString("\n\rlowside ");
+				UART_SendString(INVERT_LOWSIDE ? "inverted" : "normal");
+				TIM1_init(PWM_RES_AD, 0);
 			}
 			break;
 		case MODE_LED :
@@ -791,7 +796,7 @@ void autoDetectInit(){
 			}
 		break;
 		case MODE_HALL :
-			UART_SendString("\n\rthis will spin motor slowly to detect hall sensor pins,if it takes too long please increase input voltage to 42v.\n\rpress Y to start,Enter to return to menu\n\r");
+			UART_SendString("\n\rthis will spin motor slowly to detect hall sensor pins,if it takes too long please increase input voltage to 42v, if the motor does not move at all or a short circuit occured press I to invert lowside drive signal\n\rpress Y to start,Enter to return to menu\n\r");
 			wait=1;
 			while(wait){
 				__NOP();
