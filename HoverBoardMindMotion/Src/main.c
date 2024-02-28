@@ -66,7 +66,7 @@ s32 main(void){
 	UARTX_Init(BAUD_AD);    //uart used for autodetect, only 4 possible pin combination on uart1
 	exNVIC_Configure(DMA1_Channel2_3_IRQn, 0, 0);
 	DMA_NVIC_Config(DMA1_Channel3, (u32)&UART1->RDR, (u32)sRxBuffer, 1);
-	if(restorecfg()){
+	if(restorecfg()){    //valid config is present
 		if(LATCHPIN<PINCOUNT){
 			pinMode(LATCHPIN,INPUT_PULLUP);
 			masterslave = 1;

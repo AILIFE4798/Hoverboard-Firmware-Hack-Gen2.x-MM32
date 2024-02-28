@@ -17,12 +17,12 @@ Library Manager: ArmAr.exe V6.19
 Hex Converter:   FromElf.exe V6.19
 CPU DLL:         SARMCM3.DLL V5.38.0.0
 Dialog DLL:      DARMCM1.DLL V1.19.6.0
-Target DLL:      UL2CM3.DLL V1.164.8.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.1.0.0
 Dialog DLL:      TARMCM1.DLL V1.14.6.0
  
 <h2>Project:</h2>
 C:\Users\Admin\Documents\GitHub\Hoverboard-Firmware-Hack-Gen2.x-MM32\HoverBoardMindMotion\Hoverboard.uvprojx
-Project File Date:  02/27/2024
+Project File Date:  02/28/2024
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.19', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
@@ -45,18 +45,25 @@ Note: source file '.\Library\MM32SPIN25\HAL_lib\src\HAL_tim.c' - object file ren
 Note: source file '.\Library\MM32SPIN25\HAL_lib\src\HAL_uart.c' - object file renamed from '.\Objects\HAL_uart.o' to '.\Objects\hal_uart_1.o'.
 Note: source file '.\Library\MM32SPIN25\HAL_lib\src\HAL_wwdg.c' - object file renamed from '.\Objects\HAL_wwdg.o' to '.\Objects\hal_wwdg_1.o'.
 Note: source file '.\Library\MM32SPIN25\HAL_lib\src\hal_uid.c' - object file renamed from '.\Objects\hal_uid.o' to '.\Objects\hal_uid_1.o'.
-Src/autodetect.c(190): warning: enumeration values 'MODE_STARTUP' and 'MODE_ITOTAL' not handled in switch [-Wswitch]
+compiling interrupt.c...
+Src/main.c(89): warning: 5 enumeration values not handled in switch: 'MODE_UART', 'MODE_MENU', 'MODE_ITOTAL'... [-Wswitch]
+                switch (mode){
+                        ^~~~
+1 warning generated.
+compiling main.c...
+compiling initialize.c...
+Src/autodetect.c(199): warning: enumeration values 'MODE_UART' and 'MODE_ITOTAL' not handled in switch [-Wswitch]
         switch (mode){
                 ^~~~
-Src/autodetect.c(730): warning: enumeration values 'MODE_STARTUP', 'MODE_WAIT_UART', and 'MODE_ITOTAL' not handled in switch [-Wswitch]
+Src/autodetect.c(769): warning: enumeration values 'MODE_UART', 'MODE_WAIT_UART', and 'MODE_ITOTAL' not handled in switch [-Wswitch]
         switch (mode){
                 ^~~~
 2 warnings generated.
 compiling autodetect.c...
 linking...
-Program Size: Code=20484 RO-data=3348 RW-data=1668 ZI-data=1988  
+Program Size: Code=20604 RO-data=3504 RW-data=1668 ZI-data=1988  
 FromELF: creating hex file...
-".\Objects\HoverboardOutputMM32SPIN25.axf" - 0 Error(s), 2 Warning(s).
+".\Objects\HoverboardOutputMM32SPIN25.axf" - 0 Error(s), 3 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -83,11 +90,11 @@ Package Vendor: MindMotion
    * Component: ARM::CMSIS:CORE:5.6.0
 
    * Component: MindMotion::Device:Startup:1.0.4
-      Include file:  Device/MM32SPIN2x/Source/system_MM32SPIN2xx_p.h
       Source file:   Device/MM32SPIN2x/Source/system_MM32SPIN2xx_p.c
-      Include file:  Device/MM32SPIN2x/Include/HAL_device.h
       Source file:   Device/MM32SPIN2x/Source/KEIL_StartAsm/startup_MM32SPIN2xx_p.s
-Build Time Elapsed:  00:00:02
+      Include file:  Device/MM32SPIN2x/Include/HAL_device.h
+      Include file:  Device/MM32SPIN2x/Source/system_MM32SPIN2xx_p.h
+Build Time Elapsed:  00:00:04
 </pre>
 </body>
 </html>

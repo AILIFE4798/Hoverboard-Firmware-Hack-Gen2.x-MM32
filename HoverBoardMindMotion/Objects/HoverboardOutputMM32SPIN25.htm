@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\HoverboardOutputMM32SPIN25.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\HoverboardOutputMM32SPIN25.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Tue Feb 27 10:29:43 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Wed Feb 28 16:46:20 2024
 <BR><P>
 <H3>Maximum Stack Usage =        368 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -950,6 +950,7 @@ Global Symbols
 <LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidiv
 </UL>
 <BR>[Called By]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;autoDetectSerialIt
+<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;detectSelfHold
 </UL>
 
 <P><STRONG><a name="[8e]"></a>FLASH_ErasePage</STRONG> (Thumb, 280 bytes, Stack size 8 bytes, hal_flash_1.o(.text.FLASH_ErasePage))
@@ -1277,7 +1278,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[b5]"></a>checkbutton</STRONG> (Thumb, 240 bytes, Stack size 24 bytes, autodetect.o(.text.checkbutton))
-<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = checkbutton &rArr; detectSelfHold &rArr; __aeabi_ddiv
+<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = checkbutton &rArr; detectSelfHold &rArr; EEPROM_Write &rArr; FLASH_ProgramHalfWord
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;digitalRead
 <LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SendString
@@ -1301,10 +1302,11 @@ Global Symbols
 <LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;autoDetectInit
 </UL>
 
-<P><STRONG><a name="[b6]"></a>detectSelfHold</STRONG> (Thumb, 176 bytes, Stack size 24 bytes, autodetect.o(.text.detectSelfHold))
-<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = detectSelfHold &rArr; __aeabi_ddiv
+<P><STRONG><a name="[b6]"></a>detectSelfHold</STRONG> (Thumb, 204 bytes, Stack size 24 bytes, autodetect.o(.text.detectSelfHold))
+<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = detectSelfHold &rArr; EEPROM_Write &rArr; FLASH_ProgramHalfWord
 </UL>
-<BR>[Calls]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DELAY_Ms
+<BR>[Calls]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EEPROM_Write
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DELAY_Ms
 <LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vref_Init
 <LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pinMode
 <LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
@@ -1416,13 +1418,13 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;analogRead
 <LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SendString
 <LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DELAY_Ms
-<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
 <LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
 <LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2f
 <LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 <LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fcmple
 <LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fcmpge
 <LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
+<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
 </UL>
 <BR>[Called By]<UL><LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -1450,7 +1452,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[c6]"></a>simhallupdate</STRONG> (Thumb, 712 bytes, Stack size 32 bytes, autodetect.o(.text.simhallupdate))
+<P><STRONG><a name="[c6]"></a>simhallupdate</STRONG> (Thumb, 792 bytes, Stack size 32 bytes, autodetect.o(.text.simhallupdate))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = simhallupdate &rArr; commutate &rArr; TIM_SelectOCxM
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;commutate

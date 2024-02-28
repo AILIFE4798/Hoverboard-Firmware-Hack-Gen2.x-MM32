@@ -18,7 +18,11 @@ extern uint16_t pinstorage[64];
 #ifdef TARGET_MM32SPIN25
 #define TX_AD PD0
 #define RX_AD PD1
+//#define TX_AD PB6
+//#define RX_AD PB7
 #else
+//#define TX_AD PB6
+//#define RX_AD PB7
 #define TX_AD PB4
 #define RX_AD PB6
 #endif

@@ -59,6 +59,7 @@ uint8_t addrparsemode;
 uint8_t dataparsemode;
 uint8_t addrlen=0;
 uint8_t datalen=0;
+extern MM32TIM23 halltims[TIMCOUNT];
 
 
 uint8_t hallA[PINCOUNT];
@@ -153,8 +154,12 @@ uint8_t detectSelfHold(){
 	uint8_t havelatch=0;
 	for(uint8_t i=0;i<PINCOUNT;i++){
 		if(!used(i)){
-			uint32_t timeout = millis+50;    //10ms not enough for capacitor to discharge
+			uint32_t timeout = millis+200;    //10ms not enough for capacitor to discharge
 			uint32_t treshold = (uint16_t)ADC1->ADDR15+10;    //refrence is very stable, 10 is enough to detect change(0.05v drop)
+			if(!havelatch){
+				LATCHPIN = i;
+				EEPROM_Write((u8*)pinstorage, 2 * 64);    //if the detection failed, the pin is still saved
+			}
 			pinMode(i,INPUT);    //release latch
 			while(1){
 				tmp = (uint16_t)ADC1->ADDR15;
@@ -170,6 +175,10 @@ uint8_t detectSelfHold(){
 			}
 	  }
 	}	
+	if(!havelatch){
+		LATCHPIN = 65535;
+		EEPROM_Write((u8*)pinstorage, 2 * 64);    //slave board
+	}
 	uint16_t adcval = ADC1->ADDR15;
 	vcc=(double)4915.2/adcval;    //vcc saved to calculate accurate vbat
 	return havelatch;
@@ -600,7 +609,7 @@ void autoDetectSerialIt(){    //serial dma interrupt
 	
 
 void simhallupdate(){    
-	while(pinstorage[0]==255||pinstorage[1]==255||pinstorage[2]==255){    //wait till every sensor is found
+	while(HALLAPIN==255||HALLBPIN==255||HALLCPIN==255){    //wait till every sensor is found
 		for(uint8_t i=1;i<7;i++){
 			step=i;    //sensorless drive
 			commutate();
@@ -645,17 +654,17 @@ void simhallupdate(){
 		
 		for(uint8_t i=0;i<PINCOUNT;i++){
 			if(hallA[i]){
-				pinstorage[0]=i;    //save and print found pin
+				HALLAPIN=i;    //save and print found pin
 				UART_SendString("\r\nHALLA:");
 				UART_SendString(&PXX[i][0]);
 			}
 			if(hallB[i]){
-				pinstorage[1]=i;
+				HALLBPIN=i;
 				UART_SendString("\r\nHALLB:");
 				UART_SendString(&PXX[i][0]);
 			}
 			if(hallC[i]){
-				pinstorage[2]=i;
+				HALLCPIN=i;
 				UART_SendString("\r\nHALLC:");
 				UART_SendString(&PXX[i][0]);
 			}
@@ -679,6 +688,36 @@ void simhallupdate(){
 	TIM1->CCR3=0;
 	if(doinloop){
 		UART_SendString("\r\nDetection sucessful");
+		uint8_t avalid,bvalid,cvalid,timnum=0;
+		for(uint8_t i=0;i<TIMCOUNT;i++){ 
+			if(halltims[i].io == HALLAPIN){
+				avalid=1;
+				timnum+=halltims[i].tim2;
+			}
+			if(halltims[i].io == HALLBPIN){
+				bvalid=1;
+				timnum+=halltims[i].tim2;
+			}
+			if(halltims[i].io == HALLCPIN){
+				cvalid=1;
+				timnum+=halltims[i].tim2;
+			}
+		}
+		if(!(avalid&&bvalid&&cvalid)){
+			UART_SendString("\r\nWarning:pinmodeAF of HALL pin ");
+			if(avalid){
+				UART_SendString(&PXX[HALLAPIN][0]);
+			}
+			if(bvalid){
+				UART_SendString(&PXX[HALLBPIN][0]);
+			}
+			if(cvalid){
+				UART_SendString(&PXX[HALLCPIN][0]);
+			}
+			UART_SendString(" is not found, it is sugessted to redo the detection");
+		}else if(!(timnum==0||timnum==3)){
+			UART_SendString("\r\nWarning:HALL sensor pin timer mapping is invalid, it is sugessted to redo the detection");
+		}
 		doinloop=0;
 	}
 }	

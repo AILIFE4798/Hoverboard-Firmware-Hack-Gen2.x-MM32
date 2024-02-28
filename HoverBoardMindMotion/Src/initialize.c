@@ -207,7 +207,7 @@ void vref_Init(){
 	ADC_InitStructure.ADC_Resolution = ADC_Resolution_12b;
 	ADC_Init(ADC1, &ADC_InitStructure);
 	ADC_Cmd(ADC1, ENABLE);
-	ADC_RegularChannelConfig(ADC1, ADC_Channel_VoltReference, 0, ADC_SampleTime_7_5Cycles);
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_VoltReference, 0, ADC_SampleTime_1_5Cycles);
 	ADC_VrefintCmd(ENABLE);
 	ADC_SoftwareStartConvCmd(ADC1, ENABLE);
 }

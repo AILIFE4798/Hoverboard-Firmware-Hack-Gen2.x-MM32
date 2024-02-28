@@ -21,7 +21,7 @@ void printstorage(uint8_t i);
 
 
 typedef enum{
-  MODE_STARTUP=0,
+  MODE_UART=0,
   MODE_WAIT_UART=1,
   MODE_MENU=2,
   MODE_HALL=3,
