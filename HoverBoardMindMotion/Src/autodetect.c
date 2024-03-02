@@ -829,7 +829,7 @@ void autoDetectInit(){
 						hallC[i]=0;
 					}
 				}
-				pinstorage[0]=pinstorage[1]=pinstorage[2]=255;
+				HALLAPIN=HALLBPIN=HALLCPIN=255;
 			/*
 				halltmp[0]=halltmp[1]=halltmp[2]=255;
 				revolutions=0;
