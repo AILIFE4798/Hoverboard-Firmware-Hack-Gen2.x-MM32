@@ -1,33 +1,56 @@
 ./objects/bldc.o: Src\bldc.c \
-  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN2x_DFP\1.1.6\Device\MM32SPIN2x\Include\HAL_device.h \
-  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN2x_DFP\1.1.6\Device\MM32SPIN2x\Include\MM32SPIN2xx_p.h \
-  C:\Users\Admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\core_cm0.h \
+  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\mm32_device.h \
+  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\mm32_reg.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdint.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdbool.h \
+  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\types.h \
+  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_common.h \
+  C:\Users\Admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\core_cm0.h \
   C:\Users\Admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_version.h \
   C:\Users\Admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_compiler.h \
   C:\Users\Admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_armclang.h \
-  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN2x_DFP\1.1.6\Device\MM32SPIN2x\Include\system_MM32SPIN2xx_p.h \
-  library\MM32SPIN25\HAL_lib\inc\hal_gpio.h Src\..\Inc\pinout.h \
-  Src\..\Inc\..\Inc\hardware.h \
-  library\MM32SPIN25\HAL_lib\inc\spin25-redefine.h \
-  library\MM32SPIN25\HAL_lib\inc\hal_conf.h \
-  library\MM32SPIN25\HAL_lib\inc\HAL_adc.h \
-  library\MM32SPIN25\HAL_lib\inc\HAL_crc.h \
-  library\MM32SPIN25\HAL_lib\inc\HAL_comp.h \
-  library\MM32SPIN25\HAL_lib\inc\HAL_dma.h \
-  library\MM32SPIN25\HAL_lib\inc\HAL_div.h \
-  library\MM32SPIN25\HAL_lib\inc\HAL_exti.h \
-  library\MM32SPIN25\HAL_lib\inc\HAL_flash.h \
-  library\MM32SPIN25\HAL_lib\inc\HAL_i2c.h \
-  library\MM32SPIN25\HAL_lib\inc\HAL_iwdg.h \
-  library\MM32SPIN25\HAL_lib\inc\HAL_op.h \
-  library\MM32SPIN25\HAL_lib\inc\HAL_pwr.h \
-  library\MM32SPIN25\HAL_lib\inc\HAL_rcc.h \
-  library\MM32SPIN25\HAL_lib\inc\HAL_spi.h \
-  library\MM32SPIN25\HAL_lib\inc\HAL_tim.h \
-  library\MM32SPIN25\HAL_lib\inc\HAL_uart.h \
-  library\MM32SPIN25\HAL_lib\inc\HAL_wwdg.h \
-  library\MM32SPIN25\HAL_lib\inc\HAL_misc.h \
-  library\MM32SPIN25\HAL_lib\inc\HAL_syscfg.h Src\..\Inc\remoteUartBus.h \
-  Src\..\Inc\bldc.h Src\..\Inc\calculation.h \
+  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_adc.h \
+  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_bkp.h \
+  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_can.h \
+  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_comp.h \
+  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_crc.h \
+  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_dbg.h \
+  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_div.h \
+  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_dma.h \
+  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_exti.h \
+  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_flash.h \
+  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_gpio.h \
+  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_i2c.h \
+  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_iwdg.h \
+  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_pwr.h \
+  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_rcc.h \
+  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_spi.h \
+  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_syscfg.h \
+  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_tim.h \
+  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_uart.h \
+  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\reg_wwdg.h \
+  C:\Users\Admin\AppData\Local\Arm\Packs\MindMotion\MM32SPIN0x_DFP\1.0.8\Device\MM32SPIN06xx_s\Include\mm32_reg_redefine_v1.h \
+  library\MM32SPIN05\HAL_Lib\Inc\hal_gpio.h Src\..\Inc\pinout.h \
+  Src\..\Inc\..\Inc\hardware.h library\MM32SPIN05\HAL_Lib\Inc\hal_conf.h \
+  library\MM32SPIN05\HAL_Lib\Inc\hal_adc.h \
+  library\MM32SPIN05\HAL_Lib\Inc\hal_crc.h \
+  library\MM32SPIN05\HAL_Lib\Inc\hal_comp.h \
+  library\MM32SPIN05\HAL_Lib\Inc\hal_dbg.h \
+  library\MM32SPIN05\HAL_Lib\Inc\hal_div.h \
+  library\MM32SPIN05\HAL_Lib\Inc\hal_dma.h \
+  library\MM32SPIN05\HAL_Lib\Inc\hal_exti.h \
+  library\MM32SPIN05\HAL_Lib\Inc\hal_flash.h \
+  library\MM32SPIN05\HAL_Lib\Inc\hal_i2c.h \
+  library\MM32SPIN05\HAL_Lib\Inc\hal_iwdg.h \
+  library\MM32SPIN05\HAL_Lib\Inc\hal_misc.h \
+  library\MM32SPIN05\HAL_Lib\Inc\hal_pwr.h \
+  library\MM32SPIN05\HAL_Lib\Inc\hal_rcc.h \
+  library\MM32SPIN05\HAL_Lib\Inc\hal_spi.h \
+  library\MM32SPIN05\HAL_Lib\Inc\hal_syscfg.h \
+  library\MM32SPIN05\HAL_Lib\Inc\hal_tim.h \
+  library\MM32SPIN05\HAL_Lib\Inc\hal_uart.h \
+  library\MM32SPIN05\HAL_Lib\Inc\hal_uid.h \
+  library\MM32SPIN05\HAL_Lib\Inc\hal_wwdg.h \
+  library\MM32SPIN05\HAL_Lib\Inc\hal_redefine.h \
+  Src\..\Inc\remoteUartBus.h Src\..\Inc\bldc.h Src\..\Inc\calculation.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\math.h Src\..\Inc\hardware.h

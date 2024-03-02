@@ -1043,7 +1043,7 @@ void finduartloop(){
 	for(uint8_t r=0;r<UARTCOUNT/2;r++){
 		for(uint8_t t=0;t<UARTCOUNT/2;t++){
 			for(uint8_t i=0;i<UARTCOUNT;i++){
-				pinMode(uarts[i].io, OUTPUT);
+				pinMode(uarts[i].io, INPUT_PULLUP);
 		    pinModeAF(uarts[i].io,uarts[i].af+1);
 			}
 			found=1;
