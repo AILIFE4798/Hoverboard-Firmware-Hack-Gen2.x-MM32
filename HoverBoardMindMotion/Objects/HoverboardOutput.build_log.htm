@@ -17,35 +17,48 @@ Library Manager: ArmAr.exe V6.19
 Hex Converter:   FromElf.exe V6.19
 CPU DLL:         SARMCM3.DLL V5.38.0.0
 Dialog DLL:      DARMCM1.DLL V1.19.6.0
-Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.1.0.0
+Target DLL:      UL2CM3.DLL V1.164.8.0
 Dialog DLL:      TARMCM1.DLL V1.14.6.0
  
 <h2>Project:</h2>
 C:\Users\Admin\Documents\GitHub\Hoverboard-Firmware-Hack-Gen2.x-MM32\HoverBoardMindMotion\Hoverboard.uvprojx
-Project File Date:  02/27/2024
+Project File Date:  03/02/2024
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.19', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
-Build target 'MM32SPIN05'
+Build target 'MM32SPIN25'
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\hal_adc.c' - object file renamed from '.\Objects\hal_adc.o' to '.\Objects\hal_adc_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\hal_comp.c' - object file renamed from '.\Objects\hal_comp.o' to '.\Objects\hal_comp_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\hal_crc.c' - object file renamed from '.\Objects\hal_crc.o' to '.\Objects\hal_crc_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\hal_div.c' - object file renamed from '.\Objects\hal_div.o' to '.\Objects\hal_div_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\hal_dma.c' - object file renamed from '.\Objects\hal_dma.o' to '.\Objects\hal_dma_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\hal_exti.c' - object file renamed from '.\Objects\hal_exti.o' to '.\Objects\hal_exti_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\hal_flash.c' - object file renamed from '.\Objects\hal_flash.o' to '.\Objects\hal_flash_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\hal_gpio.c' - object file renamed from '.\Objects\hal_gpio.o' to '.\Objects\hal_gpio_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\hal_i2c.c' - object file renamed from '.\Objects\hal_i2c.o' to '.\Objects\hal_i2c_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\hal_iwdg.c' - object file renamed from '.\Objects\hal_iwdg.o' to '.\Objects\hal_iwdg_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\hal_misc.c' - object file renamed from '.\Objects\hal_misc.o' to '.\Objects\hal_misc_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\hal_pwr.c' - object file renamed from '.\Objects\hal_pwr.o' to '.\Objects\hal_pwr_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\hal_rcc.c' - object file renamed from '.\Objects\hal_rcc.o' to '.\Objects\hal_rcc_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\hal_spi.c' - object file renamed from '.\Objects\hal_spi.o' to '.\Objects\hal_spi_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\hal_tim.c' - object file renamed from '.\Objects\hal_tim.o' to '.\Objects\hal_tim_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\hal_uart.c' - object file renamed from '.\Objects\hal_uart.o' to '.\Objects\hal_uart_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\hal_uid.c' - object file renamed from '.\Objects\hal_uid.o' to '.\Objects\hal_uid_1.o'.
+Note: source file '.\Library\MM32SPIN25\HAL_lib\src\hal_wwdg.c' - object file renamed from '.\Objects\hal_wwdg.o' to '.\Objects\hal_wwdg_1.o'.
 compiling delay.c...
 compiling bldc.c...
 compiling main.c...
 compiling uart.c...
 compiling interrupt.c...
-Src/initialize.c(166): warning: implicit conversion from enumeration type 'TIMOSSR_Typedef' to different enumeration type 'TIMOSSI_Typedef' [-Wenum-conversion]
-        TIM_BDTRInitStructure.TIM_OSSIState = TIM_OSSRState_Enable;
-                                            ~ ^~~~~~~~~~~~~~~~~~~~
-1 warning generated.
 compiling initialize.c...
 compiling calculation.c...
 compiling hardware.c...
 compiling remoteUartBus.c...
-compiling system_mm32spin06xx_s.c...
 compiling sim_eeprom.c...
 linking...
-Program Size: Code=12804 RO-data=732 RW-data=164 ZI-data=2548  
+Program Size: Code=9468 RO-data=648 RW-data=144 ZI-data=2136  
 FromELF: creating hex file...
-".\Objects\HoverboardOutput.axf" - 0 Error(s), 1 Warning(s).
+".\Objects\HoverboardOutput.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -56,24 +69,26 @@ Package Vendor: ARM
    * Component: CORE Version: 5.6.0
 
 Package Vendor: MindMotion
-                http://www.mindmotion.com.cn/Download/MDK_KEIL/MindMotion.MM32SPIN0x_DFP.1.0.8.pack
-                MindMotion.MM32SPIN0x_DFP.1.0.8
-                MindMotion MM32SPIN0x Series Device Support, Drivers and Examples
-   * Component: Startup Version: 1.0.0
+                http://www.mindmotion.com.cn/Download/MDK_KEIL/MindMotion.MM32SPIN2x_DFP.1.1.6.pack
+                MindMotion.MM32SPIN2x_DFP.1.1.6
+                MindMotion MM32SPIN2x Series Device Support, Drivers and Examples
+   * Component: Startup Version: 1.0.4
 
 <h2>Collection of Component include folders:</h2>
-  ./RTE/_MM32SPIN05
+  ./RTE/_MM32SPIN25
   C:/Users/Admin/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include
-  C:/Users/Admin/AppData/Local/Arm/Packs/MindMotion/MM32SPIN0x_DFP/1.0.8/Device/MM32SPIN06xx_s/Include
+  C:/Users/Admin/AppData/Local/Arm/Packs/MindMotion/MM32SPIN2x_DFP/1.1.6/Device/MM32SPIN2x/Include
+  C:/Users/Admin/AppData/Local/Arm/Packs/MindMotion/MM32SPIN2x_DFP/1.1.6/Device/MM32SPIN2x/Source
 
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.6.0
 
-   * Component: MindMotion::Device:Startup:1.0.0
-      Include file:  Device/MM32SPIN06xx_s/Include/mm32_device.h
-      Source file:   Device/MM32SPIN06xx_s/Source/system_mm32spin06xx_s.c
-      Source file:   Device/MM32SPIN06xx_s/Source/KEIL_StartAsm/startup_mm32spin06xx_s_keil.s
+   * Component: MindMotion::Device:Startup:1.0.4
+      Include file:  Device/MM32SPIN2x/Include/HAL_device.h
+      Source file:   Device/MM32SPIN2x/Source/KEIL_StartAsm/startup_MM32SPIN2xx_p.s
+      Include file:  Device/MM32SPIN2x/Source/system_MM32SPIN2xx_p.h
+      Source file:   Device/MM32SPIN2x/Source/system_MM32SPIN2xx_p.c
 Build Time Elapsed:  00:00:03
 </pre>
 </body>

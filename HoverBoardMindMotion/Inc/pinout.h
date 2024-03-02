@@ -5,8 +5,7 @@
 /* |_| |_|\___/  \_/  |_____|_| \_\ |_| |_/_/   \_\____|_|\_\    \_/  |_____|*/
 /*                                                                           */
 //version 136 : over current and low voltage protection fix
-//file for setting custom pinout
-//pinout is for Layout2.8.1
+
 
 
 #include "../Inc/hardware.h"
