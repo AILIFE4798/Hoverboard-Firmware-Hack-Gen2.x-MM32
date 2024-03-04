@@ -161,7 +161,9 @@ uint8_t detectSelfHold(){
 				LATCHPIN = i;
 				EEPROM_Write((u8*)pinstorage, 2 * 64);    //if the detection failed, the pin is still saved
 			}
-			pinMode(i,INPUT);    //release latch
+			pinMode(i,INPUT_ADC);    //release latch
+			DELAY_Ms(250);
+			/*    //using eeprom for masterslave
 			while(1){
 				tmp = (uint16_t)ADC1->ADDR15;
 				if(tmp>treshold){
@@ -174,6 +176,7 @@ uint8_t detectSelfHold(){
 					break;
 				}
 			}
+			*/
 	  }
 	}	
 	if(!havelatch){
@@ -1007,18 +1010,18 @@ void saveNexit(){    //check if saving is required
 	return;
 }
 
-void printstorage(uint8_t i){
+void printstorage(uint8_t i){    //print address and value with description
 	UART_SendString("\r\n");
 	UART_SendString(&addrdescription[i][0]);
-	for(uint8_t j=0;j<(13-strlen(addrdescription[i]));j++){
+	for(uint8_t j=0;j<(13-strlen(addrdescription[i]));j++){    //allign data
 		UART_Send_Byte(' ');
 	}
 	char buffer[32];
 	sprintf(&buffer[0],"(%2i): %5i ",i,pinstorage[i]);
 	UART_SendString(&buffer[0]);
-	if(i<32){
+	if(i<32){    //<32 is storage for pins ,>32 is storage for value no need for description 
 		UART_Send_Byte('(');
-		if(pinstorage[i]<PINCOUNT){
+		if(pinstorage[i]<PINCOUNT){    //pin is valid
 			UART_SendString(&PXX[pinstorage[i]][0]);
 		}else{
 			UART_SendString("not set");
@@ -1033,18 +1036,24 @@ void finduartloop(){
 	uint8_t tindex=0;
 	uint8_t rindex=0;
 	uint8_t found=0;
-	for(uint8_t i=0;i<UARTCOUNT;i++){
-		if(uarts[i].tx){
-			txs[tindex++]=i;
-		}else{
-			rxs[rindex++]=i;
+	for(uint8_t i=0;i<UARTCOUNT;i++){    //seperate the tx and rx pins to different array
+		if(!used(uarts[i].io)){
+			if(uarts[i].tx){
+				txs[tindex++]=i;
+			}else{
+				rxs[rindex++]=i;
+			}
 		}
 	}
 	for(uint8_t r=0;r<UARTCOUNT/2;r++){
 		for(uint8_t t=0;t<UARTCOUNT/2;t++){
-			for(uint8_t i=0;i<UARTCOUNT;i++){
-				pinMode(uarts[i].io, INPUT_PULLUP);
-		    pinModeAF(uarts[i].io,uarts[i].af+1);
+			for(uint8_t i=0;i<UARTCOUNT;i++){    //disable unused input and output af to impossible value
+				if(uarts[i].tx){
+					pinMode(uarts[i].io, INPUT_ADC);
+				}else{
+					pinMode(uarts[i].io, INPUT_PULLUP);
+				}
+				pinModeAF(uarts[i].io,GPIO_AF_7);
 			}
 			found=1;
 			pinModeAF(uarts[txs[t]].io,uarts[txs[t]].af);
@@ -1055,7 +1064,7 @@ void finduartloop(){
 				receiveuart=0;
         UART_Send_Byte((u8)(teststr[i]));
 				DELAY_Ms(10);
-				if(receiveuart!=teststr[i]){
+				if(receiveuart!=teststr[i]){    //send a string and verify if it is looped back sucessfully
 					for(uint8_t j=0;j<PINCOUNT;j++){
 						if(!(used(j)||j==uarts[txs[t]].io||j==uarts[rxs[r]].io)){
 							pinMode(j, INPUT_PULLUP);
@@ -1073,10 +1082,10 @@ void finduartloop(){
 				}
 			}
 			if(found){
-				TXPIN=uarts[txs[t]].io;
+				TXPIN=uarts[txs[t]].io;    //save
 				RXPIN=uarts[rxs[r]].io;
 				EEPROM_Write((u8*)pinstorage, 2 * 64);
-				t=100;
+				t=100;    //exit loop
 				r=100;
 				mode=MODE_WAIT_UART;
 				for(uint8_t j=0;j<PINCOUNT;j++){
@@ -1090,7 +1099,7 @@ void finduartloop(){
 						pinMode(i, INPUT);
 					}
 				}	
-				UART_GPIO_Init();
+				UART_GPIO_Init();    //re initialize
 			}
 		}
 	}

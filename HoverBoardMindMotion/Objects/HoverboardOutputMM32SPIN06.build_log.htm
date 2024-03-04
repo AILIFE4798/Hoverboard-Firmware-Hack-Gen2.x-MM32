@@ -22,7 +22,7 @@ Dialog DLL:      TARMCM1.DLL V1.14.6.0
  
 <h2>Project:</h2>
 C:\Users\Admin\Documents\GitHub\Hoverboard-Firmware-Hack-Gen2.x-MM32\HoverBoardMindMotion\Hoverboard.uvprojx
-Project File Date:  03/02/2024
+Project File Date:  03/03/2024
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.19', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
@@ -46,16 +46,16 @@ compiling interrupt.c...
 compiling uart.c...
 compiling calculation.c...
 compiling sim_eeprom.c...
-Src/autodetect.c(203): warning: enumeration values 'MODE_UART' and 'MODE_ITOTAL' not handled in switch [-Wswitch]
+Src/autodetect.c(206): warning: enumeration values 'MODE_UART' and 'MODE_ITOTAL' not handled in switch [-Wswitch]
         switch (mode){
                 ^~~~
-Src/autodetect.c(784): warning: enumeration values 'MODE_UART', 'MODE_WAIT_UART', and 'MODE_ITOTAL' not handled in switch [-Wswitch]
+Src/autodetect.c(787): warning: enumeration values 'MODE_UART', 'MODE_WAIT_UART', and 'MODE_ITOTAL' not handled in switch [-Wswitch]
         switch (mode){
                 ^~~~
 2 warnings generated.
 compiling autodetect.c...
 linking...
-Program Size: Code=21288 RO-data=3580 RW-data=1680 ZI-data=1984  
+Program Size: Code=21248 RO-data=3568 RW-data=1680 ZI-data=1976  
 FromELF: creating hex file...
 ".\Objects\HoverboardOutputMM32SPIN06.axf" - 0 Error(s), 4 Warning(s).
 
@@ -83,9 +83,9 @@ Package Vendor: MindMotion
    * Component: ARM::CMSIS:CORE:5.6.0
 
    * Component: MindMotion::Device:Startup:1.0.0
-      Source file:   Device/MM32SPIN06xx_s/Source/KEIL_StartAsm/startup_mm32spin06xx_s_keil.s
-      Source file:   Device/MM32SPIN06xx_s/Source/system_mm32spin06xx_s.c
       Include file:  Device/MM32SPIN06xx_s/Include/mm32_device.h
+      Source file:   Device/MM32SPIN06xx_s/Source/system_mm32spin06xx_s.c
+      Source file:   Device/MM32SPIN06xx_s/Source/KEIL_StartAsm/startup_mm32spin06xx_s_keil.s
 Build Time Elapsed:  00:00:03
 </pre>
 </body>
