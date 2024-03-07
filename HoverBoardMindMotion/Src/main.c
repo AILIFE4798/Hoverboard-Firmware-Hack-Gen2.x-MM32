@@ -97,7 +97,7 @@ s32 main(void){
 	if(LATCHPIN<PINCOUNT){    //have latch
 		DELAY_Ms(50);    //some board the micro controller can reset in time and turn back on
 		digitalWrite(LATCHPIN, 1);
-		while(digitalRead(BUTTONPIN)){    //wait while release button
+		while(digitalRead(BUTTONPIN)&&BUTTONPIN<PINCOUNT){    //wait while release button
 			if(BUZZERPIN<PINCOUNT){    //have buzzer
 				digitalWrite(BUZZERPIN, 1);
 				DELAY_Ms(2);
@@ -167,7 +167,7 @@ s32 main(void){
 			flicker=!flicker;
 		  lastflicker=millis;
 		}
-		if(LATCHPIN<PINCOUNT){
+		if(LATCHPIN<PINCOUNT&&BUTTONPIN<PINCOUNT){
 			if(digitalRead(BUTTONPIN)){    //button press for shutdown
 				TIM1->CCR1=0;    //shut down motor
 				TIM1->CCR2=0;
