@@ -4,7 +4,7 @@
 /* |  _  | |_| |\ V / | |___|  _ <  |  _  |/ ___ \ |___| . \    \ V /  / __/ */
 /* |_| |_|\___/  \_/  |_____|_| \_\ |_| |_/_/   \_\____|_|\_\    \_/  |_____|*/
 /*                                                                           */
-//version 142 : option to disable button only
+//version 143 : option to disable eeprom
 
 
 

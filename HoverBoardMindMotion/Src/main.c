@@ -42,12 +42,19 @@ int realspeed=0;
 int frealspeed=0;
 uint8_t  wState;
 extern u32 SystemCoreClock;
-uint16_t pinstorage[64]={0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xDCAB, 31, 250, 0, 19200, 8192, 1, 30, 0, 10, 300, 1, 1, 42000, 32000, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 uint8_t flicker=0;
+////////////////////////////////////////////////////////////////////////////////////////////
+//  compile device specefic firmware for mass produce
+//  change EEPROMEN to 0
+#define EEPROMEN 1
+//  copy pinstorage initializer from autodetect and replace the default line below
+uint16_t pinstorage[64]={0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xDCAB, 31, 250, 0, 19200, 8192, 1, 30, 0, 10, 300, 1, 1, 42000, 32000, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+////////////////////////////////////////////////////////////////////////////////////////////
+
 
 s32 main(void){
 	DELAY_Init();
-	if(!restorecfg()){    //if data in eeprom is not valid, do not boot up
+	if(!restorecfg()&&EEPROMEN){    //if data in eeprom is not valid, do not boot up
 		RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOA, ENABLE);
 		RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOB, ENABLE);
 		RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOC, ENABLE);
@@ -94,7 +101,7 @@ s32 main(void){
 	//uart dma
 	DMA_NVIC_Config(DMA1_Channel3, (u32)&UART1->RDR, (u32)sRxBuffer, 1);
 	//latch on power
-	if(LATCHPIN<PINCOUNT){    //have latch
+	if(LATCHPIN<PINCOUNT&&EEPROMEN){    //have latch
 		DELAY_Ms(50);    //some board the micro controller can reset in time and turn back on
 		digitalWrite(LATCHPIN, 1);
 		while(digitalRead(BUTTONPIN)&&BUTTONPIN<PINCOUNT){    //wait while release button
