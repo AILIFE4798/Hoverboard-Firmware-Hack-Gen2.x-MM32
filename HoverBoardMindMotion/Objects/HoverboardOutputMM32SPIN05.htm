@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\HoverboardOutputMM32SPIN05.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\HoverboardOutputMM32SPIN05.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Mon Mar  4 18:57:08 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Fri Mar  8 11:57:08 2024
 <BR><P>
 <H3>Maximum Stack Usage =        368 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -862,7 +862,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_NVIC_Config
 </UL>
 
-<P><STRONG><a name="[7c]"></a>DMA_NVIC_Config</STRONG> (Thumb, 104 bytes, Stack size 64 bytes, initialize.o(.text.DMA_NVIC_Config))
+<P><STRONG><a name="[7c]"></a>DMA_NVIC_Config</STRONG> (Thumb, 116 bytes, Stack size 64 bytes, initialize.o(.text.DMA_NVIC_Config))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = DMA_NVIC_Config &rArr; DMA_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_Cmd
@@ -1094,8 +1094,8 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM1_init
 </UL>
 
-<P><STRONG><a name="[98]"></a>UARTX_Init</STRONG> (Thumb, 72 bytes, Stack size 32 bytes, initialize.o(.text.UARTX_Init))
-<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = UARTX_Init &rArr; UART_Init
+<P><STRONG><a name="[98]"></a>UARTX_Init</STRONG> (Thumb, 92 bytes, Stack size 40 bytes, initialize.o(.text.UARTX_Init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = UARTX_Init &rArr; UART_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_Cmd
 <LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_Init
@@ -1146,8 +1146,8 @@ Global Symbols
 <LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SendString
 </UL>
 
-<P><STRONG><a name="[a2]"></a>UART_SendString</STRONG> (Thumb, 44 bytes, Stack size 16 bytes, uart.o(.text.UART_SendString))
-<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = UART_SendString
+<P><STRONG><a name="[a2]"></a>UART_SendString</STRONG> (Thumb, 72 bytes, Stack size 24 bytes, uart.o(.text.UART_SendString))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = UART_SendString
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_GetFlagStatus
 <LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SendData
@@ -1161,8 +1161,8 @@ Global Symbols
 <LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[79]"></a>UART_Send_Byte</STRONG> (Thumb, 28 bytes, Stack size 8 bytes, uart.o(.text.UART_Send_Byte))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = UART_Send_Byte
+<P><STRONG><a name="[79]"></a>UART_Send_Byte</STRONG> (Thumb, 52 bytes, Stack size 16 bytes, uart.o(.text.UART_Send_Byte))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = UART_Send_Byte
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_GetFlagStatus
 <LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SendData
@@ -1173,8 +1173,8 @@ Global Symbols
 <LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;finduartloop
 </UL>
 
-<P><STRONG><a name="[a5]"></a>UART_Send_Group</STRONG> (Thumb, 44 bytes, Stack size 16 bytes, uart.o(.text.UART_Send_Group))
-<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = UART_Send_Group
+<P><STRONG><a name="[a5]"></a>UART_Send_Group</STRONG> (Thumb, 76 bytes, Stack size 24 bytes, uart.o(.text.UART_Send_Group))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = UART_Send_Group
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_GetFlagStatus
 <LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SendData
@@ -1273,9 +1273,9 @@ Global Symbols
 <LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DELAY_Ms
 <LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vref_Init
 <LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pinMode
-<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
 <LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2f
 <LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;checkbutton
 <LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -1309,7 +1309,7 @@ Global Symbols
 <LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_DeInit
 </UL>
 
-<P><STRONG><a name="[be]"></a>finduartloop</STRONG> (Thumb, 792 bytes, Stack size 64 bytes, autodetect.o(.text.finduartloop))
+<P><STRONG><a name="[be]"></a>finduartloop</STRONG> (Thumb, 780 bytes, Stack size 64 bytes, autodetect.o(.text.finduartloop))
 <BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = finduartloop &rArr; UART_GPIO_Init &rArr; pinMode &rArr; GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EEPROM_Write
@@ -1330,7 +1330,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;testrotateloop
 </UL>
 
-<P><STRONG><a name="[38]"></a>main</STRONG> (Thumb, 340 bytes, Stack size 0 bytes, main.o(.text.main))
+<P><STRONG><a name="[38]"></a>main</STRONG> (Thumb, 360 bytes, Stack size 0 bytes, main.o(.text.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 304 + Unknown Stack Size
 <LI>Call Chain = main &rArr; autoDetectInit &rArr; __2sprintf &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -1357,9 +1357,9 @@ Global Symbols
 <LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BLDC_init
 <LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DELAY_Init
 <LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHBPeriphClockCmd
-<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
 <LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2f
 <LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
 </UL>
 <BR>[Called By]<UL><LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>

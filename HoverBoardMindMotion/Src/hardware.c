@@ -83,7 +83,7 @@ const MM32TIM23 halltims[TIMCOUNT] = {
 {PD7,GPIO_AF_5,0},
 };
 
-const MM32UART1 uarts[UARTCOUNT] = {
+const MM32UART uarts[UARTCOUNT] = {
 {PB6,GPIO_AF_0,1},
 {PB7,GPIO_AF_0,0},
 {PB8,GPIO_AF_0,0},
@@ -167,11 +167,17 @@ const MM32TIM23 halltims[TIMCOUNT] = {
 {PC15,GPIO_AF_6,1},
 };
 
-const MM32UART1 uarts[UARTCOUNT] = {
-{PB3,GPIO_AF_3,1},
-{PB4,GPIO_AF_3,0},
-{PB6,GPIO_AF_0,1},
-{PB7,GPIO_AF_0,0},
+const MM32UART uarts[UARTCOUNT] = {
+{PB3,GPIO_AF_3,1,1},
+{PB4,GPIO_AF_3,0,1},
+{PB6,GPIO_AF_0,1,1},
+{PB7,GPIO_AF_0,0,1},
+{PA2,GPIO_AF_1,1,2},
+{PA3,GPIO_AF_1,0,2},
+{PA6,GPIO_AF_3,0,2},
+{PA15,GPIO_AF_1,0,2},
+{PB7,GPIO_AF_4,1,2},
+{PB8,GPIO_AF_4,0,2},
 };
 
 const MM32TIMBK ocps[TIMBKCOUNT] = {

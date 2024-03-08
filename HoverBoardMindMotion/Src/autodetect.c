@@ -60,7 +60,7 @@ uint8_t dataparsemode;
 uint8_t addrlen=0;
 uint8_t datalen=0;
 extern MM32TIM23 halltims[TIMCOUNT];
-extern MM32UART1 uarts[UARTCOUNT];
+extern MM32UART uarts[UARTCOUNT];
 uint8_t receiveuart;
 
 uint8_t hallA[PINCOUNT];
@@ -1032,7 +1032,7 @@ void printstorage(uint8_t i){    //print address and value with description
 
 void finduartloop(){
 	char teststr[] = "HelloWorld";
-	uint8_t txs[UARTCOUNT/2], rxs[UARTCOUNT/2];
+	uint8_t txs[UARTCOUNT], rxs[UARTCOUNT];
 	uint8_t tindex=0;
 	uint8_t rindex=0;
 	uint8_t found=0;
@@ -1045,8 +1045,13 @@ void finduartloop(){
 			}
 		}
 	}
-	for(uint8_t r=0;r<UARTCOUNT/2;r++){
-		for(uint8_t t=0;t<UARTCOUNT/2;t++){
+	rindex++;
+	tindex++;
+	for(uint8_t r=0;r<rindex;r++){
+		for(uint8_t t=0;t<tindex;t++){
+			if(uarts[txs[t]].uart!=uarts[rxs[r]].uart){
+				continue;
+			}
 			for(uint8_t i=0;i<UARTCOUNT;i++){    //disable unused input and output af to impossible value
 				if(uarts[i].tx){
 					pinMode(uarts[i].io, INPUT_ADC);
