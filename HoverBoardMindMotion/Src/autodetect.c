@@ -1053,7 +1053,7 @@ void finduartloop(){
 				continue;
 			}
 			for(uint8_t i=0;i<UARTCOUNT;i++){    //disable unused input and output af to impossible value
-				pinMode(uarts[i].io, INPUT_ADC);
+				pinMode(uarts[i].io, INPUT_PULLUP);
 				pinModeAF(uarts[i].io,GPIO_AF_7);
 			}
 			found=1;

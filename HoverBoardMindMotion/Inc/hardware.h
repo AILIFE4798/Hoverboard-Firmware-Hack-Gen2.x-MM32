@@ -22,7 +22,7 @@
 #define PINCOUNT 34
 #define ADCCOUNT 13
 #define TIMCOUNT 22
-#define UARTCOUNT 6
+#define UARTCOUNT 10
 #define TIMBKCOUNT 4
 #else
 #define PINCOUNT 33
