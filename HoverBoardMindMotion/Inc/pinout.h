@@ -4,7 +4,7 @@
 /* |  _  | |_| |\ V / | |___|  _ <  |  _  |/ ___ \ |___| . \    \ V /  / __/ */
 /* |_| |_|\___/  \_/  |_____|_| \_\ |_| |_/_/   \_\____|_|\_\    \_/  |_____|*/
 /*                                                                           */
-
+#define VERSION_INFO "\r\nPinFinder beta v160\r\nchangelog:autodetect uart1 and uart2"
 #include "../Inc/hardware.h"
 extern MM32GPIO pins[PINCOUNT];
 extern uint16_t pinstorage[64];

@@ -22,36 +22,35 @@ Dialog DLL:      TARMCM1.DLL V1.14.6.0
  
 <h2>Project:</h2>
 C:\Users\Admin\Documents\GitHub\Hoverboard-Firmware-Hack-Gen2.x-MM32\HoverBoardMindMotion\Hoverboard.uvprojx
-Project File Date:  03/08/2024
+Project File Date:  03/12/2024
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.19', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'MM32SPIN05'
 compiling bldc.c...
-Src/main.c(94): warning: 4 enumeration values not handled in switch: 'MODE_MENU', 'MODE_ITOTAL', 'MODE_CLI'... [-Wswitch]
-                switch (mode){
-                        ^~~~
-1 warning generated.
-compiling main.c...
 Src/initialize.c(93): warning: implicit conversion from enumeration type 'TIMOSSR_Typedef' to different enumeration type 'TIMOSSI_Typedef' [-Wenum-conversion]
         TIM_BDTRInitStructure.TIM_OSSIState = TIM_OSSRState_Enable;
                                             ~ ^~~~~~~~~~~~~~~~~~~~
 1 warning generated.
 compiling initialize.c...
+Src/main.c(94): warning: 4 enumeration values not handled in switch: 'MODE_MENU', 'MODE_ITOTAL', 'MODE_CLI'... [-Wswitch]
+                switch (mode){
+                        ^~~~
+1 warning generated.
+compiling main.c...
 compiling interrupt.c...
 compiling uart.c...
 compiling calculation.c...
-compiling hardware.c...
 Src/autodetect.c(206): warning: enumeration values 'MODE_UART' and 'MODE_ITOTAL' not handled in switch [-Wswitch]
         switch (mode){
                 ^~~~
-Src/autodetect.c(787): warning: enumeration values 'MODE_UART', 'MODE_WAIT_UART', and 'MODE_ITOTAL' not handled in switch [-Wswitch]
+Src/autodetect.c(790): warning: enumeration values 'MODE_UART', 'MODE_WAIT_UART', and 'MODE_ITOTAL' not handled in switch [-Wswitch]
         switch (mode){
                 ^~~~
 2 warnings generated.
 compiling autodetect.c...
 linking...
-Program Size: Code=21444 RO-data=3596 RW-data=1680 ZI-data=1976  
+Program Size: Code=21468 RO-data=3708 RW-data=1680 ZI-data=1976  
 FromELF: creating hex file...
 ".\Objects\HoverboardOutputMM32SPIN05.axf" - 0 Error(s), 4 Warning(s).
 
@@ -80,9 +79,9 @@ Package Vendor: MindMotion
 
    * Component: MindMotion::Device:Startup:1.0.0
       Include file:  Device/MM32SPIN06xx_s/Include/mm32_device.h
-      Source file:   Device/MM32SPIN06xx_s/Source/KEIL_StartAsm/startup_mm32spin06xx_s_keil.s
       Source file:   Device/MM32SPIN06xx_s/Source/system_mm32spin06xx_s.c
-Build Time Elapsed:  00:00:02
+      Source file:   Device/MM32SPIN06xx_s/Source/KEIL_StartAsm/startup_mm32spin06xx_s_keil.s
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>
