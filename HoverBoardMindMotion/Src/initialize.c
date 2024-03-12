@@ -14,7 +14,7 @@
 #endif
 
 extern MM32GPIO pins[PINCOUNT];
-extern MM32UART1 uarts[UARTCOUNT];
+extern MM32UART uarts[UARTCOUNT];
 extern MM32ADC adcs[ADCCOUNT];
 extern MM32TIM23 halltims[TIMCOUNT];
 extern MM32TIMBK ocps[TIMBKCOUNT];
@@ -125,7 +125,11 @@ void UARTX_Init(u32 baudrate){
 	UART_InitStructure.HWFlowControl = UART_HWFlowControl_None;
 	UART_InitStructure.Mode = UART_Mode_Rx | UART_Mode_Tx;
 	UART_Init(UART1, &UART_InitStructure);
+	UART_Init(UART2, &UART_InitStructure);
 	UART_Cmd(UART1, ENABLE);
+	UART_Cmd(UART2, ENABLE);
+	UART_DMACmd(UART1, UART_DMAReq_EN, ENABLE);
+	UART_DMACmd(UART2, UART_DMAReq_EN, ENABLE);
 }
 
 void UART_GPIO_Init(){
@@ -169,7 +173,6 @@ void DMA_NVIC_Config(DMA_Channel_TypeDef* dam_chx, u32 cpar, u32 cmar, u16 cndtr
 	DMA_Init(dam_chx, &DMA_InitStructure);
 	// Enable UARTy_DMA1_Channel Transfer complete interrupt
 	DMA_ITConfig(dam_chx, DMA_IT_TC, ENABLE);
-	UART_DMACmd(UART1, UART_DMAReq_EN, ENABLE);
 	// UARTy_DMA1_Channel enable
 	DMA_Cmd(dam_chx, ENABLE);
 }

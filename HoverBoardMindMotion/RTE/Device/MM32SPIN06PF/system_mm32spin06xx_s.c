@@ -737,7 +737,7 @@ void SetSysClockToXX_HSI(void)
 
     //PCLK2 = HCLK
     RCC->CFGR |= (u32)RCC_CFGR_PPRE2_DIV1;
-
+		/*removed by ailife uart2 clock is dependent on this
     if(SystemCoreClock > 36000000) {
         //PCLK1 = HCLK/2
         RCC->CFGR |= (u32)RCC_CFGR_PPRE1_DIV2;
@@ -746,7 +746,7 @@ void SetSysClockToXX_HSI(void)
         //PCLK1 = HCLK
         RCC->CFGR |= (u32)RCC_CFGR_PPRE1_DIV2;
     }
-
+		*/
     RCC->CFGR &= (u32)0xFFFCFFFF;
 
     RCC->CR &= (u32)0x000FFFFF;

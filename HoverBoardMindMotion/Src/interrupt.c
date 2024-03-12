@@ -45,7 +45,17 @@ void DMA1_Channel2_3_IRQHandler(void){
 		}
 	}
 }	
-	
+void DMA1_Channel4_5_IRQHandler(void){
+	if(DMA_GetITStatus(DMA1_IT_TC5)) {
+		DMA_ClearITPendingBit(DMA1_IT_GL5);
+		if(mode==MODE_UART){
+			receiveuart=sRxBuffer[0];
+		}else{
+			UART_Send_Byte(sRxBuffer[0]);
+			autoDetectSerialIt();
+		}
+	}
+}		
 void ADC1_COMP_IRQHandler(void){
 
 }	

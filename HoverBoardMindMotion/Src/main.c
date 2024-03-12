@@ -62,7 +62,9 @@ s32 main(void){
 	BLDC_init();    //motor pin is always the same so initialize it first
 	UARTX_Init(BAUD_AD);    //uart used for autodetect, only 4 possible pin combination on uart1
 	exNVIC_Configure(DMA1_Channel2_3_IRQn, 0, 0);
+	exNVIC_Configure(DMA1_Channel4_5_IRQn, 1, 0);
 	DMA_NVIC_Config(DMA1_Channel3, (u32)&UART1->RDR, (u32)sRxBuffer, 1);
+	DMA_NVIC_Config(DMA1_Channel5, (u32)&UART2->RDR, (u32)sRxBuffer, 1);
 	if(restorecfg()){    //valid config is present
 		if(LATCHPIN<PINCOUNT){
 			pinMode(LATCHPIN,INPUT_PULLUP);

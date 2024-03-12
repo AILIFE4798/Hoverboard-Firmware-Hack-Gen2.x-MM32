@@ -60,7 +60,7 @@ uint8_t dataparsemode;
 uint8_t addrlen=0;
 uint8_t datalen=0;
 extern MM32TIM23 halltims[TIMCOUNT];
-extern MM32UART1 uarts[UARTCOUNT];
+extern MM32UART uarts[UARTCOUNT];
 uint8_t receiveuart;
 
 uint8_t hallA[PINCOUNT];
@@ -481,7 +481,7 @@ void autoDetectSerialIt(){    //serial dma interrupt
 								
 							break;
 							case 'h':    //help
-								UART_SendString("\r\n\nThis tool allow you to modify and view all saved pinouts and settings\n\r\n\rUsage:  [command] <address> <value>\n\r\n\rCommands: \n\r\n\r r     read saved data\n\r w     write data\n\r h     display this help page\n\r l     list all data\n\r g     generate pinstorage variable initializer to copy in firmware\n\r e     erase all data\n\r x     exit command line tool and go back to main menu\n\r\n\rAddresses:\r\n\n");
+								UART_SendString("\r\n\nThis tool allow you to modify and view all saved pinouts and settings\n\r\n\rUsage:  [command] <address> <value>\n\r\n\rCommands: \n\r\n\r r     read saved data\n\r w     write data\n\r h     display this help page\n\r l     list all data\n\r g     generate pinstorage variable initializer to copy in firmware\n\r e     erase all data\n\r x     exit command line tool and go back to main menu\n\r i     show current version info\n\r\n\rAddresses:\r\n\n");
 								for(uint8_t i=0;i<64;i++){
 									char buffer[16];
 									sprintf(&buffer[0],"index %i: ",i);
@@ -521,6 +521,9 @@ void autoDetectSerialIt(){    //serial dma interrupt
 							break;
 							case 0:
 								__NOP();    //display new line only if no command is entered
+							break;
+							case 'i':
+								UART_SendString(VERSION_INFO);    //leave terminal
 							break;
 							default:    //command not found
 								UART_SendString("\r\nCommand\"");
@@ -1032,7 +1035,7 @@ void printstorage(uint8_t i){    //print address and value with description
 
 void finduartloop(){
 	char teststr[] = "HelloWorld";
-	uint8_t txs[UARTCOUNT/2], rxs[UARTCOUNT/2];
+	uint8_t txs[UARTCOUNT], rxs[UARTCOUNT];
 	uint8_t tindex=0;
 	uint8_t rindex=0;
 	uint8_t found=0;
@@ -1045,14 +1048,15 @@ void finduartloop(){
 			}
 		}
 	}
-	for(uint8_t r=0;r<UARTCOUNT/2;r++){
-		for(uint8_t t=0;t<UARTCOUNT/2;t++){
+	rindex++;
+	tindex++;
+	for(uint8_t r=0;r<rindex;r++){
+		for(uint8_t t=0;t<tindex;t++){
+			if(uarts[txs[t]].uart!=uarts[rxs[r]].uart){
+				continue;
+			}
 			for(uint8_t i=0;i<UARTCOUNT;i++){    //disable unused input and output af to impossible value
-				if(uarts[i].tx){
-					pinMode(uarts[i].io, INPUT_ADC);
-				}else{
-					pinMode(uarts[i].io, INPUT_PULLUP);
-				}
+				pinMode(uarts[i].io, INPUT_ADC);
 				pinModeAF(uarts[i].io,GPIO_AF_7);
 			}
 			found=1;
@@ -1062,6 +1066,7 @@ void finduartloop(){
 			pinMode(uarts[rxs[r]].io, INPUT);
 			for(uint8_t i=0;i<10;i++){
 				receiveuart=0;
+				DELAY_Ms(1);
         UART_Send_Byte((u8)(teststr[i]));
 				DELAY_Ms(10);
 				if(receiveuart!=teststr[i]){    //send a string and verify if it is looped back sucessfully
