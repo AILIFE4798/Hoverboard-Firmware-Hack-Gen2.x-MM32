@@ -99,16 +99,17 @@ s32 main(void){
 	uarten=UART_GPIO_Init();
 	UARTX_Init((uint32_t)BAUD,uarten);
 	//uart interrupt
-	NVIC_Configure(DMA1_Channel2_3_IRQn, 1);
 	//uart dma
-	if(uarten){
+	if(uarten==1){
 		DMA_NVIC_Config(DMA1_Channel3, (u32)&UART1->RDR, (u32)sRxBuffer, 1);
+		NVIC_Configure(DMA1_Channel2_3_IRQn, 1);
 	}else{
 		DMA_NVIC_Config(DMA1_Channel5, (u32)&UART2->RDR, (u32)sRxBuffer, 1);
+		NVIC_Configure(DMA1_Channel4_5_IRQn, 1);
 	}
 	//latch on power
 	if(LATCHPIN<PINCOUNT&&EEPROMEN){    //have latch
-		DELAY_Ms(50);    //some board the micro controller can reset in time and turn back on
+		DELAY_Ms(100);    //some board the micro controller can reset in time and turn back on
 		digitalWrite(LATCHPIN, 1);
 		while(digitalRead(BUTTONPIN)&&BUTTONPIN<PINCOUNT){    //wait while release button
 			if(BUZZERPIN<PINCOUNT){    //have buzzer
