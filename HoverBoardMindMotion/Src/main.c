@@ -43,6 +43,7 @@ int frealspeed=0;
 uint8_t  wState;
 extern u32 SystemCoreClock;
 uint8_t flicker=0;
+uint8_t uarten=1;
 ////////////////////////////////////////////////////////////////////////////////////////////
 //  compile device specefic firmware for mass produce
 //  change EEPROMEN to 0
@@ -95,11 +96,16 @@ s32 main(void){
 	Iwdg_Init(IWDG_Prescaler_32, 0xff);
 	#endif
 	//serial1.begin(19200);
-	UARTX_Init((uint32_t)BAUD);
+	uarten=UART_GPIO_Init();
+	UARTX_Init((uint32_t)BAUD,uarten);
 	//uart interrupt
 	NVIC_Configure(DMA1_Channel2_3_IRQn, 1);
 	//uart dma
-	DMA_NVIC_Config(DMA1_Channel3, (u32)&UART1->RDR, (u32)sRxBuffer, 1);
+	if(uarten){
+		DMA_NVIC_Config(DMA1_Channel3, (u32)&UART1->RDR, (u32)sRxBuffer, 1);
+	}else{
+		DMA_NVIC_Config(DMA1_Channel5, (u32)&UART2->RDR, (u32)sRxBuffer, 1);
+	}
 	//latch on power
 	if(LATCHPIN<PINCOUNT&&EEPROMEN){    //have latch
 		DELAY_Ms(50);    //some board the micro controller can reset in time and turn back on

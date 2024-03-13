@@ -13,11 +13,10 @@
 #endif
 
 extern MM32GPIO pins[PINCOUNT];
-extern MM32UART1 uarts[UARTCOUNT];
+extern MM32UART uarts[UARTCOUNT];
 extern MM32ADC adcs[ADCCOUNT];
 extern MM32TIM23 halltims[TIMCOUNT];
 extern MM32TIMBK ocps[TIMBKCOUNT];
-
 
 //normal io
 void io_init(){
@@ -216,7 +215,7 @@ void NVIC_Configure(u8 ch, u8 pri){
 	NVIC_Init(&NVIC_InitStruct);
 }
 //uart
-void UARTX_Init(u32 baudrate){
+void UARTX_Init(u32 baudrate,uint8_t uart){
 	UART_InitTypeDef UART_InitStructure;
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_UART1, ENABLE);
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART2, ENABLE);
@@ -228,12 +227,13 @@ void UARTX_Init(u32 baudrate){
 	UART_InitStructure.Parity = UART_Parity_No;
 	UART_InitStructure.HWFlowControl = UART_HWFlowControl_None;
 	UART_InitStructure.Mode = UART_Mode_Rx | UART_Mode_Tx;
-	UART_Init(UART1, &UART_InitStructure);
-	UART_Cmd(UART1, ENABLE);
-	UART_GPIO_Init();
+	UART_Init(uart==1 ? UART1 : UART2, &UART_InitStructure);
+	UART_Cmd(uart==1 ? UART1 : UART2, ENABLE);
+	UART_DMACmd(uart==1 ? UART1 : UART2, UART_DMAReq_EN, ENABLE);
 }
 
-void UART_GPIO_Init(){
+uint8_t UART_GPIO_Init(){
+	uint8_t uart=1;
 	for(uint8_t i=0;i<UARTCOUNT;i++){
 		if(uarts[i].io==TXPIN||uarts[i].io==RXPIN){
 			pinModeAF(uarts[i].io,uarts[i].af);
@@ -242,8 +242,10 @@ void UART_GPIO_Init(){
 			}else{
 				pinMode(uarts[i].io, INPUT);
 			}
+			uart=uarts[i].uart;
 		}
 	}
+	return uart;
 }
 
 void DMA_NVIC_Config(DMA_Channel_TypeDef* dam_chx, u32 cpar, u32 cmar, u16 cndtr){
@@ -274,7 +276,6 @@ void DMA_NVIC_Config(DMA_Channel_TypeDef* dam_chx, u32 cpar, u32 cmar, u16 cndtr
 	DMA_Init(dam_chx, &DMA_InitStructure);
 	// Enable UARTy_DMA1_Channel Transfer complete interrupt
 	DMA_ITConfig(dam_chx, DMA_IT_TC, ENABLE);
-	UART_DMACmd(UART1, UART_DMAReq_EN, ENABLE);
 	// UARTy_DMA1_Channel enable
 	DMA_Cmd(dam_chx, ENABLE);
 }

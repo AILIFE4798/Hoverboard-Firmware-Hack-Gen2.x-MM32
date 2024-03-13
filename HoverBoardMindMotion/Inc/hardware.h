@@ -18,17 +18,18 @@
 #define IOC 3
 #define IOD 4
 
+
 #ifdef TARGET_MM32SPIN25
 #define PINCOUNT 34
 #define ADCCOUNT 13
 #define TIMCOUNT 22
-#define UARTCOUNT 6
+#define UARTCOUNT 10
 #define TIMBKCOUNT 4
 #else
 #define PINCOUNT 33
 #define ADCCOUNT 10
 #define TIMCOUNT 14
-#define UARTCOUNT 4
+#define UARTCOUNT 10
 #define TIMBKCOUNT 4
 #endif
 
@@ -96,7 +97,8 @@ typedef struct{
   uint8_t io;
   uint8_t af;
   uint8_t tx;
-}MM32UART1;
+  uint8_t uart;
+}MM32UART;
 typedef struct{
   uint8_t io;
   uint16_t af;

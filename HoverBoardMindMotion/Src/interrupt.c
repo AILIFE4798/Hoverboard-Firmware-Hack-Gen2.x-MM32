@@ -42,7 +42,13 @@ void DMA1_Channel2_3_IRQHandler(void){
     serialit();
   }
 }	
-	
+
+void DMA1_Channel4_5_IRQHandler(void){
+  if(DMA_GetITStatus(DMA1_IT_TC5)) {
+    DMA_ClearITPendingBit(DMA1_IT_GL5);
+    serialit();
+  }
+}	
 void ADC1_COMP_IRQHandler(void){
 	if(ADC_GetFlagStatus(ADC1, ADC_IT_AWD) != RESET) {
     ADC_ClearFlag(ADC1, ADC_IT_AWD);
