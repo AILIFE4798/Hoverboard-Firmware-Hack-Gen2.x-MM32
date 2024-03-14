@@ -71,7 +71,7 @@ extern uint16_t pinstorage[64];
 uint16_t prevpinstorage[64];    
 
 uint8_t banner[]={0X20,0X20,0X5F,0X20,0X20,0X20,0X5F,0X20,0X20,0X5F,0X5F,0X5F,0X5F,0X5F,0X20,0X20,0X20,0X20,0X20,0X5F,0X5F,0X5F,0X5F,0X5F,0X5F,0X5F,0X20,0X5F,0X5F,0X5F,0X5F,0X20,0X20,0X20,0X20,0X5F,0X20,0X20,0X20,0X5F,0X20,0X20,0X20,0X20,0X5F,0X20,0X20,0X20,0X20,0X5F,0X5F,0X5F,0X5F,0X20,0X5F,0X20,0X20,0X5F,0X5F,0X20,0X5F,0X5F,0X20,0X20,0X20,0X20,0X20,0X5F,0X5F,0X5F,0X5F,0X5F,0X5F,0X20,0X20,0X0A,0X0D,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X2F,0X20,0X5F,0X20,0X5C,0X20,0X5C,0X20,0X20,0X20,0X2F,0X20,0X2F,0X20,0X5F,0X5F,0X5F,0X5F,0X7C,0X20,0X20,0X5F,0X20,0X5C,0X20,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X20,0X2F,0X20,0X5C,0X20,0X20,0X2F,0X20,0X5F,0X5F,0X5F,0X7C,0X20,0X7C,0X2F,0X20,0X2F,0X20,0X5C,0X20,0X5C,0X20,0X20,0X20,0X2F,0X20,0X2F,0X5F,0X5F,0X5F,0X20,0X5C,0X20,0X0A,0X0D,0X20,0X7C,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X20,0X5C,0X20,0X5C,0X20,0X2F,0X20,0X2F,0X7C,0X20,0X20,0X5F,0X7C,0X20,0X7C,0X20,0X7C,0X5F,0X29,0X20,0X7C,0X20,0X7C,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X20,0X2F,0X20,0X5F,0X20,0X5C,0X7C,0X20,0X7C,0X20,0X20,0X20,0X7C,0X20,0X27,0X20,0X2F,0X20,0X20,0X20,0X5C,0X20,0X5C,0X20,0X2F,0X20,0X2F,0X20,0X20,0X5F,0X5F,0X29,0X20,0X7C,0X0A,0X0D,0X20,0X7C,0X20,0X20,0X5F,0X20,0X20,0X7C,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X5C,0X20,0X56,0X20,0X2F,0X20,0X7C,0X20,0X7C,0X5F,0X5F,0X5F,0X7C,0X20,0X20,0X5F,0X20,0X3C,0X20,0X20,0X7C,0X20,0X20,0X5F,0X20,0X20,0X7C,0X2F,0X20,0X5F,0X5F,0X5F,0X20,0X5C,0X20,0X7C,0X5F,0X5F,0X5F,0X7C,0X20,0X2E,0X20,0X5C,0X20,0X20,0X20,0X20,0X5C,0X20,0X56,0X20,0X2F,0X20,0X20,0X2F,0X20,0X5F,0X5F,0X2F,0X20,0X0A,0X0D,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X5F,0X7C,0X5C,0X5F,0X5F,0X5F,0X2F,0X20,0X20,0X5C,0X5F,0X2F,0X20,0X20,0X7C,0X5F,0X5F,0X5F,0X5F,0X5F,0X7C,0X5F,0X7C,0X20,0X5C,0X5F,0X5C,0X20,0X7C,0X5F,0X7C,0X20,0X7C,0X5F,0X2F,0X5F,0X2F,0X20,0X20,0X20,0X5C,0X5F,0X5C,0X5F,0X5F,0X5F,0X5F,0X7C,0X5F,0X7C,0X5C,0X5F,0X5C,0X20,0X20,0X20,0X20,0X5C,0X5F,0X2F,0X20,0X20,0X7C,0X5F,0X5F,0X5F,0X5F,0X5F,0X7C,0X0A,0X0D,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X20,0X0A,0X0D,0X0A,0X0D};
-char PXX[PINCOUNT][5]={"PA0\0","PA1\0","PA2\0","PA3\0","PA4\0","PA5\0","PA6\0","PA7\0","PA11\0","PA12\0","PA13\0","PA14\0","PA15\0","PB0\0","PB1\0","PB2\0","PB3\0","PB4\0","PB5\0","PB6\0","PB7\0","PB8\0","PB9\0","PB10\0","PB11\0","PB12\0","PC13\0","PC14\0","PC15\0","PD0\0","PD1\0","PD2\0","PD3\0"};
+char PXX[PINCOUNT][5]={"PA0\0","PA1\0","PA2\0","PA3\0","PA4\0","PA5\0","PA6\0","PA7\0","PA11\0","PA12\0","PA13\0","PA14\0","PA15\0","PB0\0","PB1\0","PB2\0","PB3\0","PB4\0","PB5\0","PB6\0","PB7\0","PB8\0","PB9\0","PB10\0","PB11\0","PB12\0","PC13\0","PC14\0","PC15\0","PD0\0","PD1\0","PD2\0","PD3\0","PD7\0"};
 char addrdescription[64][14]={
 {"halla\0"},
 {"hallb\0"},
@@ -631,116 +631,122 @@ void autoDetectSerialIt(){    //serial dma interrupt
 
 void simhallupdate(){    
 	while(HALLAPIN==255||HALLBPIN==255||HALLCPIN==255){    //wait till every sensor is found
-		for(uint8_t i=1;i<7;i++){
-			step=i;    //sensorless drive
-			commutate();
-			DELAY_Ms(30);
-			for(uint8_t i=0;i<PINCOUNT;i++){
-				if(!used(i)){    //check every possible pin
-					switch (step){
-						case 1:    //if current state does not match what it should,remove from possible pins list
-							hallA[i]=!digitalRead(i)&&hallA[i];
-							hallB[i]=digitalRead(i)&&hallB[i];
-							hallC[i]=digitalRead(i)&&hallC[i];
-						break;
-						case 2:    //if a pin have been removed not add it back in next step
-							hallA[i]=!digitalRead(i)&&hallA[i];
-							hallB[i]=!digitalRead(i)&&hallB[i];
-							hallC[i]=digitalRead(i)&&hallC[i];
-						break;
-						case 3:
-							hallA[i]=digitalRead(i)&&hallA[i];
-							hallB[i]=!digitalRead(i)&&hallB[i];
-							hallC[i]=digitalRead(i)&&hallC[i];
-						break;
-						case 4:
-							hallA[i]=digitalRead(i)&&hallA[i];
-							hallB[i]=!digitalRead(i)&&hallB[i];
-							hallC[i]=!digitalRead(i)&&hallC[i];
-						break;
-						case 5:
-							hallA[i]=digitalRead(i)&&hallA[i];
-							hallB[i]=digitalRead(i)&&hallB[i];
-							hallC[i]=!digitalRead(i)&&hallC[i];
-						break;
-						case 6:
-							hallA[i]=!digitalRead(i)&&hallA[i];
-							hallB[i]=digitalRead(i)&&hallB[i];
-							hallC[i]=!digitalRead(i)&&hallC[i];
-						break;
+		for(uint8_t j=1;j<30;j++){
+			for(uint8_t i=1;i<7;i++){
+				step=i;    //sensorless drive
+				commutate();
+				DELAY_Ms(30-j);
+				for(uint8_t i=0;i<PINCOUNT;i++){
+					if(!used(i)){    //check every possible pin
+						switch (step){
+							case 1:    //if current state does not match what it should,remove from possible pins list
+								hallA[i]=!digitalRead(i)&&hallA[i];
+								hallB[i]=digitalRead(i)&&hallB[i];
+								hallC[i]=digitalRead(i)&&hallC[i];
+							break;
+							case 2:    //if a pin have been removed not add it back in next step
+								hallA[i]=!digitalRead(i)&&hallA[i];
+								hallB[i]=!digitalRead(i)&&hallB[i];
+								hallC[i]=digitalRead(i)&&hallC[i];
+							break;
+							case 3:
+								hallA[i]=digitalRead(i)&&hallA[i];
+								hallB[i]=!digitalRead(i)&&hallB[i];
+								hallC[i]=digitalRead(i)&&hallC[i];
+							break;
+							case 4:
+								hallA[i]=digitalRead(i)&&hallA[i];
+								hallB[i]=!digitalRead(i)&&hallB[i];
+								hallC[i]=!digitalRead(i)&&hallC[i];
+							break;
+							case 5:
+								hallA[i]=digitalRead(i)&&hallA[i];
+								hallB[i]=digitalRead(i)&&hallB[i];
+								hallC[i]=!digitalRead(i)&&hallC[i];
+							break;
+							case 6:
+								hallA[i]=!digitalRead(i)&&hallA[i];
+								hallB[i]=digitalRead(i)&&hallB[i];
+								hallC[i]=!digitalRead(i)&&hallC[i];
+							break;
+						}
 					}
 				}
-			}
-		}
-		
-		for(uint8_t i=0;i<PINCOUNT;i++){
-			if(hallA[i]){
-				HALLAPIN=i;    //save and print found pin
-				UART_SendString("\r\nHALLA:");
-				UART_SendString(&PXX[i][0]);
-			}
-			if(hallB[i]){
-				HALLBPIN=i;
-				UART_SendString("\r\nHALLB:");
-				UART_SendString(&PXX[i][0]);
-			}
-			if(hallC[i]){
-				HALLCPIN=i;
-				UART_SendString("\r\nHALLC:");
-				UART_SendString(&PXX[i][0]);
+				DELAY_Ms(j);
 			}
 			
-		}
-		for(uint8_t i=0;i<PINCOUNT;i++){    //everything is possible
-			hallA[i] = 1;
-			hallB[i] = 1;
-			hallC[i] = 1;
-		}
-		for(uint8_t i=0;i<PINCOUNT;i++){    //remove used pins from possible pins
-			if(used(i)){
-				hallA[i]=0;
-				hallB[i]=0;
-				hallC[i]=0;
+			for(uint8_t i=0;i<PINCOUNT;i++){
+				if(hallA[i]){
+					HALLAPIN=i;    //save and print found pin
+					UART_SendString("\r\nHALLA:");
+					UART_SendString(&PXX[i][0]);
+				}
+				if(hallB[i]){
+					HALLBPIN=i;
+					UART_SendString("\r\nHALLB:");
+					UART_SendString(&PXX[i][0]);
+				}
+				if(hallC[i]){
+					HALLCPIN=i;
+					UART_SendString("\r\nHALLC:");
+					UART_SendString(&PXX[i][0]);
+				}
+				
+			}
+			for(uint8_t i=0;i<PINCOUNT;i++){    //everything is possible
+				hallA[i] = 1;
+				hallB[i] = 1;
+				hallC[i] = 1;
+			}
+			for(uint8_t i=0;i<PINCOUNT;i++){    //remove used pins from possible pins
+				if(used(i)){
+					hallA[i]=0;
+					hallB[i]=0;
+					hallC[i]=0;
+				}
+			}
+			if(HALLAPIN==255||HALLBPIN==255||HALLCPIN==255){
+				UART_SendString("\r\nretry");
+				HALLAPIN=HALLBPIN=HALLCPIN=255;
+			}else if(HALLAPIN!=255&&HALLBPIN!=255&&HALLCPIN!=255){
+				UART_SendString("\r\nDetection sucessful");
+				uint8_t avalid,bvalid,cvalid,timnum=0;
+				for(uint8_t i=0;i<TIMCOUNT;i++){ 
+					if(halltims[i].io == HALLAPIN){
+						avalid=1;
+						timnum+=halltims[i].tim2;
+					}
+					if(halltims[i].io == HALLBPIN){
+						bvalid=1;
+						timnum+=halltims[i].tim2;
+					}
+					if(halltims[i].io == HALLCPIN){
+						cvalid=1;
+						timnum+=halltims[i].tim2;
+					}
+				}
+				if(!(avalid&&bvalid&&cvalid)){
+					UART_SendString("\r\nWarning:pinmodeAF of HALL pin ");
+					if(avalid){
+						UART_SendString(&PXX[HALLAPIN][0]);
+					}
+					if(bvalid){
+						UART_SendString(&PXX[HALLBPIN][0]);
+					}
+					if(cvalid){
+						UART_SendString(&PXX[HALLCPIN][0]);
+					}
+					UART_SendString(" is not found, it is sugessted to redo the detection");
+				}else if(!(timnum==0||timnum==3)){
+					UART_SendString("\r\nWarning:HALL sensor pin timer mapping is invalid, it is sugessted to redo the detection");
+				}
+				break;
 			}
 		}
 	}
 	TIM1->CCR1=0;    //disable motor after all pins is found
 	TIM1->CCR2=0;
 	TIM1->CCR3=0;
-	if(doinloop){
-		UART_SendString("\r\nDetection sucessful");
-		uint8_t avalid,bvalid,cvalid,timnum=0;
-		for(uint8_t i=0;i<TIMCOUNT;i++){ 
-			if(halltims[i].io == HALLAPIN){
-				avalid=1;
-				timnum+=halltims[i].tim2;
-			}
-			if(halltims[i].io == HALLBPIN){
-				bvalid=1;
-				timnum+=halltims[i].tim2;
-			}
-			if(halltims[i].io == HALLCPIN){
-				cvalid=1;
-				timnum+=halltims[i].tim2;
-			}
-		}
-		if(!(avalid&&bvalid&&cvalid)){
-			UART_SendString("\r\nWarning:pinmodeAF of HALL pin ");
-			if(avalid){
-				UART_SendString(&PXX[HALLAPIN][0]);
-			}
-			if(bvalid){
-				UART_SendString(&PXX[HALLBPIN][0]);
-			}
-			if(cvalid){
-				UART_SendString(&PXX[HALLCPIN][0]);
-			}
-			UART_SendString(" is not found, it is sugessted to redo the detection");
-		}else if(!(timnum==0||timnum==3)){
-			UART_SendString("\r\nWarning:HALL sensor pin timer mapping is invalid, it is sugessted to redo the detection");
-		}
-		doinloop=0;
-	}
 }	
 
 
@@ -813,6 +819,8 @@ void autoDetectInit(){
 		break;
 		case MODE_HALL :
 			UART_SendString("\n\rthis will spin motor slowly to detect hall sensor pins,if it takes too long please increase input voltage to 42v, if the motor does not move at all or a short circuit occured press I to invert lowside drive signal\n\rpress Y to start,Enter to return to menu\n\r");
+			UART_SendString("lowside ");
+			UART_SendString(INVERT_LOWSIDE ? "inverted" : "normal");
 			wait=1;
 			while(wait){
 				__NOP();
