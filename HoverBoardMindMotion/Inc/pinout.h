@@ -4,7 +4,7 @@
 /* |  _  | |_| |\ V / | |___|  _ <  |  _  |/ ___ \ |___| . \    \ V /  / __/ */
 /* |_| |_|\___/  \_/  |_____|_| \_\ |_| |_/_/   \_\____|_|\_\    \_/  |_____|*/
 /*                                                                           */
-#define VERSION_INFO "\r\nPinFinder beta v167\r\nchangelog:hall detection rework"
+#define VERSION_INFO "\r\nPinFinder beta v168\r\nchangelog:discard changes,button detection fix"
 #include "../Inc/hardware.h"
 extern MM32GPIO pins[PINCOUNT];
 extern uint16_t pinstorage[64];

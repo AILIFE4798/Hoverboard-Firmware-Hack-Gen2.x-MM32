@@ -617,6 +617,7 @@ void autoDetectSerialIt(){    //serial dma interrupt
 							UART_SendString("\r\nEEPROM write failed\r\n");
 						}
 					case 'n':
+						EEPROM_Read((u8*)pinstorage, 2 * 64);
 						mode=MODE_MENU;
 						init=1;
 					break;
@@ -969,6 +970,11 @@ void checkbutton(){
 					BUTTONPIN=i;
 					UART_SendString("\r\nButton:");
 					UART_SendString(&PXX[i][0]);
+					for(uint8_t i=0;i<PINCOUNT;i++){
+						if(!used(i)){
+							hallA[i]=digitalRead(i);    //hall array reused to detect change in io state for button
+						}
+					}
 				}
 			}
 		}
