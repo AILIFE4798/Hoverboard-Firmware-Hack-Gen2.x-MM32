@@ -138,13 +138,13 @@ void TIM1_init(u16 arr, u16 psc){
 	TIM_TimeBaseStructure.TIM_Prescaler = psc;
 	//Setting Clock Segmentation
 	TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
-	TIM_TimeBaseStructure.TIM_RepetitionCounter = 0;
+	TIM_TimeBaseStructure.TIM_RepetitionCounter = 1;
 	///TIM Upward Counting Mode
-	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
+	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_CenterAligned1;
 	TIM_TimeBaseInit(TIM1, &TIM_TimeBaseStructure);
 
 	TIM_OCStructInit(&TIM_OCInitStructure);
-	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_Timing;
+	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM2;
 	TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
 	TIM_OCInitStructure.TIM_OutputNState = TIM_OutputNState_Enable;
 	TIM_OCInitStructure.TIM_Pulse = 0;
@@ -155,6 +155,8 @@ void TIM1_init(u16 arr, u16 psc){
 	TIM_OC1Init(TIM1, &TIM_OCInitStructure);
 	TIM_OC2Init(TIM1, &TIM_OCInitStructure);
 	TIM_OC3Init(TIM1, &TIM_OCInitStructure);
+	TIM_OCInitStructure.TIM_Pulse = 1; 							//0% duty cycle
+	TIM_OC4Init(TIM1, &TIM_OCInitStructure);
 
 	TIM_CCPreloadControl(TIM1, ENABLE);
 	TIM_ITConfig(TIM1, TIM_IT_COM, ENABLE);
@@ -162,7 +164,7 @@ void TIM1_init(u16 arr, u16 psc){
 
 	TIM_BDTRStructInit(&TIM_BDTRInitStructure);
 	// Automatic Output enable, Break, dead time and lock configuration
-	TIM_BDTRInitStructure.TIM_OSSIState = TIM_OSSRState_Enable;
+	TIM_BDTRInitStructure.TIM_OSSIState = TIM_OSSIState_Enable;
 	TIM_BDTRInitStructure.TIM_OSSRState = TIM_OSSRState_Enable;
 	TIM_BDTRInitStructure.TIM_Break = TIM_Break_Enable;
 	TIM_BDTRInitStructure.TIM_BreakPolarity = AWDG ? TIM_BreakPolarity_High : TIM_BreakPolarity_Low ;

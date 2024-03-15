@@ -7,6 +7,10 @@
 #include "../Inc/remoteUartBus.h"
 #include "../Inc/calculation.h"
 
+#include "../Inc/ipark.h"
+#include "../Inc/FOC_Math.h"
+#include "../Inc/pwm_gen.h"
+
 extern uint8_t step;
 extern bool uart;
 extern bool adc;
@@ -30,6 +34,8 @@ uint32_t iphaseboffset=0;
 extern MM32ADC adcs[10];
 float vcc;
 uint8_t realdir=0;
+
+int16_t	TestAngle = 0;
 
 //commutation interrupt
 void TIM1_BRK_UP_TRG_COM_IRQHandler(void){
@@ -55,47 +61,19 @@ void ADC1_COMP_IRQHandler(void){
 		TIM_GenerateEvent(TIM1, TIM_EventSource_Break);
   }
 	if(RESET != ADC_GetITStatus(ADC1, ADC_IT_EOC)) {
-		if(poweron<127){//cancel out adc offset
-			itotaloffset+=analogRead(ITOTALPIN);
-			poweron++;
-		}else if(poweron==127){//divide by 128
-			itotaloffset = itotaloffset>>7;
-			if(AWDG){
-				ADC_AnalogWatchdogCmd(ADC1, ENABLE);
-				ADC_AnalogWatchdogThresholdsConfig(ADC1, (uint16_t)(AWDG+itotaloffset), 0);
-				for(uint8_t i=0;i<ADCCOUNT;i++){
-					if(adcs[i].io==ITOTALPIN){
-						ADC_AnalogWatchdogSingleChannelConfig(ADC1, adcs[i].channel);
-						break;
-					}
-				}
-				ADC_ITConfig(ADC1, ADC_IT_AWD, ENABLE);
-			}
-			poweron++;
-		}else{
-			if(hallpos(dir)!=hallposprev){
-				step=hallpos(dir);
-				commutate();
-				if(hallpos(dir)>hallposprev||(hallpos(dir)==1&&hallposprev==6)){
-					realdir=0;
-				}else{
-					realdir=1;
-				}
-				hallposprev=hallpos(dir);
-			}
-			uint16_t tmp = ADC1->ADDR15;
-			vcc=(double)4915.2/tmp;
-			vbat = (double)VBAT_DIVIDER*analogRead(VBATPIN)*vcc*100/4096;//read adc register
-			tmp = analogRead(ITOTALPIN);//prevent overflow on negative value
-			itotal = (double)ITOTAL_DIVIDER*(tmp-itotaloffset)*vcc*100/4096;
-			avgvbat();
-			avgItotal();
-			if(SOFT_ILIMIT>100&&SOFT_ILIMIT<3000&&itotal>SOFT_ILIMIT*100){
-				TIM1->CCR1=0;
-				TIM1->CCR2=0;
-				TIM1->CCR3=0;
-			}
-		}
+			TestAngle += 30;
+			ipark1.Ds = 3000;
+			ipark1.Qs = 0;		//CurIQ.qOut;
+			ipark1.Theta = TestAngle;    
+			IPARK_MACRO1(&ipark1);
+			//SVPWM
+			pwm_gen.Mode = FIVEMODE;
+			pwm_gen.Alpha = ipark1.Alpha;
+			pwm_gen.Beta  = ipark1.Beta;
+			PWM_GEN_calc(&pwm_gen);
+
+			//Update duty cycle
+			Update_PWM(&pwm_gen);
 		ADC_ClearITPendingBit(ADC1, ADC_IT_EOC);
 	}
 }	

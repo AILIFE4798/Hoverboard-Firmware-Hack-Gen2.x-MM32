@@ -434,6 +434,21 @@
               <FileType>1</FileType>
               <FilePath>.\Src\sim_eeprom.c</FilePath>
             </File>
+            <File>
+              <FileName>ipark.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\ipark.c</FilePath>
+            </File>
+            <File>
+              <FileName>pwm_gen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\pwm_gen.c</FilePath>
+            </File>
+            <File>
+              <FileName>FOC_Math.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\FOC_Math.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -488,6 +503,21 @@
               <FileName>sim_eeprom.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Inc\sim_eeprom.h</FilePath>
+            </File>
+            <File>
+              <FileName>ipark.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\ipark.h</FilePath>
+            </File>
+            <File>
+              <FileName>pwm_gen.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\pwm_gen.h</FilePath>
+            </File>
+            <File>
+              <FileName>FOC_Math.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\FOC_Math.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1211,6 +1241,21 @@
               <FileType>1</FileType>
               <FilePath>.\Src\sim_eeprom.c</FilePath>
             </File>
+            <File>
+              <FileName>ipark.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\ipark.c</FilePath>
+            </File>
+            <File>
+              <FileName>pwm_gen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\pwm_gen.c</FilePath>
+            </File>
+            <File>
+              <FileName>FOC_Math.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\FOC_Math.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1265,6 +1310,21 @@
               <FileName>sim_eeprom.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Inc\sim_eeprom.h</FilePath>
+            </File>
+            <File>
+              <FileName>ipark.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\ipark.h</FilePath>
+            </File>
+            <File>
+              <FileName>pwm_gen.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\pwm_gen.h</FilePath>
+            </File>
+            <File>
+              <FileName>FOC_Math.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\FOC_Math.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -2126,6 +2186,21 @@
               <FileType>1</FileType>
               <FilePath>.\Src\sim_eeprom.c</FilePath>
             </File>
+            <File>
+              <FileName>ipark.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\ipark.c</FilePath>
+            </File>
+            <File>
+              <FileName>pwm_gen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\pwm_gen.c</FilePath>
+            </File>
+            <File>
+              <FileName>FOC_Math.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\FOC_Math.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2180,6 +2255,21 @@
               <FileName>sim_eeprom.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Inc\sim_eeprom.h</FilePath>
+            </File>
+            <File>
+              <FileName>ipark.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\ipark.h</FilePath>
+            </File>
+            <File>
+              <FileName>pwm_gen.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\pwm_gen.h</FilePath>
+            </File>
+            <File>
+              <FileName>FOC_Math.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\FOC_Math.h</FilePath>
             </File>
           </Files>
         </Group>
