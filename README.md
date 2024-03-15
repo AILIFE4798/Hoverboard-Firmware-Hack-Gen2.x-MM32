@@ -59,7 +59,9 @@ now with the pinfinder firmware, any board type is supported, but below are some
 ## support
 join this server to get support
 
-https://discord.gg/dvrKS9uyV7
+discord: https://discord.gg/dvrKS9uyV7
+
+matrix: https://matrix.to/#/#hoverboard-firmware-hack:matrix.ai-life.xyz
 
 ## Contributions
 if you had any feature request or bug report please create issue or use the [discussions](https://github.com/AILIFE4798/Hoverboard-Firmware-Hack-Gen2.x-MM32/discussions) feature, because im working on this project actively now dont use pr unless you asked me first because it will get desynced and cannot merge
