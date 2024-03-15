@@ -38,6 +38,7 @@ uint16_t revolutions=0;
 uint8_t selpin=0;
 uint8_t blinkstate=0;
 uint32_t lastblink;
+uint8_t ledmode=0;
 extern float vcc;
 uint8_t adcleft[10];
 uint8_t showalladc=0;
@@ -320,35 +321,41 @@ void autoDetectSerialIt(){    //serial dma interrupt
 				case 'u':
 				case 'l':
 				case 'z':
-					pinMode(selpin, sRxBuffer[0]=='w' ? INPUT_PULLUP : INPUT);
+					pinMode(selpin, sRxBuffer[0]=='w'&&!ledmode ? INPUT_PULLUP : INPUT);
 					//if pin is saved turn it off, if its not left it on so easy to see what led is still left
 					switch(sRxBuffer[0]){
 						case 'r':
+							pinMode(LEDRPIN, INPUT_PULLUP);
 							LEDRPIN=selpin;
 							UART_SendString("\r\nLEDR:");
 							UART_SendString(&PXX[selpin][0]);
 						break;
 						case 'g':
+							pinMode(LEDGPIN, INPUT_PULLUP);
 							LEDGPIN=selpin;
 							UART_SendString("\r\nLEDG:");
 							UART_SendString(&PXX[selpin][0]);
 						break;
 						case 'b':
+							pinMode(LEDBPIN, INPUT_PULLUP);
 							LEDBPIN=selpin;
 							UART_SendString("\r\nLEDB:");
 							UART_SendString(&PXX[selpin][0]);
 						break;
 						case 'u':
+							pinMode(LEDUPIN, INPUT_PULLUP);
 							LEDUPIN=selpin;
 							UART_SendString("\r\nUpper LED:");
 							UART_SendString(&PXX[selpin][0]);
 						break;
 						case 'l':
+							pinMode(LEDDPIN, INPUT_PULLUP);
 							LEDDPIN=selpin;
 							UART_SendString("\r\nLower LED:");
 							UART_SendString(&PXX[selpin][0]);
 						break;
 						case 'z':
+							pinMode(BUZZERPIN, INPUT_PULLUP);
 							BUZZERPIN=selpin;
 							UART_SendString("\r\nBuzzer:");
 							UART_SendString(&PXX[selpin][0]);
@@ -366,7 +373,7 @@ void autoDetectSerialIt(){    //serial dma interrupt
 					}while(used(selpin));    //find next unused pin
 				break;
 				case 's':
-					pinMode(selpin,INPUT_PULLUP);
+					pinMode(selpin,ledmode ? INPUT : INPUT_PULLUP);
 					do{
 						if(selpin==0){
 							selpin=PINCOUNT-1;
@@ -374,6 +381,10 @@ void autoDetectSerialIt(){    //serial dma interrupt
 							selpin--;
 						}
 					}while(used(selpin));
+				break;
+				case 'm':
+					init=1;
+					ledmode=!ledmode;
 				break;
 			}
 			UART_SendString("\rNow trying:");
@@ -673,7 +684,7 @@ void simhallupdate(){
 						}
 					}
 				}
-				DELAY_Ms(j);
+				//DELAY_Ms(j);
 			}
 			
 			for(uint8_t i=0;i<PINCOUNT;i++){
@@ -743,6 +754,12 @@ void simhallupdate(){
 				}
 				break;
 			}
+			if(mode!=MODE_HALL){
+				break;
+			}
+		}
+		if(mode!=MODE_HALL){
+			break;
 		}
 	}
 	TIM1->CCR1=0;    //disable motor after all pins is found
@@ -852,10 +869,14 @@ void autoDetectInit(){
 			}
 		break;
 		case MODE_LED :
-			UART_SendString("\n\rAll pins will be set high, the selected pin will blink, the already saved pins will remain off. If a LED does not light up, it is broken.\r\npress W to go to next pin\r\npress S to go to previous pin\n\rPress R to save as red LED\r\nPress G to save as green LED\r\nPress B to save as blue LED(or orange on some board)\r\nPress U to save as upper LED\r\nPress L to save as lower LED\r\nPress Z to save as buzzer\r\npress Enter to go back to main menu\r\n");
+			if(ledmode){
+				UART_SendString("\n\rAll pins will be set low, the selected pin will blink, the already saved pins will remain off. If a LED is stuck on it cannot be controled.\r\npress W to go to next pin\r\npress S to go to previous pin\n\rPress R to save as red LED\r\nPress G to save as green LED\r\nPress B to save as blue LED(or orange on some board)\r\nPress U to save as upper LED\r\nPress L to save as lower LED\r\nPress Z to save as buzzer\r\nPress M to switch to all led off by default\r\npress Enter to go back to main menu\r\n");
+			}else{
+				UART_SendString("\n\rAll pins will be set high, the selected pin will blink, the already saved pins will remain off. If a LED does not light up, it is broken.\r\npress W to go to next pin\r\npress S to go to previous pin\n\rPress R to save as red LED\r\nPress G to save as green LED\r\nPress B to save as blue LED(or orange on some board)\r\nPress U to save as upper LED\r\nPress L to save as lower LED\r\nPress Z to save as buzzer\r\nPress M to switch to all led on by default\r\npress Enter to go back to main menu\r\n");
+			}
 			for(uint8_t i=0;i<PINCOUNT;i++){
 				if(!used(i)){
-					pinMode(i,INPUT_PULLUP);
+					pinMode(i,ledmode ? INPUT : INPUT_PULLUP);
 				}
 			}
 			selpin=0;
@@ -919,7 +940,7 @@ void autoDetectInit(){
 }
 	
 void blinkLEDupdate(){
-	if(millis-lastblink>200){
+	if(millis-lastblink>100){
 		pinMode(selpin,blinkstate ? INPUT : INPUT_PULLUP);    //toggle pullup pulldown to blink
 		blinkstate=!blinkstate;
 		lastblink=millis;
