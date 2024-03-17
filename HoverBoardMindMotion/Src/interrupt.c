@@ -61,7 +61,7 @@ void ADC1_COMP_IRQHandler(void){
 		TIM_GenerateEvent(TIM1, TIM_EventSource_Break);
   }
 	if(RESET != ADC_GetITStatus(ADC1, ADC_IT_EOC)) {
-			TestAngle += 30;
+			TestAngle += 10;
 			ipark1.Ds = 3000;
 			ipark1.Qs = 0;		//CurIQ.qOut;
 			ipark1.Theta = TestAngle;    

@@ -449,6 +449,26 @@
               <FileType>1</FileType>
               <FilePath>.\Src\FOC_Math.c</FilePath>
             </File>
+            <File>
+              <FileName>clarke.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\clarke.c</FilePath>
+            </File>
+            <File>
+              <FileName>hallhandle.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\hallhandle.c</FilePath>
+            </File>
+            <File>
+              <FileName>park.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\park.c</FilePath>
+            </File>
+            <File>
+              <FileName>PID.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\PID.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -518,6 +538,26 @@
               <FileName>FOC_Math.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Inc\FOC_Math.h</FilePath>
+            </File>
+            <File>
+              <FileName>clarke.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\clarke.h</FilePath>
+            </File>
+            <File>
+              <FileName>hallhandle.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\hallhandle.h</FilePath>
+            </File>
+            <File>
+              <FileName>park.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\park.h</FilePath>
+            </File>
+            <File>
+              <FileName>PID.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\PID.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1256,6 +1296,26 @@
               <FileType>1</FileType>
               <FilePath>.\Src\FOC_Math.c</FilePath>
             </File>
+            <File>
+              <FileName>clarke.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\clarke.c</FilePath>
+            </File>
+            <File>
+              <FileName>hallhandle.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\hallhandle.c</FilePath>
+            </File>
+            <File>
+              <FileName>park.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\park.c</FilePath>
+            </File>
+            <File>
+              <FileName>PID.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\PID.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1325,6 +1385,26 @@
               <FileName>FOC_Math.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Inc\FOC_Math.h</FilePath>
+            </File>
+            <File>
+              <FileName>clarke.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\clarke.h</FilePath>
+            </File>
+            <File>
+              <FileName>hallhandle.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\hallhandle.h</FilePath>
+            </File>
+            <File>
+              <FileName>park.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\park.h</FilePath>
+            </File>
+            <File>
+              <FileName>PID.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\PID.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -2201,6 +2281,26 @@
               <FileType>1</FileType>
               <FilePath>.\Src\FOC_Math.c</FilePath>
             </File>
+            <File>
+              <FileName>clarke.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\clarke.c</FilePath>
+            </File>
+            <File>
+              <FileName>hallhandle.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\hallhandle.c</FilePath>
+            </File>
+            <File>
+              <FileName>park.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\park.c</FilePath>
+            </File>
+            <File>
+              <FileName>PID.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\PID.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2270,6 +2370,26 @@
               <FileName>FOC_Math.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Inc\FOC_Math.h</FilePath>
+            </File>
+            <File>
+              <FileName>clarke.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\clarke.h</FilePath>
+            </File>
+            <File>
+              <FileName>hallhandle.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\hallhandle.h</FilePath>
+            </File>
+            <File>
+              <FileName>park.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\park.h</FilePath>
+            </File>
+            <File>
+              <FileName>PID.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\PID.h</FilePath>
             </File>
           </Files>
         </Group>
