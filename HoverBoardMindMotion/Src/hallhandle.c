@@ -1,5 +1,6 @@
 /*-------------------- Includes -----------------------*/
 #include "../Inc/HallHandle.h"
+#include "../Inc/bldc.h"
 #include "mm32_device.h"                // Device header
 
 
@@ -7,12 +8,12 @@
 HALLType HALL1;
 int16_t CWShift = -5000;
 int16_t CCWShift = 3000;
+extern uint8_t dir;
 
 /*------------------ Private functions ----------------*/
 void HALLModuleInit(HALLType *u);
 void HALLModuleCalc(HALLType *u);
-uint8_t HALL_JudgeState(void);
-uint8_t HALL_ReadHallPorts(void);
+
 
 /****************************************************************
 	Function Name£ºHALLModuleInit
@@ -24,7 +25,7 @@ void HALLModuleInit(HALLType *u)
 {
 	uint8_t i;
 	
-	u->RunHallValue = HALL_JudgeState();
+	u->RunHallValue = hallpos(dir);
 	u->PreHallValue = u->RunHallValue;
 	u->CMDDIR = MOTORDIR;
 	u->IncAngle = 5;
@@ -76,7 +77,7 @@ void HALLModuleCalc(HALLType *u)
 	static uint8_t i = 0;
 	uint8_t j = 0;
 	
-	u->RunHallValue = HALL_JudgeState();
+	u->RunHallValue = hallpos(dir);
 	
 	if(u->PreHallValue != u->RunHallValue)
 	{
@@ -126,65 +127,4 @@ void HALLModuleCalc(HALLType *u)
 	else
 	{}
 }
-
-/****************************************************************
-	Function Name£ºHALL_JudgeState
-	Description£ºRead Hall Value 4times
-	Input£ºnone
-	Output£ºnone
-****************************************************************/
-uint8_t HALL_JudgeState(void)
-{
- uint8_t bReadValue1;
- uint8_t bReadValue2;
- uint8_t i,j;
-
-	bReadValue1 = HALL_ReadHallPorts();
-	
-	for (i = 4,j=8; i > 0; i--)
-	{
-		if (--j == 0) 
-				return bReadValue1; 
-		
-		bReadValue2 = HALL_ReadHallPorts();
-		
-		if (bReadValue1 != bReadValue2)
-		{
-			i = 4;
-			bReadValue1 = bReadValue2;
-		}
-	}
-	
-	return bReadValue1;    
-} 
-
-/****************************************************************
-	Function Name£ºHALL_JudgeState
-	Description£ºRead Hall Value
-	Input£ºnone
-	Output£ºnone
-****************************************************************/
-uint8_t HALL_ReadHallPorts(void)
-{
-	uint8_t HallA;
-	uint8_t HallB;
-	uint8_t HallC;
-	uint8_t HallValue;
-	
-	HallA = GPIO_ReadInputDataBit(HALL_PORT,HALLU_PIN);
-	HallB = GPIO_ReadInputDataBit(HALL_PORT,HALLV_PIN);
-	HallC = GPIO_ReadInputDataBit(HALL_PORT,HALLW_PIN);
-	
-	if(HALL1.CMDDIR == 1)
-	{
-		HallValue = HallC*4 + HallB*2 + HallA;
-	}
-	else
-	{
-		HallValue = 7-(HallC*4 + HallB*2 + HallA);
-	}
-	
-	return HallValue;
-}
-
 

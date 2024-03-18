@@ -47,8 +47,6 @@ extern HALLType HALL1;
 
 extern void HALLModuleInit(HALLType *u);
 extern void HALLModuleCalc(HALLType *u);
-extern uint8_t HALL_JudgeState(void);
-extern uint8_t HALL_ReadHallPorts(void);
 
 
 

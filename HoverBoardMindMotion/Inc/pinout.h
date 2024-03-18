@@ -28,6 +28,8 @@ extern uint16_t pinstorage[64];
 #define ITOTALPIN pinstorage[13]
 #define TXPIN pinstorage[14]
 #define RXPIN pinstorage[15]
+#define IPHASEAPIN pinstorage[16]
+#define IPHASEBPIN pinstorage[17]
 #define OCPPIN pinstorage[23]
 #define OCPREFPIN pinstorage[24]
 

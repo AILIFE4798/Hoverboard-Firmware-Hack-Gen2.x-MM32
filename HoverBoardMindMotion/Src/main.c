@@ -21,6 +21,8 @@
 #include "../Inc/ipark.h"
 #include "../Inc/FOC_Math.h"
 #include "../Inc/pwm_gen.h"
+#include "../Inc/PID.h"
+#include "../Inc/hallhandle.h"
 
 uint8_t step=1;//very importatnt to set to 1 or it will not work
 uint32_t millis;
@@ -144,8 +146,14 @@ s32 main(void){
 	uint16_t bat_60 = BAT_EMPTY+((float)(BAT_FULL-BAT_EMPTY)/100*60);
 	uint16_t bat_70 = BAT_EMPTY+((float)(BAT_FULL-BAT_EMPTY)/100*70);
 	uint16_t bat_100 = BAT_FULL;
+	
 	PWM_GEN_init(&pwm_gen);
 	InitNormalization(300,4000,4000,&RP);
+	HALLModuleInit(&HALL1);
+	InitPI();
+	MovingAvgInit(&IDData);
+	MovingAvgInit(&IQData);
+	MovingAvgInit(&SpeedFdk);
   while(1) {
 		
 		digitalWrite(LEDRPIN,digitalRead(HALLAPIN));

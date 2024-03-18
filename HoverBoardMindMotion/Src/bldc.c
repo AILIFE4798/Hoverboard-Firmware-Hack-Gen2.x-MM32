@@ -45,7 +45,6 @@ const uint8_t hall_to_pos[8] =
 
 
 uint8_t hallpos(uint8_t dir){
-	#ifdef HALLAPIN
 	uint8_t HallA;
 	uint8_t HallB;
 	uint8_t HallC;
@@ -65,9 +64,6 @@ uint8_t hallpos(uint8_t dir){
 	}
 	
 	return hall_to_pos[HallValue];
-	#else
-	return 0;
-	#endif
 }
 
 void commutate(){
