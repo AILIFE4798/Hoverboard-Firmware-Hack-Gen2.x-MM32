@@ -28,8 +28,10 @@ extern uint16_t pinstorage[64];
 #define ITOTALPIN pinstorage[13]
 #define TXPIN pinstorage[14]
 #define RXPIN pinstorage[15]
-#define IPHASEAPIN pinstorage[16]
-#define IPHASEBPIN pinstorage[17]
+//#define IPHASEAPIN pinstorage[16]
+//#define IPHASEBPIN pinstorage[17]
+#define IPHASEAPIN PA2
+#define IPHASEBPIN PA6
 #define OCPPIN pinstorage[23]
 #define OCPREFPIN pinstorage[24]
 
@@ -42,7 +44,7 @@ extern uint16_t pinstorage[64];
 #define INVERT_LOWSIDE pinstorage[40]
 #define SOFT_ILIMIT pinstorage[41]
 #define AWDG pinstorage[42]
-#define CONSTSPEED pinstorage[44]
+#define DRIVEMODE pinstorage[44]
 #define BAT_FULL pinstorage[45]
 #define BAT_EMPTY pinstorage[46]
 #define SERIAL_TIMEOUT pinstorage[47]

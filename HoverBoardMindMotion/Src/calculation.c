@@ -112,7 +112,7 @@ int PID2PWM(int pid){
 }
 
 uint32_t updateMotorRPM(uint32_t halltime){
-    return  60000000 / (halltime * 10 * WINDINGS);
+    return  600000000 / (halltime * 10 * WINDINGS);
 }
 
 

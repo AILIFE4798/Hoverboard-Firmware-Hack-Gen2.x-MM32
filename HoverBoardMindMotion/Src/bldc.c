@@ -63,7 +63,8 @@ uint8_t hallpos(uint8_t dir){
 		HallValue = 7-(HallC*4 + HallB*2 + HallA);
 	}
 	
-	return hall_to_pos[HallValue];
+	//return hall_to_pos[HallValue];
+	return HallValue;
 }
 
 void commutate(){
@@ -148,7 +149,7 @@ void speedupdate(){
 		if(BAT_EMPTY>20000&&BAT_EMPTY<65000&&vbat*10<BAT_EMPTY){
 			pwm=0;
 		}else{
-			if(CONSTSPEED){	
+			if(DRIVEMODE==COM_SPEED){	
 				pwm= PID2PWM((PID(speed,realspeed)/50));// command the required RPM
 				if(speed==0){
 					pwm=0;

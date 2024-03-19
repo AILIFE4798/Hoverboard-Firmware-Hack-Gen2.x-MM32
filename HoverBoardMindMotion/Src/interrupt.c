@@ -31,8 +31,8 @@ extern uint8_t hallposprev;
 extern int32_t iOdom;
 uint32_t itotaloffset=0;
 uint8_t poweron=0;
-uint16_t iphasea;
-uint16_t iphaseb;
+int iphasea;
+int iphaseb;
 uint32_t iphaseaoffset=0;
 uint32_t iphaseboffset=0;
 extern MM32ADC adcs[10];
@@ -87,16 +87,6 @@ void ADC1_COMP_IRQHandler(void){
 			}
 			poweron++;
 		}else{
-			if(hallpos(dir)!=hallposprev){
-				//step=hallpos(dir);
-				//commutate();
-				if(hallpos(dir)>hallposprev||(hallpos(dir)==1&&hallposprev==6)){
-					realdir=0;
-				}else{
-					realdir=1;
-				}
-				hallposprev=hallpos(dir);
-			}
 			uint16_t tmp = ADC1->ADDR15;
 			vcc=(double)4915.2/tmp;
 			vbat = (double)VBAT_DIVIDER*analogRead(VBATPIN)*vcc*100/4096;//read adc register
@@ -106,55 +96,55 @@ void ADC1_COMP_IRQHandler(void){
 			iphaseb = iphaseboffset-analogRead(IPHASEBPIN);
 			avgvbat();
 			avgItotal();
-			
-			HALLModuleCalc(&HALL1);
-			//CLARK±ä»»
-			clarke1.As = iphasea;
-			clarke1.Bs = iphaseb;
-			CLARKE_MACRO1(&clarke1);
-		
-			//PARK±ä»»
-			park1.Alpha = clarke1.Alpha;
-			park1.Beta = clarke1.Beta;
-			park1.Theta = HALL1.Angle;     /*Angle Input*/
-			PARK_MACRO1(&park1);	
-
-			//DQÂË²¨
-			IDData.NewData = park1.Ds;
-			MovingAvgCal(&IDData);
-
-			IQData.NewData = park1.Qs;
-			MovingAvgCal(&IQData);		
-		
-			CurID.qInRef = 0;
-			CurID.qInMeas = IDData.Out;
-			CalcPI(&CurID);
-
-			CurIQ.qInRef = Speed.qOut;
-			CurIQ.qInMeas = IQData.Out;
-			CalcPI(&CurIQ);
-			
-			//IPARK
-			//ipark1.Ds = CurID.qOut;
-			ipark1.Qs = CurIQ.qOut;		
-			//ipark1.Theta = HALL1.Angle;    
-			//IPARK_MACRO1(&ipark1);
-	
-			TestAngle += 10;
-			ipark1.Ds = 3000;
-			//ipark1.Qs = 0;		//CurIQ.qOut;
-			ipark1.Theta = TestAngle;    
-			IPARK_MACRO1(&ipark1);
-			//SVPWM
-			pwm_gen.Mode = FIVEMODE;
-			pwm_gen.Alpha = ipark1.Alpha;
-			pwm_gen.Beta  = ipark1.Beta;
-			PWM_GEN_calc(&pwm_gen);
-
-			//Update duty cycle
-			Update_PWM(&pwm_gen);
+			if(DRIVEMODE==COM_VOLT||DRIVEMODE==COM_SPEED&&0){
+				
+			}else{
+				HALLModuleCalc(&HALL1);
+				//CLARK
+				clarke1.As = iphasea;
+				clarke1.Bs = iphaseb;
+				CLARKE_MACRO1(&clarke1);
+				//PARK
+				park1.Alpha = clarke1.Alpha;
+				park1.Beta = clarke1.Beta;
+				park1.Theta = HALL1.Angle;     /*Angle Input*/
+				PARK_MACRO1(&park1);	
+				//filter
+				IDData.NewData = park1.Ds;
+				MovingAvgCal(&IDData);
+				
+				IQData.NewData = park1.Qs;
+				MovingAvgCal(&IQData);		
+				//PID
+				CurID.qInRef = 0;
+				CurID.qInMeas = IDData.Out;
+				CalcPI(&CurID);
+				
+				CurIQ.qInRef = Speed.qOut;
+				CurIQ.qInMeas = IQData.Out;
+				CalcPI(&CurIQ);
+				
+				//IPARK
+				//TestAngle += 30;
+				ipark1.Ds = 0;
+				//ipark1.Ds = CurID.qOut;
+				ipark1.Qs = -5000;
+				//ipark1.Qs = CurIQ.qOut;	
+				HALL1.CMDDIR = -1;
+				dir = -1;
+				//ipark1.Theta = TestAngle;	
+				ipark1.Theta = HALL1.Angle;    
+				IPARK_MACRO1(&ipark1);
+				//SVPWM
+				//pwm_gen.Mode = FIVEMODE;
+				pwm_gen.Mode = SEVENMODE;
+				pwm_gen.Alpha = ipark1.Alpha;
+				pwm_gen.Beta  = ipark1.Beta;
+				PWM_GEN_calc(&pwm_gen);
+				//Update duty cycle
+				Update_PWM(&pwm_gen);
+			}
 		}
-			
 		ADC_ClearITPendingBit(ADC1, ADC_IT_EOC);
 	}
 }	

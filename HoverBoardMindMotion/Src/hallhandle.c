@@ -1,13 +1,15 @@
 /*-------------------- Includes -----------------------*/
 #include "../Inc/HallHandle.h"
 #include "../Inc/bldc.h"
+#ifdef TARGET_MM32SPIN25
+#include "HAL_device.h"                 // Device header
+#else
 #include "mm32_device.h"                // Device header
-
+#endif
 
 /*------------------- Private variables ---------------*/
 HALLType HALL1;
-int16_t CWShift = -5000;
-int16_t CCWShift = 3000;
+int16_t CWShift = 0;
 extern uint8_t dir;
 
 /*------------------ Private functions ----------------*/
@@ -34,29 +36,16 @@ void HALLModuleInit(HALLType *u)
 	u->Time100msCNT = 0;
 	u->HallTimeSum = 60000;
 	
-	u->CWAngleTab[5] = 10922;
-	u->CWAngleTab[1] = 21844;
-	u->CWAngleTab[3] = 32767;
-	u->CWAngleTab[2] = -21844;
-	u->CWAngleTab[6] = -10922;
-	u->CWAngleTab[4] = 0;
-	
-	u->CCWAngleTab[5] = 10922;
-	u->CCWAngleTab[1] = 21844;
-	u->CCWAngleTab[3] = 32767;
-	u->CCWAngleTab[2] = -21844;
-	u->CCWAngleTab[6] = -10922;
-	u->CCWAngleTab[4] = 0;
-	
+	u->CWAngleTab[5] = 32767;
+	u->CWAngleTab[1] = 43688;
+	u->CWAngleTab[3] = 54610;
+	u->CWAngleTab[2] = 0;
+	u->CWAngleTab[6] = 10922;
+	u->CWAngleTab[4] = 21844;
 
-	if(u->CMDDIR == -1)
-	{
-		u->Angle = u->CCWAngleTab[HALL1.RunHallValue] + CCWShift;
-	}
-	else
-	{
+
+
 		u->Angle = u->CWAngleTab[HALL1.RunHallValue] + CWShift;
-	}
 	
 	for(i=0;i<8;i++)
 	{
@@ -79,10 +68,7 @@ void HALLModuleCalc(HALLType *u)
 	
 	u->RunHallValue = hallpos(dir);
 	
-	if(u->PreHallValue != u->RunHallValue)
-	{
-		u->Time100msCNT = 0;
-		
+	if(u->PreHallValue != u->RunHallValue){
 		i++;
 		if(i >= 6)
 		{
@@ -106,14 +92,8 @@ void HALLModuleCalc(HALLType *u)
 		u->IncAngle = 4096000/u->HallTimeSum;
 		u->IncAngleMax = 10922;
 		
-		if(u->CMDDIR == -1)
-		{
-			u->Angle = u->CCWAngleTab[u->RunHallValue] + CCWShift;
-		}
-		else
-		{
-			u->Angle = u->CWAngleTab[u->RunHallValue] + CWShift;
-		}
+		u->Angle = u->CWAngleTab[u->RunHallValue] + CWShift;
+
 	}
 	
 	u->PreHallValue = u->RunHallValue;

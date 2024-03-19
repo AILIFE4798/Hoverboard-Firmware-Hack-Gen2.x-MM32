@@ -26,8 +26,7 @@ typedef struct
 	uint8_t Time100msCNT;
 	uint32_t HallTime[8];		
 	uint32_t HallTimeSum;
-	int16_t CWAngleTab[8];
-	int16_t CCWAngleTab[8];
+	uint16_t CWAngleTab[8];
 }
 HALLType;
 

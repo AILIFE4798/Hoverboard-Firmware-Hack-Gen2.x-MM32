@@ -313,6 +313,17 @@ void adc_Init(void){
 			}
 		}
 	}
+	pinMode(PA0, INPUT_ADC);
+	pinMode(PA1, INPUT_ADC);
+	pinMode(PA2, INPUT_ADC);
+	pinMode(PA4, INPUT_ADC);
+	pinMode(PA5, INPUT_ADC);
+	pinMode(PA6, INPUT_ADC);
+	for(uint8_t i=0;i<ADCCOUNT;i++){
+			if(adcs[i].io==PA2||adcs[i].io==PA6){
+				ADC_RegularChannelConfig(ADC1, adcs[i].channel, 0, ADC_SampleTime_7_5Cycles);
+			}
+		}
 	ADC_ITConfig(ADC1, ADC_IT_EOC, ENABLE);
 }
 
