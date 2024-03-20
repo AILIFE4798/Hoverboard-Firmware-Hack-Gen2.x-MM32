@@ -1,8 +1,11 @@
 #ifndef PID_h
 #define PID_h
 
+#ifdef TARGET_MM32SPIN25
+#include "HAL_device.h"                 // Device header
+#else
 #include "mm32_device.h"                // Device header
-
+#endif
 
 #define DUTY_OUTMAX  2249    					//占空比输出最大值
 #define DUTY_OUTMIN  20             	//占空比输出最小值

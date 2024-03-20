@@ -1,8 +1,11 @@
 #ifndef FOC_Math_h
 #define FOC_Math_h
 
+#ifdef TARGET_MM32SPIN25
+#include "HAL_device.h"                 // Device header
+#else
 #include "mm32_device.h"                // Device header
-
+#endif
 
 typedef struct
 {

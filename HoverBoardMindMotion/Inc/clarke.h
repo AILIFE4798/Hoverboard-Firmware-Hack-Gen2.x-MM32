@@ -1,5 +1,8 @@
+#ifdef TARGET_MM32SPIN25
+#include "HAL_device.h"                 // Device header
+#else
 #include "mm32_device.h"                // Device header
-
+#endif
 #define INV_SQRT3		591				// (1/sqrt(3)) << 10
 
 typedef struct {  
