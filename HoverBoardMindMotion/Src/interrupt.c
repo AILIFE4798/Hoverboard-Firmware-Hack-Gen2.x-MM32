@@ -39,7 +39,7 @@ extern MM32ADC adcs[10];
 float vcc;
 uint8_t realdir=0;
 extern uint8_t hall_to_pos[8];
-extern int pwm;
+extern uint16_t abspwm;
 
 int16_t	TestAngle = 0;
 
@@ -112,7 +112,7 @@ void ADC1_COMP_IRQHandler(void){
 				hallposprev=pwmpos;
 			}
 			if(!(DRIVEMODE==COM_VOLT||DRIVEMODE==COM_SPEED)){
-				HALL1.CMDDIR = dir;
+				HALL1.CMDDIR = -dir;
 				HALLModuleCalc(&HALL1);
 				//CLARK
 				clarke1.As = iphasea;
@@ -142,7 +142,7 @@ void ADC1_COMP_IRQHandler(void){
 				TestAngle += 200;
 				ipark1.Ds = 0;
 				//ipark1.Ds = CurID.qOut;
-				ipark1.Qs = pwm;
+				ipark1.Qs = abspwm;
 				//ipark1.Qs = CurIQ.qOut;	
 				//ipark1.Theta = TestAngle;	
 				ipark1.Theta = HALL1.Angle;    

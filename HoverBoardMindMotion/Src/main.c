@@ -33,7 +33,7 @@ uint32_t iOdom;
 bool uart;
 bool adc;
 bool comm=1;
-int8_t dir=-1;
+int8_t dir=1;
 uint8_t uartBuffer=0;
 u8 sRxBuffer[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 int vbat;

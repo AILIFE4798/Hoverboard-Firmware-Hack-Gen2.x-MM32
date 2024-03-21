@@ -42,11 +42,9 @@ extern uint16_t pinstorage[64];
 #define INVERT_LOWSIDE pinstorage[40]
 #define SOFT_ILIMIT pinstorage[41]
 #define AWDG pinstorage[42]
-//#define DRIVEMODE pinstorage[44]
-#define DRIVEMODE SINE_VOLT
+#define DRIVEMODE pinstorage[44]
 #define BAT_FULL pinstorage[45]
-//#define BAT_EMPTY pinstorage[46]
-#define BAT_EMPTY 0
+#define BAT_EMPTY pinstorage[46]
 #define SERIAL_TIMEOUT pinstorage[47]
 
 

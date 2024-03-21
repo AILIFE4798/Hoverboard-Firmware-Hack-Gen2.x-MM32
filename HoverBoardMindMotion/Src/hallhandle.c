@@ -66,7 +66,7 @@ void HALLModuleCalc(HALLType *u)
 	static uint8_t i = 0;
 	uint8_t j = 0;
 	
-	u->RunHallValue = hallpos(dir);
+	u->RunHallValue = hallpos(u->CMDDIR);
 	
 	if(u->PreHallValue != u->RunHallValue){
 		i++;

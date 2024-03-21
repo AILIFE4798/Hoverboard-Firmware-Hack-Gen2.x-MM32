@@ -69,9 +69,7 @@ uint8_t hallpos(uint8_t dir){
 }
 
 void commutate(){//U,V,W(A,B,C)
-	TIM1->CCR1=abspwm;
-	TIM1->CCR2=abspwm;
-	TIM1->CCR3=abspwm;
+
 	if(step == 1) {//1,0,-1
 		TIM_CCxCmd(TIM1, TIM_Channel_2, TIM_CCx_Disable);
 		TIM_CCxNCmd(TIM1, TIM_Channel_2, TIM_CCxN_Disable);
@@ -162,7 +160,7 @@ void speedupdate(){
 					PIDrst();
 				}
 			}else if(DRIVEMODE==SINE_VOLT){	
-				pwm= speed*30;// IQ=30000~-30000
+				pwm= speed*40;// IQ=30000~-30000
 			}else if(DRIVEMODE==SINE_SPEED){	
 				pwm= PID2PWM((PID(speed,realspeed))/50);// command the required RPM
 				if(speed==0){
@@ -174,10 +172,15 @@ void speedupdate(){
 		if(pwm>0){
 		dir=1;
 		}else{
-		dir=0;
+		dir=-1;
 		}
 		abspwm=fabs((double)pwm);    // 4095~-4095
- }
+		if(DRIVEMODE==COM_VOLT||DRIVEMODE==COM_SPEED){
+			TIM1->CCR1=abspwm;
+			TIM1->CCR2=abspwm;
+			TIM1->CCR3=abspwm;
+		}
+	}
 }
 
 

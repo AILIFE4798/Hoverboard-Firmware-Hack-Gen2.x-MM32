@@ -183,12 +183,17 @@
         <Ww>
           <count>5</count>
           <WinNumber>1</WinNumber>
-          <ItemText>CurID</ItemText>
+          <ItemText>dir</ItemText>
         </Ww>
         <Ww>
           <count>6</count>
           <WinNumber>1</WinNumber>
-          <ItemText>CWShift</ItemText>
+          <ItemText>pwm</ItemText>
+        </Ww>
+        <Ww>
+          <count>7</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>HALL1.CMDDIR</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>
