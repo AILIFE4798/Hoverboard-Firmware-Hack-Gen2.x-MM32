@@ -33,7 +33,7 @@ uint32_t iOdom;
 bool uart;
 bool adc;
 bool comm=1;
-bool dir=1;
+int8_t dir=-1;
 uint8_t uartBuffer=0;
 u8 sRxBuffer[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 int vbat;
@@ -155,13 +155,67 @@ s32 main(void){
 	MovingAvgInit(&IQData);
 	MovingAvgInit(&SpeedFdk);
   while(1) {
-		
-		digitalWrite(LEDRPIN,digitalRead(HALLAPIN));
-		digitalWrite(LEDGPIN,digitalRead(HALLBPIN));
-		digitalWrite(LEDBPIN,digitalRead(HALLCPIN));
-		
-
-		
+		if(BAT_FULL>20000&&BAT_FULL<65000&&BAT_EMPTY>20000&&BAT_EMPTY<65000&&BAT_FULL>BAT_EMPTY){
+			if(vbat*10>bat_70){
+				digitalWrite(LEDRPIN,0);
+				digitalWrite(LEDGPIN,1);
+				digitalWrite(LEDBPIN,0);
+			}else if(vbat*10>bat_60){
+				digitalWrite(LEDRPIN,0);
+				digitalWrite(LEDGPIN,1);
+				digitalWrite(LEDBPIN,1);
+			}else if(vbat*10>bat_50){
+				digitalWrite(LEDRPIN,0);
+				digitalWrite(LEDGPIN,0);
+				digitalWrite(LEDBPIN,1);	
+			}else if(vbat*10>bat_20){
+				digitalWrite(LEDRPIN,1);
+				digitalWrite(LEDGPIN,0);
+				digitalWrite(LEDBPIN,1);
+			}else if(vbat*10>bat_10){
+				digitalWrite(LEDRPIN,1);
+				digitalWrite(LEDGPIN,0);
+				digitalWrite(LEDBPIN,0);
+			}else{
+				digitalWrite(LEDRPIN,flicker);
+				digitalWrite(LEDGPIN,0);
+				digitalWrite(LEDBPIN,0);
+			}
+		}else{
+			digitalWrite(LEDRPIN,digitalRead(HALLAPIN));
+			digitalWrite(LEDGPIN,digitalRead(HALLBPIN));
+			digitalWrite(LEDBPIN,digitalRead(HALLCPIN));
+		}
+		if(millis-lastupdate>1){//speed pid loop
+			speedupdate();
+		  lastupdate=millis;
+		}
+		if(millis-lastflicker>700){//speed pid loop
+			flicker=!flicker;
+		  lastflicker=millis;
+		}
+		if(LATCHPIN<PINCOUNT&&BUTTONPIN<PINCOUNT){
+			if(digitalRead(BUTTONPIN)){    //button press for shutdown
+				TIM1->CCR1=0;    //shut down motor
+				TIM1->CCR2=0;
+				TIM1->CCR3=0;
+				if(BUZZERPIN<PINCOUNT){
+					for(int i=0;i<3;i++){    //power off melody
+						digitalWrite(BUZZERPIN, 1);
+						DELAY_Ms(150);
+						digitalWrite(BUZZERPIN, 0);
+						DELAY_Ms(150);
+					}
+				}
+				while(digitalRead(BUTTONPIN)) {    //wait for release
+					__NOP();
+					IWDG_ReloadCounter();
+				}
+				digitalWrite(LATCHPIN, 0);    //last line to ever be executed
+				while(1);//incase the hardware failed...
+			}
+		}
+		IWDG_ReloadCounter();    //feed the watchdog
   }//main loop	
 }
 

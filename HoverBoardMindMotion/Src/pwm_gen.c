@@ -5,6 +5,7 @@
 #include "mm32_device.h"                // Device header
 #endif
 #include "../Inc/pwm_gen.h"
+#include "../Inc/pinout.h"
 
 /*------------------- Private variables ---------------*/
 PWM_GEN_T pwm_gen;
@@ -29,7 +30,7 @@ void PWM_GEN_init(PWM_GEN_T *u1)
 	u1->CompC	= 0;
 	u1->Mode	= SEVENMODE;
 	u1->Sector	= 0;
-	u1->N_halfPeriod	= 8192;
+	u1->N_halfPeriod	= PWM_RES;
 }
 
 /*************************************

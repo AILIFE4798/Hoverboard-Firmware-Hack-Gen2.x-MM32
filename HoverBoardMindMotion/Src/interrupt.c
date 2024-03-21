@@ -19,7 +19,7 @@ extern uint8_t step;
 extern bool uart;
 extern bool adc;
 extern bool comm;
-extern bool dir;
+extern int8_t dir;
 extern double rpm;
 extern uint32_t lastcommutate;
 extern uint32_t millis;
@@ -38,6 +38,8 @@ uint32_t iphaseboffset=0;
 extern MM32ADC adcs[10];
 float vcc;
 uint8_t realdir=0;
+extern uint8_t hall_to_pos[8];
+extern int pwm;
 
 int16_t	TestAngle = 0;
 
@@ -96,9 +98,21 @@ void ADC1_COMP_IRQHandler(void){
 			iphaseb = iphaseboffset-analogRead(IPHASEBPIN);
 			avgvbat();
 			avgItotal();
-			if(DRIVEMODE==COM_VOLT||DRIVEMODE==COM_SPEED&&0){
-				
-			}else{
+			uint8_t pwmpos=hall_to_pos[hallpos(dir)];
+			if(pwmpos!=hallposprev){
+				if(DRIVEMODE==COM_VOLT||DRIVEMODE==COM_SPEED){
+					step=pwmpos;
+					commutate();
+				}
+				if(pwmpos>hallposprev||(pwmpos==1&&hallposprev==6)){
+					realdir=0;
+				}else{
+					realdir=1;
+				}
+				hallposprev=pwmpos;
+			}
+			if(!(DRIVEMODE==COM_VOLT||DRIVEMODE==COM_SPEED)){
+				HALL1.CMDDIR = dir;
 				HALLModuleCalc(&HALL1);
 				//CLARK
 				clarke1.As = iphasea;
@@ -125,19 +139,17 @@ void ADC1_COMP_IRQHandler(void){
 				CalcPI(&CurIQ);
 				
 				//IPARK
-				//TestAngle += 30;
+				TestAngle += 200;
 				ipark1.Ds = 0;
 				//ipark1.Ds = CurID.qOut;
-				ipark1.Qs = -5000;
+				ipark1.Qs = pwm;
 				//ipark1.Qs = CurIQ.qOut;	
-				HALL1.CMDDIR = -1;
-				dir = -1;
 				//ipark1.Theta = TestAngle;	
 				ipark1.Theta = HALL1.Angle;    
 				IPARK_MACRO1(&ipark1);
 				//SVPWM
-				//pwm_gen.Mode = FIVEMODE;
-				pwm_gen.Mode = SEVENMODE;
+				pwm_gen.Mode = FIVEMODE;
+				//pwm_gen.Mode = SEVENMODE;
 				pwm_gen.Alpha = ipark1.Alpha;
 				pwm_gen.Beta  = ipark1.Beta;
 				PWM_GEN_calc(&pwm_gen);

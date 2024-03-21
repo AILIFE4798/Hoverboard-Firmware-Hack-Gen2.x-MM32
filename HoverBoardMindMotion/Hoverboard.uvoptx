@@ -247,6 +247,10 @@
           <WinId>35902</WinId>
         </Entry>
         <Entry>
+          <Name>System Viewer\TIM1</Name>
+          <WinId>35900</WinId>
+        </Entry>
+        <Entry>
           <Name>System Viewer\UART1</Name>
           <WinId>35903</WinId>
         </Entry>
