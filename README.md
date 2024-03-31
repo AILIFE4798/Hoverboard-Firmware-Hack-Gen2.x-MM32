@@ -5,6 +5,8 @@
 
 ## Installation 
 Check [here](https://github.com/RoboDurden/Hoverboard-Firmware-Hack-Gen2.x/wiki/MM32SPIN05PF%E2%80%90Layout-2.8) for step by step toturial on how to install this firmware on your board
+
+please also check the autodetect&configuration section
 ## Control methods
 you must use a ESP32 to control the hacked hoverboard
 
@@ -24,18 +26,11 @@ https://youtu.be/hCaIlEKzI3A
 * self hold
 * voltage and total current
 * software and hardware over current protection
-## auto detect
+* sine wave mode to drive the motor with more torque and higher effiency
+## Autodetect&configuration
 
-1. first flash the [pinfinder](https://github.com/AILIFE4798/Hoverboard-Firmware-Hack-Gen2.x-MM32/tree/pin-finder) firmware
-2. do not run the firmware after flash, power the board from constant current supply, press power button and release it in 1 second
-3. all led and buzzer should light up continuely, wait for about 5 second the board will turn off automaticly
-4. press power button again, all led should go into fast blinking mode, now use a wire to short circuit the tx and rx pin you want to use
-5. led will turn off and you can connect a usb to serial adapter with 19200 baud to it to acess pinfinder cli
-6. use autodetect for pins it can detect, and use command line to edit other parameters, there is full guide of how to use auto detect in the serial terminal to guide you through all steps
-7. save the configurations permanantly to eeprom
-8. flash the normal firmware, make sure to choose erase pages and not erase full chip so the configuration remains
-9. now the board should use your configuration file, if all the leds are blinking together it cannot parse the config file you have done something wrong
-10. if auto detect fail to detect your layout please use command line to added it manually
+https://github.com/AILIFE4798/Hoverboard-Firmware-Hack-Gen2.x-MM32/wiki/How-to-use-PinFinder-firmware
+
 ## todo
 * optimizations
 * constant torque
