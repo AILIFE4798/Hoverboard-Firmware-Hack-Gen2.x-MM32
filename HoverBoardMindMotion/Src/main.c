@@ -17,7 +17,13 @@
 #include "../Inc/bldc.h"
 #include "../Inc/sim_eeprom.h"
 #include "../Inc/hardware.h"
+#include "../Inc/calculation.h"
 
+#include "../Inc/ipark.h"
+#include "../Inc/FOC_Math.h"
+#include "../Inc/pwm_gen.h"
+#include "../Inc/PID.h"
+#include "../Inc/hallhandle.h"
 
 uint8_t step=1;//very importatnt to set to 1 or it will not work
 uint32_t millis;
@@ -28,7 +34,7 @@ uint32_t iOdom;
 bool uart;
 bool adc;
 bool comm=1;
-bool dir=1;
+int8_t dir=1;
 uint8_t uartBuffer=0;
 u8 sRxBuffer[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 int vbat;
@@ -44,6 +50,7 @@ uint8_t  wState;
 extern u32 SystemCoreClock;
 uint8_t flicker=0;
 uint8_t uarten=1;
+uint8_t halltimen=1;
 ////////////////////////////////////////////////////////////////////////////////////////////
 //  compile device specefic firmware for mass produce
 //  change EEPROMEN to 0
@@ -80,7 +87,7 @@ s32 main(void){
 	//hall gpio init
 	HALL_Init();
 	//hall timer init
-	HALLTIM_Init(65535, SystemCoreClock/100000);//sysclock is 72mhz
+	halltimen=HALLTIM_Init(65535, SystemCoreClock/1000000);//sysclock is 72mhz
 	//initialize 6 bldc pins
 	BLDC_init();
 	//initialize timer
@@ -141,8 +148,17 @@ s32 main(void){
 	uint16_t bat_60 = BAT_EMPTY+((float)(BAT_FULL-BAT_EMPTY)/100*60);
 	uint16_t bat_70 = BAT_EMPTY+((float)(BAT_FULL-BAT_EMPTY)/100*70);
 	uint16_t bat_100 = BAT_FULL;
+	
+	PWM_GEN_init(&pwm_gen);
+	InitNormalization(300,4000,4000,&RP);
+	HALLModuleInit(&HALL1);
+	InitPI();
+	MovingAvgInit(&IDData);
+	MovingAvgInit(&IQData);
+	MovingAvgInit(&SpeedFdk);
+	PID_Init();
   while(1) {
-		if(BAT_FULL>20000&&BAT_FULL<65000){
+		if(BAT_FULL>20000&&BAT_FULL<65000&&BAT_EMPTY>20000&&BAT_EMPTY<65000&&BAT_FULL>BAT_EMPTY){
 			if(vbat*10>bat_70){
 				digitalWrite(LEDRPIN,0);
 				digitalWrite(LEDGPIN,1);

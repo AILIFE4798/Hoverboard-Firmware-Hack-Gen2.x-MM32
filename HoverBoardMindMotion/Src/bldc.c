@@ -11,12 +11,13 @@
 #include "hal_tim.h"
 #include "hal_conf.h"
 #include "math.h"
-
+#include "../Inc/hallhandle.h"
 
 extern uint8_t step;
 extern int speed;
 extern int pwm;
-extern bool dir;
+uint16_t abspwm;
+extern int8_t dir;
 extern int realspeed;
 extern int frealspeed;
 extern int itotal;
@@ -45,7 +46,6 @@ const uint8_t hall_to_pos[8] =
 
 
 uint8_t hallpos(uint8_t dir){
-	#ifdef HALLAPIN
 	uint8_t HallA;
 	uint8_t HallB;
 	uint8_t HallC;
@@ -64,76 +64,74 @@ uint8_t hallpos(uint8_t dir){
 		HallValue = 7-(HallC*4 + HallB*2 + HallA);
 	}
 	
-	return hall_to_pos[HallValue];
-	#else
-	return 0;
-	#endif
+	//return hall_to_pos[HallValue];
+	return HallValue;
 }
 
-void commutate(){
-//U,V,W(A,B,C)
-		if(step == 1) {//1,0,-1
-			TIM_CCxCmd(TIM1, TIM_Channel_2, TIM_CCx_Disable);
-			TIM_CCxNCmd(TIM1, TIM_Channel_2, TIM_CCxN_Disable);
-			TIM_SelectOCxM(TIM1, TIM_Channel_1, TIM_OCMode_PWM1);
-			TIM_CCxCmd(TIM1, TIM_Channel_1, TIM_CCx_Enable);
-			TIM_CCxNCmd(TIM1, TIM_Channel_1, TIM_CCxN_Disable);
-			TIM_SelectOCxM(TIM1, TIM_Channel_3, TIM_OCMode_PWM1);
-			TIM_CCxCmd(TIM1, TIM_Channel_3, TIM_CCx_Disable);
-			TIM_CCxNCmd(TIM1, TIM_Channel_3, TIM_CCxN_Enable);
-		}else if(step == 2) {//0,1,-1
-			TIM_CCxCmd(TIM1, TIM_Channel_1, TIM_CCx_Disable);
-			TIM_CCxNCmd(TIM1, TIM_Channel_1, TIM_CCxN_Disable);
-			TIM_SelectOCxM(TIM1, TIM_Channel_2, TIM_OCMode_PWM1);
-			TIM_CCxCmd(TIM1, TIM_Channel_2, TIM_CCx_Enable);
-			TIM_CCxNCmd(TIM1, TIM_Channel_2, TIM_CCxN_Disable);
-			TIM_SelectOCxM(TIM1, TIM_Channel_3, TIM_OCMode_PWM1);
-			TIM_CCxCmd(TIM1, TIM_Channel_3, TIM_CCx_Disable);
-			TIM_CCxNCmd(TIM1, TIM_Channel_3, TIM_CCxN_Enable);		
-		}else if(step == 3) {//-1,1,0
-			TIM_CCxCmd(TIM1, TIM_Channel_3, TIM_CCx_Disable);
-			TIM_CCxNCmd(TIM1, TIM_Channel_3, TIM_CCxN_Disable);
-			TIM_SelectOCxM(TIM1, TIM_Channel_2, TIM_OCMode_PWM1);
-			TIM_CCxCmd(TIM1, TIM_Channel_2, TIM_CCx_Enable);
-			TIM_CCxNCmd(TIM1, TIM_Channel_2, TIM_CCxN_Disable);
-			TIM_SelectOCxM(TIM1, TIM_Channel_1, TIM_OCMode_PWM1);
-			TIM_CCxCmd(TIM1, TIM_Channel_1, TIM_CCx_Disable);
-			TIM_CCxNCmd(TIM1, TIM_Channel_1, TIM_CCxN_Enable);			
-	  }else if(step == 4) {//-1,0,1
-			TIM_CCxCmd(TIM1, TIM_Channel_2, TIM_CCx_Disable);
-			TIM_CCxNCmd(TIM1, TIM_Channel_2, TIM_CCxN_Disable);
-			TIM_SelectOCxM(TIM1, TIM_Channel_3, TIM_OCMode_PWM1);
-			TIM_CCxCmd(TIM1, TIM_Channel_3, TIM_CCx_Enable);
-			TIM_CCxNCmd(TIM1, TIM_Channel_3, TIM_CCxN_Disable);
-			TIM_SelectOCxM(TIM1, TIM_Channel_1, TIM_OCMode_PWM1);
-			TIM_CCxCmd(TIM1, TIM_Channel_1, TIM_CCx_Disable);
-			TIM_CCxNCmd(TIM1, TIM_Channel_1, TIM_CCxN_Enable);	
-		}else if(step == 5) {//0,-1,1
-			TIM_CCxCmd(TIM1, TIM_Channel_1, TIM_CCx_Disable);
-			TIM_CCxNCmd(TIM1, TIM_Channel_1, TIM_CCxN_Disable);
-			TIM_SelectOCxM(TIM1, TIM_Channel_3, TIM_OCMode_PWM1);
-			TIM_CCxCmd(TIM1, TIM_Channel_3, TIM_CCx_Enable);
-			TIM_CCxNCmd(TIM1, TIM_Channel_3, TIM_CCxN_Disable);
-			TIM_SelectOCxM(TIM1, TIM_Channel_2, TIM_OCMode_PWM1);
-			TIM_CCxCmd(TIM1, TIM_Channel_2, TIM_CCx_Disable);
-			TIM_CCxNCmd(TIM1, TIM_Channel_2, TIM_CCxN_Enable);	
-		}else if(step == 6) {//1,-1,0
-			TIM_CCxCmd(TIM1, TIM_Channel_3, TIM_CCx_Disable);
-			TIM_CCxNCmd(TIM1, TIM_Channel_3, TIM_CCxN_Disable);
-			TIM_SelectOCxM(TIM1, TIM_Channel_1, TIM_OCMode_PWM1);
-			TIM_CCxCmd(TIM1, TIM_Channel_1, TIM_CCx_Enable);
-			TIM_CCxNCmd(TIM1, TIM_Channel_1, TIM_CCxN_Disable);
-			TIM_SelectOCxM(TIM1, TIM_Channel_2, TIM_OCMode_PWM1);
-			TIM_CCxCmd(TIM1, TIM_Channel_2, TIM_CCx_Disable);
-			TIM_CCxNCmd(TIM1, TIM_Channel_2, TIM_CCxN_Enable);  
-		}else{//0,0,0
-			TIM_CCxCmd(TIM1, TIM_Channel_1, TIM_CCx_Disable);
-			TIM_CCxNCmd(TIM1, TIM_Channel_1, TIM_CCxN_Disable);
-			TIM_CCxCmd(TIM1, TIM_Channel_2, TIM_CCx_Disable);
-			TIM_CCxNCmd(TIM1, TIM_Channel_2, TIM_CCxN_Disable);
-			TIM_CCxCmd(TIM1, TIM_Channel_3, TIM_CCx_Disable);
-			TIM_CCxNCmd(TIM1, TIM_Channel_3, TIM_CCxN_Disable);
-		}
+void commutate(){//U,V,W(A,B,C)
+
+	if(step == 1) {//-1,0,1
+		TIM_CCxCmd(TIM1, TIM_Channel_2, TIM_CCx_Disable);
+		TIM_CCxNCmd(TIM1, TIM_Channel_2, TIM_CCxN_Disable);
+		TIM_SelectOCxM(TIM1, TIM_Channel_3, TIM_OCMode_PWM1);
+		TIM_CCxCmd(TIM1, TIM_Channel_3, TIM_CCx_Enable);
+		TIM_CCxNCmd(TIM1, TIM_Channel_3, TIM_CCxN_Disable);
+		TIM_SelectOCxM(TIM1, TIM_Channel_1, TIM_OCMode_PWM1);
+		TIM_CCxCmd(TIM1, TIM_Channel_1, TIM_CCx_Disable);
+		TIM_CCxNCmd(TIM1, TIM_Channel_1, TIM_CCxN_Enable);	
+	}else if(step == 2) {//0,-1,1
+		TIM_CCxCmd(TIM1, TIM_Channel_1, TIM_CCx_Disable);
+		TIM_CCxNCmd(TIM1, TIM_Channel_1, TIM_CCxN_Disable);
+		TIM_SelectOCxM(TIM1, TIM_Channel_3, TIM_OCMode_PWM1);
+		TIM_CCxCmd(TIM1, TIM_Channel_3, TIM_CCx_Enable);
+		TIM_CCxNCmd(TIM1, TIM_Channel_3, TIM_CCxN_Disable);
+		TIM_SelectOCxM(TIM1, TIM_Channel_2, TIM_OCMode_PWM1);
+		TIM_CCxCmd(TIM1, TIM_Channel_2, TIM_CCx_Disable);
+		TIM_CCxNCmd(TIM1, TIM_Channel_2, TIM_CCxN_Enable);		
+	}else if(step == 3) {//1,-1,0
+		TIM_CCxCmd(TIM1, TIM_Channel_3, TIM_CCx_Disable);
+		TIM_CCxNCmd(TIM1, TIM_Channel_3, TIM_CCxN_Disable);
+		TIM_SelectOCxM(TIM1, TIM_Channel_1, TIM_OCMode_PWM1);
+		TIM_CCxCmd(TIM1, TIM_Channel_1, TIM_CCx_Enable);
+		TIM_CCxNCmd(TIM1, TIM_Channel_1, TIM_CCxN_Disable);
+		TIM_SelectOCxM(TIM1, TIM_Channel_2, TIM_OCMode_PWM1);
+		TIM_CCxCmd(TIM1, TIM_Channel_2, TIM_CCx_Disable);
+		TIM_CCxNCmd(TIM1, TIM_Channel_2, TIM_CCxN_Enable); 			
+	}else if(step == 4) {//1,0,-1
+		TIM_CCxCmd(TIM1, TIM_Channel_2, TIM_CCx_Disable);
+		TIM_CCxNCmd(TIM1, TIM_Channel_2, TIM_CCxN_Disable);
+		TIM_SelectOCxM(TIM1, TIM_Channel_1, TIM_OCMode_PWM1);
+		TIM_CCxCmd(TIM1, TIM_Channel_1, TIM_CCx_Enable);
+		TIM_CCxNCmd(TIM1, TIM_Channel_1, TIM_CCxN_Disable);
+		TIM_SelectOCxM(TIM1, TIM_Channel_3, TIM_OCMode_PWM1);
+		TIM_CCxCmd(TIM1, TIM_Channel_3, TIM_CCx_Disable);
+		TIM_CCxNCmd(TIM1, TIM_Channel_3, TIM_CCxN_Enable);
+	}else if(step == 5) {//0,1,-1
+		TIM_CCxCmd(TIM1, TIM_Channel_1, TIM_CCx_Disable);
+		TIM_CCxNCmd(TIM1, TIM_Channel_1, TIM_CCxN_Disable);
+		TIM_SelectOCxM(TIM1, TIM_Channel_2, TIM_OCMode_PWM1);
+		TIM_CCxCmd(TIM1, TIM_Channel_2, TIM_CCx_Enable);
+		TIM_CCxNCmd(TIM1, TIM_Channel_2, TIM_CCxN_Disable);
+		TIM_SelectOCxM(TIM1, TIM_Channel_3, TIM_OCMode_PWM1);
+		TIM_CCxCmd(TIM1, TIM_Channel_3, TIM_CCx_Disable);
+		TIM_CCxNCmd(TIM1, TIM_Channel_3, TIM_CCxN_Enable);	
+	}else if(step == 6) {//-1,1,0
+		TIM_CCxCmd(TIM1, TIM_Channel_3, TIM_CCx_Disable);
+		TIM_CCxNCmd(TIM1, TIM_Channel_3, TIM_CCxN_Disable);
+		TIM_SelectOCxM(TIM1, TIM_Channel_2, TIM_OCMode_PWM1);
+		TIM_CCxCmd(TIM1, TIM_Channel_2, TIM_CCx_Enable);
+		TIM_CCxNCmd(TIM1, TIM_Channel_2, TIM_CCxN_Disable);
+		TIM_SelectOCxM(TIM1, TIM_Channel_1, TIM_OCMode_PWM1);
+		TIM_CCxCmd(TIM1, TIM_Channel_1, TIM_CCx_Disable);
+		TIM_CCxNCmd(TIM1, TIM_Channel_1, TIM_CCxN_Enable); 
+	}else{//0,0,0
+		TIM_CCxCmd(TIM1, TIM_Channel_1, TIM_CCx_Disable);
+		TIM_CCxNCmd(TIM1, TIM_Channel_1, TIM_CCxN_Disable);
+		TIM_CCxCmd(TIM1, TIM_Channel_2, TIM_CCx_Disable);
+		TIM_CCxNCmd(TIM1, TIM_Channel_2, TIM_CCxN_Disable);
+		TIM_CCxCmd(TIM1, TIM_Channel_3, TIM_CCx_Disable);
+		TIM_CCxNCmd(TIM1, TIM_Channel_3, TIM_CCxN_Disable);
+	}
 
 	TIM_GenerateEvent(TIM1, TIM_EventSource_COM);//apply changes
 }
@@ -144,35 +142,40 @@ void commutate(){
 void speedupdate(){
 	if(poweron>127){
 		RemoteUpdate();	
-		avgspeed();//speed filter prevent oscilation
-		if(millis-lastcommutate>250){//zero out speed
-			realspeed=0;
-			frealspeed=0;
-		}	
+		//speed=200;
 		if(BAT_EMPTY>20000&&BAT_EMPTY<65000&&vbat*10<BAT_EMPTY){
 			pwm=0;
 		}else{
-			if(CONSTSPEED){	
+			if(DRIVEMODE==COM_VOLT){
+				pwm=speed*PWM_RES/1000;//1000~-1000 for all pwm resolution
+			}else if(DRIVEMODE==COM_SPEED){	
 				pwm= PID2PWM((PID(speed,realspeed)/50));// command the required RPM
 				if(speed==0){
 					pwm=0;
 					PIDrst();
 				}
-			}else{
-				pwm=speed*PWM_RES/1000;//1000~-1000 for all pwm resolution
+			}else if(DRIVEMODE==SINE_VOLT){	
+				pwm= speed*40;// IQ=30000~-30000
+			}else if(DRIVEMODE==SINE_SPEED){	
+				pwm= PID2PWM((PID(speed,realspeed))/50);// command the required RPM
+				if(speed==0){
+					pwm=0;
+					PIDrst();
+				}
 			}
 		}
 		if(pwm>0){
 		dir=1;
 		}else{
-		dir=0;
+		dir=-1;
 		}
-
-		unsigned int abspeed=fabs((double)pwm);    // 4095~-4095
-		TIM1->CCR1=abspeed;
-		TIM1->CCR2=abspeed;
-		TIM1->CCR3=abspeed;
- }
+		abspwm=fabs((double)pwm);    // 4095~-4095
+		if(DRIVEMODE==COM_VOLT||DRIVEMODE==COM_SPEED){
+			TIM1->CCR1=abspwm;
+			TIM1->CCR2=abspwm;
+			TIM1->CCR3=abspwm;
+		}
+	}
 }
 
 

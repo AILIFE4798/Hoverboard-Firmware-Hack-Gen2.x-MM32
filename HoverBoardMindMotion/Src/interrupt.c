@@ -7,11 +7,19 @@
 #include "../Inc/remoteUartBus.h"
 #include "../Inc/calculation.h"
 
+#include "../Inc/ipark.h"
+#include "../Inc/park.h"
+#include "../Inc/clarke.h"
+#include "../Inc/PID.h"
+#include "../Inc/FOC_Math.h"
+#include "../Inc/pwm_gen.h"
+#include "../Inc/hallhandle.h"
+
 extern uint8_t step;
 extern bool uart;
 extern bool adc;
 extern bool comm;
-extern bool dir;
+extern int8_t dir;
 extern double rpm;
 extern uint32_t lastcommutate;
 extern uint32_t millis;
@@ -23,13 +31,17 @@ extern uint8_t hallposprev;
 extern int32_t iOdom;
 uint32_t itotaloffset=0;
 uint8_t poweron=0;
-uint16_t iphasea;
-uint16_t iphaseb;
+int iphasea;
+int iphaseb;
 uint32_t iphaseaoffset=0;
 uint32_t iphaseboffset=0;
 extern MM32ADC adcs[10];
 float vcc;
 uint8_t realdir=0;
+extern uint8_t hall_to_pos[8];
+extern uint16_t abspwm;
+
+int16_t	TestAngle = 0;
 
 //commutation interrupt
 void TIM1_BRK_UP_TRG_COM_IRQHandler(void){
@@ -57,9 +69,13 @@ void ADC1_COMP_IRQHandler(void){
 	if(RESET != ADC_GetITStatus(ADC1, ADC_IT_EOC)) {
 		if(poweron<127){//cancel out adc offset
 			itotaloffset+=analogRead(ITOTALPIN);
+			iphaseaoffset+=analogRead(IPHASEAPIN);
+			iphaseboffset+=analogRead(IPHASEBPIN);
 			poweron++;
 		}else if(poweron==127){//divide by 128
 			itotaloffset = itotaloffset>>7;
+			iphaseaoffset = iphaseaoffset>>7;
+			iphaseboffset = iphaseboffset>>7;
 			if(AWDG){
 				ADC_AnalogWatchdogCmd(ADC1, ENABLE);
 				ADC_AnalogWatchdogThresholdsConfig(ADC1, (uint16_t)(AWDG+itotaloffset), 0);
@@ -73,27 +89,61 @@ void ADC1_COMP_IRQHandler(void){
 			}
 			poweron++;
 		}else{
-			if(hallpos(dir)!=hallposprev){
-				step=hallpos(dir);
-				commutate();
-				if(hallpos(dir)>hallposprev||(hallpos(dir)==1&&hallposprev==6)){
-					realdir=0;
-				}else{
-					realdir=1;
-				}
-				hallposprev=hallpos(dir);
-			}
 			uint16_t tmp = ADC1->ADDR15;
 			vcc=(double)4915.2/tmp;
 			vbat = (double)VBAT_DIVIDER*analogRead(VBATPIN)*vcc*100/4096;//read adc register
 			tmp = analogRead(ITOTALPIN);//prevent overflow on negative value
 			itotal = (double)ITOTAL_DIVIDER*(tmp-itotaloffset)*vcc*100/4096;
+			iphasea = iphaseaoffset-analogRead(IPHASEAPIN);
+			iphaseb = iphaseboffset-analogRead(IPHASEBPIN);
 			avgvbat();
 			avgItotal();
-			if(SOFT_ILIMIT>100&&SOFT_ILIMIT<3000&&itotal>SOFT_ILIMIT*100){
-				TIM1->CCR1=0;
-				TIM1->CCR2=0;
-				TIM1->CCR3=0;
+			
+			HALL1.CMDDIR = -dir;
+			HALLModuleCalc(&HALL1);
+			
+			if(!(DRIVEMODE==COM_VOLT||DRIVEMODE==COM_SPEED)){
+				//CLARK
+				clarke1.As = iphasea;
+				clarke1.Bs = iphaseb;
+				CLARKE_MACRO1(&clarke1);
+				//PARK
+				park1.Alpha = clarke1.Alpha;
+				park1.Beta = clarke1.Beta;
+				park1.Theta = HALL1.Angle;
+				PARK_MACRO1(&park1);	
+				//filter
+				IDData.NewData = park1.Ds;
+				MovingAvgCal(&IDData);
+				
+				IQData.NewData = park1.Qs;
+				MovingAvgCal(&IQData);		
+				//PID
+				CurID.qInRef = 0;
+				CurID.qInMeas = IDData.Out;
+				CalcPI(&CurID);
+				
+				CurIQ.qInRef = Speed.qOut;
+				CurIQ.qInMeas = IQData.Out;
+				CalcPI(&CurIQ);
+				
+				//IPARK
+				TestAngle += 200;
+				ipark1.Ds = 0;
+				//ipark1.Ds = CurID.qOut;
+				ipark1.Qs = abspwm;
+				//ipark1.Qs = CurIQ.qOut;	
+				//ipark1.Theta = TestAngle;	
+				ipark1.Theta = HALL1.Angle;    
+				IPARK_MACRO1(&ipark1);
+				//SVPWM
+				//pwm_gen.Mode = FIVEMODE;
+				pwm_gen.Mode = SEVENMODE;
+				pwm_gen.Alpha = ipark1.Alpha;
+				pwm_gen.Beta  = ipark1.Beta;
+				PWM_GEN_calc(&pwm_gen);
+				//Update duty cycle
+				Update_PWM(&pwm_gen);
 			}
 		}
 		ADC_ClearITPendingBit(ADC1, ADC_IT_EOC);
@@ -101,21 +151,16 @@ void ADC1_COMP_IRQHandler(void){
 }	
 
 void TIM2_IRQHandler(void) {
+	
 	if (TIM_GetITStatus(TIM2, TIM_IT_CC1) != RESET){
-		
-    realspeed = updateMotorRPM(TIM2->CCR1); // rpm is correct			
 		TIM_ClearITPendingBit(TIM2, TIM_IT_CC1);
+		if (realdir == 1){
+			iOdom++;
+		}else{
+			iOdom--;
+		}
   }
-  //realspeed = (long)80000 / (long)(TIM2->CCR1); // not correct
-  if (realdir == 0){ // negative speed spinning backward
-    realspeed *= -1;
-	}
-  lastcommutate = millis;
-  if (realdir == 1){
-    iOdom++;
-  }else{
-    iOdom--;
-	}
+  
 }
 
 void TIM3_IRQHandler(void) {

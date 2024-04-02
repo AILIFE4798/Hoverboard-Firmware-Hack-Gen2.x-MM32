@@ -434,6 +434,41 @@
               <FileType>1</FileType>
               <FilePath>.\Src\sim_eeprom.c</FilePath>
             </File>
+            <File>
+              <FileName>ipark.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\ipark.c</FilePath>
+            </File>
+            <File>
+              <FileName>pwm_gen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\pwm_gen.c</FilePath>
+            </File>
+            <File>
+              <FileName>FOC_Math.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\FOC_Math.c</FilePath>
+            </File>
+            <File>
+              <FileName>clarke.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\clarke.c</FilePath>
+            </File>
+            <File>
+              <FileName>hallhandle.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\hallhandle.c</FilePath>
+            </File>
+            <File>
+              <FileName>park.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\park.c</FilePath>
+            </File>
+            <File>
+              <FileName>PID.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\PID.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -488,6 +523,41 @@
               <FileName>sim_eeprom.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Inc\sim_eeprom.h</FilePath>
+            </File>
+            <File>
+              <FileName>ipark.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\ipark.h</FilePath>
+            </File>
+            <File>
+              <FileName>pwm_gen.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\pwm_gen.h</FilePath>
+            </File>
+            <File>
+              <FileName>FOC_Math.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\FOC_Math.h</FilePath>
+            </File>
+            <File>
+              <FileName>clarke.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\clarke.h</FilePath>
+            </File>
+            <File>
+              <FileName>hallhandle.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\hallhandle.h</FilePath>
+            </File>
+            <File>
+              <FileName>park.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\park.h</FilePath>
+            </File>
+            <File>
+              <FileName>PID.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\PID.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1211,6 +1281,41 @@
               <FileType>1</FileType>
               <FilePath>.\Src\sim_eeprom.c</FilePath>
             </File>
+            <File>
+              <FileName>ipark.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\ipark.c</FilePath>
+            </File>
+            <File>
+              <FileName>pwm_gen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\pwm_gen.c</FilePath>
+            </File>
+            <File>
+              <FileName>FOC_Math.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\FOC_Math.c</FilePath>
+            </File>
+            <File>
+              <FileName>clarke.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\clarke.c</FilePath>
+            </File>
+            <File>
+              <FileName>hallhandle.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\hallhandle.c</FilePath>
+            </File>
+            <File>
+              <FileName>park.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\park.c</FilePath>
+            </File>
+            <File>
+              <FileName>PID.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\PID.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1265,6 +1370,41 @@
               <FileName>sim_eeprom.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Inc\sim_eeprom.h</FilePath>
+            </File>
+            <File>
+              <FileName>ipark.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\ipark.h</FilePath>
+            </File>
+            <File>
+              <FileName>pwm_gen.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\pwm_gen.h</FilePath>
+            </File>
+            <File>
+              <FileName>FOC_Math.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\FOC_Math.h</FilePath>
+            </File>
+            <File>
+              <FileName>clarke.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\clarke.h</FilePath>
+            </File>
+            <File>
+              <FileName>hallhandle.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\hallhandle.h</FilePath>
+            </File>
+            <File>
+              <FileName>park.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\park.h</FilePath>
+            </File>
+            <File>
+              <FileName>PID.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\PID.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -2126,6 +2266,41 @@
               <FileType>1</FileType>
               <FilePath>.\Src\sim_eeprom.c</FilePath>
             </File>
+            <File>
+              <FileName>ipark.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\ipark.c</FilePath>
+            </File>
+            <File>
+              <FileName>pwm_gen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\pwm_gen.c</FilePath>
+            </File>
+            <File>
+              <FileName>FOC_Math.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\FOC_Math.c</FilePath>
+            </File>
+            <File>
+              <FileName>clarke.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\clarke.c</FilePath>
+            </File>
+            <File>
+              <FileName>hallhandle.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\hallhandle.c</FilePath>
+            </File>
+            <File>
+              <FileName>park.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\park.c</FilePath>
+            </File>
+            <File>
+              <FileName>PID.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\PID.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2180,6 +2355,41 @@
               <FileName>sim_eeprom.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Inc\sim_eeprom.h</FilePath>
+            </File>
+            <File>
+              <FileName>ipark.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\ipark.h</FilePath>
+            </File>
+            <File>
+              <FileName>pwm_gen.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\pwm_gen.h</FilePath>
+            </File>
+            <File>
+              <FileName>FOC_Math.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\FOC_Math.h</FilePath>
+            </File>
+            <File>
+              <FileName>clarke.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\clarke.h</FilePath>
+            </File>
+            <File>
+              <FileName>hallhandle.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\hallhandle.h</FilePath>
+            </File>
+            <File>
+              <FileName>park.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\park.h</FilePath>
+            </File>
+            <File>
+              <FileName>PID.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Inc\PID.h</FilePath>
             </File>
           </Files>
         </Group>

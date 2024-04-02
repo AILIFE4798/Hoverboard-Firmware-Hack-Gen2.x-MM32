@@ -5,7 +5,11 @@
 #endif
 #include "../Inc/calculation.h"   
 #include "../Inc/pinout.h"   
+#include "../Inc/bldc.h"   
 
+uint8_t Kp=4;
+uint8_t Ki=10;
+uint8_t Kd=180;
 int max = 4000;
 int min = -4000;
 int qdSum = 0;
@@ -28,6 +32,25 @@ int aavgarr[64];
 extern int itotal;
 extern int fitotal;
 
+void PID_Init(){
+	switch(DRIVEMODE){
+		case COM_SPEED:
+			Kp=50;
+			Ki=100;
+			Kd=200;
+			max = 4000;
+			min = -4000;
+		break;
+		case SINE_SPEED:
+			Kp=50;
+			Ki=100;
+			Kd=200;
+			max = 40000;
+			min = -40000;
+		break;
+	}
+
+}
 void PIDrst(){
 	lasterr=qdSum=prevpwm=0;
 }
@@ -112,7 +135,7 @@ int PID2PWM(int pid){
 }
 
 uint32_t updateMotorRPM(uint32_t halltime){
-    return  60000000 / (halltime * 10 * WINDINGS);
+    return  60000000 / (halltime * WINDINGS);
 }
 
 

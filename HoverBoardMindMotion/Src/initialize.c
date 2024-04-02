@@ -51,8 +51,8 @@ void HALL_Init(){
 	pinMode(HALLCPIN, INPUT);
 }
 
-void HALLTIM_Init(u32 arr, u16 psc){    //hall sensor hardware speed sensing
-	int tim2;
+uint8_t HALLTIM_Init(u32 arr, u16 psc){    //hall sensor hardware speed sensing
+	uint8_t tim2;
 	for(uint8_t i=0;i<TIMCOUNT;i++){
 		if(halltims[i].io==HALLAPIN||halltims[i].io==HALLBPIN||halltims[i].io==HALLCPIN){
 			pinModeAF(halltims[i].io,halltims[i].af);
@@ -91,6 +91,7 @@ void HALLTIM_Init(u32 arr, u16 psc){    //hall sensor hardware speed sensing
 	
 	TIM_Cmd(tim2 ? TIM2 : TIM3, ENABLE);
 	NVIC_Configure(tim2 ? TIM2_IRQn : TIM3_IRQn, 1);
+	return tim2;
 }
 
 
@@ -138,13 +139,13 @@ void TIM1_init(u16 arr, u16 psc){
 	TIM_TimeBaseStructure.TIM_Prescaler = psc;
 	//Setting Clock Segmentation
 	TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
-	TIM_TimeBaseStructure.TIM_RepetitionCounter = 0;
+	TIM_TimeBaseStructure.TIM_RepetitionCounter = 1;
 	///TIM Upward Counting Mode
-	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
+	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_CenterAligned1;
 	TIM_TimeBaseInit(TIM1, &TIM_TimeBaseStructure);
 
 	TIM_OCStructInit(&TIM_OCInitStructure);
-	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_Timing;
+	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM2;
 	TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
 	TIM_OCInitStructure.TIM_OutputNState = TIM_OutputNState_Enable;
 	TIM_OCInitStructure.TIM_Pulse = 0;
@@ -155,6 +156,8 @@ void TIM1_init(u16 arr, u16 psc){
 	TIM_OC1Init(TIM1, &TIM_OCInitStructure);
 	TIM_OC2Init(TIM1, &TIM_OCInitStructure);
 	TIM_OC3Init(TIM1, &TIM_OCInitStructure);
+	TIM_OCInitStructure.TIM_Pulse = 1; 							//0% duty cycle
+	TIM_OC4Init(TIM1, &TIM_OCInitStructure);
 
 	TIM_CCPreloadControl(TIM1, ENABLE);
 	TIM_ITConfig(TIM1, TIM_IT_COM, ENABLE);
@@ -311,6 +314,16 @@ void adc_Init(void){
 			}
 		}
 	}
+	if(IPHASEAPIN<PINCOUNT&&IPHASEBPIN<PINCOUNT){
+		pinMode(IPHASEAPIN, INPUT_ADC);
+		pinMode(IPHASEBPIN, INPUT_ADC);
+		for(uint8_t i=0;i<ADCCOUNT;i++){
+			if(adcs[i].io==IPHASEAPIN||adcs[i].io==IPHASEBPIN){
+				ADC_RegularChannelConfig(ADC1, adcs[i].channel, 0, ADC_SampleTime_7_5Cycles);
+			}
+		}
+	}
+
 	ADC_ITConfig(ADC1, ADC_IT_EOC, ENABLE);
 }
 
