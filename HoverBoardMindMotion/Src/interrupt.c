@@ -98,22 +98,11 @@ void ADC1_COMP_IRQHandler(void){
 			iphaseb = iphaseboffset-analogRead(IPHASEBPIN);
 			avgvbat();
 			avgItotal();
-			uint8_t pwmpos=hall_to_pos[hallpos(dir)];
-			if(pwmpos!=hallposprev){
-				if(DRIVEMODE==COM_VOLT||DRIVEMODE==COM_SPEED){
-					step=pwmpos;
-					commutate();
-				}
-				if(pwmpos>hallposprev||(pwmpos==1&&hallposprev==6)){
-					realdir=0;
-				}else{
-					realdir=1;
-				}
-				hallposprev=pwmpos;
-			}
+			
+			HALL1.CMDDIR = -dir;
+			HALLModuleCalc(&HALL1);
+			
 			if(!(DRIVEMODE==COM_VOLT||DRIVEMODE==COM_SPEED)){
-				HALL1.CMDDIR = -dir;
-				HALLModuleCalc(&HALL1);
 				//CLARK
 				clarke1.As = iphasea;
 				clarke1.Bs = iphaseb;
@@ -121,7 +110,7 @@ void ADC1_COMP_IRQHandler(void){
 				//PARK
 				park1.Alpha = clarke1.Alpha;
 				park1.Beta = clarke1.Beta;
-				park1.Theta = HALL1.Angle;     /*Angle Input*/
+				park1.Theta = HALL1.Angle;
 				PARK_MACRO1(&park1);	
 				//filter
 				IDData.NewData = park1.Ds;
@@ -148,8 +137,8 @@ void ADC1_COMP_IRQHandler(void){
 				ipark1.Theta = HALL1.Angle;    
 				IPARK_MACRO1(&ipark1);
 				//SVPWM
-				pwm_gen.Mode = FIVEMODE;
-				//pwm_gen.Mode = SEVENMODE;
+				//pwm_gen.Mode = FIVEMODE;
+				pwm_gen.Mode = SEVENMODE;
 				pwm_gen.Alpha = ipark1.Alpha;
 				pwm_gen.Beta  = ipark1.Beta;
 				PWM_GEN_calc(&pwm_gen);
@@ -162,21 +151,16 @@ void ADC1_COMP_IRQHandler(void){
 }	
 
 void TIM2_IRQHandler(void) {
+	
 	if (TIM_GetITStatus(TIM2, TIM_IT_CC1) != RESET){
-		
-    realspeed = updateMotorRPM(TIM2->CCR1); // rpm is correct			
 		TIM_ClearITPendingBit(TIM2, TIM_IT_CC1);
+		if (realdir == 1){
+			iOdom++;
+		}else{
+			iOdom--;
+		}
   }
-  //realspeed = (long)80000 / (long)(TIM2->CCR1); // not correct
-  if (realdir == 0){ // negative speed spinning backward
-    realspeed *= -1;
-	}
-  lastcommutate = millis;
-  if (realdir == 1){
-    iOdom++;
-  }else{
-    iOdom--;
-	}
+  
 }
 
 void TIM3_IRQHandler(void) {

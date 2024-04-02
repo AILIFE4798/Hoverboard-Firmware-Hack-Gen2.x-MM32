@@ -51,8 +51,8 @@ void HALL_Init(){
 	pinMode(HALLCPIN, INPUT);
 }
 
-void HALLTIM_Init(u32 arr, u16 psc){    //hall sensor hardware speed sensing
-	int tim2;
+uint8_t HALLTIM_Init(u32 arr, u16 psc){    //hall sensor hardware speed sensing
+	uint8_t tim2;
 	for(uint8_t i=0;i<TIMCOUNT;i++){
 		if(halltims[i].io==HALLAPIN||halltims[i].io==HALLBPIN||halltims[i].io==HALLCPIN){
 			pinModeAF(halltims[i].io,halltims[i].af);
@@ -91,6 +91,7 @@ void HALLTIM_Init(u32 arr, u16 psc){    //hall sensor hardware speed sensing
 	
 	TIM_Cmd(tim2 ? TIM2 : TIM3, ENABLE);
 	NVIC_Configure(tim2 ? TIM2_IRQn : TIM3_IRQn, 1);
+	return tim2;
 }
 
 

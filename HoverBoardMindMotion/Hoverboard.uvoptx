@@ -178,22 +178,22 @@
         <Ww>
           <count>4</count>
           <WinNumber>1</WinNumber>
-          <ItemText>hallposprev</ItemText>
+          <ItemText>HALL1.RunHallValue</ItemText>
         </Ww>
         <Ww>
           <count>5</count>
           <WinNumber>1</WinNumber>
-          <ItemText>dir</ItemText>
+          <ItemText>HALL1.PreHallValue</ItemText>
         </Ww>
         <Ww>
           <count>6</count>
           <WinNumber>1</WinNumber>
-          <ItemText>pwm</ItemText>
+          <ItemText>realdir</ItemText>
         </Ww>
         <Ww>
           <count>7</count>
           <WinNumber>1</WinNumber>
-          <ItemText>HALL1.CMDDIR</ItemText>
+          <ItemText>abspwm</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>

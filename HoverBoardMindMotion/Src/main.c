@@ -17,6 +17,7 @@
 #include "../Inc/bldc.h"
 #include "../Inc/sim_eeprom.h"
 #include "../Inc/hardware.h"
+#include "../Inc/calculation.h"
 
 #include "../Inc/ipark.h"
 #include "../Inc/FOC_Math.h"
@@ -49,6 +50,7 @@ uint8_t  wState;
 extern u32 SystemCoreClock;
 uint8_t flicker=0;
 uint8_t uarten=1;
+uint8_t halltimen=1;
 ////////////////////////////////////////////////////////////////////////////////////////////
 //  compile device specefic firmware for mass produce
 //  change EEPROMEN to 0
@@ -85,7 +87,7 @@ s32 main(void){
 	//hall gpio init
 	HALL_Init();
 	//hall timer init
-	HALLTIM_Init(65535, SystemCoreClock/1000000);//sysclock is 72mhz
+	halltimen=HALLTIM_Init(65535, SystemCoreClock/1000000);//sysclock is 72mhz
 	//initialize 6 bldc pins
 	BLDC_init();
 	//initialize timer
@@ -154,6 +156,7 @@ s32 main(void){
 	MovingAvgInit(&IDData);
 	MovingAvgInit(&IQData);
 	MovingAvgInit(&SpeedFdk);
+	PID_Init();
   while(1) {
 		if(BAT_FULL>20000&&BAT_FULL<65000&&BAT_EMPTY>20000&&BAT_EMPTY<65000&&BAT_FULL>BAT_EMPTY){
 			if(vbat*10>bat_70){

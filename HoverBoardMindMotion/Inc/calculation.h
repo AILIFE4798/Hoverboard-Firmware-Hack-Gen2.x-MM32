@@ -4,12 +4,10 @@
 #include "mm32_device.h"                // Device header
 #endif
 
-#define Kp 4
-#define Ki 10
-#define Kd 180
 
 
 
+void PID_Init();
 int PID(int setpoint,int real);
 void avgspeed();
 int PID2PWM(int pid);
