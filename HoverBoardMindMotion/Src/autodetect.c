@@ -118,7 +118,7 @@ char addrdescription[64][14]={
 {"softocp\0"},
 {"hardocp\0"},
 {"reserved\0"},
-{"constspeed\0"},
+{"drivemode\0"},
 {"batfull\0"},
 {"batempty\0"},
 {"timeout\0"},

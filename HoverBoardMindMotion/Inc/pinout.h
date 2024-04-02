@@ -4,7 +4,7 @@
 /* |  _  | |_| |\ V / | |___|  _ <  |  _  |/ ___ \ |___| . \    \ V /  / __/ */
 /* |_| |_|\___/  \_/  |_____|_| \_\ |_| |_/_/   \_\____|_|\_\    \_/  |_____|*/
 /*                                                                           */
-#define VERSION_INFO "\r\nPinFinder beta v169\r\nchangelog:better led detection,hall detect bug fix"
+#define VERSION_INFO "\r\nPinFinder beta v170\r\nchangelog:rename constspeed to drivemode"
 #include "../Inc/hardware.h"
 extern MM32GPIO pins[PINCOUNT];
 extern uint16_t pinstorage[64];
@@ -43,7 +43,7 @@ extern uint16_t pinstorage[64];
 #define INVERT_LOWSIDE pinstorage[40]
 #define SOFT_ILIMIT pinstorage[41]
 #define AWDG pinstorage[42]
-#define CONSTSPEED pinstorage[44]
+#define DRIVEMODE pinstorage[44]
 #define BAT_FULL pinstorage[45]
 #define BAT_EMPTY pinstorage[46]
 #define SERIAL_TIMEOUT pinstorage[47]
