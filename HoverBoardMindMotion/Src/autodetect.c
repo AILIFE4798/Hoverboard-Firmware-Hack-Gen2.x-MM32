@@ -897,7 +897,7 @@ void autoDetectInit(){
 			commutate();
 			ADCALL_Init();    //enable every adc pins to be scanned at same time
 			for(uint8_t i=0;i<ADCCOUNT;i++){
-				if(!used(adcs[i].io)){    //coresponding gpio is free
+				if(!used(adcs[i].io)||adcs[i].io==VBATPIN){    //coresponding gpio is free
 					ADC_RegularChannelConfig(ADC1, adcs[i].channel, 0, ADC_SampleTime_7_5Cycles);
 					pinMode(adcs[i].io,INPUT_ADC);
 					adcleft[i]=1;
@@ -910,7 +910,7 @@ void autoDetectInit(){
 		case MODE_BUTTON :
 			UART_SendString("\r\nPress and release power button once to detect automaticly\r\nIf button press is not registered,press E to enable fix, the board may acidently power off\r\npress Enter to return to main menu\r\n");
 			for(uint8_t i=0;i<PINCOUNT;i++){
-				if(!used(i)){
+				if(!used(i)||i==BUTTONPIN){
 					hallA[i]=digitalRead(i);    //hall array reused to detect change in io state for button
 				}
 			}
@@ -970,8 +970,9 @@ void printvoltage(){
 	
 void checkbutton(){
 	if(doinloop){    //workaround
+		UART_SendString("\r\nboard is about to redetect the self hold pin,please do not touch the button any more,only after the board power off you should turn it back on manually");
 		BUTTONPIN=LATCHPIN;    //the current latch pin is actually buttonpin, so swap it
-		LATCHPIN=255;
+		LATCHPIN=65535;
 		pinMode(BUTTONPIN,INPUT);    //release fake latch pin
 		selfhold();    //detect self hold again with remaining pin
 		masterslave = detectSelfHold();
@@ -982,11 +983,13 @@ void checkbutton(){
 			UART_SendString(&PXX[LATCHPIN][0]);
 		}else{
 			UART_SendString("Workaround failed");
+			LATCHPIN=65535;
+			BUTTONPIN=65535;
 		}
 		doinloop=0;
 	}else{
 		for(uint8_t i=0;i<PINCOUNT;i++){
-			if(!used(i)){
+			if(!used(i)||i==BUTTONPIN){
 				if(!hallA[i]&&digitalRead(i)){    //pin start as low and state changed to high
 					BUTTONPIN=i;
 					UART_SendString("\r\nButton:");
@@ -1069,7 +1072,7 @@ void printstorage(uint8_t i){    //print address and value with description
 }
 
 void finduartloop(){
-	char teststr[] = "HelloWorld";
+	char teststr[] = {0x11,0x12,0x13,0x14,0x14,0x13,0x12,0x11};
 	uint8_t txs[UARTCOUNT], rxs[UARTCOUNT];
 	uint8_t tindex=0;
 	uint8_t rindex=0;
@@ -1099,7 +1102,7 @@ void finduartloop(){
 			pinModeAF(uarts[rxs[r]].io,uarts[rxs[r]].af);
 			pinMode(uarts[txs[t]].io, OUTPUT_AF);
 			pinMode(uarts[rxs[r]].io, INPUT);
-			for(uint8_t i=0;i<10;i++){
+			for(uint8_t i=0;i<8;i++){
 				receiveuart=0;
 				DELAY_Ms(1);
         UART_Send_Byte((u8)(teststr[i]));
@@ -1134,6 +1137,15 @@ void finduartloop(){
 					}
 				}
 				DELAY_Ms(1000);
+				uint8_t released=0;
+				while(!released){
+					UART_Send_Byte((u8)'.');
+					DELAY_Ms(10);
+					if(receiveuart!='.'){
+						released=1;
+						DELAY_Ms(1000);
+					}
+				}
 				for(uint8_t i=0;i<PINCOUNT;i++){
 					if(!used(i)){
 						pinMode(i, INPUT);
