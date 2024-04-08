@@ -23,6 +23,10 @@
 #include "../Inc/remoteUartBus.h"
 #include "hal_crc.h"
 
+#include "../Inc/sim_eeprom.h"
+#include "../Inc/calculation.h"
+
+
 #pragma pack(1)
 
 extern uint32_t millis;
@@ -60,13 +64,16 @@ typedef struct {			// ´#pragma pack(1)´ needed to get correct sizeof()
    uint8_t  wStateSlave;   // 1=ledGreen, 2=ledOrange, 4=ledRed, 8=ledUp, 16=ledDown   , 32=Battery3Led, 64=Disable, 128=ShutOff
    uint16_t checksum;
 } SerialServer2HoverMaster;
+
 typedef struct {			// ´#pragma pack(1)´ needed to get correct sizeof()
    uint8_t cStart;			//  = '/';
    //uint16_t cStart;		//  = #define START_FRAME         0xABCD
    uint8_t  iDataType;  //  2 = unique id for this data struct
    uint8_t 	iSlave;			//  contains the slave id this message is intended for
-   float  fBatteryVoltage;	// 10s LiIon = 10*3.6 = 36;
-   uint8_t 	iDivemode;			//  0=pwm, 1=speed/10, 3=torque, 4=iOdometer
+	 float  fBattFull;    // 10s LiIon = 42.0;
+	 float  fBattEmpty;    // 10s LiIon = 27.0;
+	 uint8_t  iDriveMode;      //  MM32: 0=COM_VOLT, 1=COM_SPEED, 2=SINE_VOLT, 3=SINE_SPEED
+   int8_t 	iSlaveNew;			//  if >= 0 contains the new slave id saved to eeprom
    uint16_t checksum;
 } SerialServer2HoverConfig;
 
@@ -137,10 +144,10 @@ void AnswerMaster(void){
 	SerialHover2Server oData;
 	oData.cStart = START_FRAME;
 	oData.iSlave = SLAVE_ID;
-	oData.iVolt = (uint16_t)	(fvbat);
+	oData.iVolt = (uint16_t) (fvbat);
 	oData.iAmp = (int16_t) 	(fitotal);
 	oData.iSpeed = (int16_t) (realspeed	*10);
-	oData.iOdom = (int32_t) iOdom;
+	oData.iOdom = (int32_t) iOdom;	//pwm	;
 	//oData.iOdom = iAnswerMaster++;
 
 	oData.checksum = 	CalcCRC((uint8_t*) &oData, sizeof(oData) - 2);	// (first bytes except crc)
@@ -220,6 +227,25 @@ void serialit(void){
 				case 2: 
 				{
 					SerialServer2HoverConfig* pData = (SerialServer2HoverConfig*) aReceiveBuffer;
+					if (	(pData->fBattFull > 0) && (pData->fBattFull < 60.0)	)
+					{
+						BAT_FULL = pData->fBattFull * 1000;
+					}
+					if (	(pData->fBattEmpty > 0) && (pData->fBattEmpty < 60.0)	)
+					{
+						BAT_EMPTY = pData->fBattEmpty * 1000;
+					}
+					if (pData->iDriveMode <= SINE_SPEED)
+					{
+						DRIVEMODE = pData->iDriveMode;
+						PIDrst();
+						PID_Init();
+						TIMOCInit();
+					}
+					if (pData->iSlaveNew >= 0)
+						SLAVE_ID = pData->iSlaveNew;
+			
+					EEPROM_Write((u8*)pinstorage, 2 * 64);    //if the detection failed, the pin is still saved
 					break;
 				}
 			}

@@ -178,23 +178,29 @@ void speedupdate(){
 	}
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+void TIMOCInit(){
+	if(DRIVEMODE==COM_VOLT||DRIVEMODE==COM_SPEED){
+		TIM_SelectOCxM(TIM1, TIM_Channel_1, TIM_OCMode_PWM1);
+		TIM_SelectOCxM(TIM1, TIM_Channel_2, TIM_OCMode_PWM1);
+		TIM_SelectOCxM(TIM1, TIM_Channel_3, TIM_OCMode_PWM1);
+		TIM_CCxCmd(TIM1, TIM_Channel_1, TIM_CCx_Disable);
+		TIM_CCxNCmd(TIM1, TIM_Channel_1, TIM_CCxN_Disable);
+		TIM_CCxCmd(TIM1, TIM_Channel_2, TIM_CCx_Disable);
+		TIM_CCxNCmd(TIM1, TIM_Channel_2, TIM_CCxN_Disable);
+		TIM_CCxCmd(TIM1, TIM_Channel_3, TIM_CCx_Disable);
+		TIM_CCxNCmd(TIM1, TIM_Channel_3, TIM_CCxN_Disable);
+		commutate();
+	}else{
+		TIM_SelectOCxM(TIM1, TIM_Channel_1, TIM_OCMode_PWM2);
+		TIM_SelectOCxM(TIM1, TIM_Channel_2, TIM_OCMode_PWM2);
+		TIM_SelectOCxM(TIM1, TIM_Channel_3, TIM_OCMode_PWM2);
+		TIM_CCxCmd(TIM1, TIM_Channel_1, TIM_CCx_Enable);
+		TIM_CCxNCmd(TIM1, TIM_Channel_1, TIM_CCxN_Enable);
+		TIM_CCxCmd(TIM1, TIM_Channel_2, TIM_CCx_Enable);
+		TIM_CCxNCmd(TIM1, TIM_Channel_2, TIM_CCxN_Enable);
+		TIM_CCxCmd(TIM1, TIM_Channel_3, TIM_CCx_Enable);
+		TIM_CCxNCmd(TIM1, TIM_Channel_3, TIM_CCxN_Enable);
+	
+	}
+	TIM_GenerateEvent(TIM1, TIM_EventSource_COM);
+}
