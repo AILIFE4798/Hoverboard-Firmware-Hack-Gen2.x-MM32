@@ -98,88 +98,65 @@ void ADC1_COMP_IRQHandler(void){
 			iphaseb = iphaseboffset-analogRead(IPHASEBPIN);
 			avgvbat();
 			avgItotal();
-			
-			HALL1.CMDDIR = -dir;
-			HALLModuleCalc(&HALL1);
-			
-			if(!(DRIVEMODE==COM_VOLT||DRIVEMODE==COM_SPEED)){
-				//CLARK
-				clarke1.As = iphasea;
-				clarke1.Bs = iphaseb;
-				CLARKE_MACRO1(&clarke1);
-				//PARK
-				park1.Alpha = clarke1.Alpha;
-				park1.Beta = clarke1.Beta;
-				park1.Theta = HALL1.Angle;
-				PARK_MACRO1(&park1);	
-				//filter
-				IDData.NewData = park1.Ds;
-				MovingAvgCal(&IDData);
+			if(itotal>SOFT_ILIMIT){
+				TIM_CtrlPWMOutputs(TIM1, DISABLE);
+			}else{
+				TIM_CtrlPWMOutputs(TIM1, ENABLE);
+				HALL1.CMDDIR = -dir;
+				HALLModuleCalc(&HALL1);
 				
-				IQData.NewData = park1.Qs;
-				MovingAvgCal(&IQData);		
-				//PID
-				CurID.qInRef = 0;
-				CurID.qInMeas = IDData.Out;
-				CalcPI(&CurID);
-				
-				CurIQ.qInRef = Speed.qOut;
-				CurIQ.qInMeas = IQData.Out;
-				CalcPI(&CurIQ);
-				
-				//IPARK
-				TestAngle += 200;
-				ipark1.Ds = 0;
-				//ipark1.Ds = CurID.qOut;
-				ipark1.Qs = abspwm;
-				//ipark1.Qs = CurIQ.qOut;	
-				//ipark1.Theta = TestAngle;	
-				ipark1.Theta = HALL1.Angle;    
-				IPARK_MACRO1(&ipark1);
-				//SVPWM
-				//pwm_gen.Mode = FIVEMODE;
-				pwm_gen.Mode = SEVENMODE;
-				pwm_gen.Alpha = ipark1.Alpha;
-				pwm_gen.Beta  = ipark1.Beta;
-				PWM_GEN_calc(&pwm_gen);
-				//Update duty cycle
-				Update_PWM(&pwm_gen);
+				if(!(DRIVEMODE==COM_VOLT||DRIVEMODE==COM_SPEED)){
+					if(DRIVEMODE==FOC_VOLT||DRIVEMODE==FOC_SPEED||DRIVEMODE==FOC_TORQUE){
+						//CLARK
+						clarke1.As = iphasea;
+						clarke1.Bs = iphaseb;
+						CLARKE_MACRO1(&clarke1);
+						//PARK
+						park1.Alpha = clarke1.Alpha;
+						park1.Beta = clarke1.Beta;
+						park1.Theta = HALL1.Angle;
+						PARK_MACRO1(&park1);	
+						//filter
+						IDData.NewData = park1.Ds;
+						MovingAvgCal(&IDData);
+						
+						IQData.NewData = park1.Qs;
+						MovingAvgCal(&IQData);		
+						//PID
+						CurID.qInRef = 0;
+						CurID.qInMeas = IDData.Out;
+						CalcPI(&CurID);
+						
+						CurIQ.qInRef = Speed.qOut;
+						CurIQ.qInMeas = IQData.Out;
+						CalcPI(&CurIQ);
+					}
+					//IPARK
+					if(DRIVEMODE==SINE_VOLT||DRIVEMODE==SINE_SPEED){
+						ipark1.Ds = 0;
+						ipark1.Qs = abspwm;
+					}else{
+						ipark1.Ds = CurID.qOut;
+						ipark1.Qs = CurIQ.qOut;	
+					}
+					//TestAngle += 50;
+					//ipark1.Theta = TestAngle;	
+					ipark1.Theta = HALL1.Angle;    
+					IPARK_MACRO1(&ipark1);
+					//SVPWM
+					//pwm_gen.Mode = FIVEMODE;
+					pwm_gen.Mode = SEVENMODE;
+					pwm_gen.Alpha = ipark1.Alpha;
+					pwm_gen.Beta  = ipark1.Beta;
+					PWM_GEN_calc(&pwm_gen);
+					//Update duty cycle
+					Update_PWM(&pwm_gen);
+				}
 			}
 		}
 		ADC_ClearITPendingBit(ADC1, ADC_IT_EOC);
 	}
 }	
-
-void TIM2_IRQHandler(void) {
-	
-	if (TIM_GetITStatus(TIM2, TIM_IT_CC1) != RESET){
-		TIM_ClearITPendingBit(TIM2, TIM_IT_CC1);
-		if (realdir == 1){
-			iOdom++;
-		}else{
-			iOdom--;
-		}
-  }
-  
-}
-
-void TIM3_IRQHandler(void) {
-	if (TIM_GetITStatus(TIM3, TIM_IT_CC1) != RESET){
-		
-    realspeed = updateMotorRPM(TIM3->CCR1); // rpm is correct		
-		TIM_ClearITPendingBit(TIM3, TIM_IT_CC1);
-  }
-  //realspeed = (long)80000 / (long)(TIM2->CCR1); // not correct
-  if (realdir == 0){ // negative speed spinning backward
-    realspeed *= -1;
-	}
-  lastcommutate = millis;
-  if (realdir == 1){
-    iOdom++;
-  }else{
-    iOdom--;
-	}
-}
 
 
 

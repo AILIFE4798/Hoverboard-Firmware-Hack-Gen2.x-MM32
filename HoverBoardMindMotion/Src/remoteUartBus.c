@@ -242,7 +242,7 @@ void serialit(void){
 						PID_Init();
 						TIMOCInit();
 					}
-					if (pData->iSlaveNew >= 0)
+					if (pData->iSlaveNew >= 0 && 0)    //disabled!
 						SLAVE_ID = pData->iSlaveNew;
 			
 					EEPROM_Write((u8*)pinstorage, 2 * 64);    //if the detection failed, the pin is still saved

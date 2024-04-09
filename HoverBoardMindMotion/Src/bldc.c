@@ -29,7 +29,8 @@ uint8_t hallpos(uint8_t dir);
 bool lastdir=0;
 extern uint8_t poweron;
 extern int vbat;
-
+uint8_t lowbatcount=0;
+uint8_t lowbatperm=0;
 
 const uint8_t hall_to_pos[8] =
 {
@@ -144,7 +145,17 @@ void speedupdate(){
 		RemoteUpdate();	
 		//speed=200;
 		if(BAT_EMPTY>20000&&BAT_EMPTY<65000&&vbat*10<BAT_EMPTY){
+			if(lowbatcount<10){
+				lowbatcount++;
+			}else if(lowbatcount>=10&&speed==0&&realspeed<100){
+				lowbatperm=1;
+			}
+		}else{
+			lowbatcount=0;
+		}
+		if(lowbatperm){
 			pwm=0;
+			TIM_CtrlPWMOutputs(TIM1, DISABLE);
 		}else{
 			if(DRIVEMODE==COM_VOLT){
 				pwm=speed*PWM_RES/1000;//1000~-1000 for all pwm resolution

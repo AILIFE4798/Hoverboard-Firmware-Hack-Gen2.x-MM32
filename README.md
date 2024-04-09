@@ -3,6 +3,8 @@
 
  Pre-compiled binary is available
 
+### if you can see this text, that probably means this repo is not maintained any more
+
 ## Installation 
 Check [here](https://github.com/RoboDurden/Hoverboard-Firmware-Hack-Gen2.x/wiki/MM32SPIN05PF%E2%80%90Layout-2.8) for step by step toturial on how to install this firmware on your board
 

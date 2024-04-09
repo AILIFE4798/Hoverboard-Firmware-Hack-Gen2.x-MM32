@@ -48,7 +48,7 @@ typedef struct
     uint16_t UART_WordLength;
     uint16_t UART_StopBits;
     uint16_t UART_Parity;
-    uint16_t UART_Mode;
+    uint16_t Mode;
     uint16_t UART_HardwareFlowControl;
 } UART_InitTypeDef;
 

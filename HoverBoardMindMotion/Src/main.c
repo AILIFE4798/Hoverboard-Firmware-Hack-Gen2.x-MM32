@@ -51,6 +51,8 @@ extern u32 SystemCoreClock;
 uint8_t flicker=0;
 uint8_t uarten=1;
 uint8_t halltimen=1;
+extern uint8_t lowbatcount;
+extern uint8_t lowbatperm;
 ////////////////////////////////////////////////////////////////////////////////////////////
 //  compile device specefic firmware for mass produce
 //  change EEPROMEN to 0
@@ -82,6 +84,8 @@ s32 main(void){
 			DELAY_Ms(1000);
 		}
 	}
+	DRIVEMODE=SINE_SPEED;
+	BAT_EMPTY=24000;
 	//initialize normal gpio
 	io_init();
 	//hall gpio init
@@ -115,7 +119,7 @@ s32 main(void){
 		NVIC_Configure(DMA1_Channel4_5_IRQn, 1);
 	}
 	//latch on power
-	if(LATCHPIN<PINCOUNT&&EEPROMEN){    //have latch
+	if(LATCHPIN<PINCOUNT){    //have latch
 		DELAY_Ms(100);    //some board the micro controller can reset in time and turn back on
 		digitalWrite(LATCHPIN, 1);
 		while(digitalRead(BUTTONPIN)&&BUTTONPIN<PINCOUNT){    //wait while release button
@@ -141,13 +145,6 @@ s32 main(void){
 	}
 	ADC_SoftwareStartConvCmd(ADC1, ENABLE);    //Software start conversion
 	UART_SendString("hello World\n\r");    //debug uart
-	uint16_t bat_0 = BAT_EMPTY;
-	uint16_t bat_10 = BAT_EMPTY+((float)(BAT_FULL-BAT_EMPTY)/100*10);
-	uint16_t bat_20 = BAT_EMPTY+((float)(BAT_FULL-BAT_EMPTY)/100*20);
-	uint16_t bat_50 = BAT_EMPTY+((float)(BAT_FULL-BAT_EMPTY)/100*50);
-	uint16_t bat_60 = BAT_EMPTY+((float)(BAT_FULL-BAT_EMPTY)/100*60);
-	uint16_t bat_70 = BAT_EMPTY+((float)(BAT_FULL-BAT_EMPTY)/100*70);
-	uint16_t bat_100 = BAT_FULL;
 	
 	PWM_GEN_init(&pwm_gen);
 	InitNormalization(300,4000,4000,&RP);
@@ -158,36 +155,52 @@ s32 main(void){
 	MovingAvgInit(&SpeedFdk);
 	PID_Init();
   while(1) {
-		if(BAT_FULL>20000&&BAT_FULL<65000&&BAT_EMPTY>20000&&BAT_EMPTY<65000&&BAT_FULL>BAT_EMPTY){
-			if(vbat*10>bat_70){
-				digitalWrite(LEDRPIN,0);
-				digitalWrite(LEDGPIN,1);
-				digitalWrite(LEDBPIN,0);
-			}else if(vbat*10>bat_60){
-				digitalWrite(LEDRPIN,0);
-				digitalWrite(LEDGPIN,1);
-				digitalWrite(LEDBPIN,1);
-			}else if(vbat*10>bat_50){
-				digitalWrite(LEDRPIN,0);
-				digitalWrite(LEDGPIN,0);
-				digitalWrite(LEDBPIN,1);	
-			}else if(vbat*10>bat_20){
-				digitalWrite(LEDRPIN,1);
-				digitalWrite(LEDGPIN,0);
-				digitalWrite(LEDBPIN,1);
-			}else if(vbat*10>bat_10){
-				digitalWrite(LEDRPIN,1);
-				digitalWrite(LEDGPIN,0);
-				digitalWrite(LEDBPIN,0);
+		if(LEDRPIN<PINCOUNT&&LEDGPIN<PINCOUNT&&LEDBPIN<PINCOUNT){
+			uint16_t bat_0 = BAT_EMPTY;
+			uint16_t bat_10 = BAT_EMPTY+((float)(BAT_FULL-BAT_EMPTY)/100*10);
+			uint16_t bat_20 = BAT_EMPTY+((float)(BAT_FULL-BAT_EMPTY)/100*20);
+			uint16_t bat_50 = BAT_EMPTY+((float)(BAT_FULL-BAT_EMPTY)/100*50);
+			uint16_t bat_60 = BAT_EMPTY+((float)(BAT_FULL-BAT_EMPTY)/100*60);
+			uint16_t bat_70 = BAT_EMPTY+((float)(BAT_FULL-BAT_EMPTY)/100*70);
+			uint16_t bat_100 = BAT_FULL;
+			if(BAT_FULL>20000&&BAT_FULL<65000&&BAT_EMPTY>20000&&BAT_EMPTY<65000&&BAT_FULL>BAT_EMPTY){
+				if(vbat*10>bat_70){
+					digitalWrite(LEDRPIN,0);
+					digitalWrite(LEDGPIN,1);
+					digitalWrite(LEDBPIN,0);
+				}else if(vbat*10>bat_60){
+					digitalWrite(LEDRPIN,0);
+					digitalWrite(LEDGPIN,1);
+					digitalWrite(LEDBPIN,1);
+				}else if(vbat*10>bat_50){
+					digitalWrite(LEDRPIN,0);
+					digitalWrite(LEDGPIN,0);
+					digitalWrite(LEDBPIN,1);	
+				}else if(vbat*10>bat_20){
+					digitalWrite(LEDRPIN,1);
+					digitalWrite(LEDGPIN,0);
+					digitalWrite(LEDBPIN,1);
+				}else if(vbat*10>bat_10){
+					digitalWrite(LEDRPIN,1);
+					digitalWrite(LEDGPIN,0);
+					digitalWrite(LEDBPIN,0);
+				}else{
+					digitalWrite(LEDRPIN,flicker);
+					digitalWrite(LEDGPIN,0);
+					digitalWrite(LEDBPIN,0);
+				}
 			}else{
-				digitalWrite(LEDRPIN,flicker);
-				digitalWrite(LEDGPIN,0);
-				digitalWrite(LEDBPIN,0);
+				digitalWrite(LEDRPIN,digitalRead(HALLAPIN));
+				digitalWrite(LEDGPIN,digitalRead(HALLBPIN));
+				digitalWrite(LEDBPIN,digitalRead(HALLCPIN));
 			}
-		}else{
-			digitalWrite(LEDRPIN,digitalRead(HALLAPIN));
-			digitalWrite(LEDGPIN,digitalRead(HALLBPIN));
-			digitalWrite(LEDBPIN,digitalRead(HALLCPIN));
+		}
+		if(BUZZERPIN<PINCOUNT){
+			if(lowbatcount>=10||lowbatperm){
+				digitalWrite(BUZZERPIN,flicker);
+			}else{
+				digitalWrite(BUZZERPIN,0);
+			}
 		}
 		if(millis-lastupdate>1){//speed pid loop
 			speedupdate();

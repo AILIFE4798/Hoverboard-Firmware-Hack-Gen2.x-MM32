@@ -188,7 +188,7 @@ void UART_Init(UART_TypeDef *UARTx, UART_InitTypeDef *UART_InitStruct)
     tmpreg &= GCR_CLEAR_Mask;
     /* Set autorlowen bit according to UART_HardwareFlowControl value */
     /* Set rxen,txen bits according to UART_Mode value */
-    tmpreg |= UART_InitStruct->UART_HardwareFlowControl | UART_InitStruct->UART_Mode;
+    tmpreg |= UART_InitStruct->UART_HardwareFlowControl | UART_InitStruct->Mode;
     /* Write to UART GCR */
     UARTx->GCR = tmpreg;
     /*---------------------------- UART BRR Configuration -----------------------*/
@@ -222,7 +222,7 @@ void UART_StructInit(UART_InitTypeDef *UART_InitStruct)
     UART_InitStruct->UART_WordLength = UART_WordLength_8b;
     UART_InitStruct->UART_StopBits = UART_StopBits_1;
     UART_InitStruct->UART_Parity = UART_Parity_No;
-    UART_InitStruct->UART_Mode = UART_Mode_Rx | UART_Mode_Tx;
+    UART_InitStruct->Mode = UART_Mode_Rx | UART_Mode_Tx;
     UART_InitStruct->UART_HardwareFlowControl = UART_HardwareFlowControl_None;
 }
 

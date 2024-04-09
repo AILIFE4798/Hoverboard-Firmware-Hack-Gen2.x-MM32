@@ -90,7 +90,7 @@ uint8_t HALLTIM_Init(u32 arr, u16 psc){    //hall sensor hardware speed sensing
 	TIM_SelectMasterSlaveMode(tim2 ? TIM2 : TIM3, TIM_MasterSlaveMode_Enable);
 	
 	TIM_Cmd(tim2 ? TIM2 : TIM3, ENABLE);
-	NVIC_Configure(tim2 ? TIM2_IRQn : TIM3_IRQn, 1);
+	//NVIC_Configure(tim2 ? TIM2_IRQn : TIM3_IRQn, 1);
 	return tim2;
 }
 

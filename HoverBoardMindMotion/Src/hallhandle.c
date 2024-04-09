@@ -18,6 +18,7 @@ extern uint8_t halltimen;
 extern uint8_t step;
 extern uint32_t lastcommutate;
 extern uint32_t millis;
+extern int32_t iOdom;
 /*------------------ Private functions ----------------*/
 void HALLModuleInit(HALLType *u);
 void HALLModuleCalc(HALLType *u);
@@ -112,6 +113,11 @@ void HALLModuleCalc(HALLType *u){
 			u->IncAngle = 4096000/u->HallTimeSum;
 			u->IncAngleMax = 10922;
 			u->Angle = u->CWAngleTab[u->RunHallValue] + CWShift;
+		}
+		if (realdir == 1){
+			iOdom++;
+		}else{
+			iOdom--;
 		}
 	}
 	

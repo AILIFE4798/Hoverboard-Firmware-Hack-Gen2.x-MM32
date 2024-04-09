@@ -4,7 +4,7 @@
 /* |  _  | |_| |\ V / | |___|  _ <  |  _  |/ ___ \ |___| . \    \ V /  / __/ */
 /* |_| |_|\___/  \_/  |_____|_| \_\ |_| |_/_/   \_\____|_|\_\    \_/  |_____|*/
 /*                                                                           */
-//version 144 : added sine wave drive mode
+//version 161 : minor bug fix,changes to live config,better low battery cutoff,soft current limit fix
 
 
 

@@ -16,7 +16,6 @@
 #define StopBits UART_StopBits
 #define Parity UART_Parity
 #define HWFlowControl UART_HardwareFlowControl
-#define Mode UART_Mode
 #define UART_HWFlowControl_None UART_HardwareFlowControl_None
 
 #define ADC_Mode_Continue ADC_Mode_Continuous_Scan
