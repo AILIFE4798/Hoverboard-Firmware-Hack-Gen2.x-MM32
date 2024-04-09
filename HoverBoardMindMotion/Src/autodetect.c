@@ -213,32 +213,32 @@ void autoDetectSerialIt(){    //serial dma interrupt
 			}
 			break;
 		case MODE_MENU :
-			switch(sRxBuffer[0]){    //choose action in menu
-				case '1':    //(1)-Auto detect all pins.
+			switch(sRxBuffer[0]){    //choose action in menu 
+				case '0':    //(0)-Auto detect all pins.
 					mode=MODE_HALL;
 					init=1;
 					detectall=1;    //only exit to main menu after all step completed 
 				break;
-				case '2':    //(2)-Auto detect HALL sensor.
+				case '1':    //(1)-Auto detect HALL sensor.
 					mode=MODE_HALL;
 					init=1;
 					detectall=0;
 					doinloop=1;
 				break;
-				case '3':    //(3)-Auto detect LED and buzzer.
+				case '2':    //(2)-Auto detect LED and buzzer.
 					mode=MODE_LED;
 					init=1;
 					detectall=0;
 				break;
-				case '4':    //(4)-Auto detect battery voltage.
+				case '3':    //(3)-Auto detect battery voltage.
 					mode=MODE_VBAT;
 					init=1;
 					detectall=0;
 				break;
-				case '5':    //(5)-Auto detect total current.
+				case '4':    //(4)-Auto detect total current.
 					UART_SendString("Feature not implemented.");
 				break;
-				case '6':    //(6)-Auto detect power button.
+				case '5':    //(5)-Auto detect power button.
 					if(masterslave){
 						mode=MODE_BUTTON;
 						init=1;
@@ -246,6 +246,11 @@ void autoDetectSerialIt(){    //serial dma interrupt
 					}else{
 						UART_SendString("I'm a Slave board.");
 					}
+				break;
+				case '6':    //(6)-Set Slave ID
+					mode=MODE_SLAVEID;
+					init=1;
+					detectall=0;
 				break;
 				case '7':    //(7)-Modify configurations manually by command line.
 					mode=MODE_CLI;
@@ -411,9 +416,33 @@ void autoDetectSerialIt(){    //serial dma interrupt
 			break;
 			case MODE_BUTTON :
 				if(sRxBuffer[0]=='\n'||sRxBuffer[0]=='\r'){
-					saveNexit();    //last stage always exit
+					if(detectall){
+						mode=MODE_SLAVEID;
+						init=1;
+						sTimingDelay=0;
+					}else{
+						saveNexit();
+					}
 				}else if(sRxBuffer[0]=='e'){	
 					doinloop=1;    //button pin latch pin workaround
+				}
+			break;
+			case MODE_SLAVEID :
+				if(sRxBuffer[0]>='0'&&sRxBuffer[0]<='9'){
+					data=data*10+(sRxBuffer[0]-'0');
+				}else if(sRxBuffer[0]=='\n'||sRxBuffer[0]=='\r'){
+					if(data<256){
+						SLAVE_ID=data;
+						char buffer[32];
+						sprintf(&buffer[0],"\r\nSlaveID: %i\r\n",SLAVE_ID);
+						UART_SendString(&buffer[0]);
+						saveNexit();
+					}else{
+						UART_SendString("\r\nInvalid SlaveID,it must be between 0 and 255\r\n");
+						data=0;
+					}
+				}else if(sRxBuffer[0]=='\b'||sRxBuffer[0]==127){    //backspace
+					data=data/10;
 				}
 			break;
 			case MODE_CLI :
@@ -554,6 +583,32 @@ void autoDetectSerialIt(){    //serial dma interrupt
 					break;
 					case ' ':    //space as seperator for command
 						stage++;
+					break;
+					case 127:
+					case '\b':
+						switch(stage){
+							case 0 :    //command
+								command=0;
+							break;
+							case 1 :    //address
+								if(addrparsemode==2){
+									if(addrlen>0){
+										addrlen--;
+									}
+								}else{
+									address=address/10;
+								}
+							break;
+							case 2 :    //value
+								if(dataparsemode==2){
+									if(datalen>0){
+										datalen--;
+									}
+								}else{
+									data=data/10;
+								}
+							break;
+						}
 					break;
 					default:    //parse command without using sscanf
 						switch(stage){
@@ -822,12 +877,13 @@ void autoDetectInit(){
 			sprintf(&buffer[0],"  MCU Voltage:%fV  Serial number:%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X\n\r",vcc,device_id_data[0],device_id_data[1],device_id_data[2],device_id_data[3],device_id_data[4],device_id_data[5],device_id_data[6],device_id_data[7],device_id_data[8],device_id_data[9],device_id_data[10],device_id_data[11]);
 			UART_SendString(&buffer[0]);
 			UART_SendString("Welcome to PinFinder, press number key to choose action.\n\r");
-			UART_SendString("  (1)-Auto detect all pins.\n\r");
-			UART_SendString("  (2)-Auto detect HALL sensor.\n\r");
-			UART_SendString("  (3)-Auto detect LED and buzzer.\n\r");
-			UART_SendString("  (4)-Auto detect battery voltage.\n\r");
-			UART_SendString("  (5)-Auto detect total current.\n\r");
-			UART_SendString("  (6)-Auto detect power button.\n\r");
+			UART_SendString("  (0)-Auto detect all pins.\n\r");
+			UART_SendString("  (1)-Auto detect HALL sensor.\n\r");
+			UART_SendString("  (2)-Auto detect LED and buzzer.\n\r");
+			UART_SendString("  (3)-Auto detect battery voltage.\n\r");
+			UART_SendString("  (4)-Auto detect total current.\n\r");
+			UART_SendString("  (5)-Auto detect power button.\n\r");
+			UART_SendString("  (6)-Set Slave ID\n\r");
 			UART_SendString("  (7)-Modify configurations manually by command line.\n\r");
 			UART_SendString("  (8)-Test motor rotation.\n\r");
 			UART_SendString("  (9)-Power off.\n\r>");
@@ -914,6 +970,10 @@ void autoDetectInit(){
 					hallA[i]=digitalRead(i);    //hall array reused to detect change in io state for button
 				}
 			}
+		break;
+		case MODE_SLAVEID :
+			UART_SendString("\r\nPlease enter the SlaveID for this board between 0 to 255\n\ryou must use this ID to communicate with the board in main firmware,so make sure to write it down\n\rnumber key to input,enter to save\n\n\rSlaveID:");
+			data=0;
 		break;
 		case MODE_CLI :
 			UART_SendString("\r\nWelcome to command line interface,type h for help\n\rpinfinder~$ ");

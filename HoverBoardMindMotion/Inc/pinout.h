@@ -4,7 +4,7 @@
 /* |  _  | |_| |\ V / | |___|  _ <  |  _  |/ ___ \ |___| . \    \ V /  / __/ */
 /* |_| |_|\___/  \_/  |_____|_| \_\ |_| |_/_/   \_\____|_|\_\    \_/  |_____|*/
 /*                                                                           */
-#define VERSION_INFO "\r\nPinFinder beta v171\r\nchangelog:esp32 autodetect serial detect support,fix bug in vbat and button detection"
+#define VERSION_INFO "\r\nPinFinder beta v173\r\nchangelog:set slaveid mode, backspace support in CLI"
 #include "../Inc/hardware.h"
 extern MM32GPIO pins[PINCOUNT];
 extern uint16_t pinstorage[64];

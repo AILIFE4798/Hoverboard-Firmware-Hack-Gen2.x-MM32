@@ -32,6 +32,7 @@ typedef enum{
   MODE_CLI=8,
   MODE_TESTROTATE=9,
   MODE_SAVE=10,
+	MODE_SLAVEID=11,
 }modes_t;
 
 
