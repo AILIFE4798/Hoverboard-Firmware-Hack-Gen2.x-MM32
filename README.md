@@ -43,13 +43,13 @@ any board equippted with MM32SPIN0X or MM32SPIN2X microcontroller should be supp
 
 now with the pinfinder firmware, any board type is supported, but below are some example
 
-### [Layout 1](https://github.com/RoboDurden/Hoverboard-Firmware-Hack-Gen2.x/issues/59)
+### [MM32SPIN05PF](https://github.com/RoboDurden/Hoverboard-Firmware-Hack-Gen2.x/issues/59)
 ![301605486-a523f7cc-a34a-4567-8c74-eb735d45fe0a](https://github.com/AILIFE4798/Hoverboard-Firmware-Hack-Gen2.x-MM32/assets/142502122/8d725b8a-ae16-4200-9281-23d509e72d12)
 
-### [Layout 2](https://github.com/RoboDurden/Hoverboard-Firmware-Hack-Gen2.x/issues/61)
+### [MM32SPIN06PF](https://github.com/RoboDurden/Hoverboard-Firmware-Hack-Gen2.x/issues/61)
 ![303005959-978f0a8c-0b84-4eb5-9011-176705d9b6e9](https://github.com/AILIFE4798/Hoverboard-Firmware-Hack-Gen2.x-MM32/assets/142502122/c4e70bda-5ef6-4b0c-80b7-7830203dcfcc)
 
-### Layout 3
+### MM32SPIN25PF
 ![Gen2 6 1](https://github.com/AILIFE4798/Hoverboard-Firmware-Hack-Gen2.x-MM32/assets/142502122/7c34e631-0be7-4276-aa93-18d8b7d5c52e)
 
 
