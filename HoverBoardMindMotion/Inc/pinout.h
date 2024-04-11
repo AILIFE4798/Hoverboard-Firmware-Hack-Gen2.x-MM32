@@ -4,7 +4,7 @@
 /* |  _  | |_| |\ V / | |___|  _ <  |  _  |/ ___ \ |___| . \    \ V /  / __/ */
 /* |_| |_|\___/  \_/  |_____|_| \_\ |_| |_/_/   \_\____|_|\_\    \_/  |_____|*/
 /*                                                                           */
-#define VERSION_INFO "\r\nPinFinder beta v173\r\nchangelog:set slaveid mode, backspace support in CLI"
+#define VERSION_INFO "\r\nPinFinder beta v173\r\nchangelog:detect unsupported serial terminal,changes to serial parsing algorithm to make it reliable"
 #include "../Inc/hardware.h"
 extern MM32GPIO pins[PINCOUNT];
 extern uint16_t pinstorage[64];

@@ -18,6 +18,7 @@ void testrotateloop();
 void saveNexit();
 void printstorage(uint8_t i);
 void finduartloop();
+void waituartloop();
 
 
 typedef enum{

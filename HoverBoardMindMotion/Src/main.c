@@ -52,7 +52,8 @@ float vcc;
 extern MM32GPIO pins[PINCOUNT];
 extern MM32ADC adcs[ADCCOUNT];
 extern char PXX[PINCOUNT][5];	
-
+extern uint8_t doinloop;
+	
 s32 main(void){	
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOA, ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBENR_GPIOB, ENABLE);
@@ -96,17 +97,7 @@ s32 main(void){
 				finduartloop();
 			break;
 			case MODE_WAIT_UART :
-				UART_SendString("\n\n\n\n\r");
-				UART_Send_Group(&banner,464);
-				UART_SendString("Welcome to PinFinder\n\r");
-				UART_SendString("press enter to continue");
-				for(uint8_t i=0;i<50;i++){    //keep printing to help find tx rx line
-					if(mode!=1){
-						break;
-					}
-					UART_SendString(".");
-					DELAY_Ms(100);
-				}
+				waituartloop();
 			break;
 			case MODE_HALL :
 				simhallupdate();

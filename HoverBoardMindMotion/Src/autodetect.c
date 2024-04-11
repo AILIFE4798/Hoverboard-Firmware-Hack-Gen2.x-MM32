@@ -63,6 +63,7 @@ uint8_t datalen=0;
 extern MM32TIM23 halltims[TIMCOUNT];
 extern MM32UART uarts[UARTCOUNT];
 uint8_t receiveuart;
+uint8_t counter;
 
 uint8_t hallA[PINCOUNT];
 uint8_t hallB[PINCOUNT];
@@ -204,16 +205,15 @@ uint8_t used(uint8_t pin){
 	
 	
 void autoDetectSerialIt(){    //serial dma interrupt
+	uint8_t serialRead=sRxBuffer[0];
 	switch (mode){
 		case MODE_WAIT_UART :
-			if(sRxBuffer[0]=='\n'||sRxBuffer[0]=='\r'){    //go to main menu after enter pressed
-				mode=MODE_MENU;
-				init=1;
-				sTimingDelay=0;
+			if(serialRead=='\n'||serialRead=='\r'){    //go to main menu after enter pressed
+				doinloop=1;
 			}
 			break;
 		case MODE_MENU :
-			switch(sRxBuffer[0]){    //choose action in menu 
+			switch(serialRead){    //choose action in menu 
 				case '0':    //(0)-Auto detect all pins.
 					mode=MODE_HALL;
 					init=1;
@@ -278,7 +278,7 @@ void autoDetectSerialIt(){    //serial dma interrupt
 			}
 			break;
 		case MODE_HALL :
-			if(sRxBuffer[0]=='\n'||sRxBuffer[0]=='\r'){
+			if(serialRead=='\n'||serialRead=='\r'){
 				if(detectall){
 					mode=MODE_LED;    //next step
 					init=1;
@@ -287,9 +287,9 @@ void autoDetectSerialIt(){    //serial dma interrupt
 					saveNexit();    //save config if it is changed
 				}
 				wait=0;
-			}else if(sRxBuffer[0]=='y'){
+			}else if(serialRead=='y'){
 				wait=0;    //continue running after user confirmed
-			}else if(sRxBuffer[0]=='i'){
+			}else if(serialRead=='i'){
 				INVERT_LOWSIDE = !INVERT_LOWSIDE;
 				UART_SendString("\n\rlowside ");
 				UART_SendString(INVERT_LOWSIDE ? "inverted" : "normal");
@@ -303,7 +303,7 @@ void autoDetectSerialIt(){    //serial dma interrupt
 			}
 			break;
 		case MODE_LED :
-			switch(sRxBuffer[0]){
+			switch(serialRead){
 				case '\n':
 				case '\r':
 					if(detectall){
@@ -326,9 +326,9 @@ void autoDetectSerialIt(){    //serial dma interrupt
 				case 'u':
 				case 'l':
 				case 'z':
-					pinMode(selpin, sRxBuffer[0]=='w'&&!ledmode ? INPUT_PULLUP : INPUT);
+					pinMode(selpin, serialRead=='w'&&!ledmode ? INPUT_PULLUP : INPUT);
 					//if pin is saved turn it off, if its not left it on so easy to see what led is still left
-					switch(sRxBuffer[0]){
+					switch(serialRead){
 						case 'r':
 							pinMode(LEDRPIN, INPUT_PULLUP);
 							LEDRPIN=selpin;
@@ -366,7 +366,7 @@ void autoDetectSerialIt(){    //serial dma interrupt
 							UART_SendString(&PXX[selpin][0]);
 						break;
 					}
-					if(sRxBuffer[0]!='w'){
+					if(serialRead!='w'){
 						UART_SendString("\r\n");
 					}
 					do{
@@ -397,25 +397,31 @@ void autoDetectSerialIt(){    //serial dma interrupt
 			UART_SendString("  ");
 			break;
 			case MODE_VBAT :
-			if(sRxBuffer[0]=='\n'||sRxBuffer[0]=='\r'){
-				if(detectall&&masterslave){    //slave cannot detect button
-					mode=MODE_BUTTON;
-					init=1;
-					sTimingDelay=0;
+			if(serialRead=='\n'||serialRead=='\r'){
+				if(detectall){
+					if(masterslave){    //slave cannot detect button
+						mode=MODE_BUTTON;
+						init=1;
+						sTimingDelay=0;
+					}else{
+						mode=MODE_SLAVEID;
+						init=1;
+						sTimingDelay=0;
+					}
 				}else{
 					sTimingDelay=0;
 					saveNexit();
 				}
-			}else if(sRxBuffer[0]=='f'){
+			}else if(serialRead=='f'){
 				showalladc=!showalladc;    //toggle extreme value filtering
-			}else if(sRxBuffer[0]>='0'&&sRxBuffer[0]<='9'){    //number pressed
-				VBATPIN=adcs[sRxBuffer[0]-'0'].io;    //save pin
+			}else if(serialRead>='0'&&serialRead<='9'){    //number pressed
+				VBATPIN=adcs[serialRead-'0'].io;    //save pin
 				UART_SendString("\r\nVBAT:");
 				UART_SendString(&PXX[VBATPIN][0]);
 			}
 			break;
 			case MODE_BUTTON :
-				if(sRxBuffer[0]=='\n'||sRxBuffer[0]=='\r'){
+				if(serialRead=='\n'||serialRead=='\r'){
 					if(detectall){
 						mode=MODE_SLAVEID;
 						init=1;
@@ -423,14 +429,14 @@ void autoDetectSerialIt(){    //serial dma interrupt
 					}else{
 						saveNexit();
 					}
-				}else if(sRxBuffer[0]=='e'){	
+				}else if(serialRead=='e'){	
 					doinloop=1;    //button pin latch pin workaround
 				}
 			break;
 			case MODE_SLAVEID :
-				if(sRxBuffer[0]>='0'&&sRxBuffer[0]<='9'){
-					data=data*10+(sRxBuffer[0]-'0');
-				}else if(sRxBuffer[0]=='\n'||sRxBuffer[0]=='\r'){
+				if(serialRead>='0'&&serialRead<='9'){
+					data=data*10+(serialRead-'0');
+				}else if(serialRead=='\n'||serialRead=='\r'){
 					if(data<256){
 						SLAVE_ID=data;
 						char buffer[32];
@@ -441,12 +447,12 @@ void autoDetectSerialIt(){    //serial dma interrupt
 						UART_SendString("\r\nInvalid SlaveID,it must be between 0 and 255\r\n");
 						data=0;
 					}
-				}else if(sRxBuffer[0]=='\b'||sRxBuffer[0]==127){    //backspace
+				}else if(serialRead=='\b'||serialRead==127){    //backspace
 					data=data/10;
 				}
 			break;
 			case MODE_CLI :
-				switch(sRxBuffer[0]){
+				switch(serialRead){
 					case '\r':    //run command entered before
 					case '\n':
 						switch(command){
@@ -614,24 +620,24 @@ void autoDetectSerialIt(){    //serial dma interrupt
 						switch(stage){
 							case 0 :    //command
 								if(command==0){    //only capture first digit
-									command=sRxBuffer[0];
+									command=serialRead;
 								}
 							break;
 							case 1 :    //address
-								if(!(sRxBuffer[0]>='0'&&sRxBuffer[0]<='9')||addrparsemode==2){
-									addrstr[addrlen++]=sRxBuffer[0];
+								if(!(serialRead>='0'&&serialRead<='9')||addrparsemode==2){
+									addrstr[addrlen++]=serialRead;
 									addrparsemode=2;
 								}else{
-									address=address*10+(sRxBuffer[0]-'0');    //shift left and add new value
+									address=address*10+(serialRead-'0');    //shift left and add new value
 									addrparsemode=1;
 								}
 							break;
 							case 2 :    //value
-								if(!(sRxBuffer[0]>='0'&&sRxBuffer[0]<='9')||dataparsemode==2){
-									datastr[datalen++]=sRxBuffer[0];
+								if(!(serialRead>='0'&&serialRead<='9')||dataparsemode==2){
+									datastr[datalen++]=serialRead;
 									dataparsemode=2;
 								}else{
-									data=data*10+(sRxBuffer[0]-'0');
+									data=data*10+(serialRead-'0');
 									dataparsemode=1;
 								}
 							break;
@@ -640,7 +646,7 @@ void autoDetectSerialIt(){    //serial dma interrupt
 				}
 			break;
 			case MODE_TESTROTATE :
-				switch(sRxBuffer[0]){
+				switch(serialRead){
 					case '\r':
 					case '\n':
 						TIM1->CCR1=0;
@@ -673,7 +679,7 @@ void autoDetectSerialIt(){    //serial dma interrupt
 				}	
 			break;	
 			case MODE_SAVE :
-				switch(sRxBuffer[0]){
+				switch(serialRead){
 					case 'y':
 						if(EEPROM_Write((u8*)pinstorage, 2 * 64)){
 							UART_SendString("\r\nconfiguration saved\r\n");
@@ -1217,4 +1223,46 @@ void finduartloop(){
 	}
 }
 	
-
+void waituartloop(){
+	if(doinloop){
+		DELAY_Ms(1);
+		mode=MODE_UART;    //do not loop back
+		uint8_t ansi=0;
+		uint32_t timeout=0;
+		timeout=millis+200;
+		UART_SendString("\x1b[5n");
+		while(millis<timeout){
+			if(receiveuart=='\x1b'||receiveuart=='['){
+				ansi=1;
+				break;
+			}
+			__NOP();    //idk why this is needed, but do not remove or it will not work, it took me one day to find
+		}
+		if(!ansi){
+			UART_SendString("\r\nyour serial terminal is not supported");
+			UART_SendString("\r\nplease go read the fucking manual");
+			UART_SendString("\r\nhttps://t.ly/GFo9T");
+			while(1);
+		}else{
+			UART_SendString("\r\n\x1b[36mpass");
+			mode=MODE_MENU;
+			init=1;
+			sTimingDelay=0;
+			
+		}
+		doinloop=0;
+	}else{
+		if(counter==0){
+			UART_SendString("\n\n\n\n\r");
+			UART_Send_Group(&banner,464);
+			UART_SendString("Welcome to PinFinder\n\r");
+			UART_SendString("press enter to continue");
+		}else{
+			UART_SendString(".");
+			DELAY_Ms(100);
+		}
+		if(++counter>50){
+			counter=0;
+		}
+	}
+}
