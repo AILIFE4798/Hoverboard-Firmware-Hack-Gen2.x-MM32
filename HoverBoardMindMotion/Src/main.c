@@ -84,8 +84,7 @@ s32 main(void){
 			DELAY_Ms(1000);
 		}
 	}
-	DRIVEMODE=SINE_SPEED;
-	BAT_EMPTY=24000;
+	
 	//initialize normal gpio
 	io_init();
 	//hall gpio init
