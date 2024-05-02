@@ -64,6 +64,7 @@ extern MM32TIM23 halltims[TIMCOUNT];
 extern MM32UART uarts[UARTCOUNT];
 uint8_t receiveuart;
 uint8_t counter;
+uint8_t saverase=0;
 
 uint8_t hallA[PINCOUNT];
 uint8_t hallB[PINCOUNT];
@@ -550,17 +551,10 @@ void autoDetectSerialIt(){    //serial dma interrupt
 								}
 								UART_SendString("\b\b};");    //\b to delete extra ,
 							break;
-							case 'e':{    //write all ff to eeprom to erase it
-								uint16_t tmperase[64];
-								for(uint8_t i=0;i<64;i++){
-									tmperase[i]=0xffff;
-								}
-								if(EEPROM_Write((u8*)tmperase, 2 * 64)){
-									UART_SendString("\r\nEEPROM erase complete,reboot needed without saving to take effect");
-								}else{
-									UART_SendString("\r\nEEPROM erase failed");
-								}
-							}
+							case 'e':    //write all ff to eeprom to erase it
+								saverase=1;
+								mode=MODE_SAVE;
+								init=1;
 							break;
 							case 'x':
 								saveNexit();    //leave terminal
@@ -681,17 +675,34 @@ void autoDetectSerialIt(){    //serial dma interrupt
 			case MODE_SAVE :
 				switch(serialRead){
 					case 'y':
-						if(EEPROM_Write((u8*)pinstorage, 2 * 64)){
-							UART_SendString("\r\nconfiguration saved\r\n");
-							mode=MODE_MENU;
-							init=1;
+						if(saverase){
+							for(uint8_t i=0;i<64;i++){
+								pinstorage[i]=0;
+							}
+							if(EEPROM_Write((u8*)pinstorage, 2 * 64)){
+								DELAY_Ms(100);
+								UART_SendString("\r\nEEPROM erase complete,please power cycle to take effect\r\n");
+								UART_SendString("core helted\r\n");
+								while(1){
+									__NOP();
+								}
+							}else{
+								UART_SendString("\r\nEEPROM erase failed\r\n");
+							}
 						}else{
-							UART_SendString("\r\nEEPROM write failed\r\n");
+							if(EEPROM_Write((u8*)pinstorage, 2 * 64)){
+								UART_SendString("\r\nconfiguration saved\r\n");
+								mode=MODE_MENU;
+								init=1;
+							}else{
+								UART_SendString("\r\nEEPROM write failed\r\n");
+							}
 						}
 					case 'n':
 						EEPROM_Read((u8*)pinstorage, 2 * 64);
 						mode=MODE_MENU;
 						init=1;
+						saverase=0;
 					break;
 					default:
 						UART_SendString("\r\nY/N?");    //prevent acidently cancellation you have to press y or n
@@ -1000,7 +1011,11 @@ void autoDetectInit(){
 			pinMode(HALLCPIN,INPUT);
 		break;
 		case MODE_SAVE :
-			UART_SendString("\r\nChanges were made to the configurations, do you want to save it permanantly?Y/N\r\n>");
+			if(saverase){
+				UART_SendString("\r\nYou are going to delete all saved pins and configurations,this process cannot be undone,are you sure to continue?Y/N\r\n>");
+			}else{
+				UART_SendString("\r\nChanges were made to the configurations, do you want to save it permanantly?Y/N\r\n>");
+			}
 		break;
 	}		
 }
