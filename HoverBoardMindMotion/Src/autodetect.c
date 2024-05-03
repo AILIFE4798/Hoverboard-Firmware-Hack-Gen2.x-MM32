@@ -237,7 +237,7 @@ void autoDetectSerialIt(){    //serial dma interrupt
 					detectall=0;
 				break;
 				case '4':    //(4)-Auto detect total current.
-					UART_SendString("Feature not implemented.");
+					UART_SendString("\aFeature not implemented.");
 				break;
 				case '5':    //(5)-Auto detect power button.
 					if(masterslave){
@@ -245,7 +245,7 @@ void autoDetectSerialIt(){    //serial dma interrupt
 						init=1;
 						detectall=0;
 					}else{
-						UART_SendString("I'm a Slave board.");
+						UART_SendString("\aI'm a Slave board.");
 					}
 				break;
 				case '6':    //(6)-Set Slave ID
@@ -264,7 +264,7 @@ void autoDetectSerialIt(){    //serial dma interrupt
 						init=1;
 						detectall=0;
 					}else{
-						UART_SendString("HALL sensor not configured, please detect it first.");
+						UART_SendString("\aHALL sensor not configured, please detect it first.");
 					}
 				break;
 				case '9':    //(9)-Power off.
@@ -272,7 +272,7 @@ void autoDetectSerialIt(){    //serial dma interrupt
 						UART_SendString("Thanks for choosing my firmware,goodbye.");
 						pinMode(LATCHPIN,INPUT);
 					}else{
-						UART_SendString("I'm a Slave board.");
+						UART_SendString("\aI'm a Slave board.");
 					}
 				break;
 				
@@ -445,7 +445,7 @@ void autoDetectSerialIt(){    //serial dma interrupt
 						UART_SendString(&buffer[0]);
 						saveNexit();
 					}else{
-						UART_SendString("\r\nInvalid SlaveID,it must be between 0 and 255\r\n");
+						UART_SendString("\r\n\aInvalid SlaveID,it must be between 0 and 255\r\n");
 						data=0;
 					}
 				}else if(serialRead=='\b'||serialRead==127){    //backspace
@@ -470,7 +470,7 @@ void autoDetectSerialIt(){    //serial dma interrupt
 									if(parsedata!=255){
 										address=parsedata;
 									}else{
-										UART_SendString("\r\naddress \"");
+										UART_SendString("\r\n\aaddress \"");
 										UART_SendString(&addrstr[0]);
 										UART_SendString("\" does not exist");
 										break;
@@ -479,7 +479,7 @@ void autoDetectSerialIt(){    //serial dma interrupt
 								if(address<64){
 									printstorage(address);
 								}else{
-									UART_SendString("\r\nInvalid address");
+									UART_SendString("\r\n\aInvalid address");
 								}
 							break;
 							case 'w':    //write to address
@@ -495,7 +495,7 @@ void autoDetectSerialIt(){    //serial dma interrupt
 									if(parsedata!=255){
 										address=parsedata;
 									}else{
-										UART_SendString("\r\naddress \"");
+										UART_SendString("\r\n\aaddress \"");
 										UART_SendString(&addrstr[0]);
 										UART_SendString("\" does not exist");
 										break;
@@ -513,7 +513,7 @@ void autoDetectSerialIt(){    //serial dma interrupt
 									if(parsedata!=255){
 										data=parsedata;
 									}else{
-										UART_SendString("\r\npin \"");
+										UART_SendString("\r\n\apin \"");
 										UART_SendString(&datastr[0]);
 										UART_SendString("\" does not exist");
 										break;
@@ -523,7 +523,7 @@ void autoDetectSerialIt(){    //serial dma interrupt
 									pinstorage[address]=data;
 									printstorage(address);
 								}else{
-									UART_SendString("\r\nInvalid address");
+									UART_SendString("\r\n\aInvalid address");
 								}
 								
 							break;
@@ -566,7 +566,7 @@ void autoDetectSerialIt(){    //serial dma interrupt
 								UART_SendString(VERSION_INFO);    //leave terminal
 							break;
 							default:    //command not found
-								UART_SendString("\r\nCommand\"");
+								UART_SendString("\r\n\aCommand\"");
 								UART_Send_Byte(command);
 								UART_SendString("\"does not exist");
 							break;
@@ -687,7 +687,7 @@ void autoDetectSerialIt(){    //serial dma interrupt
 									__NOP();
 								}
 							}else{
-								UART_SendString("\r\nEEPROM erase failed\r\n");
+								UART_SendString("\r\n\aEEPROM erase failed\r\n");
 							}
 						}else{
 							if(EEPROM_Write((u8*)pinstorage, 2 * 64)){
@@ -695,7 +695,7 @@ void autoDetectSerialIt(){    //serial dma interrupt
 								mode=MODE_MENU;
 								init=1;
 							}else{
-								UART_SendString("\r\nEEPROM write failed\r\n");
+								UART_SendString("\r\n\aEEPROM write failed\r\n");
 							}
 						}
 					case 'n':
@@ -705,7 +705,7 @@ void autoDetectSerialIt(){    //serial dma interrupt
 						saverase=0;
 					break;
 					default:
-						UART_SendString("\r\nY/N?");    //prevent acidently cancellation you have to press y or n
+						UART_SendString("\r\n\aY/N?");    //prevent acidently cancellation you have to press y or n
 					break;
 				}
 			break;
@@ -810,7 +810,7 @@ void simhallupdate(){
 					}
 				}
 				if(!(avalid&&bvalid&&cvalid)){
-					UART_SendString("\r\nWarning:pinmodeAF of HALL pin ");
+					UART_SendString("\r\n\aWarning:pinmodeAF of HALL pin ");
 					if(avalid){
 						UART_SendString(&PXX[HALLAPIN][0]);
 					}
@@ -822,7 +822,7 @@ void simhallupdate(){
 					}
 					UART_SendString(" is not found, it is sugessted to redo the detection");
 				}else if(!(timnum==0||timnum==3)){
-					UART_SendString("\r\nWarning:HALL sensor pin timer mapping is invalid, it is sugessted to redo the detection");
+					UART_SendString("\r\n\aWarning:HALL sensor pin timer mapping is invalid, it is sugessted to redo the detection");
 				}
 				break;
 			}
@@ -1012,7 +1012,7 @@ void autoDetectInit(){
 		break;
 		case MODE_SAVE :
 			if(saverase){
-				UART_SendString("\r\nYou are going to delete all saved pins and configurations,this process cannot be undone,are you sure to continue?Y/N\r\n>");
+				UART_SendString("\r\n\aYou are going to delete all saved pins and configurations,this process cannot be undone,are you sure to continue?Y/N\r\n>");
 			}else{
 				UART_SendString("\r\nChanges were made to the configurations, do you want to save it permanantly?Y/N\r\n>");
 			}
@@ -1063,7 +1063,7 @@ void checkbutton(){
 			UART_SendString("\r\nLatch:");
 			UART_SendString(&PXX[LATCHPIN][0]);
 		}else{
-			UART_SendString("Workaround failed");
+			UART_SendString("\aWorkaround failed");
 			LATCHPIN=65535;
 			BUTTONPIN=65535;
 		}

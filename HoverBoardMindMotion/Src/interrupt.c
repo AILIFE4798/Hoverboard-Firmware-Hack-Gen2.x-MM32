@@ -40,7 +40,9 @@ void DMA1_Channel2_3_IRQHandler(void){
 		if(mode==MODE_UART){
 			receiveuart=sRxBuffer[0];
 		}else{
+			UART_SendString("\x1b[35m");
 			UART_Send_Byte(sRxBuffer[0]);
+			UART_SendString("\x1b[36m");
 			autoDetectSerialIt();
 		}
 	}
@@ -51,7 +53,9 @@ void DMA1_Channel4_5_IRQHandler(void){
 		if(mode==MODE_UART){
 			receiveuart=sRxBuffer[0];
 		}else{
+			UART_SendString("\x1b[35m");
 			UART_Send_Byte(sRxBuffer[0]);
+			UART_SendString("\x1b[36m");
 			autoDetectSerialIt();
 		}
 	}
