@@ -18,11 +18,17 @@
 #define IOC 3
 #define IOD 4
 
-#ifdef TARGET_MM32SPIN25
+#if(defined TARGET_MM32SPIN25)
 #define PINCOUNT 34
 #define ADCCOUNT 13
 #define TIMCOUNT 22
 #define UARTCOUNT 10
+#define TIMBKCOUNT 4
+#elif (defined TARGET_MM32SPIN0280)
+#define PINCOUNT 34
+#define ADCCOUNT 13
+#define TIMCOUNT 22
+#define UARTCOUNT 13
 #define TIMBKCOUNT 4
 #else
 #define PINCOUNT 33
