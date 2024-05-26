@@ -114,8 +114,13 @@ void exNVIC_Configure(u8 ch, u8 pri, u8 sub)
 //uart
 void UARTX_Init(u32 baudrate){
 	UART_InitTypeDef UART_InitStructure;
+	#ifdef TARGET_MM32SPIN0280
+	RCC_UART_ClockCmd(UART1, ENABLE);
+	RCC_UART_ClockCmd(UART2, ENABLE);
+	#else
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_UART1, ENABLE);
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART2, ENABLE);
+	#endif
 	//Baud rate
 	UART_StructInit(&UART_InitStructure);
 	UART_InitStructure.BaudRate = baudrate;
@@ -147,7 +152,11 @@ void UART_GPIO_Init(){
 
 void DMA_NVIC_Config(DMA_Channel_TypeDef* dam_chx, u32 cpar, u32 cmar, u16 cndtr){
 	DMA_InitTypeDef DMA_InitStructure;
+	#ifdef TARGET_MM32SPIN0280
+	RCC_DMA_ClockCmd(DMA1, ENABLE);
+	#else
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
+	#endif
 	DMA_DeInit(dam_chx);
 	DMA_StructInit(&DMA_InitStructure);
 	//DMA transfer peripheral address
@@ -200,27 +209,35 @@ void Iwdg_Init(u16 IWDG_Prescaler, u16 Reload){
 
 void vref_Init(){
 	ADC_DeInit(ADC1);
+	#ifdef TARGET_MM32SPIN0280
+	RCC_ADC_ClockCmd(ADC1, ENABLE);
+	#else
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
+	#endif
 	ADC_InitTypeDef  ADC_InitStructure;
 	ADC_InitStructure.ADC_PRESCALE = ADC_PCLK2_PRESCALE_6;
 	ADC_InitStructure.ADC_Mode = ADC_Mode_Continue;
 	ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
-	ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_T1_CC4;
+	ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_T1_CC3;
 	ADC_InitStructure.ADC_Resolution = ADC_Resolution_12b;
 	ADC_Init(ADC1, &ADC_InitStructure);
 	ADC_Cmd(ADC1, ENABLE);
-	ADC_RegularChannelConfig(ADC1, ADC_Channel_VoltReference, 0, ADC_SampleTime_1_5Cycles);
+	ADC_RegularChannelConfig(ADC1, ADC_Channel_VoltReference, 0, ADC_SampleTime_7_5Cycles);
 	ADC_VrefintCmd(ENABLE);
 	ADC_SoftwareStartConvCmd(ADC1, ENABLE);
 }
 void ADCALL_Init(){
 	ADC_DeInit(ADC1);
+	#ifdef TARGET_MM32SPIN0280
+	RCC_ADC_ClockCmd(ADC1, ENABLE);
+	#else
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
+	#endif
 	ADC_InitTypeDef  ADC_InitStructure;
 	ADC_InitStructure.ADC_PRESCALE = ADC_PCLK2_PRESCALE_6;
 	ADC_InitStructure.ADC_Mode = ADC_Mode_Continue;
 	ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
-	ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_T1_CC4;
+	ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_T1_CC3;
 	ADC_InitStructure.ADC_Resolution = ADC_Resolution_12b;
 	ADC_Init(ADC1, &ADC_InitStructure);
 	ADC_Cmd(ADC1, ENABLE);
