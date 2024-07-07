@@ -43,8 +43,8 @@ void NVIC_Init(NVIC_InitTypeDef* init_struct)
 {
 
     if (init_struct->NVIC_IRQChannelCmd != DISABLE) {
-        NVIC->IP[init_struct->NVIC_IRQChannel >> 0x02] =
-            (NVIC->IP[init_struct->NVIC_IRQChannel >> 0x02] &
+        NVIC->IPR[init_struct->NVIC_IRQChannel >> 0x02] =
+            (NVIC->IPR[init_struct->NVIC_IRQChannel >> 0x02] &
              (~(((u32)0xFF) << ((init_struct->NVIC_IRQChannel & 0x03) * 8)))) |
             ((((u32)init_struct->NVIC_IRQChannelPriority << 6) & 0xFF) << ((init_struct->NVIC_IRQChannel & 0x03) * 8));
 
@@ -64,8 +64,8 @@ void exNVIC_Init(exNVIC_Init_TypeDef* init_struct)
 {
 
     if (init_struct->NVIC_IRQChannelCmd != DISABLE) {
-        NVIC->IP[init_struct->NVIC_IRQChannel >> 0x02] =
-            (NVIC->IP[init_struct->NVIC_IRQChannel >> 0x02] &
+        NVIC->IPR[init_struct->NVIC_IRQChannel >> 0x02] =
+            (NVIC->IPR[init_struct->NVIC_IRQChannel >> 0x02] &
              (~(((u32)0xFF) << ((init_struct->NVIC_IRQChannel & 0x03) * 8)))) |
             //           ((((u32)init_struct->NVIC_IRQChannelPriority << 6)
             //& 0xFF)
